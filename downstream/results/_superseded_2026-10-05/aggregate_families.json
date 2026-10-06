@@ -1,0 +1,332 @@
+{
+  "berka_loan_default": {
+    "signal": {
+      "own row only": [
+        0.6678208679593721,
+        0.008915037634961938
+      ],
+      "own + count": [
+        0.819482917820868,
+        0.009572219352084606
+      ],
+      "own + mean/sum": [
+        0.8112880886426592,
+        0.005633164516118406
+      ],
+      "own + spread/extremes": [
+        0.7914358264081255,
+        0.005663824628986787
+      ],
+      "own + code shares": [
+        0.8799630655586334,
+        0.01076691032319377
+      ],
+      "everything": [
+        0.887927054478301,
+        0.014319540553343326
+      ]
+    },
+    "preserved": {
+      "berka_split": {
+        "count": {
+          "n": 2,
+          "real_mean_abs": 0.09293011025228093,
+          "syn_mean_abs": 0.027313756267199917,
+          "retained": 0.5626851300189556
+        },
+        "mean/sum": {
+          "n": 7,
+          "real_mean_abs": 0.05900226734695739,
+          "syn_mean_abs": 0.043730869934085315,
+          "retained": 0.8871347569275798
+        },
+        "spread/extremes": {
+          "n": 12,
+          "real_mean_abs": 0.04534902747341025,
+          "syn_mean_abs": 0.04715474452191366,
+          "retained": 1.4955537398018814
+        },
+        "code shares": {
+          "n": 52,
+          "real_mean_abs": 0.07765142390249923,
+          "syn_mean_abs": 0.04545995572701021,
+          "retained": 0.8766164163760483
+        },
+        "own row": {
+          "n": 24,
+          "real_mean_abs": 0.062255688185340406,
+          "syn_mean_abs": 0.07055761127532952,
+          "retained": 0.9028560935089541
+        }
+      },
+      "berka_split_s2": {
+        "count": {
+          "n": 2,
+          "real_mean_abs": 0.09293011025228093,
+          "syn_mean_abs": 0.0317467794033115,
+          "retained": 0.6313349396774751
+        },
+        "mean/sum": {
+          "n": 7,
+          "real_mean_abs": 0.05900226734695739,
+          "syn_mean_abs": 0.04726059021445089,
+          "retained": 0.6863006617899685
+        },
+        "spread/extremes": {
+          "n": 12,
+          "real_mean_abs": 0.04534902747341025,
+          "syn_mean_abs": 0.042670149812481066,
+          "retained": 0.9870812523411551
+        },
+        "code shares": {
+          "n": 52,
+          "real_mean_abs": 0.07765142390249923,
+          "syn_mean_abs": 0.04569385224220343,
+          "retained": 0.810133474445719
+        },
+        "own row": {
+          "n": 24,
+          "real_mean_abs": 0.062255688185340406,
+          "syn_mean_abs": 0.04813659277206724,
+          "retained": 0.8962990396387477
+        }
+      },
+      "berka_split_s3": {
+        "count": {
+          "n": 2,
+          "real_mean_abs": 0.09293011025228093,
+          "syn_mean_abs": 0.030730880027032177,
+          "retained": 0.3391702654746797
+        },
+        "mean/sum": {
+          "n": 7,
+          "real_mean_abs": 0.05900226734695739,
+          "syn_mean_abs": 0.03882470539316889,
+          "retained": 0.8618894759047601
+        },
+        "spread/extremes": {
+          "n": 12,
+          "real_mean_abs": 0.04534902747341025,
+          "syn_mean_abs": 0.03967596488199444,
+          "retained": 1.0636319541718278
+        },
+        "code shares": {
+          "n": 52,
+          "real_mean_abs": 0.07765142390249923,
+          "syn_mean_abs": 0.04531019163298014,
+          "retained": 0.7273332563013021
+        },
+        "own row": {
+          "n": 24,
+          "real_mean_abs": 0.062255688185340406,
+          "syn_mean_abs": 0.06417651988880818,
+          "retained": 1.0115084066983706
+        }
+      },
+      "berka_split_s5": {
+        "count": {
+          "n": 2,
+          "real_mean_abs": 0.09293011025228093,
+          "syn_mean_abs": 0.06694919357519341,
+          "retained": 1.2910284873860927
+        },
+        "mean/sum": {
+          "n": 7,
+          "real_mean_abs": 0.05900226734695739,
+          "syn_mean_abs": 0.05018751615363172,
+          "retained": 1.3899768131641388
+        },
+        "spread/extremes": {
+          "n": 12,
+          "real_mean_abs": 0.04534902747341025,
+          "syn_mean_abs": 0.07426882761758459,
+          "retained": 2.151005587787674
+        },
+        "code shares": {
+          "n": 52,
+          "real_mean_abs": 0.07765142390249923,
+          "syn_mean_abs": 0.040550334797725456,
+          "retained": 0.6888812239148308
+        },
+        "own row": {
+          "n": 24,
+          "real_mean_abs": 0.062255688185340406,
+          "syn_mean_abs": 0.07162025222964898,
+          "retained": 1.3960874440128443
+        }
+      }
+    },
+    "family_sizes": {
+      "own row": 24,
+      "count": 2,
+      "mean/sum": 7,
+      "spread/extremes": 12,
+      "code shares": 52
+    }
+  },
+  "berka_card_ownership": {
+    "signal": {
+      "own row only": [
+        0.6755804542801039,
+        0.0027112940893986985
+      ],
+      "own + count": [
+        0.6877965292150932,
+        0.006670732575290874
+      ],
+      "own + mean/sum": [
+        0.8641047073183676,
+        0.0026764195308004845
+      ],
+      "own + spread/extremes": [
+        0.8376850819933132,
+        0.0007980855509823902
+      ],
+      "own + code shares": [
+        0.7756633763201188,
+        0.0018964201443530115
+      ],
+      "everything": [
+        0.8735618001379822,
+        0.0011358242488491907
+      ]
+    },
+    "preserved": {
+      "berka_split": {
+        "count": {
+          "n": 2,
+          "real_mean_abs": 0.03298228979775429,
+          "syn_mean_abs": 0.0024854757143844973,
+          "retained": 0.0671113416675142
+        },
+        "mean/sum": {
+          "n": 7,
+          "real_mean_abs": 0.19505423984821846,
+          "syn_mean_abs": 0.007106848252352799,
+          "retained": 0.07445472244502506
+        },
+        "spread/extremes": {
+          "n": 12,
+          "real_mean_abs": 0.1565655626722805,
+          "syn_mean_abs": 0.014440080670479903,
+          "retained": 0.17281391352559491
+        },
+        "code shares": {
+          "n": 46,
+          "real_mean_abs": 0.05500601268371217,
+          "syn_mean_abs": 0.017970407027609523,
+          "retained": 0.2883772916898046
+        },
+        "own row": {
+          "n": 23,
+          "real_mean_abs": 0.04042334070926514,
+          "syn_mean_abs": 0.017365267285446944,
+          "retained": 0.336482661600634
+        }
+      },
+      "berka_split_s2": {
+        "count": {
+          "n": 2,
+          "real_mean_abs": 0.03298228979775429,
+          "syn_mean_abs": 0.0024854757143844973,
+          "retained": 0.0671113416675142
+        },
+        "mean/sum": {
+          "n": 7,
+          "real_mean_abs": 0.19505423984821846,
+          "syn_mean_abs": 0.0066467056057853136,
+          "retained": 0.0877339705730385
+        },
+        "spread/extremes": {
+          "n": 12,
+          "real_mean_abs": 0.1565655626722805,
+          "syn_mean_abs": 0.03232079021789553,
+          "retained": 0.3069749381873071
+        },
+        "code shares": {
+          "n": 46,
+          "real_mean_abs": 0.05500601268371217,
+          "syn_mean_abs": 0.020015312778875905,
+          "retained": 0.33145896237114253
+        },
+        "own row": {
+          "n": 23,
+          "real_mean_abs": 0.04042334070926514,
+          "syn_mean_abs": 0.02372137209720341,
+          "retained": 0.4368110764381834
+        }
+      },
+      "berka_split_s3": {
+        "count": {
+          "n": 2,
+          "real_mean_abs": 0.03298228979775429,
+          "syn_mean_abs": 0.0024854757143844973,
+          "retained": 0.0671113416675142
+        },
+        "mean/sum": {
+          "n": 7,
+          "real_mean_abs": 0.19505423984821846,
+          "syn_mean_abs": 0.004877949541260452,
+          "retained": 0.13070093975122862
+        },
+        "spread/extremes": {
+          "n": 12,
+          "real_mean_abs": 0.1565655626722805,
+          "syn_mean_abs": 0.009989822928100514,
+          "retained": 0.04720486481574716
+        },
+        "code shares": {
+          "n": 46,
+          "real_mean_abs": 0.05500601268371217,
+          "syn_mean_abs": 0.02288571785350826,
+          "retained": 0.44246895340808784
+        },
+        "own row": {
+          "n": 23,
+          "real_mean_abs": 0.04042334070926514,
+          "syn_mean_abs": 0.016173215580182223,
+          "retained": 0.305140362968352
+        }
+      },
+      "berka_split_s5": {
+        "count": {
+          "n": 2,
+          "real_mean_abs": 0.03298228979775429,
+          "syn_mean_abs": 0.0024854757143844973,
+          "retained": 0.0671113416675142
+        },
+        "mean/sum": {
+          "n": 7,
+          "real_mean_abs": 0.19505423984821846,
+          "syn_mean_abs": 0.02842463928852524,
+          "retained": 0.36169405830940765
+        },
+        "spread/extremes": {
+          "n": 12,
+          "real_mean_abs": 0.1565655626722805,
+          "syn_mean_abs": 0.039240196413021095,
+          "retained": 0.3971281100001952
+        },
+        "code shares": {
+          "n": 46,
+          "real_mean_abs": 0.05500601268371217,
+          "syn_mean_abs": 0.026512458816532546,
+          "retained": 0.4965085546995959
+        },
+        "own row": {
+          "n": 23,
+          "real_mean_abs": 0.04042334070926514,
+          "syn_mean_abs": 0.027183079680840157,
+          "retained": 0.4513899904016422
+        }
+      }
+    },
+    "family_sizes": {
+      "own row": 23,
+      "count": 2,
+      "mean/sum": 7,
+      "spread/extremes": 12,
+      "code shares": 46
+    }
+  }
+}

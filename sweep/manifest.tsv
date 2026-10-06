@@ -1,0 +1,16 @@
+# Sweep manifest — one variant per line, TAB-separated: name <TAB> seeds <TAB> kind <TAB> flags
+#   kind: berka | berka_reparam | california
+#   flags: passed verbatim as RDBDIFF_EXTRA_ARGS to scripts/resume_runs.sh (empty = baseline arch).
+# Lines starting with # and blank lines are ignored. Runner re-reads this every tick.
+#
+# 2026-09-08: n_hops=2 abandoned. reparam collapsed at 3 seeds (loan 3.2%); S5/S12's card gain
+# costs loan and runs ~2x slower. Killed berka_split_s12 + california_s12. berka_split_reparam_s10
+# was already sampling so it is left to finish. Remaining focus: the multinomial-diffusion fix.
+berka_split_reparam	0,1,2	berka_reparam
+berka_split_reparam_s10	0,1,2	berka_reparam	--n_hops 2 --num_neighbors -1 16 --seed_balance_alpha 0.5 --degree_features
+berka_split_discrete	0,1,2	berka	--categorical_diffusion multinomial
+# california_discrete DROPPED 2026-09-10: multinomial loss diverged to NaN from step 1 on
+# California's mostly-categorical schema (13 cat / 2 num in `individual`; household.PUMA=233
+# classes). Synthetic data is all-NaN garbage. Needs grad clipping / loss scaling to be
+# viable there; not worth it given the Berka discrete result is negative.
+# california_discrete	0,1,2	california	--categorical_diffusion multinomial

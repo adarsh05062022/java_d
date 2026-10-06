@@ -1,0 +1,202 @@
+{
+  "label": "paper_repro",
+  "synthetic_paths": [
+    "rdbdiff_workspace/berka/paper_repro/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/synthetic_database",
+    "rdbdiff_workspace/berka/paper_repro/seed_1/synthetic_data_sampled_structure_size_multiplier_1.0/synthetic_database",
+    "rdbdiff_workspace/berka/paper_repro/seed_2/synthetic_data_sampled_structure_size_multiplier_1.0/synthetic_database"
+  ],
+  "real": [
+    {
+      "check": "loan_date >= account_date",
+      "n": 682,
+      "dangling_fk_dropped": 0,
+      "violation_rate": 0.0,
+      "median_lag_days": 395.5,
+      "p10_lag_days": 167.0
+    },
+    {
+      "check": "card.issued >= account_date",
+      "n": 892,
+      "dangling_fk_dropped": 0,
+      "violation_rate": 0.0,
+      "median_lag_days": 658.5,
+      "p10_lag_days": 282.1
+    },
+    {
+      "check": "trans_date >= account_date",
+      "n": 1056320,
+      "dangling_fk_dropped": 0,
+      "violation_rate": 0.0,
+      "median_lag_days": 680.0,
+      "p10_lag_days": 188.0
+    },
+    {
+      "check": "account.final_balance == sum(trans.signed_amount)",
+      "n": 4500,
+      "consistency_rate": 0.9833333333333333,
+      "median_abs_error": 0.2000000000007276,
+      "mean_abs_error": 0.2560000000003782
+    },
+    {
+      "check": "operation=VYBER KARTOU -> account holds a card",
+      "n": 8036,
+      "implication_rate": 1.0
+    },
+    {
+      "check": "k_symbol=SANKC.UROK -> account ever overdrawn",
+      "n": 1577,
+      "implication_rate": 0.9587824984147115
+    },
+    {
+      "check": "order.k_symbol=UVER -> account has a loan",
+      "n": 717,
+      "implication_rate": 0.9511854951185496
+    }
+  ],
+  "synthetic_seeds": [
+    [
+      {
+        "check": "loan_date >= account_date",
+        "n": 679,
+        "dangling_fk_dropped": 0,
+        "violation_rate": 0.101620029455081,
+        "median_lag_days": 408.5645751953125,
+        "p10_lag_days": -0.8715454101562563
+      },
+      {
+        "check": "card.issued >= account_date",
+        "n": 895,
+        "dangling_fk_dropped": 0,
+        "violation_rate": 0.11396648044692738,
+        "median_lag_days": 809.9695434570312,
+        "p10_lag_days": -44.650903320312494
+      },
+      {
+        "check": "trans_date >= account_date",
+        "n": 1052012,
+        "dangling_fk_dropped": 0,
+        "violation_rate": 0.03081523784899792,
+        "median_lag_days": 715.658203125,
+        "p10_lag_days": 129.95105590820313
+      },
+      {
+        "check": "account.final_balance == sum(trans.signed_amount)",
+        "n": 4500,
+        "consistency_rate": 0.0,
+        "median_abs_error": 99824.090873003,
+        "mean_abs_error": 126667.68466685944
+      },
+      {
+        "check": "operation=VYBER KARTOU -> account holds a card",
+        "n": 8142,
+        "implication_rate": 0.19024809629083764
+      },
+      {
+        "check": "k_symbol=SANKC.UROK -> account ever overdrawn",
+        "n": 207,
+        "implication_rate": 0.6763285024154589
+      },
+      {
+        "check": "order.k_symbol=UVER -> account has a loan",
+        "n": 724,
+        "implication_rate": 0.1781767955801105
+      }
+    ],
+    [
+      {
+        "check": "loan_date >= account_date",
+        "n": 658,
+        "dangling_fk_dropped": 0,
+        "violation_rate": 0.10790273556231003,
+        "median_lag_days": 403.9033508300781,
+        "p10_lag_days": -8.599450683593746
+      },
+      {
+        "check": "card.issued >= account_date",
+        "n": 876,
+        "dangling_fk_dropped": 0,
+        "violation_rate": 0.08447488584474885,
+        "median_lag_days": 808.6037292480469,
+        "p10_lag_days": 95.2672119140625
+      },
+      {
+        "check": "trans_date >= account_date",
+        "n": 1053059,
+        "dangling_fk_dropped": 0,
+        "violation_rate": 0.03270092179070688,
+        "median_lag_days": 711.0999755859375,
+        "p10_lag_days": 127.669189453125
+      },
+      {
+        "check": "account.final_balance == sum(trans.signed_amount)",
+        "n": 4500,
+        "consistency_rate": 0.0,
+        "median_abs_error": 96505.65490573645,
+        "mean_abs_error": 125840.36580151372
+      },
+      {
+        "check": "operation=VYBER KARTOU -> account holds a card",
+        "n": 7872,
+        "implication_rate": 0.19867886178861788
+      },
+      {
+        "check": "k_symbol=SANKC.UROK -> account ever overdrawn",
+        "n": 197,
+        "implication_rate": 0.6649746192893401
+      },
+      {
+        "check": "order.k_symbol=UVER -> account has a loan",
+        "n": 726,
+        "implication_rate": 0.1763085399449036
+      }
+    ],
+    [
+      {
+        "check": "loan_date >= account_date",
+        "n": 687,
+        "dangling_fk_dropped": 0,
+        "violation_rate": 0.10625909752547306,
+        "median_lag_days": 395.8359375,
+        "p10_lag_days": -9.11815185546874
+      },
+      {
+        "check": "card.issued >= account_date",
+        "n": 901,
+        "dangling_fk_dropped": 0,
+        "violation_rate": 0.10987791342952276,
+        "median_lag_days": 772.3104858398438,
+        "p10_lag_days": -51.838134765625
+      },
+      {
+        "check": "trans_date >= account_date",
+        "n": 1070888,
+        "dangling_fk_dropped": 0,
+        "violation_rate": 0.029678173627867715,
+        "median_lag_days": 729.8841552734375,
+        "p10_lag_days": 131.6960327148438
+      },
+      {
+        "check": "account.final_balance == sum(trans.signed_amount)",
+        "n": 4500,
+        "consistency_rate": 0.0,
+        "median_abs_error": 102822.15878415108,
+        "mean_abs_error": 137304.6253768587
+      },
+      {
+        "check": "operation=VYBER KARTOU -> account holds a card",
+        "n": 8142,
+        "implication_rate": 0.18730041758781626
+      },
+      {
+        "check": "k_symbol=SANKC.UROK -> account ever overdrawn",
+        "n": 227,
+        "implication_rate": 0.6740088105726872
+      },
+      {
+        "check": "order.k_symbol=UVER -> account has a loan",
+        "n": 741,
+        "implication_rate": 0.1592442645074224
+      }
+    ]
+  ]
+}

@@ -1,0 +1,669 @@
+{
+  "dataset": "california",
+  "leakage_caveat": false,
+  "records": [
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "real",
+      "grdm_seed": null,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 1521638,
+      "n_train_syn": 0,
+      "metrics": {
+        "r2": 0.5525038557624184,
+        "rmse": 11.02597607924517,
+        "mae": 5.593526715125787
+      },
+      "seconds": 13.5
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "real",
+      "grdm_seed": null,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 1521638,
+      "n_train_syn": 0,
+      "metrics": {
+        "r2": 0.5524191412057342,
+        "rmse": 11.02701968206221,
+        "mae": 5.599500356558239
+      },
+      "seconds": 11.3
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "real",
+      "grdm_seed": null,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 1521638,
+      "n_train_syn": 0,
+      "metrics": {
+        "r2": 0.5531291935618987,
+        "rmse": 11.018269454091254,
+        "mae": 5.589784009801377
+      },
+      "seconds": 12.3
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5243976215191967,
+        "rmse": 11.366961945137279,
+        "mae": 5.793125426068161
+      },
+      "seconds": 15.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5242136171263658,
+        "rmse": 11.369160597587708,
+        "mae": 5.793716898629814
+      },
+      "seconds": 16.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5247236627592471,
+        "rmse": 11.363065062029532,
+        "mae": 5.787107019002265
+      },
+      "seconds": 18.0
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_25",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "r2": 0.5518558743392039,
+        "rmse": 11.033956084494168,
+        "mae": 5.599596787535004
+      },
+      "seconds": 16.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_25",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "r2": 0.5520668888385825,
+        "rmse": 11.031358037648241,
+        "mae": 5.597506473029034
+      },
+      "seconds": 18.1
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_25",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "r2": 0.5520295652840315,
+        "rmse": 11.031817616217962,
+        "mae": 5.596938111373226
+      },
+      "seconds": 25.4
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_50",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "r2": 0.5512791608045771,
+        "rmse": 11.041053562183205,
+        "mae": 5.606015641933204
+      },
+      "seconds": 26.1
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_50",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "r2": 0.5509904215112977,
+        "rmse": 11.044605295292287,
+        "mae": 5.602871499549812
+      },
+      "seconds": 22.1
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_50",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "r2": 0.551508304825846,
+        "rmse": 11.038234087060314,
+        "mae": 5.59663229502222
+      },
+      "seconds": 22.3
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5494249908922282,
+        "rmse": 11.06384154405671,
+        "mae": 5.612688498175953
+      },
+      "seconds": 33.7
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5491734529454901,
+        "rmse": 11.066929362545538,
+        "mae": 5.615515728418235
+      },
+      "seconds": 54.0
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5500445565642615,
+        "rmse": 11.056232228927136,
+        "mae": 5.608067586177397
+      },
+      "seconds": 52.7
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 1,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5284830641626125,
+        "rmse": 11.318035328954451,
+        "mae": 5.762724016599684
+      },
+      "seconds": 14.9
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 1,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5282738560186429,
+        "rmse": 11.320545909589814,
+        "mae": 5.761470718479065
+      },
+      "seconds": 15.1
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 1,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5280864384742479,
+        "rmse": 11.322794521680644,
+        "mae": 5.762566366506009
+      },
+      "seconds": 15.1
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_25",
+      "grdm_seed": 1,
+      "xgb_seed": 0,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "r2": 0.5522965759957235,
+        "rmse": 11.02852939415536,
+        "mae": 5.598421748043085
+      },
+      "seconds": 28.3
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_25",
+      "grdm_seed": 1,
+      "xgb_seed": 1,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "r2": 0.5523581226106877,
+        "rmse": 11.027771311968191,
+        "mae": 5.596007874046712
+      },
+      "seconds": 16.4
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_25",
+      "grdm_seed": 1,
+      "xgb_seed": 2,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "r2": 0.5525758375753509,
+        "rmse": 11.02508925409966,
+        "mae": 5.592135793178082
+      },
+      "seconds": 16.7
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_50",
+      "grdm_seed": 1,
+      "xgb_seed": 0,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "r2": 0.5513532668367358,
+        "rmse": 11.04014181217813,
+        "mae": 5.601003384942325
+      },
+      "seconds": 22.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_50",
+      "grdm_seed": 1,
+      "xgb_seed": 1,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "r2": 0.5511713451833922,
+        "rmse": 11.04237991751123,
+        "mae": 5.604097138928273
+      },
+      "seconds": 21.8
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_50",
+      "grdm_seed": 1,
+      "xgb_seed": 2,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "r2": 0.5522998169409687,
+        "rmse": 11.028489476072682,
+        "mae": 5.596729647944048
+      },
+      "seconds": 35.9
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed",
+      "grdm_seed": 1,
+      "xgb_seed": 0,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5498594512033101,
+        "rmse": 11.058506184546859,
+        "mae": 5.608651735884703
+      },
+      "seconds": 33.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed",
+      "grdm_seed": 1,
+      "xgb_seed": 1,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5499616145688783,
+        "rmse": 11.057251200605378,
+        "mae": 5.609582719362261
+      },
+      "seconds": 33.4
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed",
+      "grdm_seed": 1,
+      "xgb_seed": 2,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5504186480599269,
+        "rmse": 11.051635215442897,
+        "mae": 5.605515391449075
+      },
+      "seconds": 33.0
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 2,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5292144851007032,
+        "rmse": 11.309253607448678,
+        "mae": 5.764624483539931
+      },
+      "seconds": 15.1
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 2,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.528426277560946,
+        "rmse": 11.31871684574112,
+        "mae": 5.765836982124273
+      },
+      "seconds": 14.9
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 2,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5292289175374933,
+        "rmse": 11.309080257447874,
+        "mae": 5.758976868047102
+      },
+      "seconds": 15.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_25",
+      "grdm_seed": 2,
+      "xgb_seed": 0,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "r2": 0.5519806387200358,
+        "rmse": 11.03242003788684,
+        "mae": 5.596508034317565
+      },
+      "seconds": 16.0
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_25",
+      "grdm_seed": 2,
+      "xgb_seed": 1,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "r2": 0.5520384773111366,
+        "rmse": 11.031707880910695,
+        "mae": 5.6013701178822295
+      },
+      "seconds": 18.0
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_25",
+      "grdm_seed": 2,
+      "xgb_seed": 2,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "r2": 0.5523285159143314,
+        "rmse": 11.02813599017955,
+        "mae": 5.591405653775434
+      },
+      "seconds": 21.7
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_50",
+      "grdm_seed": 2,
+      "xgb_seed": 0,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "r2": 0.5513243932211616,
+        "rmse": 11.040497062376573,
+        "mae": 5.600447494749582
+      },
+      "seconds": 27.0
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_50",
+      "grdm_seed": 2,
+      "xgb_seed": 1,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "r2": 0.5508711092446392,
+        "rmse": 11.046072601812279,
+        "mae": 5.604558793058072
+      },
+      "seconds": 35.8
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed_50",
+      "grdm_seed": 2,
+      "xgb_seed": 2,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "r2": 0.5516033057518783,
+        "rmse": 11.037064948357315,
+        "mae": 5.5943018542043825
+      },
+      "seconds": 22.4
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed",
+      "grdm_seed": 2,
+      "xgb_seed": 0,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5502046626636861,
+        "rmse": 11.05426500335097,
+        "mae": 5.606604608978672
+      },
+      "seconds": 33.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed",
+      "grdm_seed": 2,
+      "xgb_seed": 1,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5499844094990332,
+        "rmse": 11.056971166203084,
+        "mae": 5.608022450242642
+      },
+      "seconds": 32.9
+    },
+    {
+      "dataset": "california",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "mixed",
+      "grdm_seed": 2,
+      "xgb_seed": 2,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5505194978413478,
+        "rmse": 11.050395598294548,
+        "mae": 5.601053891557949
+      },
+      "seconds": 36.6
+    }
+  ]
+}

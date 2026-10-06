@@ -1,0 +1,36 @@
+{
+    "data": {
+        "dataset_name": "berka_split_s6",
+        "data_path": "data/berka/split_train",
+        "dimension_tables": [
+            "district"
+        ]
+    },
+    "model": {
+        "gnn_aggr": "sum",
+        "d_layers": [
+            512,
+            1024,
+            1024,
+            1024,
+            1024,
+            512
+        ],
+        "dropout": 0.0,
+        "dim_t": 128
+    },
+    "diffusion": {
+        "num_timesteps": 2000,
+        "gaussian_loss_type": "mse",
+        "scheduler": "cosine"
+    },
+    "trainer": {
+        "lr": 0.0006,
+        "weight_decay": 1e-05,
+        "steps": 200000
+    },
+    "sampler": {
+        "sample_batch_size": 100000,
+        "size_multiplier": 1.0
+    }
+}

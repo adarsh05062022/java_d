@@ -1,0 +1,39 @@
+variant                sampled seeds    tasks scored (n seeds)
+------------------------------------------------------------------------------
+california             [0, 1, 2]        inctot(3), empstat(3)
+berka                  [0, 1, 2]        loan_default(3), card_ownership(3)
+berka_split            [0, 1, 2]        loan_default(3), card_ownership(3)
+berka_split_s1         [0, 1, 2]        loan_default(3), card_ownership(3)
+berka_split_repair     [0, 1, 2]        loan_default(3), card_ownership(3)
+berka_split_repair_finalonly [0, 1, 2]        loan_default(3), card_ownership(3)
+berka_split_reparam    [0, 1, 2]        loan_default(3), card_ownership(3)
+berka_split_s2         [0, 1, 2]        loan_default(3), card_ownership(3)
+berka_split_s3         [0, 1, 2]        loan_default(3), card_ownership(3)
+berka_split_s4         [0]              loan_default(1), card_ownership(1)
+berka_split_s5         [0, 1, 2]        loan_default(3), card_ownership(3)
+california_s5          [0]              inctot(1), empstat(1)
+california_s2          [0]              inctot(1), empstat(1)
+california_s3          [0]              inctot(1), empstat(1)
+california_s4          [0]              inctot(1), empstat(1)
+california_s7          [0]              inctot(1), empstat(1)
+berka_split_s6         [0]              loan_default(1), card_ownership(1)
+berka_split_s7         [0, 1, 2]        loan_default(3), card_ownership(3)
+berka_split_s8         []               loan_default(-), card_ownership(-)
+berka_split_s9         []               loan_default(-), card_ownership(-)
+berka_split_s10        []               loan_default(-), card_ownership(-)
+berka_split_s11        []               loan_default(-), card_ownership(-)
+berka_split_s12        [0]              loan_default(1), card_ownership(1)
+berka_split_s13        []               loan_default(-), card_ownership(-)
+california_s12         []               inctot(-), empstat(-)
+california_s13         []               inctot(-), empstat(-)
+berka_split_reparam_s12 []               loan_default(-), card_ownership(-)
+berka_split_reparam_s10 [0, 1, 2]        loan_default(3), card_ownership(3)
+berka_split_s12_wide   []               loan_default(-), card_ownership(-)
+berka_split_discrete   [0, 1, 2]        loan_default(3), card_ownership(3)
+california_discrete    [0, 1, 2]        inctot(-), empstat(-)
+
+Scoreable but not yet scored:
+  california_discrete / california_inctot  seeds [0, 1, 2]
+    conda run --no-capture-output -n tabsyn python -m downstream.run --dataset california_discrete --tasks california_inctot --grdm-seeds 0 1 2
+  california_discrete / california_empstat  seeds [0, 1, 2]
+    conda run --no-capture-output -n tabsyn python -m downstream.run --dataset california_discrete --tasks california_empstat --grdm-seeds 0 1 2

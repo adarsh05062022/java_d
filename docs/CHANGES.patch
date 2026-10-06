@@ -1,0 +1,1288 @@
+diff --git a/main.py b/main.py
+index 0a0e100..75b9d86 100644
+--- a/main.py
++++ b/main.py
+@@ -11,6 +11,8 @@ For details about the method, please refer to the paper: https://arxiv.org/abs/2
+ 
+ import argparse
+ import os
++import sys
++import time
+ from copy import deepcopy
+ 
+ import torch
+@@ -20,11 +22,12 @@ from rdbdiff.dataloader import get_neighbor_dataloader
+ from rdbdiff.dataset import RDBDiffDataset
+ from rdbdiff.model import GRDM, GNNDenoiser
+ from rdbdiff.random_graph_sampler import RandomGraphSampler
+-from rdbdiff.sampler import GRDMSampler
++from rdbdiff.sampler import GRDMSampler, SamplingBudgetExhausted
+ from rdbdiff.third_party.clava_ddpm import gen_multi_report
+-from rdbdiff.trainer import GRDMTrainer
++from rdbdiff.trainer import GRDMTrainer, TrainingBudgetExhausted
+ from rdbdiff.utils import (
+     count_params,
++    decode_onehot_synthetic_data,
+     denormalize_data,
+     extract_attributes,
+     get_col_to_stype_dict,
+@@ -64,6 +67,19 @@ parser.add_argument(
+     action="store_true",
+     help="Whether to disable wandb logging, useful when debugging.",
+ )
++parser.add_argument(
++    "--categorical_decoding",
++    type=str,
++    default="round",
++    choices=["round", "match"],
++    help=(
++        "How to turn diffused categorical values back into class codes. 'round' is the "
++        "upstream behaviour (round to nearest code). 'match' places the thresholds so the "
++        "synthetic marginal matches the real one, which stops rare interior classes from "
++        "being absorbed by their denser neighbours (fix S1). Non-default values write to a "
++        "separate output directory, leaving the baseline run untouched."
++    ),
++)
+ # dataloader args
+ parser.add_argument(
+     "--train_batch_size",
+@@ -89,6 +105,95 @@ parser.add_argument(
+     action="store_true",
+     help="Whether to use CPU instead of GPU (default). Useful for debugging.",
+ )
++parser.add_argument(
++    "--categorical_encoding",
++    type=str,
++    default="ordinal",
++    choices=["ordinal", "onehot"],
++    help=(
++        "How categorical columns enter the model (fix S4). 'ordinal' is the upstream "
++        "behaviour: raw class codes, quantile-transformed alongside the numerical columns and "
++        "diffused as continuous values, which gives the model a false metric in which a rare "
++        "class between two dense ones is absorbed. 'onehot' expands each categorical into one "
++        "indicator column per class, skips the quantile transform for them, and decodes by "
++        "argmax."
++    ),
++)
++parser.add_argument(
++    "--max_hours",
++    type=float,
++    default=None,
++    help=(
++        "Wall-clock budget for this process, in hours. Training stops at the next epoch "
++        "boundary and sampling at the next checkpointed timestep once it is spent, then "
++        "the process exits with code 42 having saved a resume point. Set it below this "
++        "node's ~24h process lifetime so a run is never SIGKILLed mid-stage; relaunching "
++        "resumes where it stopped. Omit for no limit."
++    ),
++)
++parser.add_argument(
++    "--gnn_aggr",
++    nargs="+",
++    default=None,
++    help=(
++        "Neighbourhood aggregation, overriding the config's model.gnn_aggr (fix S8). One "
++        "name reproduces upstream. Several (e.g. `--gnn_aggr sum mean max std`) make each "
++        "SAGEConv a MultiAggregation that concatenates the statistics: a downstream model "
++        "builds its features from counts, means, extremes and spreads of a child table, and "
++        "a denoiser conditioned on one moment of a neighbourhood cannot reproduce the rest."
++    ),
++)
++parser.add_argument(
++    "--gnn_residual",
++    action="store_true",
++    help=(
++        "Add residual connections around every message-passing layer and drop the ReLU on "
++        "the last one (fix S9). Upstream rewrites the representation at each hop, which is "
++        "why depth has been a trade rather than an addition -- S2 bought the cross-table "
++        "task 18 points and cost the single-parent task 17."
++    ),
++)
++parser.add_argument(
++    "--degree_features",
++    action="store_true",
++    help=(
++        "Condition each row on its exact per-relation child counts (fix S10). Neighbour "
++        "sampling caps the fan-out the GNN sees, so its aggregates are fixed-size samples "
++        "that carry no cardinality information; the structure is sampled before any "
++        "attribute is generated, so the true counts are available at generation time."
++    ),
++)
++parser.add_argument(
++    "--self_conditioning",
++    action="store_true",
++    help=(
++        "Run the denoiser in two passes, the second conditioned on the first's x0 estimate "
++        "of every node (fix S11). While a row is generated its neighbours sit at the same "
++        "noise level, so the measured conditioning window is one hop behind the nominal "
++        "depth (DIAGNOSIS.md A2); showing the second pass denoised neighbours buys that hop "
++        "back at roughly the cost of one extra GNN forward rather than one extra hop."
++    ),
++)
++parser.add_argument(
++    "--self_cond_aux_weight",
++    type=float,
++    default=1.0,
++    help=(
++        "Weight of the x0-reconstruction loss that supervises the first pass. The estimate "
++        "is fed forward detached, so this term is the only thing that trains that head."
++    ),
++)
++parser.add_argument(
++    "--seed_balance_alpha",
++    type=float,
++    default=0.0,
++    help=(
++        "Re-weight seed-node sampling by count(node_type) ** -alpha (fix S3). 0.0 is the "
++        "upstream behaviour (uniform over rows, so on Berka `trans` takes 4008 of every 4096 "
++        "seeds and `loan` takes 2.6); 1.0 samples node types equally. Intermediate values "
++        "temper the correction."
++    ),
++)
+ args = parser.parse_args()
+ 
+ # set random seed for reproducibility
+@@ -115,7 +220,9 @@ dimension_tables = config["data"]["dimension_tables"]
+ if len(dimension_tables) == 0:
+     dimension_tables = None
+ # model args
+-gnn_aggr = config["model"]["gnn_aggr"]
++gnn_aggr = args.gnn_aggr if args.gnn_aggr else config["model"]["gnn_aggr"]
++if isinstance(gnn_aggr, list) and len(gnn_aggr) == 1:
++    gnn_aggr = gnn_aggr[0]  # a single name is the upstream single-aggregator path
+ d_layers = config["model"]["d_layers"]
+ dropout = config["model"]["dropout"]
+ dim_t = config["model"]["dim_t"]
+@@ -132,6 +239,7 @@ sample_batch_size = config["sampler"]["sample_batch_size"]
+ size_multiplier = config["sampler"]["size_multiplier"]
+ 
+ # prepare workspace directory and device
++deadline = time.time() + args.max_hours * 3600 if args.max_hours else None
+ workspace_dir = f"rdbdiff_workspace/{dataset_name}/{exp_name}/seed_{seed}"
+ os.makedirs(workspace_dir, exist_ok=True)
+ device = (
+@@ -165,6 +273,11 @@ print(f"  data_path: {data_path}")
+ print(f"  dimension_tables: {dimension_tables}")
+ print("Model args:")
+ print(f"  gnn_aggr: {gnn_aggr}")
++print(f"  gnn_residual: {args.gnn_residual}")
++print(f"  degree_features: {args.degree_features}")
++print(f"  self_conditioning: {args.self_conditioning}")
++if args.self_conditioning:
++    print(f"  self_cond_aux_weight: {args.self_cond_aux_weight}")
+ print(f"  d_layers: {d_layers}")
+ print(f"  dropout: {dropout}")
+ print(f"  dim_t: {dim_t}")
+@@ -199,14 +312,37 @@ dataset_meta = dataset_real.dataset_meta
+ print("Preprocessing data...")
+ # TODO(AK): assert we can reconstruct all/most data
+ normalizers_dir = os.path.join(workspace_dir, "normalizers")
+-preprocess_database(database_real, normalizers_dir, seed)
++preprocess_database(
++    database_real,
++    normalizers_dir,
++    seed,
++    data_path=data_path,
++    categorical_encoding=args.categorical_encoding,
++)
+ 
+ # construct graph
+ print("Constructing graph...")
+ col_to_stype_dict = get_col_to_stype_dict(database_real, data_path)
++# Class counts per categorical column, needed only to size the one-hot blocks (fix S4).
++col_to_num_classes = (
++    {
++        table_name: {
++            col: info["size"]
++            for col, info in read_json(
++                os.path.join(data_path, f"{table_name}_domain.json")
++            ).items()
++            if info["type"] == "discrete"
++        }
++        for table_name in database_real.table_dict
++    }
++    if args.categorical_encoding == "onehot"
++    else None
++)
+ graph_real = make_pkey_fkey_graph(
+     database_real,
+     col_to_stype_dict=col_to_stype_dict,  # speficied column types
++    col_to_num_classes=col_to_num_classes,
++    add_degree_features=args.degree_features,
+ )
+ # NOTE 1: make_pkey_fkey_graph removes primary and foreign key columns from col_to_stype_dict
+ # NOTE 2: from this point onwards, we view the data as a graph so we use graph terminology
+@@ -224,6 +360,7 @@ train_dataloader, n_total_input_nodes = get_neighbor_dataloader(
+     num_neighbors=num_neighbors,
+     dimension_tables=dimension_tables,
+     node_type_to_d_in=node_type_to_d_in,
++    seed_balance_alpha=args.seed_balance_alpha,
+ )
+ 
+ ########################
+@@ -254,6 +391,11 @@ print(f"node_type_to_rtdl_d_layers: {node_type_to_rtdl_d_layers}")
+ 
+ print(f"Instantiating diffusion model...")
+ # denoising model
++# the degree block has one column per edge type and the same width on every node type, so
++# any node type reports the right size
++degree_dim = (
++    graph_real[graph_real.node_types[0]].deg.shape[1] if args.degree_features else 0
++)
+ denoising_model = GNNDenoiser(
+     node_type_to_d_in,
+     gnn_params,
+@@ -261,6 +403,9 @@ denoising_model = GNNDenoiser(
+     dim_t,
+     dimension_tables=dimension_tables,
+     node_type_to_rtdl_d_layers=node_type_to_rtdl_d_layers,
++    gnn_residual=args.gnn_residual,
++    degree_dim=degree_dim,
++    self_conditioning=args.self_conditioning,
+ )
+ denoising_model.to(device)
+ 
+@@ -272,6 +417,7 @@ grdm = GRDM(
+     scheduler=scheduler,
+     device=device,
+     dimension_tables=dimension_tables,
++    self_cond_aux_weight=args.self_cond_aux_weight,
+ )
+ grdm.to(device)
+ grdm.train()
+@@ -306,11 +452,23 @@ trainer = GRDMTrainer(
+         for nt in graph_real.node_types
+         if dimension_tables is None or nt not in dimension_tables
+     ],
++    seed_balance_alpha=args.seed_balance_alpha,
++    deadline=deadline,
+ )
+ 
+ if not trainer.is_model_already_trained():
+-    print(f"Training model...")
+-    trainer.run_training_loop()
++    if trainer.has_checkpoint():
++        start_step = trainer.load_checkpoint()
++        print(f"Resuming training from checkpoint at step {start_step}...")
++    else:
++        start_step = 0
++        print(f"Training model...")
++    try:
++        trainer.run_training_loop(start_step=start_step)
++    except TrainingBudgetExhausted:
++        # checkpoint is written; code 42 tells the relauncher this is a planned stop,
++        # not a crash, so it should start the process again rather than give up
++        sys.exit(42)
+     trainer.save_model_and_loss_history()
+ else:
+     print(f"Loading trained model...")
+@@ -330,6 +488,7 @@ sampler = GRDMSampler(
+     device=device,
+     dimension_tables=dimension_tables,
+     node_type_to_d_in=node_type_to_d_in,
++    deadline=deadline,
+ )
+ 
+ #####################################
+@@ -340,7 +499,12 @@ sampler = GRDMSampler(
+ if generate_structure:
+     syn_data_dir = os.path.join(
+         workspace_dir,
+-        f"synthetic_data_sampled_structure_size_multiplier_{size_multiplier}",
++        f"synthetic_data_sampled_structure_size_multiplier_{size_multiplier}"
++        + (
++            ""
++            if args.categorical_decoding == "round"
++            else f"_decoding_{args.categorical_decoding}"
++        ),
+     )
+     os.makedirs(syn_data_dir, exist_ok=True)
+ 
+@@ -363,10 +527,17 @@ if generate_structure:
+     # load in both cases
+     database_syn = RDBDiffDataset(sampled_structure_dir, cache_dir=None).get_db()
+     preprocess_database(
+-        database_syn, normalizers_dir, seed
++        database_syn,
++        normalizers_dir,
++        seed,
++        data_path=data_path,
++        categorical_encoding=args.categorical_encoding,
+     )  # VERY IMPORTANT when using dimension tables
+     graph_empty_attributes = make_pkey_fkey_graph(
+-        database_syn, col_to_stype_dict=col_to_stype_dict
++        database_syn,
++        col_to_stype_dict=col_to_stype_dict,
++        col_to_num_classes=col_to_num_classes,
++        add_degree_features=args.degree_features,
+     )
+ else:  # fixed structure
+     syn_data_dir = os.path.join(workspace_dir, "synthetic_data_real_structure")
+@@ -387,7 +558,10 @@ else:  # fixed structure
+ X_syn_path = os.path.join(syn_data_dir, "node_type_to_X_syn.pkl")
+ if not os.path.exists(X_syn_path):
+     print("Sampling...")
+-    graph_syn = sampler.sample_node_attributes(graph_empty_attributes)
++    try:
++        graph_syn = sampler.sample_node_attributes(graph_empty_attributes)
++    except SamplingBudgetExhausted:
++        sys.exit(42)
+ 
+     node_type_to_X_syn = {
+         node_type: graph_syn[node_type].x.detach().cpu().numpy()
+@@ -398,23 +572,44 @@ else:
+     print("Synthetic data is already sampled. Loading...")
+     node_type_to_X_syn = read_pickle(X_syn_path)
+ 
+-# denormalize synthetic data
+-node_type_to_X_syn = denormalize_data(node_type_to_X_syn, normalizers_dir)
+-
+-# re-load raw data (without preprocessing)
+-database_raw = RDBDiffDataset(data_path, cache_dir=None).get_db()
+-
+-# round synthetic data
++# number of numerical features per table (the categorical block is whatever follows)
+ node_type_to_num_numerical_features = {
+     node_type: graph_real[node_type].num_numerical_features[0].item()
+     for node_type in graph_real.node_types
+ }
+-node_type_to_X_syn = round_synthetic_data(
+-    node_type_to_X_syn=node_type_to_X_syn,
+-    node_type_to_X_real=extract_attributes(database_raw),
+-    node_type_to_num_numerical_features=node_type_to_num_numerical_features,
++
++# denormalize synthetic data
++node_type_to_X_syn = denormalize_data(
++    node_type_to_X_syn,
++    normalizers_dir,
++    node_type_to_num_numerical_features=(
++        node_type_to_num_numerical_features
++        if args.categorical_encoding == "onehot"
++        else None
++    ),
+ )
+ 
++# re-load raw data (without preprocessing)
++database_raw = RDBDiffDataset(data_path, cache_dir=None).get_db()
++
++# decode synthetic data back to class codes
++if args.categorical_encoding == "onehot":
++    node_type_to_X_syn = decode_onehot_synthetic_data(
++        node_type_to_X_syn=node_type_to_X_syn,
++        node_type_to_num_numerical_features=node_type_to_num_numerical_features,
++        node_type_to_cat_num_classes={
++            table_name: list(cols.values())
++            for table_name, cols in col_to_num_classes.items()
++        },
++    )
++else:
++    node_type_to_X_syn = round_synthetic_data(
++        node_type_to_X_syn=node_type_to_X_syn,
++        node_type_to_X_real=extract_attributes(database_raw),
++        node_type_to_num_numerical_features=node_type_to_num_numerical_features,
++        categorical_decoding=args.categorical_decoding,
++    )
++
+ if not generate_structure:
+     database_syn = deepcopy(database_raw)  # only the structure will be kept
+ 
+diff --git a/rdbdiff/dataloader.py b/rdbdiff/dataloader.py
+index 22d1202..f5462b3 100644
+--- a/rdbdiff/dataloader.py
++++ b/rdbdiff/dataloader.py
+@@ -1,6 +1,7 @@
+ from typing import Dict
+ 
+ import torch
++from torch.utils.data import WeightedRandomSampler
+ from torch_geometric.data import HeteroData
+ from torch_geometric.loader import NeighborLoader
+ from torch_geometric.typing import NodeType
+@@ -16,6 +17,7 @@ def get_neighbor_dataloader(
+     num_neighbors: list = None,
+     dimension_tables: list = None,
+     node_type_to_d_in: Dict[NodeType, int] = None,
++    seed_balance_alpha: float = 0.0,
+ ) -> NeighborLoader:
+     r"""Return a neighbor dataloader for a given database.
+ 
+@@ -43,6 +45,29 @@ def get_neighbor_dataloader(
+     else:
+         input_nodes = None
+         n_total_input_nodes = data_homogeneous.num_nodes
++    # Seed nodes are otherwise drawn uniformly over all rows, which on Berka means `trans` takes
++    # 4007.8 of every 4096 seeds while `loan` takes 2.6 -- and the loss is computed on seed nodes
++    # only, so the smallest tables are effectively starved of gradient (fix S3). Weighting each
++    # node by count(node_type) ** -alpha evens that out: alpha=0 reproduces uniform sampling,
++    # alpha=1 samples node types equally. Values in between temper it, which matters because
++    # `trans` is 98% of the data and its own quality still counts.
++    sampler = None
++    if seed_balance_alpha > 0.0:
++        node_type_ids = data_homogeneous.node_type
++        eligible = (
++            input_nodes if input_nodes is not None else torch.ones_like(node_type_ids, dtype=torch.bool)
++        )
++        counts = torch.bincount(node_type_ids[eligible], minlength=int(node_type_ids.max()) + 1)
++        per_type_weight = torch.where(
++            counts > 0, counts.double().clamp(min=1) ** (-seed_balance_alpha), torch.zeros(1, dtype=torch.double)
++        )
++        # NeighborLoader indexes into the eligible nodes, so weights must be in that same order.
++        weights = per_type_weight[node_type_ids[eligible]]
++        sampler = WeightedRandomSampler(
++            weights=weights, num_samples=int(eligible.sum().item()), replacement=True
++        )
++        shuffle = False  # a sampler and shuffle are mutually exclusive
++
+     # requires pyg-lib. can be installed with e.g. `pip install pyg-lib -f https://data.pyg.org/whl/torch-2.5.1+cu124.html`
+     # nice Doc: https://pytorch-geometric.readthedocs.io/en/2.6.1/modules/loader.html#torch_geometric.loader.NeighborLoader
+     data_loader = NeighborLoader(
+@@ -51,6 +76,7 @@ def get_neighbor_dataloader(
+         input_nodes=input_nodes,
+         batch_size=batch_size,
+         shuffle=shuffle,
++        sampler=sampler,
+         num_workers=0,
+         persistent_workers=False,
+         drop_last=False,
+diff --git a/rdbdiff/model.py b/rdbdiff/model.py
+index afe6d49..7a7fc47 100644
+--- a/rdbdiff/model.py
++++ b/rdbdiff/model.py
+@@ -3,10 +3,12 @@ from typing import Dict
+ import numpy as np
+ import torch
+ import torch.nn as nn
+-from relbench.modeling.nn import HeteroGraphSAGE
++import torch.nn.functional as F
+ from torch_geometric.data import HeteroData
+ from torch_geometric.typing import NodeType
+ 
++from rdbdiff.gnn import build_gnn
++
+ from rdbdiff.third_party.tab_ddpm import (
+     MLP,
+     GaussianMultinomialDiffusion,
+@@ -27,6 +29,7 @@ class GRDM(GaussianMultinomialDiffusion):
+         scheduler="cosine",
+         device=torch.device("cpu"),
+         dimension_tables: list = None,
++        self_cond_aux_weight: float = 1.0,
+     ):
+         super(GRDM, self).__init__(
+             num_classes=np.array([0]),
+@@ -42,6 +45,9 @@ class GRDM(GaussianMultinomialDiffusion):
+         )
+         self.device = device
+         self.dimension_tables = dimension_tables
++        # weight on the x0-reconstruction loss that supervises the first of the denoiser's
++        # two passes (fix S11). Unused unless the denoiser was built with self-conditioning.
++        self.self_cond_aux_weight = self_cond_aux_weight
+ 
+     def relational_gaussian_loss(
+         self,
+@@ -151,6 +157,24 @@ class GRDM(GaussianMultinomialDiffusion):
+         loss = torch.stack(
+             [loss_node_type.mean() for loss_node_type in node_type_to_loss.values()]
+         ).sum()
++
++        # Self-conditioning (fix S11): the denoiser's first pass emits an x0 estimate for
++        # every node, which the second pass consumes in place of the raw noisy neighbour
++        # features. That estimate is fed forward detached, so this term is the only thing
++        # training it -- without it the head would keep its initialisation forever.
++        # It is kept out of node_type_to_loss so the trainer's per-table averages still
++        # mean what they meant before.
++        x0_hat_seed = getattr(self._denoise_fn, "last_x0_hat_seed", None)
++        if x0_hat_seed and self.self_cond_aux_weight > 0:
++            aux = torch.stack(
++                [
++                    F.mse_loss(x0_hat_seed[node_type], x_target[node_type]["x_num"])
++                    for node_type in model_out
++                    if node_type in x0_hat_seed
++                ]
++            ).sum()
++            loss = loss + self.self_cond_aux_weight * aux
++
+         return loss, node_type_to_loss
+ 
+ 
+@@ -163,10 +187,17 @@ class GNNDenoiser(nn.Module):
+         dim_t: int = 128,
+         dimension_tables: list = None,
+         node_type_to_rtdl_d_layers: Dict[NodeType, list] = None,
++        gnn_residual: bool = False,
++        degree_dim: int = 0,
++        self_conditioning: bool = False,
+     ):
+         # TODO: consider ID awareness (see paper and relbench tutorial train_model.ipynb)
+         super().__init__()
+         self.dim_t = dim_t
++        self.dimension_tables = dimension_tables or []
++        self.self_conditioning = self_conditioning
++        # populated by forward() when self-conditioning is on; the diffusion loss reads it
++        self.last_x0_hat_seed = None
+ 
+         # same embedding module is applied to the time step of every node in the graph
+         self.time_embed = nn.Sequential(
+@@ -178,13 +209,44 @@ class GNNDenoiser(nn.Module):
+         for node_type, d_in in node_type_to_d_in.items():
+             self.projs[node_type] = nn.Linear(d_in, dim_t)
+ 
++        # Exact per-relation cardinality (fix S10). Neighbour sampling caps how many children
++        # a node's representation is built from (`--num_neighbors -1 16` sees 16 of an
++        # account's ~235 transactions), so the aggregate the GNN forms is a small sample of
++        # the real one and carries no information about how many children there actually are
++        # -- which is itself a feature downstream models use. The structure is sampled before
++        # any attribute is generated, so the true degrees are known at generation time too.
++        self.deg_proj = nn.Linear(degree_dim, dim_t) if degree_dim > 0 else None
++
+         # a single GNN is used to process the whole graph
+         # specifically, during training, the GNN is used to get node representation of the input nodes.
+-        self.gnn = HeteroGraphSAGE(
++        self.gnn = build_gnn(
+             channels=dim_t,
++            residual=gnn_residual,
+             **gnn_params,
+         )
+ 
++        # Self-conditioning (fix S11). While a row is denoised, its neighbours are at the same
++        # noise level, so at large t the conditioning window is effectively empty and the
++        # measured window sits one hop behind the nominal depth (DIAGNOSIS.md A2). Running the
++        # GNN twice and letting the second pass see the first pass's x0 estimate of each
++        # neighbour restores that hop without paying for another one.
++        self.x0_heads = nn.ModuleDict()
++        self.sc_projs = nn.ModuleDict()
++        if self_conditioning:
++            for node_type, d_in in node_type_to_d_in.items():
++                # the second pass consumes an x0 estimate for every node type ...
++                proj = nn.Linear(d_in, dim_t)
++                # ... injected through a zero-initialised map, so an untrained model is
++                # exactly the one-pass model and the estimate is only used once it is worth
++                # something
++                nn.init.zeros_(proj.weight)
++                nn.init.zeros_(proj.bias)
++                self.sc_projs[node_type] = proj
++                # ... but only diffused types need one predicted; dimension tables are never
++                # noised, so their clean values are already available
++                if node_type not in self.dimension_tables:
++                    self.x0_heads[node_type] = nn.Linear(dim_t, d_in)
++
+         # a different MLP is applied to the representations of the input nodes obtained by the GNN
+         self.mlps = nn.ModuleDict()
+         for node_type, d_in in node_type_to_d_in.items():
+@@ -199,6 +261,39 @@ class GNNDenoiser(nn.Module):
+         # reset parameters
+         self.gnn.reset_parameters()
+ 
++    def _node_embeddings(
++        self,
++        x_in: Dict[NodeType, torch.Tensor],
++        t_emb: Dict[NodeType, torch.Tensor],
++        batch: HeteroData,
++        x0_hat: Dict[NodeType, torch.Tensor] = None,
++    ) -> Dict[NodeType, torch.Tensor]:
++        """Project input features and add the time embedding, plus whatever conditioning
++        signals are enabled."""
++        h = {}
++        for node_type, x in x_in.items():
++            e = self.projs[node_type](x) + t_emb[node_type]
++            if self.deg_proj is not None:
++                e = e + self.deg_proj(batch[node_type].deg.to(e.dtype))
++            if x0_hat is not None:
++                e = e + self.sc_projs[node_type](x0_hat[node_type])
++            h[node_type] = e
++        return h
++
++    @staticmethod
++    def _n_input_nodes(batch: HeteroData, node_type: NodeType) -> int:
++        # we only need the features of the input nodes, which are the first nodes of each node type
++        # n_id is the global node index for every sampled node in the graph
++        # input_id is the global index of the input_nodes
++        # we compute the number of nodes in input_id that are also in n_id of this specific type:
++        n_input_nodes = torch.isin(batch.input_id, batch[node_type].n_id).sum().item()
++        if n_input_nodes > 0:
++            # check that the first n_input_nodes nodes are actually input nodes:
++            assert torch.isin(
++                batch[node_type].n_id[:n_input_nodes], batch.input_id
++            ).all()
++        return n_input_nodes
++
+     def forward(
+         self,
+         x_in: Dict[NodeType, torch.Tensor],  # shape: (num_nodes, d_in)
+@@ -214,34 +309,50 @@ class GNNDenoiser(nn.Module):
+         }
+ 
+         # project input features and add time embedding
+-        x_in = {
+-            node_type: self.projs[node_type](x)
+-            + t_emb[node_type]  # shape: (num_nodes, dim_t)
+-            for node_type, x in x_in.items()
+-        }
++        h = self._node_embeddings(x_in, t_emb, batch)
++
++        self.last_x0_hat_seed = None
++        if self.self_conditioning:
++            # first pass: one round of message passing, read out as an x0 estimate for every
++            # node in the batch (a single linear map, so this costs a GNN forward and not a
++            # second set of MLP heads)
++            z_first = self.gnn(h, batch.edge_index_dict)
++            x0_hat = {}
++            for node_type, x in x_in.items():
++                if node_type in self.x0_heads and node_type in z_first:
++                    x0_hat[node_type] = self.x0_heads[node_type](z_first[node_type])
++                else:
++                    x0_hat[node_type] = x
++            # keep the seed-node slice for the auxiliary loss that supervises this head
++            self.last_x0_hat_seed = {
++                node_type: x0_hat[node_type][: self._n_input_nodes(batch, node_type)]
++                for node_type in self.x0_heads
++                if node_type in x0_hat and self._n_input_nodes(batch, node_type) > 0
++            }
++            # second pass sees the estimate rather than the raw noise. Detached, so the first
++            # pass is trained by its own reconstruction loss instead of by whatever happens
++            # to make the denoiser's job easier.
++            h = self._node_embeddings(
++                x_in,
++                t_emb,
++                batch,
++                x0_hat={k: v.detach() for k, v in x0_hat.items()},
++            )
+ 
+         # run GNN
+         x_out = self.gnn(
+-            x_in,
++            h,
+             batch.edge_index_dict,
+         )  # {node_type: Tensor(num_nodes, dim_t)}
+ 
+         # run MLPs
+         x_final = {}
+         for node_type in x_out:
++            if node_type not in self.mlps:
++                continue
+             # extract features of input nodes
+-            # we only need the features of the input nodes, which are the first nodes of each node type
+-            # n_id is the global node index for every sampled node in the graph
+-            # input_id is the global index of the input_nodes
+-            # we compute the number of nodes in input_id that are also in n_id of this specific type:
+-            n_input_nodes = (
+-                torch.isin(batch.input_id, batch[node_type].n_id).sum().item()
+-            )
++            n_input_nodes = self._n_input_nodes(batch, node_type)
+             if n_input_nodes > 0:
+-                # check that the first n_input_nodes nodes are actually input nodes:
+-                assert torch.isin(
+-                    batch[node_type].n_id[:n_input_nodes], batch.input_id
+-                ).all()
+                 input_nodes_gnn_representations = x_out[node_type][:n_input_nodes]
+                 x_final[node_type] = self.mlps[node_type](
+                     input_nodes_gnn_representations
+diff --git a/rdbdiff/random_graph_sampler.py b/rdbdiff/random_graph_sampler.py
+index f113236..d5bf44a 100644
+--- a/rdbdiff/random_graph_sampler.py
++++ b/rdbdiff/random_graph_sampler.py
+@@ -212,7 +212,7 @@ class RandomGraphSampler:
+                         if fkeys_sampled_all is None:
+                             fkeys_sampled_all = fkeys_sampled
+                         else:
+-                            fkeys_sampled_all = np.concat(
++                            fkeys_sampled_all = np.concatenate(
+                                 (fkeys_sampled_all, fkeys_sampled), axis=0
+                             )
+                         # TODO: if not unique in the real data, skip next line
+@@ -276,8 +276,10 @@ class RandomGraphSampler:
+                     self.real_table_to_structure[parent][f"{parent}_id"], parent_ids
+                 )
+                 if len(parent_ids_zero_in_degree) > 0:
+-                    parent_ids = np.concat((parent_ids, parent_ids_zero_in_degree))
+-                    in_degrees = np.concat(
++                    parent_ids = np.concatenate(
++                        (parent_ids, parent_ids_zero_in_degree)
++                    )
++                    in_degrees = np.concatenate(
+                         (in_degrees, np.zeros_like(parent_ids_zero_in_degree))
+                     )
+ 
+diff --git a/rdbdiff/sampler.py b/rdbdiff/sampler.py
+index a5eaa5a..455d447 100644
+--- a/rdbdiff/sampler.py
++++ b/rdbdiff/sampler.py
+@@ -12,6 +12,15 @@ from rdbdiff.dataloader import get_neighbor_dataloader
+ from rdbdiff.model import GRDM
+ 
+ 
++class SamplingBudgetExhausted(Exception):
++    """Raised when the wall-clock budget runs out mid-sampling. State is checkpointed
++    before this is raised, so the relauncher just has to start the process again."""
++
++    def __init__(self, t: int):
++        super().__init__(f"wall-clock budget exhausted during sampling at timestep {t}")
++        self.t = t
++
++
+ class GRDMSampler:
+     def __init__(
+         self,
+@@ -23,6 +32,8 @@ class GRDMSampler:
+         device=torch.device("cuda"),
+         dimension_tables: list = None,
+         node_type_to_d_in: Dict[NodeType, int] = None,
++        checkpoint_every: int = 25,
++        deadline: float = None,
+     ):
+         diffusion_model._denoise_fn.load_state_dict(
+             torch.load(
+@@ -40,6 +51,10 @@ class GRDMSampler:
+         self.device = device
+         self.dimension_tables = dimension_tables
+         self.node_type_to_d_in = node_type_to_d_in
++        self.checkpoint_every = checkpoint_every
++        # absolute time.time() after which we stop and exit cleanly, or None for no limit
++        self.deadline = deadline
++        self.checkpoint_path = os.path.join(save_dir, "sampling_checkpoint.pt")
+ 
+     @torch.no_grad()
+     def sample_node_attributes(
+@@ -53,15 +68,25 @@ class GRDMSampler:
+         sampling_start_time = time.time()
+         self.diffusion_model.eval()
+ 
+-        # base noise: z_T ~ N(0, I)
+-        for node_type in graph.node_types:
+-            if self.dimension_tables is not None and node_type in self.dimension_tables:
+-                continue
+-            graph[node_type].x = torch.randn_like(graph[node_type].x)
++        # The whole state of this loop is (t, x per node type), so it can be checkpointed
++        # and resumed -- 2000 timesteps do not fit in one process lifetime on a contended GPU.
++        start_t = self.load_sampling_checkpoint(graph)
++        if start_t is None:
++            # base noise: z_T ~ N(0, I)
++            for node_type in graph.node_types:
++                if (
++                    self.dimension_tables is not None
++                    and node_type in self.dimension_tables
++                ):
++                    continue
++                graph[node_type].x = torch.randn_like(graph[node_type].x)
++            start_t = self.num_timesteps - 1
++        else:
++            print(f"Resuming sampling from timestep {start_t}...", flush=True)
+ 
+         # reverse diffusion process: at each timestep, we take one denoising step on all nodes of all types
+         # z_t = denoise(z_{t+1}, t)
+-        for t in reversed(range(0, self.num_timesteps)):
++        for t in reversed(range(0, start_t + 1)):
+             step_start_time = time.time()
+             wandb.log({f"sampling/sample_timestep": t})
+ 
+@@ -129,12 +154,60 @@ class GRDMSampler:
+             step_end_time = time.time()
+             step_total_time = step_end_time - step_start_time
+             wandb.log({f"sampling/step_time": step_total_time})
++            print(
++                f"Sampling timestep {t}/{self.num_timesteps} took {step_total_time:.2f}s",
++                flush=True,
++            )
++
++            # Checkpoint on a fixed grid of t so the work lost to a kill is bounded by
++            # checkpoint_every timesteps regardless of where the process died.
++            if t % self.checkpoint_every == 0:
++                self.save_sampling_checkpoint(graph, t)
++
++            if self.deadline is not None and time.time() >= self.deadline:
++                # Save at whatever t we reached, then hand back to the relauncher. The
++                # checkpoint is the resume point, so no sampling work is repeated.
++                self.save_sampling_checkpoint(graph, t)
++                raise SamplingBudgetExhausted(t)
+ 
+         sampling_end_time = time.time()
+         total_sampling_time = sampling_end_time - sampling_start_time
+         wandb.log({f"sampling/total_sampling_time": total_sampling_time})
++        # sampling finished; the checkpoint is now dead weight (it holds a full copy of x)
++        if os.path.exists(self.checkpoint_path):
++            os.remove(self.checkpoint_path)
+         return graph
+ 
++    def save_sampling_checkpoint(self, graph: HeteroData, t: int):
++        """Persist the reverse-diffusion state: the next timestep to run and every node
++        type's current x. Written via .tmp + os.replace so a kill mid-write cannot leave a
++        truncated checkpoint behind."""
++        tmp_path = self.checkpoint_path + ".tmp"
++        torch.save(
++            {
++                "t": t - 1,  # t itself is done; resume at the next one down
++                "node_type_to_x": {
++                    node_type: graph[node_type].x.detach().cpu()
++                    for node_type in graph.node_types
++                },
++            },
++            tmp_path,
++        )
++        os.replace(tmp_path, self.checkpoint_path)
++
++    def load_sampling_checkpoint(self, graph: HeteroData):
++        """Restore x for every node type and return the timestep to resume at, or None if
++        there is no checkpoint (in which case the caller seeds fresh noise)."""
++        if not os.path.exists(self.checkpoint_path):
++            return None
++        checkpoint = torch.load(self.checkpoint_path, weights_only=False)
++        for node_type, x in checkpoint["node_type_to_x"].items():
++            graph[node_type].x = x
++        t = checkpoint["t"]
++        if t < 0:
++            return None
++        return t
++
+     def get_dataloader(self, graph: HeteroData):
+         dataloader, _ = get_neighbor_dataloader(
+             data=graph,
+diff --git a/rdbdiff/trainer.py b/rdbdiff/trainer.py
+index fe622bc..8e08df9 100644
+--- a/rdbdiff/trainer.py
++++ b/rdbdiff/trainer.py
+@@ -12,6 +12,15 @@ from rdbdiff.model import GRDM
+ from rdbdiff.third_party.tab_ddpm import update_ema
+ 
+ 
++class TrainingBudgetExhausted(Exception):
++    """Raised at an epoch boundary when the wall-clock budget runs out. The checkpoint is
++    already written, so the relauncher just has to start the process again."""
++
++    def __init__(self, step: int):
++        super().__init__(f"wall-clock budget exhausted during training at step {step}")
++        self.step = step
++
++
+ class GRDMTrainer:
+     def __init__(
+         self,
+@@ -26,6 +35,8 @@ class GRDMTrainer:
+         n_total_target_nodes: int = None,
+         max_epochs: int = None,
+         target_node_types: list[str] = None,
++        seed_balance_alpha: float = 0.0,
++        deadline: float = None,
+     ):
+         self.diffusion_model = diffusion_model
+         # Exponential Moving Average (EMA) model is a copy of the denoising model
+@@ -59,6 +70,10 @@ class GRDMTrainer:
+         self.train_batch_size = train_batch_size
+         self.n_total_target_nodes = n_total_target_nodes
+         self.target_node_types = target_node_types
++        self.seed_balance_alpha = seed_balance_alpha
++        # absolute time.time() after which we stop at the next epoch boundary and exit
++        # cleanly, or None for no limit
++        self.deadline = deadline
+ 
+         self.loss_history = pd.DataFrame(columns=["step", "loss"])
+ 
+@@ -76,12 +91,12 @@ class GRDMTrainer:
+         self.optimizer.step()
+         return loss, node_type_to_loss
+ 
+-    def run_training_loop(self):
++    def run_training_loop(self, start_step: int = 0):
+         training_start_time = time.time()
+         self.diffusion_model.train()
+ 
+-        step = 0
+-        epoch = 0
++        step = start_step
++        epoch = start_step // self.steps_per_epoch
+ 
+         node_type_to_curr_count = {node_type: 0 for node_type in self.target_node_types}
+         node_type_to_curr_loss = {
+@@ -110,11 +125,19 @@ class GRDMTrainer:
+                 epoch_end_time = time.time()
+                 epoch_total_time = epoch_end_time - epoch_start_time
+ 
+-                assert (
+-                    sum(node_type_to_curr_count.values()) == self.n_total_target_nodes
+-                )
++                # With uniform seeding an epoch visits every target node exactly once. Balanced
++                # seeding (S3) draws with replacement, so the visit count is a random variable
++                # and only the total is fixed; check that instead, and guard the per-type
++                # division since a rare type can go unvisited in an epoch.
++                seen = sum(node_type_to_curr_count.values())
++                if self.seed_balance_alpha > 0.0:
++                    assert seen > 0
++                else:
++                    assert seen == self.n_total_target_nodes
+                 epoch_loss = 0.0
+                 for node_type in self.target_node_types:
++                    if node_type_to_curr_count[node_type] == 0:
++                        continue
+                     epoch_loss += (
+                         node_type_to_curr_loss[node_type]
+                         / node_type_to_curr_count[node_type]
+@@ -141,6 +164,20 @@ class GRDMTrainer:
+                 wandb.log({f"best_epoch": best_epoch})
+                 wandb.log({f"best_loss": best_loss})
+ 
++                self.save_checkpoint(step + 1)
++
++                # Stop at an epoch boundary once the wall-clock budget is spent. The
++                # checkpoint above is the resume point, so this costs nothing but the
++                # process restart; the alternative is being SIGKILLed mid-epoch by the
++                # node's ~24h process limit and losing up to one epoch.
++                if self.deadline is not None and time.time() >= self.deadline:
++                    print(
++                        f"Wall-clock budget exhausted at step {step + 1}; "
++                        f"checkpointed and exiting for relaunch.",
++                        flush=True,
++                    )
++                    raise TrainingBudgetExhausted(step + 1)
++
+                 node_type_to_curr_count = {
+                     node_type: 0 for node_type in self.target_node_types
+                 }
+@@ -161,6 +198,39 @@ class GRDMTrainer:
+         total_training_time = training_end_time - training_start_time
+         wandb.log({f"total_training_time": total_training_time})
+ 
++    def save_checkpoint(self, step: int):
++        """Save a resumable mid-training checkpoint (model, EMA, optimizer, step, loss
++        history). Only called at epoch boundaries, so `load_checkpoint`'s returned step
++        is always a multiple of `steps_per_epoch` and the per-epoch node-count assert in
++        `run_training_loop` stays valid after resuming."""
++        os.makedirs(self.save_dir, exist_ok=True)
++        checkpoint_path = os.path.join(self.save_dir, "checkpoint.pt")
++        tmp_path = checkpoint_path + ".tmp"
++        torch.save(
++            {
++                "step": step,
++                "model_state_dict": self.diffusion_model._denoise_fn.state_dict(),
++                "ema_state_dict": self.ema_model.state_dict(),
++                "optimizer_state_dict": self.optimizer.state_dict(),
++                "loss_history": self.loss_history,
++            },
++            tmp_path,
++        )
++        os.replace(tmp_path, checkpoint_path)  # atomic, avoids a truncated file if killed mid-write
++
++    def has_checkpoint(self):
++        return os.path.exists(os.path.join(self.save_dir, "checkpoint.pt"))
++
++    def load_checkpoint(self) -> int:
++        checkpoint = torch.load(
++            os.path.join(self.save_dir, "checkpoint.pt"), weights_only=False
++        )
++        self.diffusion_model._denoise_fn.load_state_dict(checkpoint["model_state_dict"])
++        self.ema_model.load_state_dict(checkpoint["ema_state_dict"])
++        self.optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
++        self.loss_history = checkpoint["loss_history"]
++        return checkpoint["step"]
++
+     def save_model_and_loss_history(self):
+         os.makedirs(self.save_dir, exist_ok=True)
+         self.loss_history.to_csv(os.path.join(self.save_dir, "loss.csv"), index=False)
+diff --git a/rdbdiff/utils/data.py b/rdbdiff/utils/data.py
+index d5578e6..c66077c 100644
+--- a/rdbdiff/utils/data.py
++++ b/rdbdiff/utils/data.py
+@@ -40,8 +40,19 @@ def sort_columns(
+         else:
+             raise ValueError(f"Unknown feature type {info['type']}.")
+ 
++    # Keep the frame's own order for the id columns. The upstream form built this list with
++    # `list(set(df) - ...)`, and set iteration order over strings varies between processes, so
++    # the id columns landed in a different order on every run -- two runs of the same seed wrote
++    # CSVs whose headers differed (`loan_id,account_id` vs `account_id,loan_id`). Values were
++    # unaffected, but the output was not reproducible. Consumers must still match on column
++    # name, never position.
++    id_columns = [
++        col
++        for col in df.columns
++        if col not in set(numerical_columns) | set(categorical_columns)
++    ]
+     sorted_columns = (
+-        list(set(df) - set(numerical_columns) - set(categorical_columns))  # id columns
++        id_columns  # id columns, in the frame's own order
+         + numerical_columns  # then numerical columns
+         + categorical_columns  # then categorical columns
+     )
+@@ -73,15 +84,41 @@ def get_col_to_stype_dict(
+ 
+ # TODO: generalize to more normalization functions
+ # for now, we only need QuantileTransformer, so it's fine
++def numerical_columns(data_path: str, table_name: str, df_columns) -> list:
++    """Continuous (non-id) columns of a table, in the frame's own order."""
++    domain = read_json(os.path.join(data_path, f"{table_name}_domain.json"))
++    return [
++        col
++        for col in df_columns
++        if not col.endswith("_id") and domain.get(col, {}).get("type") == "continuous"
++    ]
++
++
+ def preprocess_database(
+     database: Database,
+     normalizers_cache_dir: str,
+     seed: int = 0,
++    data_path: str = None,
++    categorical_encoding: str = "ordinal",
+ ):
+-    """Preprocess a database by normalizing its data in-place."""
++    """Preprocess a database by normalizing its data in-place.
++
++    Under the default 'ordinal' encoding every non-id column is quantile-transformed, categorical
++    codes included. That is part of why rare classes vanish (fix S4): `QuantileTransformer` maps a
++    class to a band of the normal proportional to its frequency, so a 4.7%-mass class gets a
++    correspondingly narrow target for the diffusion to land in. Under 'onehot' the categorical
++    columns are left alone here and expanded to indicator columns when the graph is built, so
++    every class gets an equal-width target.
++    """
+     for table_name, table in database.table_dict.items():
+         df = table.df
+         cols_no_id = [col for col in df.columns if not col.endswith("_id")]
++        if categorical_encoding == "onehot":
++            if data_path is None:
++                raise ValueError("data_path is required for categorical_encoding='onehot'")
++            cols_no_id = numerical_columns(data_path, table_name, df.columns)
++            if not cols_no_id:
++                continue
+         data_raw = df[cols_no_id].to_numpy()
+         data_processed = normalize(
+             X=data_raw,
+@@ -123,15 +160,31 @@ def normalize(
+ def denormalize_data(
+     node_type_to_X_syn: Dict[str, np.ndarray],
+     normalizers_dir: str,
++    node_type_to_num_numerical_features: Dict[str, int] = None,
+ ):
++    """Invert the quantile transform.
++
++    Under one-hot encoding (fix S4) the normalizer was fitted on the numerical columns alone, so
++    only that block is inverted and the indicator columns pass through untouched.
++    """
+     node_type_to_X_denorm = {}
+     for node_type, X_syn in node_type_to_X_syn.items():
+-        X_denorm = denormalize(
+-            X=X_syn,
+-            cache_dir=normalizers_dir,
+-            table_name=node_type,
++        if node_type_to_num_numerical_features is None:
++            node_type_to_X_denorm[node_type] = denormalize(
++                X=X_syn, cache_dir=normalizers_dir, table_name=node_type
++            )
++            continue
++
++        n_num = node_type_to_num_numerical_features[node_type]
++        if n_num == 0:
++            node_type_to_X_denorm[node_type] = X_syn
++            continue
++        num_block = denormalize(
++            X=X_syn[:, :n_num], cache_dir=normalizers_dir, table_name=node_type
++        )
++        node_type_to_X_denorm[node_type] = np.concatenate(
++            [num_block, X_syn[:, n_num:]], axis=1
+         )
+-        node_type_to_X_denorm[node_type] = X_denorm
+     return node_type_to_X_denorm
+ 
+ 
+@@ -158,10 +211,71 @@ def extract_attributes(database: Database) -> Dict[str, np.ndarray]:
+     return table_name_to_X
+ 
+ 
++def decode_categorical_matched(x_syn_col: np.ndarray, x_real_col: np.ndarray) -> np.ndarray:
++    """Decode one categorical column so its marginal matches the real one (fix S1).
++
++    Categorical columns are diffused as ordinal continuous values, so decoding with
++    `np.round` thresholds at the midpoints between codes. That systematically erases a rare
++    class whose code sits between two dense ones -- `loan.status` B (code 1, 4.7% of rows)
++    lies between A (0) and C (2) and collapses to 1-6 rows, while D (code 3) sits at the edge
++    of the range and survives.
++
++    Instead of assuming the midpoints are the right thresholds, keep the ordering the model
++    produced and place the thresholds where the real class proportions say they belong. Codes
++    absent from the real data receive no mass, so gaps in the label encoding are preserved.
++    """
++    real_vals, real_counts = np.unique(x_real_col, return_counts=True)
++    n = len(x_syn_col)
++
++    # Largest-remainder apportionment so the assigned counts sum to exactly n.
++    target = real_counts / real_counts.sum() * n
++    counts = np.floor(target).astype(int)
++    remainder = n - counts.sum()
++    if remainder > 0:
++        counts[np.argsort(-(target - counts))[:remainder]] += 1
++
++    order = np.argsort(x_syn_col, kind="stable")
++    out = np.empty(n, dtype=int)
++    pos = 0
++    for val, count in zip(real_vals, counts):
++        out[order[pos : pos + count]] = int(val)
++        pos += count
++    return out
++
++
++def decode_onehot_synthetic_data(
++    node_type_to_X_syn: Dict[str, np.ndarray],
++    node_type_to_num_numerical_features: Dict[str, int],
++    node_type_to_cat_num_classes: Dict[str, list],
++) -> Dict[str, np.ndarray]:
++    """Collapse one-hot blocks back to class codes by argmax (fix S4).
++
++    Inverse of the expansion in `make_pkey_fkey_graph`. The numerical block passes through
++    untouched; each categorical column is recovered as the argmax of its own block, so no class
++    can be reached by drifting across a neighbouring one.
++    """
++    out = {}
++    for table_name, X_syn in node_type_to_X_syn.items():
++        n_num = node_type_to_num_numerical_features[table_name]
++        num_block = np.round(X_syn[:, :n_num], 6)
++        codes, offset = [], n_num
++        for n_classes in node_type_to_cat_num_classes[table_name]:
++            codes.append(X_syn[:, offset : offset + n_classes].argmax(axis=1))
++            offset += n_classes
++        if codes:
++            out[table_name] = np.concatenate(
++                [num_block, np.stack(codes, axis=1).astype(num_block.dtype)], axis=1
++            )
++        else:
++            out[table_name] = num_block
++    return out
++
++
+ def round_synthetic_data(
+     node_type_to_X_syn: Dict[str, np.ndarray],
+     node_type_to_X_real: Dict[str, np.ndarray],
+     node_type_to_num_numerical_features: Dict[str, int],
++    categorical_decoding: str = "round",
+ ) -> Dict[str, np.ndarray]:
+     for table_name in node_type_to_X_syn:
+         X_syn = node_type_to_X_syn[table_name]
+@@ -174,15 +288,30 @@ def round_synthetic_data(
+         X_real_num = X_real[:, :num_numerical_features]
+         X_real_cat = X_real[:, num_numerical_features:]
+ 
+-        # round categorical features
+-        X_syn_cat = np.round(X_syn_cat).astype(int)
++        # decode categorical features
++        if categorical_decoding == "match":
++            X_syn_cat = np.stack(
++                [
++                    decode_categorical_matched(X_syn_cat[:, col], X_real_cat[:, col])
++                    for col in range(X_syn_cat.shape[1])
++                ],
++                axis=1,
++            ) if X_syn_cat.shape[1] else X_syn_cat.astype(int)
++        else:
++            X_syn_cat = np.round(X_syn_cat).astype(int)
+         # TODO: clip between smallest and largest class label
+         # TODO: using sklear.LabelEncoder might be helpful for this purpose as it stores the number of classes
+         # for now just check and manually correct
+         for col in range(X_syn_cat.shape[1]):
+             real_unique = np.unique(X_real_cat[:, col])
+-            assert (real_unique == np.arange(len(real_unique))).all()
+-            X_syn_cat[:, col] = np.clip(X_syn_cat[:, col], 0, len(real_unique) - 1)
++            # Clip to the largest class label rather than assuming the label encoding is dense.
++            # The original `assert real_unique == arange(len(real_unique))` holds only when every
++            # code 0..K-1 occurs in the training rows, which is true of the shipped datasets but
++            # not of a subsample: the berka_split holdout removes every client with birth-year
++            # code 73, leaving a gap. When the codes are contiguous this is identical to the
++            # previous behaviour, since then max == len - 1.
++            assert real_unique.min() >= 0
++            X_syn_cat[:, col] = np.clip(X_syn_cat[:, col], 0, int(real_unique.max()))
+ 
+             syn_unique = np.unique(X_syn_cat[:, col])
+             if (
+diff --git a/rdbdiff/utils/graph.py b/rdbdiff/utils/graph.py
+index 7578c54..6c219db 100644
+--- a/rdbdiff/utils/graph.py
++++ b/rdbdiff/utils/graph.py
+@@ -17,6 +17,8 @@ from torch_geometric.utils import sort_edge_index
+ def make_pkey_fkey_graph(
+     db: Database,
+     col_to_stype_dict: Dict[str, Dict[str, str]],
++    col_to_num_classes: Dict[str, Dict[str, int]] = None,
++    add_degree_features: bool = False,
+ ) -> HeteroData:
+     r"""Given a :class:`Database` object, construct a heterogeneous graph with primary-
+     foreign key relationships, together with the column stats of each table.
+@@ -54,15 +56,35 @@ def make_pkey_fkey_graph(
+         dtype = _get_default_numpy_dtype()
+         # col_to_stype only contains columns that are not pkey or fkey at this point
+         rows_np = df[col_to_stype.keys()].to_numpy().astype(dtype)
+-        data[table_name].x = torch.from_numpy(rows_np)
+ 
+-        # Add number of numerical and categorical features
+         num_numerical_features = len(
+             [stype for stype in col_to_stype.values() if stype == "numerical"]
+         )
+         num_categorical_features = len(
+             [stype for stype in col_to_stype.values() if stype == "categorical"]
+         )
++
++        # Fix S4: expand each categorical column into one indicator column per class, so the
++        # model no longer sees class codes as points on a line. Ordinal codes give the diffusion
++        # a false metric in which a rare class sitting between two dense ones (Berka
++        # `loan.status` B, between A and C) is absorbed by its neighbours on rounding.
++        # `sort_columns` guarantees numerical columns precede categorical ones, so the
++        # categorical block is exactly the tail of `rows_np`.
++        if col_to_num_classes is not None:
++            cat_cols = [c for c, s in col_to_stype.items() if s == "categorical"]
++            blocks = [rows_np[:, :num_numerical_features]]
++            for i, col in enumerate(cat_cols):
++                n_classes = col_to_num_classes[table_name][col]
++                codes = rows_np[:, num_numerical_features + i].astype(np.int64)
++                onehot = np.zeros((len(codes), n_classes), dtype=dtype)
++                onehot[np.arange(len(codes)), np.clip(codes, 0, n_classes - 1)] = 1.0
++                blocks.append(onehot)
++            rows_np = np.concatenate(blocks, axis=1) if len(blocks) > 1 else blocks[0]
++            num_categorical_features = rows_np.shape[1] - num_numerical_features
++
++        data[table_name].x = torch.from_numpy(rows_np)
++
++        # Add number of numerical and categorical features
+         data[table_name].num_numerical_features = torch.full(
+             (data[table_name].num_nodes,), num_numerical_features, dtype=torch.long
+         )
+@@ -99,11 +121,46 @@ def make_pkey_fkey_graph(
+             edge_type = (pkey_table_name, f"rev_f2p_{fkey_name}", table_name)
+             data[edge_type].edge_index = sort_edge_index(edge_index)
+ 
++    if add_degree_features:
++        add_relation_degrees(data)
++
+     data.validate()
+ 
+     return data
+ 
+ 
++def add_relation_degrees(data: HeteroData) -> None:
++    r"""Attach each node's exact per-relation child count as a ``deg`` feature (fix S10).
++
++    A downstream model's strongest features over a child table are counts and count-derived
++    ratios -- how many transactions an account has, what share of them carry a given symbol.
++    The denoiser cannot recover those from message passing: ``--num_neighbors -1 16`` hands it
++    16 of an account's ~235 transactions, so every aggregate it forms is a fixed-size sample
++    whose size says nothing about the real one. The graph structure is sampled in full before
++    any attribute is generated, so the true degree is available at generation time exactly as
++    it is at training time.
++
++    Degrees are stored as one dense ``(num_nodes, num_edge_types)`` block per node type, with
++    zeros in the columns of relations that do not point at that type. The uniform width is
++    what lets the block survive the ``to_homogeneous`` / ``to_heterogeneous`` round trip the
++    dataloader performs. Counts are ``log1p``-compressed because table fan-outs here span four
++    orders of magnitude.
++    """
++    # sorted, not insertion-ordered, so the real graph and the sampled structure graph agree
++    # on which column means which relation
++    edge_types = sorted(data.edge_types)
++    for node_type in data.node_types:
++        data[node_type].deg = torch.zeros(
++            (data[node_type].num_nodes, len(edge_types)),
++            dtype=torch.get_default_dtype(),
++        )
++    for j, edge_type in enumerate(edge_types):
++        dst = edge_type[-1]
++        dst_index = data[edge_type].edge_index[1]
++        counts = torch.bincount(dst_index, minlength=data[dst].num_nodes)
++        data[dst].deg[:, j] = torch.log1p(counts.to(torch.get_default_dtype()))
++
++
+ # Taken from https://github.com/pyg-team/pytorch-frame/blob/master/torch_frame/data/mapper.py
+ def _get_default_numpy_dtype() -> np.dtype:
+     r"""Returns the default numpy dtype."""

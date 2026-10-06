@@ -1,0 +1,172 @@
+[
+  {
+    "task": "berka_card_ownership",
+    "feature": "trans_n",
+    "family": "aggregate",
+    "real_signal": true,
+    "real_auc": 0.5337587902477332,
+    "real_lo": 0.5120008368829015,
+    "real_hi": 0.5539228315316324,
+    "synth_auc_mean": NaN,
+    "synth_auc_sd": NaN,
+    "per_seed": [
+      NaN
+    ],
+    "signal_retained": NaN,
+    "seeds_covering_half": 0,
+    "n_seeds": 1
+  },
+  {
+    "task": "berka_card_ownership",
+    "feature": "trans_balance_mean",
+    "family": "aggregate",
+    "real_signal": true,
+    "real_auc": 0.8377898104519168,
+    "real_lo": 0.8249815934490929,
+    "real_hi": 0.8496863986278853,
+    "synth_auc_mean": NaN,
+    "synth_auc_sd": NaN,
+    "per_seed": [
+      NaN
+    ],
+    "signal_retained": NaN,
+    "seeds_covering_half": 0,
+    "n_seeds": 1
+  },
+  {
+    "task": "berka_card_ownership",
+    "feature": "trans_balance_last",
+    "family": "aggregate",
+    "real_signal": true,
+    "real_auc": 0.776519998929107,
+    "real_lo": 0.7586597686844712,
+    "real_hi": 0.7950656198484178,
+    "synth_auc_mean": NaN,
+    "synth_auc_sd": NaN,
+    "per_seed": [
+      NaN
+    ],
+    "signal_retained": NaN,
+    "seeds_covering_half": 0,
+    "n_seeds": 1
+  },
+  {
+    "task": "berka_card_ownership",
+    "feature": "trans_amount_mean",
+    "family": "aggregate",
+    "real_signal": true,
+    "real_auc": 0.7501800439066182,
+    "real_lo": 0.7301498354737395,
+    "real_hi": 0.7680050423718379,
+    "synth_auc_mean": NaN,
+    "synth_auc_sd": NaN,
+    "per_seed": [
+      NaN
+    ],
+    "signal_retained": NaN,
+    "seeds_covering_half": 0,
+    "n_seeds": 1
+  },
+  {
+    "task": "berka_card_ownership",
+    "feature": "order_n",
+    "family": "aggregate",
+    "real_signal": false,
+    "real_auc": 0.5122568493869116,
+    "real_lo": 0.4883100225363339,
+    "real_hi": 0.5377480978998566,
+    "synth_auc_mean": NaN,
+    "synth_auc_sd": NaN,
+    "per_seed": [
+      NaN
+    ],
+    "signal_retained": NaN,
+    "seeds_covering_half": 0,
+    "n_seeds": 1
+  },
+  {
+    "task": "berka_card_ownership",
+    "feature": "order_amount_sum",
+    "family": "aggregate",
+    "real_signal": true,
+    "real_auc": 0.6385506151861292,
+    "real_lo": 0.6141176151479649,
+    "real_hi": 0.6672742249465228,
+    "synth_auc_mean": NaN,
+    "synth_auc_sd": NaN,
+    "per_seed": [
+      NaN
+    ],
+    "signal_retained": NaN,
+    "seeds_covering_half": 0,
+    "n_seeds": 1
+  },
+  {
+    "task": "berka_card_ownership",
+    "feature": "disp_type",
+    "family": "control",
+    "real_signal": true,
+    "real_auc": 0.594752623688156,
+    "real_lo": 0.5879395166064021,
+    "real_hi": 0.6007029041601782,
+    "synth_auc_mean": NaN,
+    "synth_auc_sd": NaN,
+    "per_seed": [
+      NaN
+    ],
+    "signal_retained": NaN,
+    "seeds_covering_half": 0,
+    "n_seeds": 1
+  },
+  {
+    "task": "berka_card_ownership",
+    "feature": "year",
+    "family": "control",
+    "real_signal": true,
+    "real_auc": 0.6111988648532877,
+    "real_lo": 0.591540666190962,
+    "real_hi": 0.6309078595301628,
+    "synth_auc_mean": NaN,
+    "synth_auc_sd": NaN,
+    "per_seed": [
+      NaN
+    ],
+    "signal_retained": NaN,
+    "seeds_covering_half": 0,
+    "n_seeds": 1
+  },
+  {
+    "task": "berka_card_ownership",
+    "feature": "gender",
+    "family": "control",
+    "real_signal": false,
+    "real_auc": 0.4904134986078389,
+    "real_lo": 0.4689339500307414,
+    "real_hi": 0.5114039218416173,
+    "synth_auc_mean": NaN,
+    "synth_auc_sd": NaN,
+    "per_seed": [
+      NaN
+    ],
+    "signal_retained": NaN,
+    "seeds_covering_half": 0,
+    "n_seeds": 1
+  },
+  {
+    "task": "berka_card_ownership",
+    "feature": "frequency",
+    "family": "control",
+    "real_signal": true,
+    "real_auc": 0.5135280573998715,
+    "real_lo": 0.5016064857826404,
+    "real_hi": 0.5256632263379091,
+    "synth_auc_mean": NaN,
+    "synth_auc_sd": NaN,
+    "per_seed": [
+      NaN
+    ],
+    "signal_retained": NaN,
+    "seeds_covering_half": 0,
+    "n_seeds": 1
+  }
+]

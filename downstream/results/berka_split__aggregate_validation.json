@@ -1,0 +1,1013 @@
+{
+  "dataset": "berka_split",
+  "rows": [
+    {
+      "task": "berka_card_ownership",
+      "feature": "trans_n",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.5337587902477332,
+      "real_lo": 0.5120008368829015,
+      "real_hi": 0.5539228315316324,
+      "real_n": 4007,
+      "synth_auc_mean": 0.4869755469772663,
+      "synth_auc_sd": 0.012004108935809433,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.5036085678887552,
+          "lo": 0.48162670910619687,
+          "hi": 0.5281872387196231,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.48160095911272816,
+          "lo": 0.45802563895789067,
+          "hi": 0.5051961745244316,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.47571711393031557,
+          "lo": 0.4485247904140583,
+          "hi": 0.4991301693639343,
+          "n": 4007,
+          "covers_half": false
+        }
+      ],
+      "signal_retained": -0.385809234488438,
+      "ks_marginal": 0.012478163214374893,
+      "seeds_covering_half": 2,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_card_ownership",
+      "feature": "trans_balance_mean",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.8377898104519168,
+      "real_lo": 0.8249815934490929,
+      "real_hi": 0.8496863986278853,
+      "real_n": 4007,
+      "synth_auc_mean": 0.5105093938516492,
+      "synth_auc_sd": 0.006422516525623449,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.5078951958815452,
+          "lo": 0.48655229046596954,
+          "hi": 0.5331468459539923,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5193495901089185,
+          "lo": 0.4945725502081159,
+          "hi": 0.5473427598979891,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5042833955644839,
+          "lo": 0.4799727861733787,
+          "hi": 0.5251080549926366,
+          "n": 4007,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": 0.03111222874837176,
+      "ks_marginal": 0.45121038183179435,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_card_ownership",
+      "feature": "trans_balance_last",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.776519998929107,
+      "real_lo": 0.7586597686844712,
+      "real_hi": 0.7950656198484178,
+      "real_n": 4007,
+      "synth_auc_mean": 0.4955592957027484,
+      "synth_auc_sd": 0.008485552314594025,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.5054132991023308,
+          "lo": 0.48097218293310423,
+          "hi": 0.5308993153484256,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.48470094846620654,
+          "lo": 0.4608443264104437,
+          "hi": 0.5108913476117326,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.49656363953970784,
+          "lo": 0.4728384080766499,
+          "hi": 0.5214174881844785,
+          "n": 4007,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": -0.016059251824277865,
+      "ks_marginal": 0.045087763081274435,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_card_ownership",
+      "feature": "trans_amount_mean",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.7501800439066182,
+      "real_lo": 0.7301498354737395,
+      "real_hi": 0.7680050423718379,
+      "real_n": 4007,
+      "synth_auc_mean": 0.5129845803900722,
+      "synth_auc_sd": 0.008467295203255298,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.5022980691388725,
+          "lo": 0.47999599237880347,
+          "hi": 0.5240598428494094,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5230066702772261,
+          "lo": 0.4959512628948814,
+          "hi": 0.5489703671041685,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5136490017541179,
+          "lo": 0.4871314024949294,
+          "hi": 0.5363603059363496,
+          "n": 4007,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": 0.051900943765597965,
+      "ks_marginal": 0.45187588386989436,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_card_ownership",
+      "feature": "order_n",
+      "family": "aggregate",
+      "real_signal": false,
+      "real_auc": 0.5122568493869116,
+      "real_lo": 0.4883100225363339,
+      "real_hi": 0.5377480978998566,
+      "real_n": 3417,
+      "synth_auc_mean": 0.5044678459150264,
+      "synth_auc_sd": 0.0028867397733107402,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.501501357549355,
+          "lo": 0.47640382473735005,
+          "hi": 0.5261398118690415,
+          "n": 3370,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5035221273850001,
+          "lo": 0.4801595160541202,
+          "hi": 0.5286519588112508,
+          "n": 3322,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.508380052810724,
+          "lo": 0.48433221432657875,
+          "hi": 0.5346564293167295,
+          "n": 3365,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": 0.3645183010731379,
+      "ks_marginal": 0.006137419401829769,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_card_ownership",
+      "feature": "order_amount_sum",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.6385506151861292,
+      "real_lo": 0.6141176151479649,
+      "real_hi": 0.6672742249465228,
+      "real_n": 3417,
+      "synth_auc_mean": 0.4931299984119591,
+      "synth_auc_sd": 0.003620035013940843,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.4889747050973294,
+          "lo": 0.46081151509393453,
+          "hi": 0.5153408091396757,
+          "n": 3370,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.4977974584516013,
+          "lo": 0.47261528861504115,
+          "hi": 0.5266987462613409,
+          "n": 3322,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.49261783168694667,
+          "lo": 0.46768538251596187,
+          "hi": 0.522697872479004,
+          "n": 3365,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": -0.04958477866598956,
+      "ks_marginal": 0.17086505077336617,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_card_ownership",
+      "feature": "disp_type",
+      "family": "control",
+      "real_signal": true,
+      "real_auc": 0.594752623688156,
+      "real_lo": 0.5879395166064021,
+      "real_hi": 0.6007029041601782,
+      "real_n": 4007,
+      "synth_auc_mean": 0.5967250670010936,
+      "synth_auc_sd": 0.005322254086321346,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.6021875936469883,
+          "lo": 0.5961187984769252,
+          "hi": 0.6086067491892673,
+          "n": 4007,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.598478241750103,
+          "lo": 0.591628882091369,
+          "hi": 0.6045774361999389,
+          "n": 4007,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5895093656061896,
+          "lo": 0.5833206354411754,
+          "hi": 0.5962499821887213,
+          "n": 4007,
+          "covers_half": false
+        }
+      ],
+      "signal_retained": 1.020816767242554,
+      "ks_marginal": 0.005074453040512433,
+      "seeds_covering_half": 0,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_card_ownership",
+      "feature": "year",
+      "family": "control",
+      "real_signal": true,
+      "real_auc": 0.6111988648532877,
+      "real_lo": 0.591540666190962,
+      "real_hi": 0.6309078595301628,
+      "real_n": 4007,
+      "synth_auc_mean": 0.519627363625728,
+      "synth_auc_sd": 0.013119439808608201,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.5244081510338628,
+          "lo": 0.4966442277421966,
+          "hi": 0.549079340420928,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5327623557512047,
+          "lo": 0.507511875013711,
+          "hi": 0.5570626241249808,
+          "n": 4007,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5017115840921167,
+          "lo": 0.48124014166491874,
+          "hi": 0.5260408021533911,
+          "n": 4007,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": 0.17650687038598611,
+      "ks_marginal": 0.007320522419099973,
+      "seeds_covering_half": 2,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_card_ownership",
+      "feature": "gender",
+      "family": "control",
+      "real_signal": false,
+      "real_auc": 0.4904134986078389,
+      "real_lo": 0.4689339500307414,
+      "real_hi": 0.5114039218416173,
+      "real_n": 4007,
+      "synth_auc_mean": 0.5047849180514548,
+      "synth_auc_sd": 0.004848802228044411,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.5096701836934596,
+          "lo": 0.49115281286369483,
+          "hi": 0.5279576821317714,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5065096536177344,
+          "lo": 0.48652770615659807,
+          "hi": 0.5278264762457795,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.4981749168431703,
+          "lo": 0.4780404052901785,
+          "hi": 0.5193156009618094,
+          "n": 4007,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": -0.49913079398991056,
+      "ks_marginal": 0.014391481573912346,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_card_ownership",
+      "feature": "frequency",
+      "family": "control",
+      "real_signal": true,
+      "real_auc": 0.5135280573998715,
+      "real_lo": 0.5016064857826404,
+      "real_hi": 0.5256632263379091,
+      "real_n": 4007,
+      "synth_auc_mean": 0.5004050287815867,
+      "synth_auc_sd": 0.006231254246962979,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.496135594130039,
+          "lo": 0.4867713684667054,
+          "hi": 0.5055417946866904,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5092159531182735,
+          "lo": 0.499887439040618,
+          "hi": 0.5197809802168478,
+          "n": 4007,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.4958635390964474,
+          "lo": 0.4870979248107616,
+          "hi": 0.5062996571270897,
+          "n": 4007,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": 0.029939907084553418,
+      "ks_marginal": 0.010980783628649848,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "trans_n",
+      "family": "aggregate",
+      "real_signal": false,
+      "real_auc": 0.42555452507921787,
+      "real_lo": 0.35539768393377286,
+      "real_hi": 0.5082829477595571,
+      "real_n": 511,
+      "synth_auc_mean": 0.5042548324085442,
+      "synth_auc_sd": 0.06090033967065571,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.5900462962962962,
+          "lo": 0.498290091777995,
+          "hi": 0.6765016958712744,
+          "n": 467,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.45479056935038875,
+          "lo": 0.36356753940966097,
+          "hi": 0.5576814186900839,
+          "n": 479,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.46792763157894735,
+          "lo": 0.36296182507199276,
+          "hi": 0.5658115996863722,
+          "n": 470,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": -0.05715367405570019,
+      "ks_marginal": 0.09545092706225745,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "trans_balance_mean",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.3629337661333952,
+      "real_lo": 0.27707171632210364,
+      "real_hi": 0.4461465305221207,
+      "real_n": 511,
+      "synth_auc_mean": 0.5479419564084528,
+      "synth_auc_sd": 0.03587957804187767,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.501984126984127,
+          "lo": 0.40129703983624626,
+          "hi": 0.5981637960700888,
+          "n": 467,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5522949586155004,
+          "lo": 0.44606399405896313,
+          "hi": 0.6484672569328434,
+          "n": 479,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5895467836257311,
+          "lo": 0.5100348769486434,
+          "hi": 0.6862392900667706,
+          "n": 470,
+          "covers_half": false
+        }
+      ],
+      "signal_retained": -0.34977218718295494,
+      "ks_marginal": 0.41607792408814004,
+      "seeds_covering_half": 2,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "trans_balance_last",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.2804698972099853,
+      "real_lo": 0.19170422744175325,
+      "real_hi": 0.35360838644341563,
+      "real_n": 511,
+      "synth_auc_mean": 0.5274710687763636,
+      "synth_auc_sd": 0.053115909159205096,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.45238095238095244,
+          "lo": 0.36969617775978314,
+          "hi": 0.5381076014125011,
+          "n": 467,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5632681213945322,
+          "lo": 0.47319808430427907,
+          "hi": 0.6633997722095673,
+          "n": 479,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5667641325536062,
+          "lo": 0.4682128563104068,
+          "hi": 0.6538900566078488,
+          "n": 470,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": -0.1251357714829674,
+      "ks_marginal": 0.11257697878315477,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "trans_amount_mean",
+      "family": "aggregate",
+      "real_signal": false,
+      "real_auc": 0.4841177834453977,
+      "real_lo": 0.4046692753164629,
+      "real_hi": 0.5596037205643125,
+      "real_n": 511,
+      "synth_auc_mean": 0.47714987556676997,
+      "synth_auc_sd": 0.06041784121729835,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.39596560846560847,
+          "lo": 0.3006094115771062,
+          "hi": 0.49299793238967066,
+          "n": 467,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.49467017807875596,
+          "lo": 0.3861634859043396,
+          "hi": 0.6229440154440155,
+          "n": 479,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5408138401559455,
+          "lo": 0.44859648950623804,
+          "hi": 0.6287705707850505,
+          "n": 470,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": 1.4387238931462987,
+      "ks_marginal": 0.40704915585923246,
+      "seeds_covering_half": 2,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "order_n",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.34204729886389984,
+      "real_lo": 0.2574888772379945,
+      "real_hi": 0.42022079346092506,
+      "real_n": 511,
+      "synth_auc_mean": 0.5224329477312214,
+      "synth_auc_sd": 0.026259156560973076,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.5163727959697733,
+          "lo": 0.42729568195885337,
+          "hi": 0.596001376273991,
+          "n": 429,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5571926765475153,
+          "lo": 0.4662012241919433,
+          "hi": 0.6497228481513286,
+          "n": 401,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.4937333706763759,
+          "lo": 0.40697490999240604,
+          "hi": 0.5770251135186976,
+          "n": 423,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": -0.1420231978932226,
+      "ks_marginal": 0.2184565262547967,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "order_amount_sum",
+      "family": "aggregate",
+      "real_signal": false,
+      "real_auc": 0.42868459695494243,
+      "real_lo": 0.3541935422841092,
+      "real_hi": 0.5064668367346938,
+      "real_n": 511,
+      "synth_auc_mean": 0.5077207883494198,
+      "synth_auc_sd": 0.04055454894309373,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.4541876574307305,
+          "lo": 0.35781806731548216,
+          "hi": 0.5530151883381548,
+          "n": 429,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5523103748910201,
+          "lo": 0.4598974705452616,
+          "hi": 0.6491011885642615,
+          "n": 401,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5166643327265089,
+          "lo": 0.4346356375003408,
+          "hi": 0.6072646292625639,
+          "n": 423,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": -0.10826256348213803,
+      "ks_marginal": 0.33526112672052827,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "trans_bank_0_frac",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.6838240976891569,
+      "real_lo": 0.6007496757017663,
+      "real_hi": 0.7491813432378278,
+      "real_n": 511,
+      "synth_auc_mean": 0.529443840193662,
+      "synth_auc_sd": 0.049245136210411565,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.49130291005291005,
+          "lo": 0.3928959625428751,
+          "hi": 0.5819876754855454,
+          "n": 467,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5989779282668674,
+          "lo": 0.5042765518920309,
+          "hi": 0.6945492996237542,
+          "n": 479,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.4980506822612086,
+          "lo": 0.4050797760388559,
+          "hi": 0.587123753894081,
+          "n": 470,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": 0.1601739954869843,
+      "ks_marginal": 0.37711035191880327,
+      "seeds_covering_half": 2,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "order_k_symbol_3_frac",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.24922714274673466,
+      "real_lo": 0.2052443464546494,
+      "real_hi": 0.29948141479136103,
+      "real_n": 511,
+      "synth_auc_mean": 0.4870219606326403,
+      "synth_auc_sd": 0.07922753913559237,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.37574779596977326,
+          "lo": 0.28322320583179356,
+          "hi": 0.47262277650828555,
+          "n": 429,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5312990409764604,
+          "lo": 0.4364517120516808,
+          "hi": 0.6219388527485301,
+          "n": 401,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5540190449516874,
+          "lo": 0.45744418523891195,
+          "hi": 0.656556802894002,
+          "n": 423,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": 0.0517521693117396,
+      "ks_marginal": 0.48204309656823624,
+      "seeds_covering_half": 2,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "order_k_symbol_4_frac",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.6579527011361002,
+      "real_lo": 0.5797792065390749,
+      "real_hi": 0.7425111227620055,
+      "real_n": 511,
+      "synth_auc_mean": 0.5191167223741031,
+      "synth_auc_sd": 0.04646972475485906,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.5003542191435768,
+          "lo": 0.44101378101968475,
+          "hi": 0.565967725436672,
+          "n": 429,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5830427201394943,
+          "lo": 0.49211467350383026,
+          "hi": 0.6689897779127789,
+          "n": 401,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.4739532278392382,
+          "lo": 0.41963002732846977,
+          "hi": 0.5340847448034899,
+          "n": 423,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": 0.12102814473322088,
+      "ks_marginal": 0.825219473264166,
+      "seeds_covering_half": 3,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "trans_operation_3_frac",
+      "family": "aggregate",
+      "real_signal": true,
+      "real_auc": 0.6169139809877116,
+      "real_lo": 0.5467473496284889,
+      "real_hi": 0.675538096124377,
+      "real_n": 511,
+      "synth_auc_mean": 0.48539280963046355,
+      "synth_auc_sd": 0.07820740522732689,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.37867063492063485,
+          "lo": 0.29176598597336967,
+          "hi": 0.46486013354011446,
+          "n": 467,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.5136067218459994,
+          "lo": 0.4101207337706823,
+          "hi": 0.6292171897608116,
+          "n": 479,
+          "covers_half": true
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5639010721247564,
+          "lo": 0.47949023574148875,
+          "hi": 0.6611312955093754,
+          "n": 470,
+          "covers_half": true
+        }
+      ],
+      "signal_retained": -0.12493963721132517,
+      "ks_marginal": 0.27595995444846155,
+      "seeds_covering_half": 2,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "amount_per_month",
+      "family": "control",
+      "real_signal": true,
+      "real_auc": 0.6909150629878662,
+      "real_lo": 0.6235196504605012,
+      "real_hi": 0.7619238059807255,
+      "real_n": 511,
+      "synth_auc_mean": 0.6601533427154759,
+      "synth_auc_sd": 0.020800098785505913,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.6431912681912683,
+          "lo": 0.5493913664233974,
+          "hi": 0.743790350877193,
+          "n": 505,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.6894474091926321,
+          "lo": 0.5883684429290319,
+          "hi": 0.7787719193703988,
+          "n": 508,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.6478213507625272,
+          "lo": 0.561267038678933,
+          "hi": 0.7260571216921241,
+          "n": 499,
+          "covers_half": false
+        }
+      ],
+      "signal_retained": 0.8388722199759302,
+      "ks_marginal": 0.031664492280930635,
+      "seeds_covering_half": 0,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "payments",
+      "family": "control",
+      "real_signal": true,
+      "real_auc": 0.6909150629878662,
+      "real_lo": 0.6235196504605012,
+      "real_hi": 0.7619238059807255,
+      "real_n": 511,
+      "synth_auc_mean": 0.6558450270889387,
+      "synth_auc_sd": 0.011841241479144827,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.6415742665742666,
+          "lo": 0.5355180937548908,
+          "hi": 0.7449267817753529,
+          "n": 505,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.6705686578298043,
+          "lo": 0.5746595886128534,
+          "hi": 0.7517252604166665,
+          "n": 508,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.655392156862745,
+          "lo": 0.5700370323916728,
+          "hi": 0.7378669513552591,
+          "n": 499,
+          "covers_half": false
+        }
+      ],
+      "signal_retained": 0.816305558345826,
+      "ks_marginal": 0.02672682467203015,
+      "seeds_covering_half": 0,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "amount",
+      "family": "control",
+      "real_signal": true,
+      "real_auc": 0.6488716284102326,
+      "real_lo": 0.5700482920760626,
+      "real_hi": 0.7275487706881566,
+      "real_n": 511,
+      "synth_auc_mean": 0.6977292687390101,
+      "synth_auc_sd": 0.017477669107045908,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.711076461076461,
+          "lo": 0.6104900005314471,
+          "hi": 0.801963358764389,
+          "n": 505,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.7090721294542951,
+          "lo": 0.6158456914548989,
+          "hi": 0.7896469371767469,
+          "n": 508,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.6730392156862746,
+          "lo": 0.5787868932986893,
+          "hi": 0.7728606730862861,
+          "n": 499,
+          "covers_half": false
+        }
+      ],
+      "signal_retained": 1.32818637674967,
+      "ks_marginal": 0.02511415525114155,
+      "seeds_covering_half": 0,
+      "n_seeds": 3
+    },
+    {
+      "task": "berka_loan_default",
+      "feature": "duration",
+      "family": "control",
+      "real_signal": false,
+      "real_auc": 0.5099505371357911,
+      "real_lo": 0.4339360145855358,
+      "real_hi": 0.588695402439822,
+      "real_n": 511,
+      "synth_auc_mean": 0.6112102417382174,
+      "synth_auc_sd": 0.01909452424525722,
+      "per_seed": [
+        {
+          "grdm_seed": 0,
+          "auc": 0.634961884961885,
+          "lo": 0.5477281623070468,
+          "hi": 0.7101747378172556,
+          "n": 505,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 1,
+          "auc": 0.6104607792505883,
+          "lo": 0.5205696530078802,
+          "hi": 0.6892106344097302,
+          "n": 508,
+          "covers_half": false
+        },
+        {
+          "grdm_seed": 2,
+          "auc": 0.5882080610021787,
+          "lo": 0.5052200914043712,
+          "hi": 0.6729264873447529,
+          "n": 499,
+          "covers_half": false
+        }
+      ],
+      "signal_retained": 11.176305381365323,
+      "ks_marginal": 0.027288540987171123,
+      "seeds_covering_half": 0,
+      "n_seeds": 3
+    }
+  ]
+}

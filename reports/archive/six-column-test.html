@@ -1,0 +1,509 @@
+<title>The Six-Column Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --bg:#f4f5f7;
+  --card:#ffffff;
+  --sunk:#e9ebef;
+  --ink:#14181d;
+  --ink-2:#444d58;
+  --ink-3:#79828d;
+  --line:#dcdfe5;
+  --line-2:#c2c8d1;
+  --accent:#5850ec;
+  --accent-soft:#e8e7fd;
+  --real:#1f4e79;
+  --synth:#b0561a;
+  --good:#1a6b52;
+  --good-soft:#dff0e9;
+  --bad:#9b2c2c;
+  --bad-soft:#f8e6e6;
+  --measure:66ch;
+  --wide:1080px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#101317;
+    --card:#191d23;
+    --sunk:#212730;
+    --ink:#e8ebef;
+    --ink-2:#b3bcc6;
+    --ink-3:#7d8794;
+    --line:#282f38;
+    --line-2:#3a434e;
+    --accent:#9d97f5;
+    --accent-soft:#1e1b3d;
+    --real:#79aae4;
+    --synth:#e2924f;
+    --good:#4fb896;
+    --good-soft:#0f2b23;
+    --bad:#e08585;
+    --bad-soft:#331b1b;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101317;
+  --card:#191d23;
+  --sunk:#212730;
+  --ink:#e8ebef;
+  --ink-2:#b3bcc6;
+  --ink-3:#7d8794;
+  --line:#282f38;
+  --line-2:#3a434e;
+  --accent:#9d97f5;
+  --accent-soft:#1e1b3d;
+  --real:#79aae4;
+  --synth:#e2924f;
+  --good:#4fb896;
+  --good-soft:#0f2b23;
+  --bad:#e08585;
+  --bad-soft:#331b1b;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Source Sans 3",system-ui,sans-serif;
+  font-size:17px;line-height:1.68;-webkit-font-smoothing:antialiased;
+}
+.doc{
+  display:grid;
+  grid-template-columns:1fr min(var(--measure),calc(100% - 2.2rem)) 1fr;
+  padding-bottom:5rem;
+}
+.doc > *{grid-column:2}
+.bleed{grid-column:1/-1;width:min(var(--wide),calc(100% - 2.2rem));margin-inline:auto}
+
+p{margin:0 0 1.05em}
+code,.m{font-family:"Source Code Pro",ui-monospace,monospace;font-size:.86em}
+code{background:var(--sunk);padding:.1em .34em;border-radius:3px;color:var(--ink-2)}
+strong{font-weight:600}
+
+header{padding:4rem 0 1.5rem;border-bottom:3px solid var(--accent);margin-bottom:2.5rem}
+.kicker{
+  font-family:"Source Code Pro",monospace;font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 1rem;
+}
+h1{
+  font-family:"Zilla Slab",Georgia,serif;font-weight:700;
+  font-size:clamp(2.3rem,6vw,3.5rem);line-height:1.03;letter-spacing:-.018em;
+  margin:0 0 1rem;text-wrap:balance;
+}
+.stand{font-size:1.12rem;line-height:1.55;color:var(--ink-2);margin:0 0 1.5rem}
+.meta{
+  display:flex;flex-wrap:wrap;gap:.3rem 1.6rem;
+  font-family:"Source Code Pro",monospace;font-size:.74rem;color:var(--ink-3);
+}
+.meta b{color:var(--ink-2);font-weight:500}
+
+.tldr{
+  background:var(--accent-soft);border-radius:6px;padding:1.4rem 1.6rem;margin:0 0 3rem;
+}
+.tldr h2{font-family:"Zilla Slab",serif;font-size:1.05rem;margin:0 0 .7rem;font-weight:600;letter-spacing:.01em}
+.tldr p{margin-bottom:.7em;font-size:.97rem}
+.tldr p:last-child{margin-bottom:0}
+
+section{margin-bottom:3.4rem}
+.step{display:flex;align-items:baseline;gap:.8rem;margin:0 0 .9rem}
+.stepnum{
+  font-family:"Zilla Slab",serif;font-weight:700;font-size:2.4rem;line-height:1;
+  color:var(--accent);letter-spacing:-.03em;flex:none;
+}
+h2{
+  font-family:"Zilla Slab",Georgia,serif;font-weight:600;
+  font-size:clamp(1.45rem,3.4vw,1.85rem);line-height:1.18;letter-spacing:-.01em;
+  margin:0;text-wrap:balance;
+}
+h3{font-family:"Source Sans 3",sans-serif;font-weight:700;font-size:1rem;margin:2rem 0 .55rem}
+
+.callout{border-left:3px solid var(--accent);background:var(--card);padding:.9rem 1.15rem;margin:1.4rem 0;border-radius:0 5px 5px 0;font-size:.97rem}
+.callout.warn{border-left-color:var(--bad);background:var(--bad-soft)}
+.callout.win{border-left-color:var(--good);background:var(--good-soft)}
+.callout .lbl{
+  font-family:"Source Code Pro",monospace;font-size:.67rem;letter-spacing:.13em;
+  text-transform:uppercase;font-weight:600;color:var(--ink-3);display:block;margin-bottom:.4rem;
+}
+.callout p:last-child{margin-bottom:0}
+
+pre{
+  font-family:"Source Code Pro",monospace;font-size:.78rem;line-height:1.7;
+  background:var(--card);border:1px solid var(--line);border-radius:5px;
+  padding:1rem 1.1rem;overflow-x:auto;color:var(--ink-2);margin:1.2rem 0;
+}
+pre .c{color:var(--ink-3);font-style:italic}
+pre .k{color:var(--accent);font-weight:600}
+pre .add{color:var(--good);font-weight:600}
+
+ul,ol{margin:.9rem 0;padding-left:1.3rem}
+li{margin:.4rem 0}
+li::marker{color:var(--accent)}
+
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:5px;background:var(--card);margin:1.3rem 0}
+table{border-collapse:collapse;width:100%;font-size:.85rem}
+caption{
+  text-align:left;font-family:"Source Code Pro",monospace;font-size:.68rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+  padding:.8rem 1rem .65rem;border-bottom:1px solid var(--line);
+}
+thead th{
+  background:var(--sunk);font-family:"Source Code Pro",monospace;font-weight:600;
+  font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);
+  text-align:right;padding:.6rem .8rem;border-bottom:1px solid var(--line-2);white-space:nowrap;
+}
+thead th:first-child{text-align:left}
+tbody td{
+  padding:.52rem .8rem;border-bottom:1px solid var(--line);text-align:right;
+  font-family:"Source Code Pro",monospace;font-variant-numeric:tabular-nums;
+  color:var(--ink-2);white-space:nowrap;
+}
+tbody td:first-child{text-align:left;font-family:"Source Sans 3",sans-serif;color:var(--ink);white-space:normal}
+tbody tr:last-child td{border-bottom:none}
+tr.key td{background:var(--accent-soft)}
+tr.key td:first-child{font-weight:700}
+tr.grp td{
+  background:var(--sunk);font-family:"Source Code Pro",monospace;font-size:.66rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+  padding:.35rem .8rem;text-align:left;
+}
+.up{color:var(--good);font-weight:700}
+.down{color:var(--bad);font-weight:700}
+.flat{color:var(--ink-3)}
+
+figure{margin:1.6rem 0}
+figure svg{display:block;width:100%;max-width:100%;height:auto}
+figcaption{font-size:.81rem;color:var(--ink-3);line-height:1.55;margin-top:.7rem}
+figcaption b{color:var(--ink-2)}
+
+.svgwrap{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1.1rem;overflow-x:auto}
+.svgwrap svg{min-width:640px}
+
+footer{
+  margin-top:3rem;padding-top:1.3rem;border-top:1px solid var(--line);
+  font-family:"Source Code Pro",monospace;font-size:.73rem;color:var(--ink-3);line-height:1.8;
+}
+footer b{color:var(--ink-2);font-weight:500}
+hr{border:none;border-top:1px solid var(--line);margin:0 0 3.2rem}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="doc">
+
+<header>
+  <p class="kicker">Task 6 &middot; walkthrough &middot; rdb-diffusion</p>
+  <h1>The Six-Column Test</h1>
+  <p class="stand">Task 5 showed GRDM destroys exactly one kind of information: statistics summarising a child table. So we gave it those statistics directly &mdash; six columns, nothing else changed &mdash; and retrained. This is what we did, why we did it that way, and what came back.</p>
+  <div class="meta">
+    <span><b>Dataset</b>&nbsp; berka_split_agg</span>
+    <span><b>Baseline</b>&nbsp; berka_split</span>
+    <span><b>Seeds done</b>&nbsp; 2 of 3</span>
+    <span><b>Metric</b>&nbsp; synthetic&rarr;real AUROC</span>
+  </div>
+</header>
+
+<div class="tldr">
+  <h2>The 30-second version</h2>
+  <p>Card ownership: synthetic&rarr;real AUROC went <strong>0.607 &rarr; 0.665</strong>. Loan default: <strong>0.543 &rarr; 0.593</strong>. Measured as <em>how much of the real model's skill survives into synthetic data</em>, that is <strong>29% &rarr; 45%</strong> on card and <strong>12% &rarr; 26%</strong> on loan.</p>
+  <p>The hypothesis was right in direction: the missing signal really is child-aggregate information, and exposing it helps. But <strong>more than half the gap remains</strong> &mdash; denormalising the statistics is a partial fix, not a solution.</p>
+</div>
+
+<section>
+  <div class="step"><span class="stepnum">1</span><h2>The diagnosis we were acting on</h2></div>
+  <p>Task 5 measured, for each feature, how strongly it predicts the label <em>inside</em> the real database and <em>inside</em> the synthetic one &mdash; a univariate AUROC, no model involved. Sorting those features by where they come from in the schema produced a clean split:</p>
+
+  <div class="tw">
+    <table>
+      <caption>Task 5 &mdash; fraction of real feature&rarr;label signal surviving generation</caption>
+      <thead><tr><th>Feature family</th><th>What it is</th><th>Card</th><th>Loan</th></tr></thead>
+      <tbody>
+        <tr><td>Own row / 1-hop parent</td><td>a field of the labelled row, or of a table it points straight at</td><td class="up">41%</td><td class="up">99%</td></tr>
+        <tr><td>Child aggregate</td><td>a statistic rolled up over a child table (<span class="m">trans</span>, <span class="m">order</span>)</td><td class="down">11%</td><td class="down">13%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The sharpest single case: <span class="m">trans_balance_mean</span> is worth <strong>0.838</strong> univariate AUROC in real data and <strong>0.511</strong> in synthetic &mdash; 3% retained, with the synthetic confidence interval covering 0.5 in all three seeds. The relationship isn't weakened; it is <em>absent</em>. And <span class="m">trans_balance_last</span> shows it isn't a broken column: its marginal distribution still matches the real one almost exactly (KS 0.045), while its connection to the label is gone.</p>
+
+  <div class="callout">
+    <span class="lbl">Why this points at aggregation</span>
+    <p>GRDM runs with <span class="m">n_hops=1</span>, <span class="m">num_neighbors=[-1]</span>, <span class="m">gnn_aggr=sum</span>. It sees <em>all</em> of an account's ~235 transactions &mdash; but collapses them into a single summed vector. One statistic per neighbourhood. A model that only ever receives the sum cannot condition a row on the <em>mean</em>, the <em>last</em> value, the <em>spread</em>, or the <em>count</em> &mdash; which is precisely the list of features that died.</p>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="step"><span class="stepnum">2</span><h2>The hypothesis, stated so it can fail</h2></div>
+  <p>If the missing downstream signal is caused by child-aggregate statistics never reaching the denoiser, then <strong>handing those statistics to the model as ordinary columns should raise synthetic&rarr;real AUROC.</strong></p>
+  <p>That is falsifiable in a useful way. If the number doesn't move, the aggregation bottleneck is not the mechanism and Task 5's story &mdash; however tidy &mdash; is wrong about causation. The baselines to beat were fixed in advance by the Task 2/3 cross-domain run: <strong>0.607</strong> on card, <strong>0.543</strong> on loan (seeds 1&ndash;2, the like-for-like subset).</p>
+</section>
+
+<hr>
+
+<section>
+  <div class="step"><span class="stepnum">3</span><h2>Designing the intervention</h2></div>
+  <p>Six account-level rollups were chosen &mdash; the ones Task 5 actually measured, so the test lines up with the diagnosis:</p>
+  <pre><span class="k">agg_trans_n</span>              <span class="c"># fan-out: how many transactions this account has</span>
+<span class="k">agg_trans_balance_mean</span>   <span class="c"># worth 0.838 univariate AUROC in real data</span>
+<span class="k">agg_trans_balance_last</span>   <span class="c"># keeps its marginal (KS 0.045), loses its meaning</span>
+<span class="k">agg_trans_amount_mean</span>
+<span class="k">agg_order_n</span>              <span class="c"># fan-out of the second child table</span>
+<span class="k">agg_order_amount_sum</span></pre>
+
+  <h3>The decision the experiment actually turns on</h3>
+  <p>Writing them onto <span class="m">account</span> is the obvious move &mdash; and on its own it would not have worked for the card task. The card label lives on the <span class="m">card</span> table, whose only parent is <span class="m">disp</span>. With <span class="m">n_hops=1</span>, generating a card row conditions on <span class="m">disp</span> and nothing further. <span class="m">account</span> is two hops away: still outside the window.</p>
+  <p>So the same six columns were denormalised onto <strong>both</strong> <span class="m">account</span> and <span class="m">disp</span>.</p>
+
+  <div class="bleed">
+  <figure>
+    <div class="svgwrap">
+      <svg viewBox="0 0 840 400" role="img" aria-label="Schema diagram showing that with one-hop conditioning, account behaviour is two hops from the card table and outside the conditioning window; copying the six aggregate columns onto disp brings them inside it.">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+          </marker>
+          <marker id="ahA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" style="fill:var(--accent)"/>
+          </marker>
+        </defs>
+
+        <!-- ============ PANEL A ============ -->
+        <text x="0" y="16" font-family="Source Code Pro, monospace" font-size="12" font-weight="600" fill="currentColor" opacity=".55">BASELINE &#8212; berka_split</text>
+
+        <!-- conditioning window -->
+        <rect x="486" y="36" width="250" height="112" rx="6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 4" opacity=".45"/>
+        <text x="611" y="166" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="10.5" fill="currentColor" opacity=".6">1-hop window when generating card</text>
+
+        <!-- nodes -->
+        <rect x="8" y="42" width="92" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="54" y="62" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="12" fill="currentColor">trans</text>
+        <rect x="8" y="110" width="92" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="54" y="130" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="12" fill="currentColor">order</text>
+
+        <rect x="212" y="76" width="104" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="264" y="96" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="12" fill="currentColor">account</text>
+
+        <rect x="504" y="76" width="86" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="547" y="96" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="12" fill="currentColor">disp</text>
+
+        <rect x="654" y="76" width="74" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="691" y="96" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="12" fill="currentColor">card</text>
+
+        <!-- edges -->
+        <line x1="100" y1="57" x2="206" y2="84" stroke="currentColor" stroke-width="1.3" marker-end="url(#ah)" opacity=".75"/>
+        <line x1="100" y1="125" x2="206" y2="99" stroke="currentColor" stroke-width="1.3" marker-end="url(#ah)" opacity=".75"/>
+        <text x="152" y="52" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="9.5" fill="currentColor" opacity=".6">~235 rows</text>
+        <line x1="316" y1="91" x2="498" y2="91" stroke="currentColor" stroke-width="1.3" marker-end="url(#ah)" opacity=".75"/>
+        <line x1="590" y1="91" x2="648" y2="91" stroke="currentColor" stroke-width="1.3" marker-end="url(#ah)" opacity=".75"/>
+
+        <!-- annotation -->
+        <line x1="264" y1="112" x2="264" y2="140" stroke="currentColor" stroke-width="1.1" opacity=".5"/>
+        <text x="264" y="156" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="11.5" fill="currentColor" opacity=".75">2 hops from card &#8212; outside the window</text>
+
+        <!-- divider -->
+        <line x1="0" y1="205" x2="840" y2="205" stroke="currentColor" stroke-width="1" opacity=".18"/>
+
+        <!-- ============ PANEL B ============ -->
+        <text x="0" y="238" font-family="Source Code Pro, monospace" font-size="12" font-weight="600" style="fill:var(--accent)">TASK 6 &#8212; berka_split_agg</text>
+
+        <rect x="486" y="258" width="250" height="122" rx="6" fill="none" style="stroke:var(--accent)" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+        <rect x="8" y="264" width="92" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="54" y="283" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="12" fill="currentColor">trans</text>
+        <rect x="8" y="326" width="92" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="54" y="345" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="12" fill="currentColor">order</text>
+
+        <rect x="212" y="288" width="104" height="44" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="264" y="304" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="12" fill="currentColor">account</text>
+        <text x="264" y="322" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="10.5" style="fill:var(--accent)" font-weight="600">+6 agg_*</text>
+
+        <rect x="504" y="288" width="86" height="44" rx="4" fill="none" style="stroke:var(--accent)" stroke-width="1.9"/>
+        <text x="547" y="304" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="12" fill="currentColor">disp</text>
+        <text x="547" y="322" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="10.5" style="fill:var(--accent)" font-weight="600">+6 agg_*</text>
+
+        <rect x="654" y="295" width="74" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="691" y="315" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="12" fill="currentColor">card</text>
+
+        <line x1="100" y1="278" x2="206" y2="298" stroke="currentColor" stroke-width="1.3" marker-end="url(#ah)" opacity=".75"/>
+        <line x1="100" y1="340" x2="206" y2="322" stroke="currentColor" stroke-width="1.3" marker-end="url(#ah)" opacity=".75"/>
+        <line x1="316" y1="310" x2="498" y2="310" stroke="currentColor" stroke-width="1.3" marker-end="url(#ah)" opacity=".75"/>
+        <line x1="590" y1="310" x2="648" y2="310" stroke="currentColor" stroke-width="1.3" marker-end="url(#ah)" opacity=".75"/>
+
+        <!-- copy arc -->
+        <path d="M 264 288 C 300 246, 470 246, 528 286" fill="none" style="stroke:var(--accent)" stroke-width="1.6" stroke-dasharray="4 3" marker-end="url(#ahA)"/>
+        <text x="400" y="248" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="11.5" style="fill:var(--accent)" font-weight="600">same six columns, copied onto disp</text>
+
+        <text x="611" y="396" text-anchor="middle" font-family="Source Code Pro, monospace" font-size="10.5" style="fill:var(--accent)">account behaviour now inside the window</text>
+      </svg>
+    </div>
+    <figcaption><b>The one edge that changes.</b> GRDM conditions a generated row on its 1-hop neighbourhood. In the baseline, a <span class="m">card</span> row sees only <span class="m">disp</span>, which carries a single attribute &mdash; account behaviour is two hops back and never enters. Denormalising the six aggregates onto <span class="m">disp</span> puts that behaviour inside the conditioning window without touching <span class="m">n_hops</span>, the GNN, or the training loop.</figcaption>
+  </figure>
+  </div>
+
+  <div class="callout warn">
+    <span class="lbl">One thing deliberately excluded</span>
+    <p>No transaction <em>operation-code</em> shares were added. <span class="m">VYBER KARTOU</span> ("card withdrawal") is a deterministic consequence of holding a card &mdash; the downstream task drops it for exactly that reason. Exposing it here would have handed the generator the label and produced a meaningless win.</p>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="step"><span class="stepnum">4</span><h2>Building the dataset</h2></div>
+  <p><span class="m">downstream/build_agg_dataset.py</span> copies <span class="m">data/berka/split_train</span> and rewrites two tables. The aggregates are computed from the <strong>real training split only</strong> &mdash; 792,600 transaction rows and 4,874 order rows, grouped to 3,375 accounts &mdash; so no test information enters anywhere.</p>
+
+  <pre><span class="k">ordered</span> = trans.sort_values(["account_id", "trans_date"])
+g = ordered.groupby("account_id")
+agg = pd.DataFrame({
+    "agg_trans_n":            g.size(),
+    "agg_trans_balance_mean": g["balance"].mean(),
+    "agg_trans_balance_last": g["balance"].last(),   <span class="c"># needs the sort above</span>
+    "agg_trans_amount_mean":  g["amount"].mean(),
+})
+go = order.groupby("account_id")
+agg_o = pd.DataFrame({"agg_order_n": go.size(),
+                      "agg_order_amount_sum": go["amount"].sum()})
+
+<span class="c"># An account with no standing orders genuinely has zero, not a gap.</span>
+out[["agg_order_n", "agg_order_amount_sum"]] = out[[...]].fillna(0.0)</pre>
+
+  <p>Then the columns are joined on and the schema grows:</p>
+  <pre><span class="c"># account.csv</span>
+  before: account_id, district_id, frequency, account_date
+  after:  account_id, district_id, frequency, account_date, <span class="add">agg_trans_n, agg_trans_balance_mean,</span>
+          <span class="add">agg_trans_balance_last, agg_trans_amount_mean, agg_order_n, agg_order_amount_sum</span>
+
+<span class="c"># disp.csv</span>
+  before: disp_id, client_id, account_id, disp_type
+  after:  disp_id, client_id, account_id, disp_type, <span class="add">agg_trans_n, ... agg_order_amount_sum</span></pre>
+
+  <div class="callout">
+    <span class="lbl">The easy-to-miss step</span>
+    <p>Each new column must be registered in <span class="m">{table}_domain.json</span> as <span class="m">{"size": 0, "type": "continuous"}</span>. GRDM's <span class="m">utils.sort_columns</span> treats any column <em>absent</em> from the domain file as an ID column &mdash; so without this the six columns would have been silently carried along as keys and never diffused at all. The experiment would have run to completion and reported a null result for the wrong reason.</p>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="step"><span class="stepnum">5</span><h2>What deliberately did not change</h2></div>
+  <p>For the result to be attributable to the aggregates, everything else had to be held fixed. The entire config difference is two lines &mdash; which directory to read:</p>
+  <pre>&lt; "dataset_name": "berka_split",       &gt; "dataset_name": "berka_split_agg",
+&lt; "data_path": "data/berka/split_train" &gt; "data_path": "data/berka/split_train_agg"</pre>
+  <p>Unchanged: <span class="m">n_hops=1</span>, <span class="m">num_neighbors=[-1]</span>, <span class="m">gnn_aggr=sum</span>, <span class="m">d_layers</span>, <span class="m">num_timesteps=2000</span>, learning rate, 200,000 training steps, the train/test cut, 3 GRDM &times; 5 XGBoost seeds, and every downstream feature builder and metric.</p>
+  <p>The clearest evidence the control held: <strong>real&rarr;real AUROC moved by +0.0009 on card and 0.0000 on loan.</strong> The real data didn't change, so that cell must not move &mdash; and it didn't.</p>
+</section>
+
+<hr>
+
+<section>
+  <div class="step"><span class="stepnum">6</span><h2>Why the evaluation can't cheat</h2></div>
+  <p>This is the part worth being careful about, because it looks like it should be circular: we injected <span class="m">trans_balance_mean</span>, and we then measure whether <span class="m">trans_balance_mean</span> predicts the label. Doesn't the model just get handed the answer?</p>
+  <p>No &mdash; because the downstream evaluation never reads the injected columns. Its feature builders select account and disp fields <em>by name</em> (<span class="m">account_id, district_id, account_date, frequency</span>) and then <strong>recompute every aggregate from the generated child tables</strong>. Verified: <span class="m">agg_</span> appears nowhere in <span class="m">downstream/tasks.py</span>, and the evaluated matrices are still 90 columns (card) and 97 (loan), exactly as in the baseline.</p>
+
+  <div class="callout">
+    <span class="lbl">So what does an improvement actually require?</span>
+    <p>A whole chain has to hold. GRDM must generate a <span class="m">disp.agg_*</span> value; generate a <span class="m">card</span> row whose existence correlates with it; generate <span class="m">trans</span> rows conditioned on <span class="m">account.agg_*</span>; and those generated transactions must then <em>re-aggregate</em> to something close to the value the account declared. Only then does the recomputed <span class="m">trans_balance_mean</span> carry signal about card ownership. Nothing in the loss function enforces that consistency &mdash; which is why this is a real test and not a tautology.</p>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="step"><span class="stepnum">7</span><h2>Running it</h2></div>
+  <p>Three seeds, 200,000 steps each, launched with a 20-hour per-process wall-clock budget. Worth recording honestly, since it shaped the timeline:</p>
+  <ul>
+    <li>All three seeds <strong>hit the 20 h budget before finishing</strong> (at 85% / 95% / 88%) and exited through their designed checkpoint-and-relaunch path. No progress lost, but a resume was needed &mdash; the node was 5&ndash;7&times; slower than the original baseline run because all 8 GPUs were at 70&ndash;100% utilisation from other jobs.</li>
+    <li>On resume, seeds 1 and 2 <strong>finished training and sampling</strong>, then crashed in a cosmetic post-hoc fidelity report &mdash; <span class="m">sdv</span> metadata doesn't know about the new <span class="m">agg_*</span> columns. The synthetic databases were already written and are fully usable; only the report step failed.</li>
+    <li>Seed 0 hit a genuine <strong>CUDA OOM</strong> when other jobs claimed 139 GB of its GPU. Resumed from checkpoint on a less contended device; still sampling at the time of writing.</li>
+  </ul>
+  <p>So the numbers below are <strong>2 of 3 seeds</strong>, and the baseline is restricted to the same two seeds for a like-for-like comparison.</p>
+</section>
+
+<hr>
+
+<section>
+  <div class="step"><span class="stepnum">8</span><h2>Results</h2></div>
+
+  <div class="bleed">
+  <div class="tw">
+    <table>
+      <caption>Cross-domain AUROC &mdash; baseline vs Task 6, seeds 1 &amp; 2 only</caption>
+      <thead><tr><th>Cell</th><th>What it asks</th><th>Baseline</th><th>Task 6</th><th>&Delta;</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="5">Card ownership</td></tr>
+        <tr><td>real &rarr; real</td><td>control &mdash; must not move</td><td>0.8690</td><td>0.8700</td><td class="flat">+0.0009</td></tr>
+        <tr class="key"><td>synth &rarr; real</td><td><b>the transfer question</b></td><td>0.6074</td><td>0.6652</td><td class="up">+0.0577</td></tr>
+        <tr><td>synth &rarr; synth</td><td>is there signal inside synthetic data at all?</td><td>0.5900</td><td>0.6523</td><td class="up">+0.0622</td></tr>
+        <tr><td>real &rarr; synth</td><td>do real rules hold on synthetic rows?</td><td>0.5915</td><td>0.5917</td><td class="flat">+0.0002</td></tr>
+        <tr class="grp"><td colspan="5">Loan default &mdash; 19 real test positives, read with caution</td></tr>
+        <tr><td>real &rarr; real</td><td>control &mdash; must not move</td><td>0.8575</td><td>0.8575</td><td class="flat">0.0000</td></tr>
+        <tr class="key"><td>synth &rarr; real</td><td><b>the transfer question</b></td><td>0.5425</td><td>0.5925</td><td class="up">+0.0501</td></tr>
+        <tr><td>synth &rarr; synth</td><td>is there signal inside synthetic data at all?</td><td>0.6057</td><td>0.6759</td><td class="up">+0.0702</td></tr>
+        <tr><td>real &rarr; synth</td><td>do real rules hold on synthetic rows?</td><td>0.5864</td><td>0.4999</td><td class="down">&minus;0.0866</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tw">
+    <table>
+      <caption>Per-seed synthetic&rarr;real AUROC &mdash; does it hold in both seeds?</caption>
+      <thead><tr><th>Task</th><th>Seed</th><th>Baseline</th><th>Task 6</th><th>&Delta;</th></tr></thead>
+      <tbody>
+        <tr><td>Card ownership</td><td>1</td><td>0.598</td><td>0.678</td><td class="up">+0.080</td></tr>
+        <tr><td>Card ownership</td><td>2</td><td>0.617</td><td>0.652</td><td class="up">+0.035</td></tr>
+        <tr><td>Loan default</td><td>1</td><td>0.560</td><td>0.566</td><td class="flat">+0.006</td></tr>
+        <tr><td>Loan default</td><td>2</td><td>0.524</td><td>0.619</td><td class="up">+0.095</td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <p>Expressed as <em>how much of the real model's above-chance skill survives into synthetic data</em> &mdash; the framing used throughout this study:</p>
+  <div class="tw">
+    <table>
+      <caption>Signal retained</caption>
+      <thead><tr><th>Task</th><th>Baseline</th><th>Task 6</th><th>Still missing</th></tr></thead>
+      <tbody>
+        <tr><td>Card ownership</td><td>29.1%</td><td class="up">44.6%</td><td>55.4%</td></tr>
+        <tr><td>Loan default</td><td>11.9%</td><td class="up">25.9%</td><td>74.1%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout win">
+    <span class="lbl">What held</span>
+    <p>Card improves in <strong>both</strong> seeds, and <span class="m">synth&rarr;synth</span> rose alongside <span class="m">synth&rarr;real</span>. That second point matters: it means the synthetic database now genuinely <em>contains</em> more learnable structure, rather than the improvement being a lucky fit to the real test set. Task 5's core finding was that synth&rarr;synth sat at chance &mdash; it no longer does.</p>
+  </div>
+
+  <div class="callout warn">
+    <span class="lbl">What didn't &mdash; and needs saying</span>
+    <p><strong>Loan is seed-dependent.</strong> Seed 2 gains +0.095, seed 1 gains +0.006. Same fragility loan shows everywhere in this study; card is the trustworthy read.</p>
+    <p><strong>real&rarr;synth did not improve</strong> &mdash; flat on card, and <em>worse</em> on loan (&minus;0.087). A real-trained model still doesn't transfer onto synthetic rows even though a synthetic-trained one now transfers better onto real. That asymmetry says the synthetic data has acquired a relationship that is <em>related to</em> but not identical with the real one.</p>
+    <p><strong>Most of the gap is still open.</strong> 0.665 against a real-data ceiling of 0.870 is a partial recovery. Denormalising aggregates helps; it does not fix relational generation.</p>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <div class="step"><span class="stepnum">9</span><h2>What this changes, and what to check next</h2></div>
+  <ul>
+    <li><strong>The causal claim now has support.</strong> Task 5 established a correlation between schema distance and signal loss; Task 6 intervened on exactly that variable and moved the outcome, in the predicted direction, on the task with reliable statistics.</li>
+    <li><strong>The bottleneck is architectural, not incidental.</strong> A fix delivered entirely through the input representation &mdash; without touching <span class="m">n_hops</span>, the pooling operator, or the loss &mdash; recovered a third of the missing card signal. That points at <span class="m">gnn_aggr=sum</span> and one-hop conditioning as the thing to change next, rather than at training length or capacity.</li>
+    <li><strong>The unmeasured link in the chain.</strong> We have not yet checked whether generated <span class="m">trans</span> rows actually re-aggregate to the <span class="m">agg_*</span> value their parent account declares. Nothing in the loss enforces it. Measuring that consistency would say how much of the remaining 55% is lost at that specific joint &mdash; and it is cheap to compute from data already on disk.</li>
+    <li><strong>Finish the third seed.</strong> Seed 0 is still sampling. Card's effect is consistent across two seeds, but the loan arm needs the third before any claim about it is worth making.</li>
+  </ul>
+
+  <footer>
+    <b>Build</b> python -m downstream.build_agg_dataset<br>
+    <b>Train</b> RDBDIFF_DATASET=berka_split_agg ./resume_runs.sh 0 1 2<br>
+    <b>Evaluate</b> python -m downstream.crossdomain --dataset berka_split_agg<br>
+    <b>Results</b> downstream/results/berka_split_agg__*_crossdomain.json
+  </footer>
+</section>
+
+</div>

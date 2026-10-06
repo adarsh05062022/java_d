@@ -1,0 +1,999 @@
+ns <title>Berka Utility Investigation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --bg:#f7f6f3;
+  --surface:#ffffff;
+  --surface-2:#f1efe9;
+  --ink:#1b1d21;
+  --ink-soft:#54575e;
+  --ink-faint:#8a8d94;
+  --rule:#dedcd4;
+  --rule-strong:#c9c6bc;
+  --accent:#3b5ba5;
+  --accent-ink:#2f4a89;
+  --accent-soft:#eceff8;
+  --good:#2f7d5d;
+  --warn:#a9741a;
+  --bad:#ac3f3c;
+  --good-bg:#e6f0ea;
+  --warn-bg:#f6ecd8;
+  --bad-bg:#f4e4e3;
+  --track:#e7e5dd;
+  --shadow:0 1px 2px rgba(20,20,25,.04),0 8px 24px -12px rgba(20,20,25,.12);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#14161a;
+    --surface:#1b1e24;
+    --surface-2:#20242b;
+    --ink:#e8e9ec;
+    --ink-soft:#abaeb6;
+    --ink-faint:#7c8088;
+    --rule:#2b2f37;
+    --rule-strong:#3a3f49;
+    --accent:#8ea9e0;
+    --accent-ink:#a7bdea;
+    --accent-soft:#212734;
+    --good:#5cbf96;
+    --warn:#e0a944;
+    --bad:#e18883;
+    --good-bg:#172a24;
+    --warn-bg:#2a2317;
+    --bad-bg:#2c1e1d;
+    --track:#2b2f37;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14161a;
+  --surface:#1b1e24;
+  --surface-2:#20242b;
+  --ink:#e8e9ec;
+  --ink-soft:#abaeb6;
+  --ink-faint:#7c8088;
+  --rule:#2b2f37;
+  --rule-strong:#3a3f49;
+  --accent:#8ea9e0;
+  --accent-ink:#a7bdea;
+  --accent-soft:#212734;
+  --good:#5cbf96;
+  --warn:#e0a944;
+  --bad:#e18883;
+  --good-bg:#172a24;
+  --warn-bg:#2a2317;
+  --bad-bg:#2c1e1d;
+  --track:#2b2f37;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -14px rgba(0,0,0,.5);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:66rem;
+  margin:0 auto;
+  padding:clamp(1.4rem,4vw,3.5rem) clamp(1.1rem,4vw,2.5rem) 6rem;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  border-bottom:2px solid var(--ink);
+  padding-bottom:1.4rem;
+  margin-bottom:2.6rem;
+}
+.kicker{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--accent-ink);
+  margin:0 0 .9rem;
+  font-weight:600;
+}
+h1{
+  font-family:"Newsreader",Georgia,serif;
+  font-weight:500;
+  font-size:clamp(2rem,5.4vw,3.1rem);
+  line-height:1.08;
+  letter-spacing:-.011em;
+  margin:0 0 .7rem;
+  text-wrap:balance;
+}
+.dek{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:clamp(1.06rem,2.4vw,1.28rem);
+  font-style:italic;
+  color:var(--ink-soft);
+  max-width:44ch;
+  margin:0 0 1.5rem;
+}
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem 1.6rem;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.78rem;
+  color:var(--ink-faint);
+}
+.meta b{color:var(--ink-soft);font-weight:500}
+
+/* ---------- TL;DR ---------- */
+.tldr{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--accent);
+  border-radius:4px;
+  padding:1.3rem 1.5rem;
+  margin:0 0 3rem;
+  box-shadow:var(--shadow);
+}
+.tldr h2{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin:0 0 .7rem;
+  font-weight:600;
+}
+.tldr p{margin:.5rem 0}
+.tldr p:first-of-type{margin-top:0}
+.tldr p:last-child{margin-bottom:0}
+
+/* ---------- sections ---------- */
+section{margin:0 0 3.4rem}
+.sec-head{
+  display:flex;
+  align-items:baseline;
+  gap:.85rem;
+  margin:0 0 1.1rem;
+  padding-bottom:.5rem;
+  border-bottom:1px solid var(--rule);
+}
+.sec-num{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.9rem;
+  font-weight:600;
+  color:var(--accent-ink);
+  flex:none;
+  padding-top:.15rem;
+}
+h2.sec-title{
+  font-family:"Newsreader",Georgia,serif;
+  font-weight:500;
+  font-size:clamp(1.4rem,3.4vw,1.85rem);
+  line-height:1.15;
+  letter-spacing:-.008em;
+  margin:0;
+  text-wrap:balance;
+}
+h3{
+  font-family:"IBM Plex Sans",sans-serif;
+  font-weight:600;
+  font-size:1.02rem;
+  letter-spacing:.005em;
+  margin:1.8rem 0 .5rem;
+}
+p{margin:.85rem 0}
+strong{font-weight:600}
+a{color:var(--accent-ink)}
+
+.lead{font-size:1.02rem}
+ul{margin:.7rem 0;padding-left:1.1rem}
+li{margin:.42rem 0;padding-left:.15rem}
+li::marker{color:var(--accent)}
+
+/* ---------- callout ---------- */
+.callout{
+  background:var(--surface-2);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:1.15rem 1.35rem;
+  margin:1.5rem 0;
+}
+.callout.warn{border-left:3px solid var(--warn);background:var(--warn-bg)}
+.callout.bad{border-left:3px solid var(--bad);background:var(--bad-bg)}
+.callout.good{border-left:3px solid var(--good);background:var(--good-bg)}
+.callout .lbl{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:var(--ink-soft);
+  display:block;margin-bottom:.4rem;
+}
+.callout p{margin:.4rem 0}
+.callout p:first-of-type{margin-top:0}
+.callout p:last-child{margin-bottom:0}
+
+/* ---------- tables ---------- */
+.scroll{
+  overflow-x:auto;
+  margin:1.3rem 0;
+  border:1px solid var(--rule);
+  border-radius:4px;
+  background:var(--surface);
+  box-shadow:var(--shadow);
+}
+table{
+  border-collapse:collapse;
+  width:100%;
+  font-size:.85rem;
+}
+thead th{
+  background:var(--surface-2);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-weight:600;
+  font-size:.68rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  text-align:left;
+  padding:.7rem .8rem;
+  border-bottom:1px solid var(--rule-strong);
+  white-space:nowrap;
+  vertical-align:bottom;
+}
+tbody td{
+  padding:.62rem .8rem;
+  border-bottom:1px solid var(--rule);
+  vertical-align:middle;
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr.is-baseline{background:var(--accent-soft)}
+tbody tr.is-pending td{color:var(--ink-faint)}
+.num{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;
+  text-align:right;
+  white-space:nowrap;
+}
+.vcode{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-weight:600;
+  white-space:nowrap;
+}
+.vsub{
+  display:block;
+  font-family:"IBM Plex Sans",sans-serif;
+  font-weight:400;
+  font-size:.76rem;
+  color:var(--ink-faint);
+  letter-spacing:0;
+}
+
+/* seeds pill */
+.seeds{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;
+  font-weight:600;
+  font-size:.9rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:1.7rem;
+  padding:.08rem .34rem;
+  border-radius:3px;
+}
+.seeds.s3{color:var(--good);background:var(--good-bg)}
+.seeds.s1{color:var(--warn);background:var(--warn-bg)}
+.seeds.sx{color:var(--ink-faint);background:var(--surface-2)}
+
+/* retained bar */
+.bar{
+  position:relative;
+  height:1.15rem;
+  min-width:104px;
+  background:var(--track);
+  border-radius:2px;
+  overflow:hidden;
+}
+.bar > span{
+  position:absolute;
+  inset:0 auto 0 0;
+  border-radius:2px;
+}
+.bar .tick{
+  position:absolute;
+  top:-2px;bottom:-2px;
+  width:2px;
+  background:var(--ink);
+  opacity:.55;
+}
+.bar-val{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-variant-numeric:tabular-nums;
+  font-size:.8rem;
+  font-weight:600;
+  margin-left:.5rem;
+}
+.fill-good{background:var(--good)}
+.fill-warn{background:var(--warn)}
+.fill-bad{background:var(--bad)}
+.cellwrap{display:flex;align-items:center;gap:.15rem;white-space:nowrap}
+
+/* verdict pill */
+.verd{
+  font-size:.78rem;
+  line-height:1.35;
+  display:inline-block;
+}
+.tag{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.62rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:.12rem .4rem;
+  border-radius:3px;
+  white-space:nowrap;
+}
+.tag.good{color:var(--good);background:var(--good-bg)}
+.tag.warn{color:var(--warn);background:var(--warn-bg)}
+.tag.bad{color:var(--bad);background:var(--bad-bg)}
+.tag.neut{color:var(--ink-soft);background:var(--surface-2)}
+
+.caption{
+  font-size:.8rem;
+  color:var(--ink-faint);
+  margin:.5rem 0 0;
+  font-style:italic;
+}
+
+/* two-up */
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+  margin:1.4rem 0;
+}
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:1.1rem 1.2rem;
+  box-shadow:var(--shadow);
+}
+.card h4{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:600;
+  margin:0 0 .6rem;
+}
+.bignum{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:2rem;
+  line-height:1;
+  font-weight:500;
+}
+.bignum .arrow{color:var(--ink-faint);font-size:1.2rem;margin:0 .3rem}
+.bignum .to{color:var(--bad)}
+.card p{font-size:.85rem;margin:.6rem 0 0;color:var(--ink-soft)}
+
+@media (max-width:620px){
+  .grid2{grid-template-columns:1fr}
+  body{font-size:16px}
+}
+
+/* load animation */
+@media (prefers-reduced-motion:no-preference){
+  .fx{opacity:0;transform:translateY(10px);animation:rise .6s cubic-bezier(.2,.6,.2,1) forwards}
+  .fx:nth-child(1){animation-delay:.02s}
+  .fx:nth-child(2){animation-delay:.08s}
+  .fx:nth-child(3){animation-delay:.14s}
+  @keyframes rise{to{opacity:1;transform:none}}
+}
+
+hr.rule{
+  border:none;
+  border-top:1px solid var(--rule);
+  margin:2.6rem 0;
+}
+.foot{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.74rem;
+  color:var(--ink-faint);
+  line-height:1.7;
+}
+.foot b{color:var(--ink-soft);font-weight:500}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead fx">
+    <p class="kicker">Follow-up to AMEX Report #15 · Relational Synthetic Data</p>
+    <h1>The Berka Downstream Utility Investigation</h1>
+    <p class="dek">GRDM reproduces the paper&rsquo;s fidelity numbers, then loses three-quarters of the predictive signal on Berka. This is why, what we tried, what the mechanism turned out to be, and where it stands.</p>
+    <div class="meta">
+      <span><b>Date</b>&nbsp;&nbsp;2026-09-30</span>
+      <span><b>Prepared by</b>&nbsp;&nbsp;Adarsh Dubey</span>
+      <span><b>Supervisor</b>&nbsp;&nbsp;Dr. Parimala Kancharla</span>
+      <span><b>Model</b>&nbsp;&nbsp;GRDM (NeurIPS 2025, arXiv:2505.16527)</span>
+    </div>
+  </header>
+
+  <div class="tldr fx">
+    <h2>The one-paragraph version</h2>
+    <p>On California (2 tables, 1 hop) GRDM synthetic data keeps <strong>95&ndash;99%</strong> of the downstream signal. On Berka (8 tables, depth 4) it keeps <strong>~24%</strong> &mdash; while scoring <em>the same</em> 96&ndash;99% on every fidelity metric. The signal Berka needs lives in <strong>cross-table aggregates</strong> (how many transactions an account has, and their size), and GRDM&rsquo;s architecture caps the neighbour sample so the true fan-out is never even an input to the model.</p>
+    <p>We ran <strong>15 fix configurations</strong>, each at 1 or 3 generator seeds. Three separate single-seed &ldquo;wins&rdquo; evaporated once we added seeds, and multinomial categorical diffusion &mdash; the last of the original program &mdash; finished negative (card 33.2%, loan <strong>&minus;2.2%</strong>, below chance). For most of this study the best 3-seed config was <strong>date-reparameterization + explicit degree features</strong> at 32% / 35%.</p>
+    <p>A follow-up study (&sect;04) then tested the mechanism directly and sharpened it. The failure is <strong>not</strong> that synthetic data encodes different relationships &mdash; a synthetic-trained model scores near chance <em>on synthetic data itself</em>. The loss is confined to <strong>child-aggregate features</strong>, which keep 11&ndash;13% of their predictive signal while own-row / 1-hop features keep 60&ndash;99%.</p>
+    <p><strong>That diagnosis then paid off.</strong> Materialising six child rollups as ordinary columns on the parent tables &mdash; the <em>six-column test</em> (&sect;06) &mdash; takes card ownership to <strong>48.7%</strong> retained and loan to <strong>30.8%</strong> at 3 seeds, on the <em>published architecture</em> with no flags changed and no extra compute. It is the best 3-seed card number of the program and the best combined result, beating reparam&nbsp;+&nbsp;degree by 14 points on card at equal loan. The fix is in the <em>input representation</em>, not the network &mdash; which is the strongest evidence yet that the bottleneck is what GRDM is allowed to see, not what it can learn.</p>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">Why the downstream utility was low</h2>
+    </div>
+    <p class="lead">Two mechanisms, and <strong>neither is visible in the fidelity metrics</strong>.</p>
+
+    <h3>a. The predictive signal lives in aggregates GRDM never sees</h3>
+    <p>For the Berka tasks, what actually predicts &ldquo;loan default&rdquo; or &ldquo;card ownership&rdquo; is information you get by rolling a <em>child</em> table up into the parent row &mdash; the <strong>count</strong> of an account&rsquo;s transactions and orders, and the mean / spread of transaction amounts. Our aggregate diagnostic (&ldquo;A6&rdquo;) isolated the failure:</p>
+    <ul>
+      <li>Two count columns alone (<span class="vcode" style="font-weight:500">trans_n</span>, <span class="vcode" style="font-weight:500">order_n</span>) carry loan-default AUROC from 0.67 to 0.82, against a 0.89 ceiling.</li>
+      <li>That <strong>count / fan-out family survives generation at only ~7%</strong> of its real correlation with the label &mdash; and it stays pinned at ~7% in the baseline, S2, S3 <em>and</em> S5. Every other feature family improves under the fixes; the counts never move.</li>
+      <li>Mechanism: GRDM&rsquo;s <span class="vcode" style="font-weight:500">--num_neighbors</span> hands the GNN a fixed number of child rows (16 after the first hop). The real number of transactions is therefore <em>absent from the input</em>, not merely noisy &mdash; no amount of depth or gradient tuning can reconstruct it. Feeding degree in explicitly (S10) touches it; materialising the rollups in the data (<span class="vcode" style="font-weight:500">agg</span>, &sect;06) moves it much further.</li>
+    </ul>
+
+    <h3>b. Two different failure modes &mdash; only one shows up in the marginals</h3>
+    <div class="grid2">
+      <div class="card">
+        <h4>Berka &mdash; loan default</h4>
+        <p style="margin-top:0"><strong>The marginal itself breaks.</strong> The rare &ldquo;default&rdquo; outcome (class B: 24 real rows) collapses to 1&ndash;10 synthetic rows; default rate 0.112&nbsp;&rarr;&nbsp;~0.073. A classifier trained on that has almost no positive examples to learn from.</p>
+      </div>
+      <div class="card">
+        <h4>Berka &mdash; card ownership</h4>
+        <p style="margin-top:0"><strong>The marginal is kept almost exactly</strong> (rate 0.168&nbsp;&rarr;&nbsp;0.16) and AUROC <em>still</em> falls 0.87&nbsp;&rarr;&nbsp;0.60. What is lost is purely the cross-table dependency between account behaviour and card ownership &mdash; not the rate.</p>
+      </div>
+    </div>
+    <p>The card result is the clean proof: <strong>matching per-column distributions is not sufficient for downstream utility</strong>, which is exactly the claim a column-shape metric cannot test.</p>
+
+    <div class="callout">
+      <span class="lbl">The paradox in one line</span>
+      <p>Berka scores <strong>96.9</strong> on Column Shapes and <strong>91.4</strong> on 1-Hop fidelity &mdash; a few points below California &mdash; yet retains an order of magnitude less downstream signal. On the S2 fix, fidelity and utility move in <em>opposite</em> directions.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">What measures we took</h2>
+    </div>
+    <p class="lead">A systematic fix program &mdash; one change per experiment, every experiment scored on the <strong>same fixed leakage-free test set</strong>, at 1 or 3 generator seeds &times; multiple XGBoost repeats (3 California, 5 Berka).</p>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Family</th>
+            <th>Experiments</th>
+            <th>What it changes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="vcode">Data / sampling</td>
+            <td class="num" style="text-align:left">S1&ndash;S3</td>
+            <td>Distribution-matched categorical decoding (S1); <strong>minority-class balanced seed sampling</strong>, &alpha;=0.5 (S3); keep conditioning at 1 hop.</td>
+          </tr>
+          <tr>
+            <td class="vcode">Conditioning depth</td>
+            <td class="num" style="text-align:left">S2, S5, S6, S7</td>
+            <td>Give the GNN more of the graph: <strong>n_hops 1&rarr;2</strong> (S2), 2&nbsp;+&nbsp;balanced (S5), <strong>n_hops&rarr;3</strong> depth-only (S6) and 3&nbsp;+&nbsp;balanced (S7).</td>
+          </tr>
+          <tr>
+            <td class="vcode">Denoiser architecture</td>
+            <td class="num" style="text-align:left">S4, S8&ndash;S12</td>
+            <td>One-hot categoricals (S4); multi-aggregation, residual connections, <strong>explicit degree / fan-out features (S10)</strong>, self-conditioning; S12 bundles S8+S9+S10.</td>
+          </tr>
+          <tr>
+            <td class="vcode">Representation</td>
+            <td class="num" style="text-align:left">reparam</td>
+            <td>Encode child dates as a <strong>lag from the parent&rsquo;s date</strong> (log1p) instead of an absolute date. Also run stacked on S10.</td>
+          </tr>
+          <tr>
+            <td class="vcode">Diffusion process</td>
+            <td class="num" style="text-align:left">discrete</td>
+            <td><strong>Multinomial</strong> categorical diffusion instead of Gaussian-over-ordinal-codes, so rare classes like default = B cannot collapse.</td>
+          </tr>
+          <tr>
+            <td class="vcode">Post-hoc</td>
+            <td class="num" style="text-align:left">repair</td>
+            <td>Enforce known constraints (ledger identity, date ordering) on the generated tables after sampling &mdash; all columns (<span class="vcode" style="font-weight:500">repair</span>), or endpoint columns only (<span class="vcode" style="font-weight:500">repair-endpoints</span>).</td>
+          </tr>
+          <tr>
+            <td class="vcode">Denormalisation</td>
+            <td class="num" style="text-align:left">agg</td>
+            <td><strong>Materialise six child rollups as parent columns</strong> on <span class="vcode" style="font-weight:500">account</span> and <span class="vcode" style="font-weight:500">disp</span>, so the aggregate statistics the GNN cannot recover are present in the input. Architecture and flags unchanged.</td>
+          </tr>
+          <tr>
+            <td class="vcode">Control (diagnostic)</td>
+            <td class="num" style="text-align:left">flatten</td>
+            <td>Ceiling check: train a <em>single-table</em> diffusion model on the fully flattened join, to bound how much of the loss is relational rather than generative. <em>Numerically unstable &mdash; see &sect;06.</em></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Alongside this, a separate <strong>dependency-fidelity suite</strong> checks whether known real constraints hold in the synthetic data directly &mdash; no ML model, no seed noise from gradient boosting.</p>
+
+    <div class="callout warn">
+      <span class="lbl">Why the seed count matters</span>
+      <p>Berka loan default has only <strong>~19&ndash;24 positive cases in the test set</strong>. A single generator seed on that task is noise. Everything reported as a headline below is 3 seeds; 1-seed rows are marked <span class="tag warn">provisional</span> and treated as pilots only.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">What results we got</h2>
+    </div>
+    <p class="lead">Signal <strong>retained</strong> = share of the real-data model&rsquo;s AUROC above chance that the synthetic-only model keeps. Baseline real AUROC: loan <strong>0.889</strong>, card <strong>0.874</strong>. The vertical tick on each bar marks the baseline (23.6% / 27.3%).</p>
+
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Config</th>
+            <th style="text-align:center">Seeds</th>
+            <th>Loan default &mdash; retained</th>
+            <th>Card ownership &mdash; retained</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="is-baseline">
+            <td><span class="vcode">baseline</span><span class="vsub">published config, n_hops=1</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:23.6%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">23.6%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:27.3%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">27.3%</span></div></td>
+            <td><span class="tag neut">reference</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">S1</span><span class="vsub">distribution-matched decoding</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:24.8%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">24.8%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:27.0%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">27.0%</span></div></td>
+            <td><span class="verd">Fixes the visible marginal, <strong>moves utility ~0</strong>.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">S2</span><span class="vsub">n_hops 1 &rarr; 2</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-bad" style="width:6.8%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">6.8%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-good" style="width:45.1%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">45.1%</span></div></td>
+            <td><span class="verd">Helps card, <strong>hurts loan</strong>.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">S3</span><span class="vsub">balanced seed sampling</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-good" style="width:41.5%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">41.5%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:31.1%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">31.1%</span></div></td>
+            <td><span class="verd"><strong>Best confirmed loan</strong> number of the program.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">S4</span><span class="vsub">one-hot categoricals</span></td>
+            <td style="text-align:center"><span class="seeds s1">1</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-bad" style="width:13.5%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">13.5%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-bad" style="width:9.6%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">9.6%</span></div></td>
+            <td><span class="verd"><span class="tag bad">dropped</span> California guard came back R&sup2; = &minus;4.97.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">S5</span><span class="vsub">S2 + S3 (n_hops=2 + balanced)</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-bad" style="width:16.0%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">16.0%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-good" style="width:50.4%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">50.4%</span></div></td>
+            <td><span class="verd"><strong>Best confirmed card</strong>, but loses loan. 1-seed pilot said 34% loan &rarr; 3 seeds say 16%.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">S6</span><span class="vsub">n_hops &rarr; 3, depth only</span></td>
+            <td style="text-align:center"><span class="seeds s1">1</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-bad" style="width:0.8%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">0.8%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:42.0%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">42.0%</span></div></td>
+            <td><span class="verd">Depth-3 is a <strong>dead end for loan</strong>. Worst fidelity of the program.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">S7</span><span class="vsub">n_hops = 3 + balanced</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-bad" style="width:3.9%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">3.9%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-good" style="width:49.8%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">49.8%</span></div></td>
+            <td><span class="verd">Balancing rescues loan at depth 2 (S5) but <strong>not</strong> at depth 3.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">S12</span><span class="vsub">S8 + S9 + S10 architecture package</span></td>
+            <td style="text-align:center"><span class="seeds s1">1</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:31.2%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">31.2%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-good" style="width:52.3%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">52.3%</span></div></td>
+            <td><span class="verd"><span class="tag warn">provisional</span> Best card of the whole program &mdash; but <strong>1 seed</strong>; the n_hops=2 line was retired before it reached 3.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">reparam</span><span class="vsub">child dates = lag from parent</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-bad" style="width:3.2%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">3.2%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:27.6%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">27.6%</span></div></td>
+            <td><span class="verd"><span class="tag bad">negative</span> The single-seed 50.4% loan was a <strong>fluke</strong> &mdash; gone at 3 seeds.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">reparam + S10</span><span class="vsub">lag dates + explicit degree features</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:31.7%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">31.7%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:34.5%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">34.5%</span></div></td>
+            <td><span class="verd"><span class="tag good">both up</span> Only 3-seed config that lifts <strong>both</strong> tasks over baseline at once.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">repair</span><span class="vsub">post-hoc constraint repair</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-bad" style="width:18.8%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">18.8%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:27.5%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">27.5%</span></div></td>
+            <td><span class="verd">Third confirmation: repairing constraints <strong>does not move utility</strong>.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">repair-endpoints</span><span class="vsub">endpoint columns only</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-bad" style="width:22.8%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">22.8%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:31.8%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">31.8%</span></div></td>
+            <td><span class="verd">The gentler repair scores better than the full one on both tasks &mdash; but both sit inside baseline noise. Endpoint checks are also the gameable ones.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">discrete</span><span class="vsub">multinomial categorical diffusion</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-bad" style="width:0%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">&minus;2.2%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:33.2%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">33.2%</span></div></td>
+            <td><span class="verd"><span class="tag bad">negative</span> Lifts card over baseline, but loan lands <strong>below chance</strong> (AUROC 0.492; per-seed 0.535 / 0.488 / 0.452). The minority-class fix did not rescue loan.</span></td>
+          </tr>
+          <tr>
+            <td><span class="vcode">agg</span><span class="vsub">six child rollups as parent columns</span></td>
+            <td style="text-align:center"><span class="seeds s3">3</span></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-warn" style="width:30.8%"></span><i class="tick" style="left:23.6%"></i></div><span class="bar-val">30.8%</span></div></td>
+            <td><div class="cellwrap"><div class="bar"><span class="fill-good" style="width:48.7%"></span><i class="tick" style="left:27.3%"></i></div><span class="bar-val">48.7%</span></div></td>
+            <td><span class="verd"><span class="tag good">best combined</span> <strong>Best 3-seed card of the program</strong> and the best combined result: +14 pts card over reparam&nbsp;+&nbsp;S10 at equal loan, matching S5&rsquo;s card <em>without</em> S5&rsquo;s loan collapse &mdash; and at <strong>n_hops=1</strong>, so no extra compute. Fidelity not yet measured.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">Bar fill: green &ge; 45%, amber 25&ndash;45%, red &lt; 25%. S8&ndash;S11 single-flag ablations were launched but retired when the n_hops=2 line was abandoned (2&times; slower for a bad trade); partial checkpoints remain on disk. <strong>agg</strong> is the only row whose fidelity column is missing: the SDV evaluation step aborts on all three seeds because its metadata does not declare the new <span class="vcode" style="font-weight:400">agg_*</span> columns. Sampling is unaffected and the synthetic databases are complete &mdash; only the post-hoc fidelity report fails.</p>
+
+    <h3>Phase 1 fidelity &mdash; the reproduction that <em>worked</em> (3 seeds, mean &plusmn; sd)</h3>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th style="text-align:right">ClavaDDPM</th>
+            <th style="text-align:right">GRDM paper</th>
+            <th style="text-align:right">GRDM ours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="4" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Berka &mdash; 8 tables, depth 4, multi-parent</td></tr>
+          <tr><td>Cardinality</td><td class="num">96.92</td><td class="num">99.65 &plusmn;.05</td><td class="num">99.65 &plusmn;.07</td></tr>
+          <tr><td>Column Shapes</td><td class="num">94.29</td><td class="num">96.84 &plusmn;.14</td><td class="num">96.89 &plusmn;.10</td></tr>
+          <tr><td>Intra-Table Trends</td><td class="num">91.49</td><td class="num">98.23 &plusmn;.03</td><td class="num">98.26 &plusmn;.08</td></tr>
+          <tr><td>1-Hop</td><td class="num">86.86</td><td class="num">91.41 &plusmn;.11</td><td class="num">91.43 &plusmn;.29</td></tr>
+          <tr><td>2-Hop</td><td class="num">89.25</td><td class="num">95.57 &plusmn;.04</td><td class="num">95.71 &plusmn;.06</td></tr>
+          <tr><td>3-Hop</td><td class="num">87.27</td><td class="num">92.43 &plusmn;.69</td><td class="num">92.06 &plusmn;.92</td></tr>
+          <tr><td colspan="4" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">California &mdash; 2 tables, depth 2</td></tr>
+          <tr><td>Column Shapes</td><td class="num">98.76</td><td class="num">98.75 &plusmn;.00</td><td class="num">98.60 &plusmn;.06</td></tr>
+          <tr><td>1-Hop</td><td class="num">95.34</td><td class="num">96.16 &plusmn;.05</td><td class="num">96.48 &plusmn;.04</td></tr>
+          <tr><td colspan="4" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">CCS &mdash; 5 tables, depth 2, multi-parent</td></tr>
+          <tr><td>Column Shapes</td><td class="num">92.64</td><td class="num">97.30 &plusmn;.36</td><td class="num">97.21 &plusmn;.53</td></tr>
+          <tr><td>1-Hop</td><td class="num">72.65</td><td class="num">85.38 &plusmn;3.03</td><td class="num">82.61 &plusmn;2.94</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">Reproduced within 0.4 points on every Berka metric. Fidelity is <em>not</em> where GRDM struggles.</p>
+
+    <h3>The three-seed lesson, made concrete</h3>
+    <div class="callout bad">
+      <span class="lbl">Single seed &rarr; three seeds, loan default retained</span>
+      <p><span class="vcode">S2</span>&nbsp; pilot 0.64 AUROC &nbsp;&rarr;&nbsp; 3-seed 0.53 &nbsp;(<strong>6.8%</strong>)</p>
+      <p><span class="vcode">S5</span>&nbsp; 1-seed <strong>34.0%</strong> &nbsp;&rarr;&nbsp; 3-seed <strong>16.0%</strong></p>
+      <p><span class="vcode">reparam</span>&nbsp; 1-seed <strong>50.4%</strong> &nbsp;&rarr;&nbsp; 3-seed <strong>3.2%</strong></p>
+      <p style="margin-top:.7rem">Three &ldquo;best fix so far&rdquo; results, all noise. S12&rsquo;s 52% card is still 1 seed.</p>
+    </div>
+
+    <h3>Independent check &mdash; dependency-fidelity suite (no ML)</h3>
+    <div class="grid2">
+      <div class="card">
+        <h4>Ledger identity holds</h4>
+        <p class="bignum" style="margin-bottom:.2rem">98.3%<span class="arrow">&rarr;</span><span class="to">0.0%</span></p>
+        <p><span class="vcode" style="font-weight:500">final_balance == &sum; signed transactions</span>, real vs. synthetic accounts. Median error ~99,700 currency units &mdash; a whole account balance.</p>
+      </div>
+      <div class="card">
+        <h4>&ldquo;Paid by card&rdquo; &rArr; holds a card</h4>
+        <p class="bignum" style="margin-bottom:.2rem">100%<span class="arrow">&rarr;</span><span class="to">19%</span></p>
+        <p>Logical dependency across a <span class="vcode" style="font-weight:500">disp</span>/<span class="vcode" style="font-weight:500">account</span> hop collapses to its base rate. Date-ordering violations rise 0% &rarr; 3&ndash;10%.</p>
+      </div>
+    </div>
+    <p>A completely separate measurement, no classifier involved, reaches the same conclusion: cross-table relationships are not carried.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Pinning the mechanism &mdash; five follow-up experiments</h2>
+    </div>
+    <p class="lead">Section 01 asserted that the missing signal lives in cross-table aggregates. That was inferred from the fix program. These five experiments were run to <strong>test it directly</strong>, on the leakage-free <span class="vcode" style="font-weight:500">berka_split</span> generator, 3 GRDM seeds &times; 5 XGBoost seeds, reusing the existing feature builders and hyperparameters unchanged.</p>
+
+    <div class="callout good">
+      <span class="lbl">Headline &mdash; the hypothesis survived, and sharpened</span>
+      <p>The failure is <strong>not that synthetic data learned different relationships</strong>. A model trained on synthetic Berka scores near chance <em>on synthetic test data itself</em> &mdash; there is almost nothing there to learn. And the loss is <strong>confined to child-aggregate features</strong>: own-row and 1-hop features keep 60&ndash;99% of their predictive signal, cross-table rollups keep 11&ndash;13%.</p>
+    </div>
+
+    <h3>Task 1 &mdash; the replacement ladder</h3>
+    <p>Total training rows held <em>fixed</em> at the real training size; only the composition changes. This is substitution, not augmentation: can synthetic rows stand in for real ones you no longer have?</p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Training mix</th>
+            <th style="text-align:right">n train</th>
+            <th style="text-align:right">AUROC</th>
+            <th style="text-align:right">&Delta; vs 100% real</th>
+            <th style="text-align:right">Bal. acc</th>
+            <th style="text-align:right">Macro-F1</th>
+            <th style="text-align:right">Seed range</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="7" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Card ownership &mdash; stable</td></tr>
+          <tr class="is-baseline"><td>100% real</td><td class="num">4,007</td><td class="num">0.8739 &plusmn;.0013</td><td class="num">&mdash;</td><td class="num">0.6889</td><td class="num">0.6924</td><td class="num">&mdash;</td></tr>
+          <tr><td>75% real + 25% synth</td><td class="num">4,007</td><td class="num">0.8693 &plusmn;.0040</td><td class="num">&minus;0.0046</td><td class="num">0.6704</td><td class="num">0.6770</td><td class="num">0.003</td></tr>
+          <tr><td>50% real + 50% synth</td><td class="num">4,008</td><td class="num">0.8653 &plusmn;.0056</td><td class="num">&minus;0.0086</td><td class="num">0.6666</td><td class="num">0.6767</td><td class="num">0.006</td></tr>
+          <tr><td>25% real + 75% synth</td><td class="num">4,007</td><td class="num">0.8565 &plusmn;.0079</td><td class="num">&minus;0.0174</td><td class="num">0.6305</td><td class="num">0.6464</td><td class="num">0.008</td></tr>
+          <tr><td>100% synthetic</td><td class="num">4,007</td><td class="num">0.6021 &plusmn;.0173</td><td class="num" style="color:var(--bad);font-weight:600">&minus;0.2718</td><td class="num">0.5003</td><td class="num">0.4593</td><td class="num">0.016</td></tr>
+          <tr><td colspan="7" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Loan default &mdash; 19 test positives, seed-fragile</td></tr>
+          <tr class="is-baseline"><td>100% real</td><td class="num">511</td><td class="num">0.8886 &plusmn;.0116</td><td class="num">&mdash;</td><td class="num">0.5375</td><td class="num">0.5428</td><td class="num">&mdash;</td></tr>
+          <tr><td>75% real + 25% synth</td><td class="num">511</td><td class="num">0.8470 &plusmn;.0278</td><td class="num">&minus;0.0415</td><td class="num">0.5706</td><td class="num">0.5826</td><td class="num">0.029</td></tr>
+          <tr><td>50% real + 50% synth</td><td class="num">512</td><td class="num">0.7834 &plusmn;.0481</td><td class="num">&minus;0.1052</td><td class="num">0.5700</td><td class="num">0.5827</td><td class="num" style="color:var(--warn);font-weight:600">0.077</td></tr>
+          <tr><td>25% real + 75% synth</td><td class="num">511</td><td class="num">0.7147 &plusmn;.0700</td><td class="num">&minus;0.1739</td><td class="num">0.5259</td><td class="num">0.5282</td><td class="num" style="color:var(--bad);font-weight:600">0.119</td></tr>
+          <tr><td>100% synthetic</td><td class="num">505</td><td class="num">0.5917 &plusmn;.0445</td><td class="num" style="color:var(--bad);font-weight:600">&minus;0.2969</td><td class="num">0.5145</td><td class="num">0.4980</td><td class="num" style="color:var(--bad);font-weight:600">0.104</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">&ldquo;Seed range&rdquo; = max &minus; min of the three per-GRDM-seed means. Card is flat across seeds; loan is not.</p>
+
+    <p>The control is the load-bearing comparison: keep the same real fraction and simply <strong>drop</strong> the rest instead of replacing it. That is what the synthetic fill has to beat.</p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Control (real only, rows dropped)</th><th style="text-align:right">n train</th><th style="text-align:right">AUROC</th><th style="text-align:right">Synthetic fill buys</th></tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="4" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Card ownership</td></tr>
+          <tr><td>75% real only</td><td class="num">3,005</td><td class="num">0.8671 &plusmn;.0049</td><td class="num" style="color:var(--good)">+0.0022</td></tr>
+          <tr><td>50% real only</td><td class="num">2,004</td><td class="num">0.8622 &plusmn;.0043</td><td class="num" style="color:var(--good)">+0.0031</td></tr>
+          <tr><td>25% real only</td><td class="num">1,002</td><td class="num">0.8460 &plusmn;.0063</td><td class="num" style="color:var(--good)">+0.0105</td></tr>
+          <tr><td colspan="4" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Loan default</td></tr>
+          <tr><td>75% real only</td><td class="num">383</td><td class="num">0.8591 &plusmn;.0295</td><td class="num" style="color:var(--bad)">&minus;0.0121</td></tr>
+          <tr><td>50% real only</td><td class="num">256</td><td class="num">0.8207 &plusmn;.0424</td><td class="num" style="color:var(--bad)">&minus;0.0373</td></tr>
+          <tr><td>25% real only</td><td class="num">128</td><td class="num">0.7491 &plusmn;.0607</td><td class="num" style="color:var(--bad)">&minus;0.0345</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">On the trustworthy task the synthetic fill buys at most <strong>+0.01</strong> AUROC &mdash; and at 25R/75S it simultaneously <em>lowers</em> balanced accuracy and macro-F1 below the control. On loan it is negative at every ratio.</p>
+
+    <h3>Tasks 2 &amp; 3 &mdash; the 4-way cross-domain matrix</h3>
+    <p>The synthetic database is cut into train/test with the <strong>same</strong> account-level, outcome-stratified protocol used for the real split, so a synthetic test set is a genuinely held-out relational database rather than a slice of a feature matrix. Training rows matched across all four cells.</p>
+    <div class="grid2">
+      <div class="card">
+        <h4>Card ownership &mdash; AUROC</h4>
+        <div class="scroll" style="margin:.4rem 0 0;box-shadow:none">
+          <table>
+            <thead><tr><th>train &darr; / test &rarr;</th><th style="text-align:right">real</th><th style="text-align:right">synthetic</th></tr></thead>
+            <tbody>
+              <tr><td><b>real</b></td><td class="num" style="color:var(--good);font-weight:600">0.8684 &plusmn;.0033</td><td class="num" style="color:var(--bad)">0.5963 &plusmn;.0168</td></tr>
+              <tr><td><b>synthetic</b></td><td class="num" style="color:var(--bad)">0.6077 &plusmn;.0164</td><td class="num" style="color:var(--bad)">0.5941 &plusmn;.0133</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Transfer keeps <strong>29.2%</strong> of the real model&rsquo;s above-chance AUROC. Every seed agrees &mdash; widest cell range 0.020.</p>
+      </div>
+      <div class="card">
+        <h4>Loan default &mdash; AUROC</h4>
+        <div class="scroll" style="margin:.4rem 0 0;box-shadow:none">
+          <table>
+            <thead><tr><th>train &darr; / test &rarr;</th><th style="text-align:right">real</th><th style="text-align:right">synthetic</th></tr></thead>
+            <tbody>
+              <tr><td><b>real</b></td><td class="num" style="color:var(--good);font-weight:600">0.8627 &plusmn;.0266</td><td class="num" style="color:var(--bad)">0.5858 &plusmn;.0975</td></tr>
+              <tr><td><b>synthetic</b></td><td class="num" style="color:var(--bad)">0.5714 &plusmn;.0449</td><td class="num" style="color:var(--bad)">0.6090 &plusmn;.0264</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Transfer keeps <strong>19.7%</strong>. Synthetic test set has only <strong>10 positives</strong>, so read the <em>tested-on-real</em> column only.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="lbl">Why this rules out &ldquo;different relationships&rdquo;</span>
+      <p>If synthetic data had learned <em>different but internally consistent</em> rules, <span class="vcode" style="font-weight:500">synth&rarr;synth</span> would be high and <span class="vcode" style="font-weight:500">synth&rarr;real</span> low. Instead <span class="vcode" style="font-weight:500">synth&rarr;synth</span> is at chance. And on card, a real-trained model scores <strong>0.5963</strong> on synthetic rows while a synthetic-trained one scores <strong>0.5941</strong> &mdash; a model that demonstrably knows the real rule does no better on synthetic data than one trained on synthetic noise. The structure is <strong>missing</strong>, not different.</p>
+    </div>
+
+    <h3>Task 4 &mdash; where in the schema the loss happens</h3>
+    <p>Univariate AUROC of each feature against the label, measured <em>inside</em> each database. No model is involved, so this separates &ldquo;the generator did not reproduce this relationship&rdquo; from &ldquo;XGBoost chose not to use it&rdquo;.</p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature family</th><th style="text-align:right">Features</th><th style="text-align:right">Signal carriers</th>
+            <th style="text-align:right">Mean real |AUC&minus;.5|</th><th style="text-align:right">Mean synth |AUC&minus;.5|</th>
+            <th style="text-align:right">Signal retained</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="6" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Card ownership</td></tr>
+          <tr><td>Own row / 1-hop parent</td><td class="num">8</td><td class="num">2</td><td class="num">0.103</td><td class="num">0.058</td><td class="num" style="color:var(--good);font-weight:600">60%</td></tr>
+          <tr><td>Child aggregate <span style="color:var(--ink-faint)">(2+ hop rollup)</span></td><td class="num">68</td><td class="num">23</td><td class="num">0.158</td><td class="num">0.016</td><td class="num" style="color:var(--bad);font-weight:600">14%</td></tr>
+          <tr><td>District dimension <span style="color:var(--ink-faint)">(held fixed by GRDM)</span></td><td class="num">14</td><td class="num">0</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+          <tr><td colspan="6" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Loan default</td></tr>
+          <tr><td>Own row / 1-hop parent</td><td class="num">9</td><td class="num">6</td><td class="num">0.132</td><td class="num">0.111</td><td class="num" style="color:var(--good);font-weight:600">81%</td></tr>
+          <tr><td>Child aggregate <span style="color:var(--ink-faint)">(2+ hop rollup)</span></td><td class="num">71</td><td class="num">27</td><td class="num">0.105</td><td class="num">0.018</td><td class="num" style="color:var(--bad);font-weight:600">21%</td></tr>
+          <tr><td>District dimension</td><td class="num">14</td><td class="num">0</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout good">
+      <span class="lbl">The number that closes the loop</span>
+      <p><span class="vcode" style="font-weight:500">disp_type</span> &mdash; a direct parent&ndash;child link &mdash; keeps <strong>102%</strong> of its signal (real 0.595 &rarr; synth 0.597, KS 0.005) and is the synthetic model&rsquo;s <em>top</em> feature by gain. On its own it is worth <strong>0.595</strong> AUROC, which is effectively the entire <span class="vcode" style="font-weight:500">synth&rarr;synth</span> score of <strong>0.594</strong>. The synthetic-trained card model is, to a first approximation, that one surviving feature.</p>
+      <p>Meanwhile <span class="vcode" style="font-weight:500">trans_balance_mean</span> &mdash; worth <strong>0.838</strong> AUROC alone in real data &mdash; collapses to <strong>0.511</strong>. On loan the two models&rsquo; importance rankings are <em>anti</em>-correlated: Spearman &rho; = <strong>&minus;0.138</strong>, top-10 overlap 2/10 (card: &rho; = 0.208, 5/10).</p>
+    </div>
+
+    <h3>Task 5 &mdash; verifying it feature by feature</h3>
+    <p>Bootstrap CIs on every AUROC, and per-seed values rather than a pooled number. The decisive test is not the retention ratio but whether the <strong>synthetic CI covers 0.5</strong> &mdash; if it does, the relationship is not weakened, it is statistically absent.</p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th><th>Family</th><th style="text-align:right">Real AUROC [95% CI]</th>
+            <th style="text-align:right">Synth AUROC (3 seeds)</th><th style="text-align:right">Retained</th>
+            <th style="text-align:center">CI covers 0.5</th><th style="text-align:right">KS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="7" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Card ownership &mdash; cross-table aggregates</td></tr>
+          <tr><td class="vcode">trans_balance_mean</td><td><span class="tag bad">child agg</span></td><td class="num">0.838 [.825, .850]</td><td class="num">0.511 &plusmn;.006</td><td class="num" style="color:var(--bad);font-weight:600">3%</td><td style="text-align:center"><span class="seeds s3" style="color:var(--bad);background:var(--bad-bg)">3/3</span></td><td class="num">0.451</td></tr>
+          <tr><td class="vcode">trans_balance_last</td><td><span class="tag bad">child agg</span></td><td class="num">0.777 [.759, .795]</td><td class="num">0.496 &plusmn;.008</td><td class="num" style="color:var(--bad);font-weight:600">2%</td><td style="text-align:center"><span class="seeds s3" style="color:var(--bad);background:var(--bad-bg)">3/3</span></td><td class="num" style="font-weight:600">0.045</td></tr>
+          <tr><td class="vcode">trans_amount_mean</td><td><span class="tag bad">child agg</span></td><td class="num">0.750 [.730, .768]</td><td class="num">0.513 &plusmn;.008</td><td class="num" style="color:var(--bad);font-weight:600">5%</td><td style="text-align:center"><span class="seeds s3" style="color:var(--bad);background:var(--bad-bg)">3/3</span></td><td class="num">0.452</td></tr>
+          <tr><td class="vcode">order_amount_sum</td><td><span class="tag bad">child agg</span></td><td class="num">0.639 [.614, .667]</td><td class="num">0.493 &plusmn;.004</td><td class="num" style="color:var(--bad);font-weight:600">5%</td><td style="text-align:center"><span class="seeds s3" style="color:var(--bad);background:var(--bad-bg)">3/3</span></td><td class="num">0.171</td></tr>
+          <tr><td class="vcode">trans_n</td><td><span class="tag bad">child agg</span></td><td class="num">0.534 [.512, .554]</td><td class="num">0.487 &plusmn;.012</td><td class="num" style="color:var(--ink-faint)">39%<span class="vsub">noisy &mdash; weak real signal</span></td><td style="text-align:center"><span class="seeds s1">2/3</span></td><td class="num">0.012</td></tr>
+          <tr><td class="vcode">order_n</td><td><span class="tag bad">child agg</span></td><td class="num">0.512 [.488, .538]</td><td class="num">0.504 &plusmn;.003</td><td class="num" style="color:var(--ink-faint)"><em>n/a</em><span class="vsub">real CI covers 0.5</span></td><td style="text-align:center"><span class="seeds s3" style="color:var(--bad);background:var(--bad-bg)">3/3</span></td><td class="num">0.006</td></tr>
+          <tr><td colspan="7" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Card ownership &mdash; own-row / 1-hop control</td></tr>
+          <tr class="is-baseline"><td class="vcode">disp_type</td><td><span class="tag good">own/1-hop</span></td><td class="num">0.595 [.588, .601]</td><td class="num">0.597 &plusmn;.005</td><td class="num" style="color:var(--good);font-weight:600">102%</td><td style="text-align:center"><span class="seeds s3">0/3</span></td><td class="num">0.005</td></tr>
+          <tr><td class="vcode">year</td><td><span class="tag good">own/1-hop</span></td><td class="num">0.611 [.592, .631]</td><td class="num">0.520 &plusmn;.013</td><td class="num" style="color:var(--warn)">18%</td><td style="text-align:center"><span class="seeds s1">2/3</span></td><td class="num">0.007</td></tr>
+          <tr><td class="vcode">frequency</td><td><span class="tag good">own/1-hop</span></td><td class="num">0.514 [.502, .526]</td><td class="num">0.500 &plusmn;.006</td><td class="num" style="color:var(--ink-faint)">3%<span class="vsub">noisy &mdash; weak real signal</span></td><td style="text-align:center"><span class="seeds s3" style="color:var(--bad);background:var(--bad-bg)">3/3</span></td><td class="num">0.011</td></tr>
+          <tr><td colspan="7" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Loan default &mdash; cross-table aggregates</td></tr>
+          <tr><td class="vcode">trans_bank_0_frac</td><td><span class="tag bad">child agg</span></td><td class="num">0.706 [.631, .770]</td><td class="num">0.533 &plusmn;.041</td><td class="num" style="color:var(--bad);font-weight:600">16%</td><td style="text-align:center"><span class="seeds s3" style="color:var(--bad);background:var(--bad-bg)">3/3</span></td><td class="num">0.358</td></tr>
+          <tr><td class="vcode">order_k_symbol_4_frac</td><td><span class="tag bad">child agg</span></td><td class="num">0.658 [.580, .743]</td><td class="num">0.519 &plusmn;.046</td><td class="num" style="color:var(--bad);font-weight:600">12%</td><td style="text-align:center"><span class="seeds s3" style="color:var(--bad);background:var(--bad-bg)">3/3</span></td><td class="num">0.825</td></tr>
+          <tr><td class="vcode">trans_operation_3_frac</td><td><span class="tag bad">child agg</span></td><td class="num">0.622 [.533, .703]</td><td class="num">0.478 &plusmn;.062</td><td class="num" style="color:var(--bad);font-weight:600">18%</td><td style="text-align:center"><span class="seeds s1">2/3</span></td><td class="num">0.325</td></tr>
+          <tr><td class="vcode">order_k_symbol_3_frac</td><td><span class="tag bad">child agg</span></td><td class="num">0.249 [.205, .299]</td><td class="num">0.487 &plusmn;.079</td><td class="num" style="color:var(--bad);font-weight:600">5%</td><td style="text-align:center"><span class="seeds s1">2/3</span></td><td class="num">0.482</td></tr>
+          <tr><td colspan="7" style="background:var(--surface-2);font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);padding:.4rem .8rem">Loan default &mdash; own-row / 1-hop control</td></tr>
+          <tr class="is-baseline"><td class="vcode">amount_per_month</td><td><span class="tag good">own/1-hop</span></td><td class="num">0.691 [.624, .762]</td><td class="num">0.660 &plusmn;.021</td><td class="num" style="color:var(--good);font-weight:600">84%</td><td style="text-align:center"><span class="seeds s3">0/3</span></td><td class="num">0.032</td></tr>
+          <tr class="is-baseline"><td class="vcode">payments</td><td><span class="tag good">own/1-hop</span></td><td class="num">0.691 [.624, .762]</td><td class="num">0.656 &plusmn;.012</td><td class="num" style="color:var(--good);font-weight:600">82%</td><td style="text-align:center"><span class="seeds s3">0/3</span></td><td class="num">0.027</td></tr>
+          <tr class="is-baseline"><td class="vcode">amount</td><td><span class="tag good">own/1-hop</span></td><td class="num">0.649 [.570, .728]</td><td class="num">0.698 &plusmn;.017</td><td class="num" style="color:var(--good);font-weight:600">133%</td><td style="text-align:center"><span class="seeds s3">0/3</span></td><td class="num">0.025</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">Retention is averaged only over features whose <em>real</em> AUROC is itself distinguishable from chance &mdash; a ratio over a real AUROC that already covers 0.5 divides by noise. Aggregates retain <strong>10.7%</strong> (card) / <strong>13.2%</strong> (loan); controls retain <strong>40.9%</strong> / <strong>99.4%</strong>. <span class="vcode" style="font-weight:500">trans_balance_last</span> is the cleanest case in the study: KS <strong>0.045</strong> against the real marginal, relationship gone entirely.</p>
+
+    <div class="callout warn">
+      <span class="lbl">Honest limits of these five experiments</span>
+      <p><strong>Card&rsquo;s control group is imperfect.</strong> <span class="vcode" style="font-weight:500">year</span> (0.611&rarr;0.520) and <span class="vcode" style="font-weight:500">frequency</span> also degrade, so the card contrast is 10.7% vs 40.9%, not a clean 10% vs 100%. Loan&rsquo;s control is the clean one at 99.4%.</p>
+      <p><strong>Fan-out count is not what carries card signal.</strong> <span class="vcode" style="font-weight:500">trans_n</span> (real AUROC 0.534) and <span class="vcode" style="font-weight:500">order_n</span> (0.512) barely separate the classes in real data &mdash; <em>balance</em> aggregates do. This qualifies section 01&rsquo;s emphasis on counts: the A6 diagnostic found counts carry loan-default signal, but on card ownership it is the balance and amount rollups that matter.</p>
+      <p><strong>Loan&rsquo;s named aggregates are all at chance in real data</strong> (0.43&ndash;0.49) because its trans rollups are cut off at <span class="vcode" style="font-weight:500">trans_date &lt; loan_date</span>. The loan arm above uses the code-share rollups that actually carry signal.</p>
+    </div>
+
+    <h3>The seed lesson, again &mdash; and only on loan</h3>
+    <p>Section 03 documented three single-seed &ldquo;wins&rdquo; that evaporated at three seeds. The same pattern appears inside these experiments, and it is <strong>entirely confined to loan default</strong>. Seed 0 looks like a partial success on every loan measurement; seeds 1 and 2 do not.</p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Measurement (loan default)</th><th style="text-align:right">Seed 0</th><th style="text-align:right">Seed 1</th><th style="text-align:right">Seed 2</th><th style="text-align:right">3-seed mean</th><th style="text-align:right">Range</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>100% synthetic &mdash; AUROC</td><td class="num" style="color:var(--warn);font-weight:600">0.6418</td><td class="num">0.5377</td><td class="num">0.5956</td><td class="num">0.5917</td><td class="num" style="color:var(--bad)">0.104</td></tr>
+          <tr><td><span class="vcode" style="font-weight:500">synth&rarr;real</span> transfer &mdash; AUROC</td><td class="num" style="color:var(--warn);font-weight:600">0.6293</td><td class="num">0.5605</td><td class="num">0.5244</td><td class="num">0.5714</td><td class="num" style="color:var(--bad)">0.105</td></tr>
+          <tr><td><span class="vcode" style="font-weight:500">real&rarr;synth</span> &mdash; AUROC</td><td class="num">0.5846</td><td class="num">0.5117</td><td class="num" style="color:var(--warn);font-weight:600">0.6612</td><td class="num">0.5858</td><td class="num" style="color:var(--bad)">0.150</td></tr>
+          <tr><td>25% real + 75% synth &mdash; AUROC</td><td class="num" style="color:var(--warn);font-weight:600">0.7890</td><td class="num">0.6846</td><td class="num">0.6704</td><td class="num">0.7147</td><td class="num" style="color:var(--bad)">0.119</td></tr>
+          <tr><td><span class="vcode" style="font-weight:500">order_k_symbol_3_frac</span> univar AUROC <span class="vsub" style="display:inline">real = 0.249</span></td><td class="num" style="color:var(--warn);font-weight:600">0.376</td><td class="num">0.531</td><td class="num">0.554</td><td class="num">0.487</td><td class="num" style="color:var(--bad)">0.178</td></tr>
+          <tr><td><span class="vcode" style="font-weight:500">trans_operation_3_frac</span> univar AUROC <span class="vsub" style="display:inline">real = 0.622</span></td><td class="num" style="color:var(--warn);font-weight:600">0.401</td><td class="num">0.481</td><td class="num">0.552</td><td class="num">0.478</td><td class="num" style="color:var(--bad)">0.151</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption">Amber = the one seed that retains a relationship the other two lose. On the two univariate rows, seed 0 keeps the <em>inverted</em> real relationship (AUROC &lt; 0.5, matching real); seeds 1 and 2 land above 0.5, i.e. the sign flips and the relationship is gone.</p>
+    <div class="callout bad">
+      <span class="lbl">What a single loan seed would have told us</span>
+      <p>Had this study run <strong>seed 0 only</strong>, we would have reported synthetic&rarr;real loan transfer at <strong>0.629</strong> &mdash; 44% of the real model&rsquo;s above-chance AUROC, roughly double the true 3-seed figure of <strong>19.7%</strong> &mdash; and concluded that loan-default dependencies partially survive. They do not.</p>
+      <p>Card ownership shows <strong>no such fragility</strong>: its widest cross-domain cell range is 0.020 and every aggregate is dead in all three seeds. Card is where these conclusions rest; loan corroborates in direction, not in magnitude.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">What the results signify</h2>
+    </div>
+    <ul class="lead">
+      <li><strong>It is a structural limitation, not a tuning bug.</strong> The quantities that carry the Berka signal are all <em>child aggregates</em> &mdash; record fan-out on loan default, transaction-balance rollups on card ownership (<span class="vcode" style="font-weight:500">trans_balance_mean</span> alone is worth 0.838 AUROC). GRDM caps the neighbour sample, so the true fan-out is not an input at all; the balance rollups fare no better. Two levers moved it: adding degree features as an explicit input (S10), and &mdash; far more effectively &mdash; materialising the rollups themselves as parent columns (<span class="vcode" style="font-weight:500">agg</span>). Both work by putting the missing statistic <em>in front of</em> the model rather than asking it to infer one.</li>
+      <li><strong>The synthetic data is empty, not wrong.</strong> &sect;04&rsquo;s cross-domain matrix is the decisive evidence: a synthetic-trained model scores 0.594 on <em>synthetic</em> test data, barely above chance. There is no alternative relationship to transfer &mdash; only an absence. Any framing that treats synthetic data as &ldquo;biased&rdquo; or &ldquo;shifted&rdquo; misdescribes what is happening. <em>And the absence is fillable:</em> under <span class="vcode" style="font-weight:500">agg</span> the same synth&rarr;synth cell rises to <strong>0.649</strong> on card and <strong>0.709</strong> on loan, so the synthetic database now genuinely carries learnable structure it did not carry before.</li>
+      <li><strong>The damage has a precise address.</strong> Own-row and 1-hop features survive generation (60&ndash;99% of signal); child aggregates do not (11&ndash;13%), and for the strongest of them the synthetic AUROC&rsquo;s 95% CI covers 0.5 in every seed. <span class="vcode" style="font-weight:500">trans_balance_last</span> keeps its marginal to KS 0.045 and loses its relationship to the label entirely &mdash; the exact failure a column-shape metric cannot see.</li>
+      <li><strong>Fidelity &ne; utility for deep schemas.</strong> A relational synthesiser can score 96&ndash;99% on the published metrics and be near-useless for a multi-hop predictive task. Any AMEX-style evaluation needs a downstream-utility gate, not just distribution matching.</li>
+      <li><strong>More depth is not the answer.</strong> 1 &rarr; 2 &rarr; 3 hops trades one task for the other and costs fidelity; it never recovers the count signal.</li>
+      <li><strong>The two tasks pull in opposite directions.</strong> Loan wants shallow + class-balanced (a marginal problem); card wants degree features / depth (a dependency problem). No single published config wins both.</li>
+      <li><strong>Best honest state today:</strong> the six-column <span class="vcode" style="font-weight:500">agg</span> variant &mdash; <strong>48.7% card / 30.8% loan</strong>, 3-seed-confirmed, on the published architecture. It supersedes reparam + degree features (34.5% / 31.7%) by 14 points on card at equal loan. Card is now within sight of &ldquo;usable&rdquo;; <strong>loan is not</strong>, and still trails S3&rsquo;s 41.5%. No config wins both.</li>
+      <li><strong>Process:</strong> every result must be multi-seed. Three separate apparent wins evaporated once seeds were added &mdash; and &sect;04 found the same fragility inside the diagnostic itself: seed 0 alone would have put loan transfer at 44% of real signal instead of the true 19.7%. The fragility is <em>specific to loan default</em>; card ownership is stable to within 0.02 AUROC across seeds, which is why the mechanism conclusions rest on card.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <h2 class="sec-title">What to try next</h2>
+    </div>
+
+    <div class="callout good">
+      <span class="lbl">Primary &mdash; completed 2026-09-30</span>
+      <p><strong>Feed the relational aggregates to GRDM explicitly.</strong> This was the top recommendation of the previous revision, and &sect;04 turned it into a testable causal claim: if the missing utility is exactly the child-aggregate signal, then exposing those aggregates as parent columns should recover some of it.</p>
+      <p>Six rollups &mdash; <span class="vcode" style="font-weight:500">trans_n</span>, <span class="vcode" style="font-weight:500">trans_balance_mean</span>, <span class="vcode" style="font-weight:500">trans_balance_last</span>, <span class="vcode" style="font-weight:500">trans_amount_mean</span>, <span class="vcode" style="font-weight:500">order_n</span>, <span class="vcode" style="font-weight:500">order_amount_sum</span> &mdash; are computed on <span class="vcode" style="font-weight:500">split_train</span> only and added to the <span class="vcode" style="font-weight:500">account</span> and <span class="vcode" style="font-weight:500">disp</span> tables. Architecture, training procedure, split and downstream protocol are unchanged, so the only difference is the added relational information. The downstream feature builders select their columns explicitly and never read the injected ones, so the evaluation still recomputes every aggregate from the <em>generated</em> child tables &mdash; no shortcut.</p>
+      <p><strong>Result &mdash; the hypothesis held.</strong> All three seeds are in. Synthetic&rarr;real AUROC on card rises from the &sect;04 baseline of <strong>0.608</strong> to <strong>0.688</strong>, and on loan from <strong>0.571</strong> to <strong>0.593</strong>. Expressed as retained signal: <strong>card 29.2% &rarr; 48.7%</strong>, <strong>loan 19.7% &rarr; 30.8%</strong>.</p>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Cross-domain cell</th><th>What it asks</th><th style="text-align:center">Card baseline</th><th style="text-align:center">Card agg</th><th style="text-align:center">Loan baseline</th><th style="text-align:center">Loan agg</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="vcode">real &rarr; real</td><td>control &mdash; must not move</td><td class="num">0.868</td><td class="num">0.869</td><td class="num">0.863</td><td class="num">0.863</td></tr>
+            <tr><td class="vcode">synth &rarr; real</td><td>the transfer question</td><td class="num">0.608</td><td class="num"><strong>0.688</strong></td><td class="num">0.571</td><td class="num"><strong>0.593</strong></td></tr>
+            <tr><td class="vcode">synth &rarr; synth</td><td>is there signal inside synthetic data at all?</td><td class="num">0.594</td><td class="num"><strong>0.649</strong></td><td class="num">0.609</td><td class="num"><strong>0.709</strong></td></tr>
+            <tr><td class="vcode">real &rarr; synth</td><td>do real rules hold on synthetic rows?</td><td class="num">0.596</td><td class="num">0.600</td><td class="num">0.586</td><td class="num">0.571</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="caption">3 generator seeds &times; 5 XGBoost repeats per cell. Per-seed synth&rarr;real on card is 0.732 / 0.678 / 0.652 &mdash; <strong>every agg seed beats every baseline seed</strong> (best baseline 0.617), so the card gain is not seed noise. Loan remains seed-fragile (0.595 / 0.566 / 0.619).</p>
+      <p><strong>Three caveats before this is quoted.</strong> (1) <em>No fidelity numbers exist</em> for agg &mdash; the SDV step aborts on the undeclared <span class="vcode" style="font-weight:500">agg_*</span> columns, and every card-improving variant except S12 previously cost fidelity, so this column is load-bearing. (2) <em>The six rollups were chosen using downstream knowledge</em> &mdash; they are the features &sect;05 found carrying real signal. This is not circular at evaluation time (the feature builders select their columns explicitly and recompute every aggregate from the generated child tables), but on an unseen schema you would not know which six to pick; AMEX needs a schema-general rule, e.g. count + mean/sum/last per numeric child column. (3) <em>Most of the gap is still open</em> &mdash; 0.688 against a real ceiling of 0.869 is partial recovery. Denormalising aggregates helps; it does not fix relational generation.</p>
+    </div>
+
+    <div class="callout bad">
+      <span class="lbl">Closed since the last revision</span>
+      <p><strong>Multinomial categorical diffusion is not the answer.</strong> It finished at 3 seeds: card <strong>33.2%</strong> retained (above the 27.3% baseline), loan <strong>&minus;2.2%</strong> &mdash; synthetic-only AUROC 0.492, i.e. <em>below chance</em>, per-seed 0.535 / 0.488 / 0.452. It fixed the minority-class collapse it was built for without recovering loan utility, which is consistent with &sect;04: loan&rsquo;s problem is not only the marginal, it is the missing cross-table dependency.</p>
+    </div>
+
+    <div class="callout warn">
+      <span class="lbl">Incomplete &mdash; single-table ceiling check</span>
+      <p><strong>The flatten baseline did not survive training.</strong> The idea was a ceiling: train an ordinary single-table diffusion model on the fully flattened join, where no relational structure has to be learned at all, and read off how much of the Berka loss is <em>relational</em> rather than generative. It is the control that would tell us whether 48.7% is close to or far from what is achievable.</p>
+      <p>On card, 2 of 3 seeds trained; seed 0 produced NaNs during sampling. Those two seeds are interesting &mdash; the flattened model retains <strong>36&ndash;71%</strong> of the aggregate features&rsquo; signal against GRDM&rsquo;s 3&ndash;5% &mdash; but 2 seeds with a third that diverged is not reportable, and this study&rsquo;s own rule is that loan needs 3. On loan it failed outright: training loss went to NaN by step 10,000 and stayed there for the remaining 20,000 steps, then sampling raised <span class="vcode" style="font-weight:500">FoundNANsError</span> and killed the script before any loan result was written. About 3.2&nbsp;GPU-hours went into a diverged model.</p>
+      <p>The loan encoding is the likely culprit: 511 rows against <span class="vcode" style="font-weight:500">d_in=198</span> with 45 missingness flags. <span class="vcode" style="font-weight:500">downstream/results/berka_split__flatten_baseline.json</span> is a stale all-NaN write from the earlier smoke run &mdash; the two usable card seeds exist only in <span class="vcode" style="font-weight:500">logs/flatten_full.log</span>. <strong>Needs a numerical fix (gradient clipping / loss scaling), not a re-run.</strong></p>
+    </div>
+
+    <p>Then, in order:</p>
+    <ul>
+      <li><strong>Restore the fidelity column for agg</strong> &mdash; declare the <span class="vcode" style="font-weight:500">agg_*</span> columns in the SDV metadata so the evaluation step stops aborting. Until that exists we cannot claim agg keeps the 96&ndash;99% fidelity, and every previous card gain except S12 cost fidelity. Cheapest open item, and it gates the headline.</li>
+      <li><strong>Generalise the six columns into a rule</strong> &mdash; count + mean/sum/last per numeric child column, applied mechanically rather than hand-picked from the diagnostic. This is the only version of the result that transfers to AMEX, and it also tests whether the gain came from the <em>specific</em> six or from denormalisation as such.</li>
+      <li><strong>Stack agg with S3</strong> &mdash; agg carries card, S3 carries loan (41.5%), and they touch different parts of the pipeline (input columns vs. seed sampling), so they should compose. This is the most plausible route to a config that clears 45% on <em>both</em>.</li>
+      <li><strong>Fix the flatten baseline&rsquo;s numerics</strong> &mdash; without that ceiling we do not know whether 48.7% is near the achievable limit or far from it.</li>
+      <li><strong>Run the untried combination:</strong> S3&rsquo;s shallow + balanced recipe (best loan) together with S10&rsquo;s degree features (best card), at 3 seeds. Nobody has run exactly that.</li>
+      <li><strong>Confirm S12 at 3 seeds</strong> if compute allows &mdash; it is the current best card number but rests on a single seed.</li>
+      <li><strong>Keep post-hoc constraint repair for the AMEX consistency gates</strong> (proposal Gate&nbsp;3 temporal / Gate&nbsp;4 financial), but not as a utility fix &mdash; repair moved utility by ~0 across three attempts.</li>
+      <li><strong>Adopt downstream utility + dependency-fidelity as explicit quality gates</strong> in the AMEX framing, and state plainly that GRDM as published needs modification before it is trustworthy on a schema as deep as the AMEX one.</li>
+    </ul>
+  </section>
+
+  <hr class="rule">
+  <p class="foot">
+    <b>Sources.</b> <span class="vcode" style="font-weight:400">downstream/RESULTS_downstream.md</span>, <span class="vcode" style="font-weight:400">downstream/DIAGNOSIS.md</span> &sect;A6, <span class="vcode" style="font-weight:400">downstream/FIXES.md</span>, <span class="vcode" style="font-weight:400">dep_fidelity/REPORT.md</span>, sweep scoreboard <span class="vcode" style="font-weight:400">sweep/status.md</span> (2026-09-10).<br>
+    <b>&sect;06 six-column test.</b> <span class="vcode" style="font-weight:400">downstream/build_agg_dataset.py</span> (dataset), <span class="vcode" style="font-weight:400">configs/berka_split_agg_fastsample.json</span>, scored with <span class="vcode" style="font-weight:400">downstream/run.py</span> + <span class="vcode" style="font-weight:400">crossdomain.py</span> at <span class="vcode" style="font-weight:400">--dataset berka_split_agg</span> (2026-09-30, 3 seeds). Flatten baseline: <span class="vcode" style="font-weight:400">downstream/flatten_baseline.py</span>, <span class="vcode" style="font-weight:400">logs/flatten_full.log</span>.<br>
+    <b>&sect;04 reproduction.</b> <span class="vcode" style="font-weight:400">downstream/ratio_report.py</span> (Task&nbsp;1), <span class="vcode" style="font-weight:400">crossdomain.py</span> + <span class="vcode" style="font-weight:400">crossdomain_report.py</span> (Tasks&nbsp;2&ndash;3), <span class="vcode" style="font-weight:400">feature_compare.py</span> + <span class="vcode" style="font-weight:400">feature_provenance.py</span> (Task&nbsp;4), <span class="vcode" style="font-weight:400">aggregate_validation.py</span> (Task&nbsp;5). Results in <span class="vcode" style="font-weight:400">downstream/results/</span>, figures in <span class="vcode" style="font-weight:400">downstream/figures/</span>. All five reuse <span class="vcode" style="font-weight:400">downstream/tasks.py</span> and <span class="vcode" style="font-weight:400">evaluate.py</span> unchanged, so their numbers are directly comparable to &sect;03.<br>
+    <b>Protocol.</b> Untuned XGBoost, identical across regimes; synthetic subsampled to the real training row count; scored on one fixed real held-out test set. &ldquo;Retained&rdquo; measured above the metric floor (0.5 for AUROC). Berka runs use the leakage-free <span class="vcode" style="font-weight:400">berka_split</span> generator.
+  </p>
+
+</div>

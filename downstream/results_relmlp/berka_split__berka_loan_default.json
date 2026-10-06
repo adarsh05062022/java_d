@@ -1,0 +1,463 @@
+{
+  "dataset": "berka_split",
+  "leakage_caveat": false,
+  "probe": "relmlp",
+  "records": [
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "real",
+      "grdm_seed": null,
+      "train_seed": 0,
+      "n_train": 511,
+      "metrics": {
+        "roc_auc": 0.7991689750692521,
+        "average_precision": 0.4165211407822246,
+        "f1_macro": 0.6471428571428571,
+        "balanced_accuracy": 0.6611842105263157,
+        "accuracy": 0.847953216374269
+      },
+      "seconds": 19.9,
+      "ci95": {
+        "roc_auc": [
+          0.7033974358974359,
+          0.8879603174603174
+        ]
+      }
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "real",
+      "grdm_seed": null,
+      "train_seed": 1,
+      "n_train": 511,
+      "metrics": {
+        "roc_auc": 0.8168282548476454,
+        "average_precision": 0.4292457343484821,
+        "f1_macro": 0.6407563025210085,
+        "balanced_accuracy": 0.6282894736842105,
+        "accuracy": 0.8713450292397661
+      },
+      "seconds": 9.8
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "real",
+      "grdm_seed": null,
+      "train_seed": 2,
+      "n_train": 511,
+      "metrics": {
+        "roc_auc": 0.8258310249307479,
+        "average_precision": 0.3682057070346784,
+        "f1_macro": 0.6021405304792926,
+        "balanced_accuracy": 0.5953947368421053,
+        "accuracy": 0.8538011695906432
+      },
+      "seconds": 8.8
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "real",
+      "grdm_seed": null,
+      "train_seed": 3,
+      "n_train": 511,
+      "metrics": {
+        "roc_auc": 0.8240997229916898,
+        "average_precision": 0.38678244892091235,
+        "f1_macro": 0.6407563025210085,
+        "balanced_accuracy": 0.6282894736842105,
+        "accuracy": 0.8713450292397661
+      },
+      "seconds": 6.7
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "real",
+      "grdm_seed": null,
+      "train_seed": 4,
+      "n_train": 511,
+      "metrics": {
+        "roc_auc": 0.8157894736842105,
+        "average_precision": 0.3319757335508954,
+        "f1_macro": 0.6142957143968266,
+        "balanced_accuracy": 0.6282894736842105,
+        "accuracy": 0.8304093567251462
+      },
+      "seconds": 7.8
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "real",
+      "grdm_seed": null,
+      "train_seed": "ensemble",
+      "n_train": 511,
+      "metrics": {
+        "roc_auc": 0.850415512465374,
+        "average_precision": 0.40752609249125255,
+        "f1_macro": 0.6657980456026058,
+        "balanced_accuracy": 0.6546052631578947,
+        "accuracy": 0.8771929824561403
+      },
+      "seconds": 0.0,
+      "ci95": {
+        "roc_auc": [
+          0.778202380952381,
+          0.9133140989988876
+        ]
+      }
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "train_seed": 0,
+      "n_train": 505,
+      "metrics": {
+        "roc_auc": 0.6433518005540166,
+        "average_precision": 0.23643754717311016,
+        "f1_macro": 0.5468769716088328,
+        "balanced_accuracy": 0.5394736842105263,
+        "accuracy": 0.8771929824561403
+      },
+      "seconds": 6.0,
+      "ci95": {
+        "roc_auc": [
+          0.4920453064227899,
+          0.7888944892473118
+        ]
+      }
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "train_seed": 1,
+      "n_train": 505,
+      "metrics": {
+        "roc_auc": 0.6295013850415512,
+        "average_precision": 0.19895537040771122,
+        "f1_macro": 0.465625,
+        "balanced_accuracy": 0.4901315789473684,
+        "accuracy": 0.8713450292397661
+      },
+      "seconds": 7.5
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "train_seed": 2,
+      "n_train": 505,
+      "metrics": {
+        "roc_auc": 0.5917590027700831,
+        "average_precision": 0.16193512677646887,
+        "f1_macro": 0.5070754716981132,
+        "balanced_accuracy": 0.5131578947368421,
+        "accuracy": 0.8713450292397661
+      },
+      "seconds": 7.2
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "train_seed": 3,
+      "n_train": 505,
+      "metrics": {
+        "roc_auc": 0.6644736842105263,
+        "average_precision": 0.18631498417315678,
+        "f1_macro": 0.4973544973544973,
+        "balanced_accuracy": 0.5032894736842105,
+        "accuracy": 0.8538011695906432
+      },
+      "seconds": 9.4
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "train_seed": 4,
+      "n_train": 505,
+      "metrics": {
+        "roc_auc": 0.5422437673130194,
+        "average_precision": 0.13938473842565002,
+        "f1_macro": 0.4943130118289354,
+        "balanced_accuracy": 0.5,
+        "accuracy": 0.847953216374269
+      },
+      "seconds": 6.9
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "train_seed": "ensemble",
+      "n_train": 505,
+      "metrics": {
+        "roc_auc": 0.6267313019390581,
+        "average_precision": 0.18059169931563318,
+        "f1_macro": 0.5070754716981132,
+        "balanced_accuracy": 0.5131578947368421,
+        "accuracy": 0.8713450292397661
+      },
+      "seconds": 0.0,
+      "ci95": {
+        "roc_auc": [
+          0.4831859805436302,
+          0.7569511772853186
+        ]
+      }
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 1,
+      "train_seed": 0,
+      "n_train": 508,
+      "metrics": {
+        "roc_auc": 0.5051939058171746,
+        "average_precision": 0.11767204558660402,
+        "f1_macro": 0.48428571428571426,
+        "balanced_accuracy": 0.48355263157894735,
+        "accuracy": 0.7777777777777778
+      },
+      "seconds": 6.3,
+      "ci95": {
+        "roc_auc": [
+          0.36749844325931286,
+          0.648736611489776
+        ]
+      }
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 1,
+      "train_seed": 1,
+      "n_train": 508,
+      "metrics": {
+        "roc_auc": 0.5069252077562327,
+        "average_precision": 0.12007701402064277,
+        "f1_macro": 0.4519230769230769,
+        "balanced_accuracy": 0.46381578947368424,
+        "accuracy": 0.8245614035087719
+      },
+      "seconds": 6.1
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 1,
+      "train_seed": 2,
+      "n_train": 508,
+      "metrics": {
+        "roc_auc": 0.5128116343490304,
+        "average_precision": 0.18449792356256328,
+        "f1_macro": 0.5610951232791476,
+        "balanced_accuracy": 0.569078947368421,
+        "accuracy": 0.8070175438596491
+      },
+      "seconds": 6.0
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 1,
+      "train_seed": 3,
+      "n_train": 508,
+      "metrics": {
+        "roc_auc": 0.5328947368421053,
+        "average_precision": 0.12390198518697715,
+        "f1_macro": 0.4557029177718833,
+        "balanced_accuracy": 0.4506578947368421,
+        "accuracy": 0.7192982456140351
+      },
+      "seconds": 7.5
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 1,
+      "train_seed": 4,
+      "n_train": 508,
+      "metrics": {
+        "roc_auc": 0.4688365650969528,
+        "average_precision": 0.10887773831525686,
+        "f1_macro": 0.47482550023266634,
+        "balanced_accuracy": 0.4769736842105263,
+        "accuracy": 0.8070175438596491
+      },
+      "seconds": 6.1
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 1,
+      "train_seed": "ensemble",
+      "n_train": 508,
+      "metrics": {
+        "roc_auc": 0.5176592797783933,
+        "average_precision": 0.12142962938476112,
+        "f1_macro": 0.48014121800529563,
+        "balanced_accuracy": 0.48355263157894735,
+        "accuracy": 0.8187134502923976
+      },
+      "seconds": 0.0,
+      "ci95": {
+        "roc_auc": [
+          0.3839817880794702,
+          0.6574337552541158
+        ]
+      }
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 2,
+      "train_seed": 0,
+      "n_train": 499,
+      "metrics": {
+        "roc_auc": 0.5803324099722991,
+        "average_precision": 0.13161459880205068,
+        "f1_macro": 0.45714285714285713,
+        "balanced_accuracy": 0.47368421052631576,
+        "accuracy": 0.8421052631578947
+      },
+      "seconds": 8.0,
+      "ci95": {
+        "roc_auc": [
+          0.4625002916886759,
+          0.6953053182835062
+        ]
+      }
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 2,
+      "train_seed": 1,
+      "n_train": 499,
+      "metrics": {
+        "roc_auc": 0.6319252077562326,
+        "average_precision": 0.19005265354937362,
+        "f1_macro": 0.5302614089499336,
+        "balanced_accuracy": 0.5296052631578947,
+        "accuracy": 0.8187134502923976
+      },
+      "seconds": 6.2
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 2,
+      "train_seed": 2,
+      "n_train": 499,
+      "metrics": {
+        "roc_auc": 0.6786703601108033,
+        "average_precision": 0.22616939412572265,
+        "f1_macro": 0.5610951232791476,
+        "balanced_accuracy": 0.569078947368421,
+        "accuracy": 0.8070175438596491
+      },
+      "seconds": 8.6
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 2,
+      "train_seed": 3,
+      "n_train": 499,
+      "metrics": {
+        "roc_auc": 0.592797783933518,
+        "average_precision": 0.13117170001726478,
+        "f1_macro": 0.43934426229508194,
+        "balanced_accuracy": 0.4407894736842105,
+        "accuracy": 0.783625730994152
+      },
+      "seconds": 7.1
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 2,
+      "train_seed": 4,
+      "n_train": 499,
+      "metrics": {
+        "roc_auc": 0.6551246537396122,
+        "average_precision": 0.16640168240234782,
+        "f1_macro": 0.49352627570449353,
+        "balanced_accuracy": 0.4934210526315789,
+        "accuracy": 0.7953216374269005
+      },
+      "seconds": 6.5
+    },
+    {
+      "dataset": "berka_split",
+      "task": "berka_loan_default",
+      "kind": "binclass",
+      "regime": "synth",
+      "grdm_seed": 2,
+      "train_seed": "ensemble",
+      "n_train": 499,
+      "metrics": {
+        "roc_auc": 0.628808864265928,
+        "average_precision": 0.1523124088576137,
+        "f1_macro": 0.48286290322580644,
+        "balanced_accuracy": 0.48684210526315785,
+        "accuracy": 0.8245614035087719
+      },
+      "seconds": 0.0,
+      "ci95": {
+        "roc_auc": [
+          0.5121344682867393,
+          0.7378954027274665
+        ]
+      }
+    }
+  ]
+}

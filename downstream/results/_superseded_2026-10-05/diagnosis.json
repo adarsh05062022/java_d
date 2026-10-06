@@ -1,0 +1,215 @@
+{
+  "a2_information_ceiling": [
+    {
+      "task": "berka_loan_default",
+      "hop": 0,
+      "n_features": 6,
+      "roc_auc": 0.6015235457063712,
+      "sd": 0.01305066380155628
+    },
+    {
+      "task": "berka_loan_default",
+      "hop": 1,
+      "n_features": 9,
+      "roc_auc": 0.5560941828254847,
+      "sd": 0.008726860942949222
+    },
+    {
+      "task": "berka_loan_default",
+      "hop": 2,
+      "n_features": 97,
+      "roc_auc": 0.888573407202216,
+      "sd": 0.011595122501118582
+    },
+    {
+      "task": "berka_card_ownership",
+      "hop": 0,
+      "n_features": 1,
+      "roc_auc": 0.6037653239929948,
+      "sd": 0.0
+    },
+    {
+      "task": "berka_card_ownership",
+      "hop": 1,
+      "n_features": 8,
+      "roc_auc": 0.6707793345008757,
+      "sd": 0.0016167347125471804
+    },
+    {
+      "task": "berka_card_ownership",
+      "hop": 2,
+      "n_features": 90,
+      "roc_auc": 0.8739133895876453,
+      "sd": 0.001273836760285374
+    }
+  ],
+  "a3_gradient_budget": [
+    {
+      "table": "trans",
+      "rows": 792600,
+      "share": 0.9784629514867057,
+      "seeds_per_batch": 4007.7842492895466,
+      "steps_per_full_pass": 1.0220111026999747
+    },
+    {
+      "table": "order",
+      "rows": 4874,
+      "share": 0.006016942247724203,
+      "seeds_per_batch": 24.645395446678336,
+      "steps_per_full_pass": 166.19737382027085
+    },
+    {
+      "table": "client",
+      "rows": 4007,
+      "share": 0.0049466326603674355,
+      "seeds_per_batch": 20.261407376865016,
+      "steps_per_full_pass": 202.15772398302974
+    },
+    {
+      "table": "disp",
+      "rows": 4007,
+      "share": 0.0049466326603674355,
+      "seeds_per_batch": 20.261407376865016,
+      "steps_per_full_pass": 202.15772398302974
+    },
+    {
+      "table": "account",
+      "rows": 3375,
+      "share": 0.004166430054589492,
+      "seeds_per_batch": 17.06569750359856,
+      "steps_per_full_pass": 240.01362962962963
+    },
+    {
+      "table": "card",
+      "rows": 672,
+      "share": 0.0008295825175360412,
+      "seeds_per_batch": 3.3979699918276247,
+      "steps_per_full_pass": 1205.4255952380952
+    },
+    {
+      "table": "loan",
+      "rows": 511,
+      "share": 0.000630828372709698,
+      "seeds_per_batch": 2.583873014618923,
+      "steps_per_full_pass": 1585.2172211350291
+    }
+  ],
+  "synth_reference": {
+    "berka_split|berka_loan_default": 0.5916666666666667,
+    "berka_split|berka_card_ownership": 0.602104229687417,
+    "berka_split_s2|berka_loan_default": 0.44189750692520774,
+    "berka_split_s2|berka_card_ownership": 0.686930425091546
+  },
+  "a1_worst": [
+    {
+      "table": "trans",
+      "column": "k_symbol",
+      "code": 4,
+      "real_share": 0.001507696189755236,
+      "syn_share": 0.00020639368871216396,
+      "retained": 0.13689342064708046,
+      "interior": true,
+      "neighbour_mass": 0.1303734544536967,
+      "normal_band": 0.0038135377849672913
+    },
+    {
+      "table": "client",
+      "column": "year",
+      "code": 71,
+      "real_share": 0.006488644871474919,
+      "syn_share": 0.0014973795857249814,
+      "retained": 0.23076923076923078,
+      "interior": true,
+      "neighbour_mass": 0.006987771400049913,
+      "normal_band": 0.6027540821563493
+    },
+    {
+      "table": "loan",
+      "column": "status",
+      "code": 1,
+      "real_share": 0.046966731898238745,
+      "syn_share": 0.011277100600723289,
+      "retained": 0.2401082669570667,
+      "interior": true,
+      "neighbour_mass": 0.8884540117416829,
+      "normal_band": 0.1319914062445955
+    },
+    {
+      "table": "account",
+      "column": "frequency",
+      "code": 1,
+      "real_share": 0.02162962962962963,
+      "syn_share": 0.005629629629629629,
+      "retained": 0.2602739726027397,
+      "interior": true,
+      "neighbour_mass": 0.9783703703703703,
+      "normal_band": 0.17615275098109962
+    },
+    {
+      "table": "client",
+      "column": "year",
+      "code": 3,
+      "real_share": 0.0009982530571499876,
+      "syn_share": 0.0004991265285749937,
+      "retained": 0.4999999999999999,
+      "interior": true,
+      "neighbour_mass": 0.0012478163214374844,
+      "normal_band": 0.16067840525619292
+    },
+    {
+      "table": "client",
+      "column": "year",
+      "code": 25,
+      "real_share": 0.011479910157224856,
+      "syn_share": 0.006571832626237418,
+      "retained": 0.5724637681159421,
+      "interior": true,
+      "neighbour_mass": 0.023708510107312203,
+      "normal_band": 0.04369281982409945
+    },
+    {
+      "table": "client",
+      "column": "year",
+      "code": 7,
+      "real_share": 0.008485150985774894,
+      "syn_share": 0.004908077530987438,
+      "retained": 0.5784313725490196,
+      "interior": true,
+      "neighbour_mass": 0.01048165710007487,
+      "normal_band": 0.38576113333761475
+    },
+    {
+      "table": "client",
+      "column": "year",
+      "code": 19,
+      "real_share": 0.010232093835787373,
+      "syn_share": 0.006322269361949921,
+      "retained": 0.6178861788617885,
+      "interior": true,
+      "neighbour_mass": 0.018717244821562264,
+      "normal_band": 0.05252020670831703
+    },
+    {
+      "table": "client",
+      "column": "year",
+      "code": 27,
+      "real_share": 0.013226853007237334,
+      "syn_share": 0.008401963231012395,
+      "retained": 0.6352201257861636,
+      "interior": true,
+      "neighbour_mass": 0.03019715497878712,
+      "normal_band": 0.046730214612362486
+    },
+    {
+      "table": "client",
+      "column": "year",
+      "code": 70,
+      "real_share": 0.006239081607187422,
+      "syn_share": 0.004076199983362449,
+      "retained": 0.6533333333333332,
+      "interior": true,
+      "neighbour_mass": 0.022710257050162216,
+      "normal_band": 0.22314416716568397
+    }
+  ]
+}

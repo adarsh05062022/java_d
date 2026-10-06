@@ -1,0 +1,206 @@
+{
+  "berka_card_ownership": {
+    "ladder": [
+      {
+        "label": "100% real",
+        "synth_share": 0.0,
+        "regime": "real",
+        "n_train": 4007,
+        "roc_auc": 0.8739133895876453,
+        "roc_auc_std": 0.001273836760285374,
+        "balanced_accuracy": 0.6888696067505174,
+        "balanced_accuracy_std": 0.008897170734954147,
+        "f1_macro": 0.6923775317531693,
+        "f1_macro_std": 0.009258554868488296
+      },
+      {
+        "label": "75% real + 25% synth",
+        "synth_share": 0.25,
+        "regime": "blend_75",
+        "n_train": 4007,
+        "roc_auc": 0.8693398078862178,
+        "roc_auc_std": 0.003951712228461744,
+        "balanced_accuracy": 0.6703693679350422,
+        "balanced_accuracy_std": 0.012768778810063434,
+        "f1_macro": 0.6770496707114552,
+        "f1_macro_std": 0.011529220761215136
+      },
+      {
+        "label": "50% real + 50% synth",
+        "synth_share": 0.5,
+        "regime": "blend_50",
+        "n_train": 4008,
+        "roc_auc": 0.8652815369102586,
+        "roc_auc_std": 0.0055625419865659624,
+        "balanced_accuracy": 0.6665936952714535,
+        "balanced_accuracy_std": 0.014712364275022915,
+        "f1_macro": 0.6766863597121026,
+        "f1_macro_std": 0.012541447651354282
+      },
+      {
+        "label": "25% real + 75% synth",
+        "synth_share": 0.75,
+        "regime": "blend_25",
+        "n_train": 4007,
+        "roc_auc": 0.8565186010720162,
+        "roc_auc_std": 0.007891250221274047,
+        "balanced_accuracy": 0.6305325585097915,
+        "balanced_accuracy_std": 0.018978084304657087,
+        "f1_macro": 0.6463807387499331,
+        "f1_macro_std": 0.01993703771394156
+      },
+      {
+        "label": "100% synthetic",
+        "synth_share": 1.0,
+        "regime": "synth",
+        "n_train": 4007,
+        "roc_auc": 0.602104229687417,
+        "roc_auc_std": 0.017346653847117924,
+        "balanced_accuracy": 0.5003407100780131,
+        "balanced_accuracy_std": 0.002125631045186687,
+        "f1_macro": 0.45934892669881955,
+        "f1_macro_std": 0.005815015020406916
+      }
+    ],
+    "control": [
+      {
+        "label": "75% real only",
+        "synth_share": 0.25,
+        "regime": "real_75",
+        "n_train": 3005,
+        "roc_auc": 0.8671063524916414,
+        "roc_auc_std": 0.004877283651094634,
+        "balanced_accuracy": 0.6755100037149074,
+        "balanced_accuracy_std": 0.012003816918848994,
+        "f1_macro": 0.6790814092423442,
+        "f1_macro_std": 0.010883885357010408
+      },
+      {
+        "label": "50% real only",
+        "synth_share": 0.5,
+        "regime": "real_50",
+        "n_train": 2004,
+        "roc_auc": 0.8621700366183729,
+        "roc_auc_std": 0.004342461221245756,
+        "balanced_accuracy": 0.6635748023138566,
+        "balanced_accuracy_std": 0.013923176898545947,
+        "f1_macro": 0.671076114148739,
+        "f1_macro_std": 0.013356184466216952
+      },
+      {
+        "label": "25% real only",
+        "synth_share": 0.75,
+        "regime": "real_25",
+        "n_train": 1002,
+        "roc_auc": 0.8460458791062992,
+        "roc_auc_std": 0.006250472340381574,
+        "balanced_accuracy": 0.6481393620973306,
+        "balanced_accuracy_std": 0.024605652923587643,
+        "f1_macro": 0.6591604460609422,
+        "f1_macro_std": 0.02024893035785208
+      }
+    ]
+  },
+  "berka_loan_default": {
+    "ladder": [
+      {
+        "label": "100% real",
+        "synth_share": 0.0,
+        "regime": "real",
+        "n_train": 511,
+        "roc_auc": 0.888573407202216,
+        "roc_auc_std": 0.011595122501118582,
+        "balanced_accuracy": 0.5375,
+        "balanced_accuracy_std": 0.018444533906416042,
+        "f1_macro": 0.542763357055547,
+        "f1_macro_std": 0.02538089846779997
+      },
+      {
+        "label": "75% real + 25% synth",
+        "synth_share": 0.25,
+        "regime": "blend_75",
+        "n_train": 511,
+        "roc_auc": 0.847045244690674,
+        "roc_auc_std": 0.02783826326435453,
+        "balanced_accuracy": 0.5706140350877192,
+        "balanced_accuracy_std": 0.03736831809556692,
+        "f1_macro": 0.5826487625883062,
+        "f1_macro_std": 0.04402521417357025
+      },
+      {
+        "label": "50% real + 50% synth",
+        "synth_share": 0.5,
+        "regime": "blend_50",
+        "n_train": 512,
+        "roc_auc": 0.7834025854108957,
+        "roc_auc_std": 0.0480858931526362,
+        "balanced_accuracy": 0.5699561403508772,
+        "balanced_accuracy_std": 0.040278109443450366,
+        "f1_macro": 0.5827480215355146,
+        "f1_macro_std": 0.04673588377378549
+      },
+      {
+        "label": "25% real + 75% synth",
+        "synth_share": 0.75,
+        "regime": "blend_25",
+        "n_train": 511,
+        "roc_auc": 0.7146583564173592,
+        "roc_auc_std": 0.06998360936663968,
+        "balanced_accuracy": 0.5258771929824563,
+        "balanced_accuracy_std": 0.03997970014288411,
+        "f1_macro": 0.528174174178704,
+        "f1_macro_std": 0.050508946650397846
+      },
+      {
+        "label": "100% synthetic",
+        "synth_share": 1.0,
+        "regime": "synth",
+        "n_train": 505,
+        "roc_auc": 0.5916666666666667,
+        "roc_auc_std": 0.044465634386769974,
+        "balanced_accuracy": 0.5144736842105263,
+        "balanced_accuracy_std": 0.034370409120114166,
+        "f1_macro": 0.4979921446317224,
+        "f1_macro_std": 0.046683706841603584
+      }
+    ],
+    "control": [
+      {
+        "label": "75% real only",
+        "synth_share": 0.25,
+        "regime": "real_75",
+        "n_train": 383,
+        "roc_auc": 0.8591412742382272,
+        "roc_auc_std": 0.029474387136766027,
+        "balanced_accuracy": 0.550438596491228,
+        "balanced_accuracy_std": 0.024635695912251957,
+        "f1_macro": 0.5593358060184734,
+        "f1_macro_std": 0.03382404297340427
+      },
+      {
+        "label": "50% real only",
+        "synth_share": 0.5,
+        "regime": "real_50",
+        "n_train": 256,
+        "roc_auc": 0.8206832871652817,
+        "roc_auc_std": 0.042363722235694054,
+        "balanced_accuracy": 0.5741228070175438,
+        "balanced_accuracy_std": 0.036784625168880286,
+        "f1_macro": 0.589519700037079,
+        "f1_macro_std": 0.046116273908102245
+      },
+      {
+        "label": "25% real only",
+        "synth_share": 0.75,
+        "regime": "real_25",
+        "n_train": 128,
+        "roc_auc": 0.7491458910433979,
+        "roc_auc_std": 0.060711453185919854,
+        "balanced_accuracy": 0.5574561403508772,
+        "balanced_accuracy_std": 0.051254837095035796,
+        "f1_macro": 0.5634280828344644,
+        "f1_macro_std": 0.06347552877832188
+      }
+    ]
+  }
+}
