@@ -1,0 +1,102 @@
+{
+  "berka": {
+    "finished_seeds": [],
+    "metrics": {
+      "Cardinality": {
+        "seeds": {},
+        "mean": null,
+        "std": null,
+        "paper_mean": 99.65,
+        "paper_std": 0.05,
+        "delta": null,
+        "previous_mean": 99.65
+      },
+      "Column Shapes": {
+        "seeds": {},
+        "mean": null,
+        "std": null,
+        "paper_mean": 96.84,
+        "paper_std": 0.14,
+        "delta": null,
+        "previous_mean": 96.89
+      },
+      "Intra-Table Trends": {
+        "seeds": {},
+        "mean": null,
+        "std": null,
+        "paper_mean": 98.23,
+        "paper_std": 0.03,
+        "delta": null,
+        "previous_mean": 98.26
+      },
+      "1-HOP": {
+        "seeds": {},
+        "mean": null,
+        "std": null,
+        "paper_mean": 91.41,
+        "paper_std": 0.11,
+        "delta": null,
+        "previous_mean": 91.43
+      },
+      "2-HOP": {
+        "seeds": {},
+        "mean": null,
+        "std": null,
+        "paper_mean": 95.57,
+        "paper_std": 0.04,
+        "delta": null,
+        "previous_mean": 95.71
+      },
+      "3-HOP": {
+        "seeds": {},
+        "mean": null,
+        "std": null,
+        "paper_mean": 92.43,
+        "paper_std": 0.69,
+        "delta": null,
+        "previous_mean": 92.06
+      }
+    }
+  },
+  "california": {
+    "finished_seeds": [],
+    "metrics": {
+      "Cardinality": {
+        "seeds": {},
+        "mean": null,
+        "std": null,
+        "paper_mean": 99.96,
+        "paper_std": 0.01,
+        "delta": null,
+        "previous_mean": 99.96
+      },
+      "Column Shapes": {
+        "seeds": {},
+        "mean": null,
+        "std": null,
+        "paper_mean": 98.75,
+        "paper_std": 0.0,
+        "delta": null,
+        "previous_mean": 98.6
+      },
+      "Intra-Table Trends": {
+        "seeds": {},
+        "mean": null,
+        "std": null,
+        "paper_mean": 97.35,
+        "paper_std": 0.02,
+        "delta": null,
+        "previous_mean": 97.53
+      },
+      "1-HOP": {
+        "seeds": {},
+        "mean": null,
+        "std": null,
+        "paper_mean": 96.16,
+        "paper_std": 0.05,
+        "delta": null,
+        "previous_mean": 96.48
+      }
+    }
+  }
+}
