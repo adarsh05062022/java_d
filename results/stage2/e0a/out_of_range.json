@@ -1,0 +1,1004 @@
+{
+ "berka/original/seed0": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 39668.10546875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.003911342894393742,
+   "frac_rows_gt_6": 0.0022350530825107095,
+   "frac_rows_gt_10": 0.0022350530825107095,
+   "frac_rows_gt_100": 0.0022350530825107095
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 21928.15625,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.029777777777777778,
+   "frac_rows_gt_6": 0.008888888888888889,
+   "frac_rows_gt_10": 0.0064444444444444445,
+   "frac_rows_gt_100": 0.0044444444444444444
+  },
+  "disp": {
+   "n_rows": 5355,
+   "max_abs": 36.632171630859375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.004481792717086834,
+   "frac_rows_gt_6": 0.004295051353874884,
+   "frac_rows_gt_10": 0.0035480859010270775,
+   "frac_rows_gt_100": 0.0
+  },
+  "card": {
+   "n_rows": 895,
+   "max_abs": 5.626794815063477,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.008938547486033519,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "loan": {
+   "n_rows": 679,
+   "max_abs": 5702.07763671875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.03829160530191458,
+   "frac_rows_gt_6": 0.01914580265095729,
+   "frac_rows_gt_10": 0.01914580265095729,
+   "frac_rows_gt_100": 0.017673048600883652
+  },
+  "order": {
+   "n_rows": 6442,
+   "max_abs": 5803.935546875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.008227258615336852,
+   "frac_rows_gt_6": 0.00776156473144986,
+   "frac_rows_gt_10": 0.007606333436820863,
+   "frac_rows_gt_100": 0.0058987891959018934
+  },
+  "trans": {
+   "n_rows": 1052012,
+   "max_abs": 3074.156494140625,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0013830640715124921,
+   "frac_rows_gt_6": 0.0007015129104991197,
+   "frac_rows_gt_10": 0.0005817424135846359,
+   "frac_rows_gt_100": 0.0005674840210948164
+  },
+  "_mtime": 1791732887.2497306,
+  "_path": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/berka/paper_repro/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/aggft_joint/seed0": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 23212.224609375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.002607561929595828,
+   "frac_rows_gt_6": 0.0016762898118830322,
+   "frac_rows_gt_10": 0.0016762898118830322,
+   "frac_rows_gt_100": 0.001490035388340473
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 12271.2060546875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.49777777777777776,
+   "frac_rows_gt_6": 0.4171111111111111,
+   "frac_rows_gt_10": 0.33444444444444443,
+   "frac_rows_gt_100": 0.16622222222222222
+  },
+  "disp": {
+   "n_rows": 5355,
+   "max_abs": 179.0305633544922,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.1103641456582633,
+   "frac_rows_gt_6": 0.06890756302521009,
+   "frac_rows_gt_10": 0.04649859943977591,
+   "frac_rows_gt_100": 0.00018674136321195143
+  },
+  "card": {
+   "n_rows": 895,
+   "max_abs": 18988.1484375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.04692737430167598,
+   "frac_rows_gt_6": 0.0022346368715083797,
+   "frac_rows_gt_10": 0.0011173184357541898,
+   "frac_rows_gt_100": 0.0011173184357541898
+  },
+  "loan": {
+   "n_rows": 679,
+   "max_abs": 37180.86328125,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.5625920471281296,
+   "frac_rows_gt_6": 0.4491899852724595,
+   "frac_rows_gt_10": 0.41384388807069217,
+   "frac_rows_gt_100": 0.374079528718704
+  },
+  "order": {
+   "n_rows": 6442,
+   "max_abs": 24351.90234375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.2932319155541757,
+   "frac_rows_gt_6": 0.2514746972989755,
+   "frac_rows_gt_10": 0.21220117975783917,
+   "frac_rows_gt_100": 0.15166097485253027
+  },
+  "trans": {
+   "n_rows": 1052012,
+   "max_abs": 3149.82177734375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.6975690391364358,
+   "frac_rows_gt_6": 0.6559792093626309,
+   "frac_rows_gt_10": 0.5029961635418607,
+   "frac_rows_gt_100": 0.17021859066246392
+  },
+  "_mtime": 1791787649.0495453,
+  "_path": "/storage/s25017/AMEX/java_d-aggft/experiments/GRDM_BERKA_AGGREGATE_CONDITIONED_FINETUNE/runs/same_spec/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/degft/seed0": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 31570.41796875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.002980070776680946,
+   "frac_rows_gt_6": 0.0018625442354255914,
+   "frac_rows_gt_10": 0.0016762898118830322,
+   "frac_rows_gt_100": 0.0016762898118830322
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 15215.603515625,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.24177777777777779,
+   "frac_rows_gt_6": 0.232,
+   "frac_rows_gt_10": 0.21688888888888888,
+   "frac_rows_gt_100": 0.10822222222222222
+  },
+  "disp": {
+   "n_rows": 5355,
+   "max_abs": 49.15619659423828,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.10830999066293184,
+   "frac_rows_gt_6": 0.03454715219421102,
+   "frac_rows_gt_10": 0.009523809523809525,
+   "frac_rows_gt_100": 0.0
+  },
+  "card": {
+   "n_rows": 895,
+   "max_abs": 5401.3818359375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.00782122905027933,
+   "frac_rows_gt_6": 0.0022346368715083797,
+   "frac_rows_gt_10": 0.0022346368715083797,
+   "frac_rows_gt_100": 0.0022346368715083797
+  },
+  "loan": {
+   "n_rows": 679,
+   "max_abs": 56284.3203125,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.5213549337260678,
+   "frac_rows_gt_6": 0.49337260677466865,
+   "frac_rows_gt_10": 0.4889543446244477,
+   "frac_rows_gt_100": 0.4845360824742268
+  },
+  "order": {
+   "n_rows": 6442,
+   "max_abs": 21954.78125,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.3210183172927662,
+   "frac_rows_gt_6": 0.29571561626823967,
+   "frac_rows_gt_10": 0.2665321328779882,
+   "frac_rows_gt_100": 0.23564110524681775
+  },
+  "trans": {
+   "n_rows": 1052012,
+   "max_abs": 34936.02734375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.2043474789260959,
+   "frac_rows_gt_6": 0.16723953719159096,
+   "frac_rows_gt_10": 0.12036934939905629,
+   "frac_rows_gt_100": 0.04697094709946274
+  },
+  "_mtime": 1791771982.814242,
+  "_path": "/storage/s25017/AMEX/java_d_degft/experiments/GRDM_BERKA_DEGREE_CONDITIONED_FINETUNE/workspace/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "california/original/seed0": {
+  "household": {
+   "n_rows": 554503,
+   "max_abs": 268.86187744140625,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0014265026519243358,
+   "frac_rows_gt_6": 1.8034167533809556e-05,
+   "frac_rows_gt_10": 7.213667013523822e-06,
+   "frac_rows_gt_100": 3.606833506761911e-06
+  },
+  "individual": {
+   "n_rows": 1522333,
+   "max_abs": 9.498302459716797,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.00023976357341002263,
+   "frac_rows_gt_6": 2.2991027587262445e-05,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "_mtime": 1791655272.0727243,
+  "_path": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/california/paper_repro/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "california/ft_agg/seed0": {
+  "household": {
+   "n_rows": 554503,
+   "max_abs": 696.046875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0009864689640993827,
+   "frac_rows_gt_6": 9.017083766904778e-06,
+   "frac_rows_gt_10": 7.213667013523822e-06,
+   "frac_rows_gt_100": 3.606833506761911e-06
+  },
+  "individual": {
+   "n_rows": 1522333,
+   "max_abs": 2766.570556640625,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.00019706595074796382,
+   "frac_rows_gt_6": 3.284432512466064e-05,
+   "frac_rows_gt_10": 1.3137730049864254e-05,
+   "frac_rows_gt_100": 1.3137730049864255e-06
+  },
+  "_mtime": 1791767367.205264,
+  "_path": "/storage/s25017/AMEX/java_d-calagg-ft/experiments/GRDM_CALIFORNIA_AGGREGATE_CONDITIONED_FINETUNE/runs/agg/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "california/ft_control/seed0": {
+  "household": {
+   "n_rows": 554503,
+   "max_abs": 1365.6646728515625,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0011181183870961925,
+   "frac_rows_gt_6": 1.62307507804286e-05,
+   "frac_rows_gt_10": 5.410250260142867e-06,
+   "frac_rows_gt_100": 3.606833506761911e-06
+  },
+  "individual": {
+   "n_rows": 1522333,
+   "max_abs": 43.03273010253906,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.00019969349675793668,
+   "frac_rows_gt_6": 3.350121162715385e-05,
+   "frac_rows_gt_10": 3.153055211967421e-05,
+   "frac_rows_gt_100": 0.0
+  },
+  "_mtime": 1791765384.8665662,
+  "_path": "/storage/s25017/AMEX/java_d-calagg-ft/experiments/GRDM_CALIFORNIA_AGGREGATE_CONDITIONED_FINETUNE/runs/control/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/original/seed1": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 2076.836669921875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.002421307506053269,
+   "frac_rows_gt_6": 0.00018625442354255913,
+   "frac_rows_gt_10": 0.00018625442354255913,
+   "frac_rows_gt_100": 0.00018625442354255913
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 4176.671875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.05511111111111111,
+   "frac_rows_gt_6": 0.0044444444444444444,
+   "frac_rows_gt_10": 0.0015555555555555555,
+   "frac_rows_gt_100": 0.0011111111111111111
+  },
+  "disp": {
+   "n_rows": 5369,
+   "max_abs": 14.163739204406738,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.001303780964797914,
+   "frac_rows_gt_6": 0.0007450176941702365,
+   "frac_rows_gt_10": 0.00037250884708511827,
+   "frac_rows_gt_100": 0.0
+  },
+  "card": {
+   "n_rows": 876,
+   "max_abs": 14752.529296875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0045662100456621,
+   "frac_rows_gt_6": 0.0045662100456621,
+   "frac_rows_gt_10": 0.0045662100456621,
+   "frac_rows_gt_100": 0.0045662100456621
+  },
+  "loan": {
+   "n_rows": 658,
+   "max_abs": 7950.74462890625,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.022796352583586626,
+   "frac_rows_gt_6": 0.0121580547112462,
+   "frac_rows_gt_10": 0.010638297872340425,
+   "frac_rows_gt_100": 0.010638297872340425
+  },
+  "order": {
+   "n_rows": 6420,
+   "max_abs": 341.60614013671875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0014018691588785046,
+   "frac_rows_gt_6": 0.0012461059190031153,
+   "frac_rows_gt_10": 0.0012461059190031153,
+   "frac_rows_gt_100": 0.000778816199376947
+  },
+  "trans": {
+   "n_rows": 1053059,
+   "max_abs": 686.1890258789062,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.00031527198381097355,
+   "frac_rows_gt_6": 0.0001481398478147948,
+   "frac_rows_gt_10": 7.501953831646659e-05,
+   "frac_rows_gt_100": 4.463187722625228e-05
+  },
+  "_mtime": 1791738759.388151,
+  "_path": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/berka/paper_repro/seed_1/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/aggft_joint/seed1": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 6.868554592132568,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.005028869435649097,
+   "frac_rows_gt_6": 0.0005587632706276774,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 6789.94140625,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.6202222222222222,
+   "frac_rows_gt_6": 0.5315555555555556,
+   "frac_rows_gt_10": 0.4091111111111111,
+   "frac_rows_gt_100": 0.1328888888888889
+  },
+  "disp": {
+   "n_rows": 5369,
+   "max_abs": 67.88275146484375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.06779661016949153,
+   "frac_rows_gt_6": 0.04935742223877817,
+   "frac_rows_gt_10": 0.03855466567330974,
+   "frac_rows_gt_100": 0.0
+  },
+  "card": {
+   "n_rows": 876,
+   "max_abs": 6.027195930480957,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0045662100456621,
+   "frac_rows_gt_6": 0.001141552511415525,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "loan": {
+   "n_rows": 658,
+   "max_abs": 47792.05078125,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.6306990881458967,
+   "frac_rows_gt_6": 0.5319148936170213,
+   "frac_rows_gt_10": 0.46656534954407297,
+   "frac_rows_gt_100": 0.4072948328267477
+  },
+  "order": {
+   "n_rows": 6420,
+   "max_abs": 24471.962890625,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.3160436137071651,
+   "frac_rows_gt_6": 0.27087227414330217,
+   "frac_rows_gt_10": 0.1883177570093458,
+   "frac_rows_gt_100": 0.11604361370716511
+  },
+  "trans": {
+   "n_rows": 1053059,
+   "max_abs": 6870.5185546875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.6884818419480769,
+   "frac_rows_gt_6": 0.6460150855745025,
+   "frac_rows_gt_10": 0.42584128714535463,
+   "frac_rows_gt_100": 0.12315264386895701
+  },
+  "_mtime": 1791787945.3692245,
+  "_path": "/storage/s25017/AMEX/java_d-aggft/experiments/GRDM_BERKA_AGGREGATE_CONDITIONED_FINETUNE/runs/same_spec/seed_1/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/degft/seed1": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 6.493052005767822,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.002421307506053269,
+   "frac_rows_gt_6": 0.00018625442354255913,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 9171.044921875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.19311111111111112,
+   "frac_rows_gt_6": 0.174,
+   "frac_rows_gt_10": 0.15,
+   "frac_rows_gt_100": 0.054
+  },
+  "disp": {
+   "n_rows": 5369,
+   "max_abs": 36.10289764404297,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.027193145837213634,
+   "frac_rows_gt_6": 0.01080275656546843,
+   "frac_rows_gt_10": 0.006146395976904451,
+   "frac_rows_gt_100": 0.0
+  },
+  "card": {
+   "n_rows": 876,
+   "max_abs": 777.5908203125,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.001141552511415525,
+   "frac_rows_gt_6": 0.001141552511415525,
+   "frac_rows_gt_10": 0.001141552511415525,
+   "frac_rows_gt_100": 0.001141552511415525
+  },
+  "loan": {
+   "n_rows": 658,
+   "max_abs": 63343.26953125,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.5288753799392097,
+   "frac_rows_gt_6": 0.5045592705167173,
+   "frac_rows_gt_10": 0.5045592705167173,
+   "frac_rows_gt_100": 0.5015197568389058
+  },
+  "order": {
+   "n_rows": 6420,
+   "max_abs": 14098.9912109375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.20576323987538941,
+   "frac_rows_gt_6": 0.19065420560747665,
+   "frac_rows_gt_10": 0.16884735202492213,
+   "frac_rows_gt_100": 0.1426791277258567
+  },
+  "trans": {
+   "n_rows": 1053059,
+   "max_abs": 18283.318359375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.1085000935370193,
+   "frac_rows_gt_6": 0.08413393741471276,
+   "frac_rows_gt_10": 0.05979816895349643,
+   "frac_rows_gt_100": 0.03252619273943815
+  },
+  "_mtime": 1791772388.6863532,
+  "_path": "/storage/s25017/AMEX/java_d_degft/experiments/GRDM_BERKA_DEGREE_CONDITIONED_FINETUNE/workspace/seed_1/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "california/original/seed1": {
+  "household": {
+   "n_rows": 554503,
+   "max_abs": 41.750308990478516,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.000975648463579097,
+   "frac_rows_gt_6": 3.606833506761911e-06,
+   "frac_rows_gt_10": 1.8034167533809555e-06,
+   "frac_rows_gt_100": 0.0
+  },
+  "individual": {
+   "n_rows": 1521820,
+   "max_abs": 12584.7490234375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0001550774730257192,
+   "frac_rows_gt_6": 5.2568634923972616e-06,
+   "frac_rows_gt_10": 6.571079365496577e-07,
+   "frac_rows_gt_100": 6.571079365496577e-07
+  },
+  "_mtime": 1791693529.9044752,
+  "_path": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/california/paper_repro/seed_1/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "california/ft_agg/seed1": {
+  "household": {
+   "n_rows": 554503,
+   "max_abs": 19544.693359375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0006852983662847631,
+   "frac_rows_gt_6": 7.213667013523822e-06,
+   "frac_rows_gt_10": 1.8034167533809555e-06,
+   "frac_rows_gt_100": 1.8034167533809555e-06
+  },
+  "individual": {
+   "n_rows": 1521820,
+   "max_abs": 61.51184844970703,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0002549578793812672,
+   "frac_rows_gt_6": 1.379926666754281e-05,
+   "frac_rows_gt_10": 6.5710793654965765e-06,
+   "frac_rows_gt_100": 0.0
+  },
+  "_mtime": 1791767430.0563643,
+  "_path": "/storage/s25017/AMEX/java_d-calagg-ft/experiments/GRDM_CALIFORNIA_AGGREGATE_CONDITIONED_FINETUNE/runs/agg/seed_1/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "california/ft_control/seed1": {
+  "household": {
+   "n_rows": 554503,
+   "max_abs": 7.890172958374023,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0008439990405822872,
+   "frac_rows_gt_6": 3.606833506761911e-06,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "individual": {
+   "n_rows": 1521820,
+   "max_abs": 8.325632095336914,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.00012945026350028255,
+   "frac_rows_gt_6": 7.885295238595891e-06,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "_mtime": 1791764691.4016457,
+  "_path": "/storage/s25017/AMEX/java_d-calagg-ft/experiments/GRDM_CALIFORNIA_AGGREGATE_CONDITIONED_FINETUNE/runs/control/seed_1/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/original/seed2": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 5.474510192871094,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0022350530825107095,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 16094.986328125,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.056,
+   "frac_rows_gt_6": 0.014444444444444444,
+   "frac_rows_gt_10": 0.0077777777777777776,
+   "frac_rows_gt_100": 0.007333333333333333
+  },
+  "disp": {
+   "n_rows": 5369,
+   "max_abs": 26.014528274536133,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.007263922518159807,
+   "frac_rows_gt_6": 0.006891413671074688,
+   "frac_rows_gt_10": 0.006146395976904451,
+   "frac_rows_gt_100": 0.0
+  },
+  "card": {
+   "n_rows": 901,
+   "max_abs": 7.938294410705566,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.00776914539400666,
+   "frac_rows_gt_6": 0.0011098779134295228,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "loan": {
+   "n_rows": 687,
+   "max_abs": 2298.72607421875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.03056768558951965,
+   "frac_rows_gt_6": 0.013100436681222707,
+   "frac_rows_gt_10": 0.011644832605531296,
+   "frac_rows_gt_100": 0.010189228529839884
+  },
+  "order": {
+   "n_rows": 6443,
+   "max_abs": 2326.868896484375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.011330125717833307,
+   "frac_rows_gt_6": 0.011330125717833307,
+   "frac_rows_gt_10": 0.011330125717833307,
+   "frac_rows_gt_100": 0.011330125717833307
+  },
+  "trans": {
+   "n_rows": 1070888,
+   "max_abs": 1882.658935546875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0010888160106379005,
+   "frac_rows_gt_6": 0.0010430595916659819,
+   "frac_rows_gt_10": 0.0008964522900620793,
+   "frac_rows_gt_100": 0.0008422916308708287
+  },
+  "_mtime": 1791745233.5872664,
+  "_path": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/berka/paper_repro/seed_2/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/aggft_joint/seed2": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 2352.81005859375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.013410318495064258,
+   "frac_rows_gt_6": 0.003725088470851183,
+   "frac_rows_gt_10": 0.001490035388340473,
+   "frac_rows_gt_100": 0.0009312721177127957
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 12848.4990234375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.758,
+   "frac_rows_gt_6": 0.7273333333333334,
+   "frac_rows_gt_10": 0.6217777777777778,
+   "frac_rows_gt_100": 0.286
+  },
+  "disp": {
+   "n_rows": 5369,
+   "max_abs": 106.05987548828125,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.23803315328739058,
+   "frac_rows_gt_6": 0.20990873533246415,
+   "frac_rows_gt_10": 0.11920283106723785,
+   "frac_rows_gt_100": 0.00018625442354255913
+  },
+  "card": {
+   "n_rows": 901,
+   "max_abs": 1848.7440185546875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.03107658157602664,
+   "frac_rows_gt_6": 0.005549389567147614,
+   "frac_rows_gt_10": 0.0011098779134295228,
+   "frac_rows_gt_100": 0.0011098779134295228
+  },
+  "loan": {
+   "n_rows": 687,
+   "max_abs": 37733.59375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.7059679767103348,
+   "frac_rows_gt_6": 0.6521106259097526,
+   "frac_rows_gt_10": 0.5807860262008734,
+   "frac_rows_gt_100": 0.4192139737991266
+  },
+  "order": {
+   "n_rows": 6443,
+   "max_abs": 29653.298828125,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.523048269439702,
+   "frac_rows_gt_6": 0.47446841533447154,
+   "frac_rows_gt_10": 0.37110041905944435,
+   "frac_rows_gt_100": 0.18671426354182835
+  },
+  "trans": {
+   "n_rows": 1070888,
+   "max_abs": 5929.7216796875,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.7573565116053219,
+   "frac_rows_gt_6": 0.7193385302664704,
+   "frac_rows_gt_10": 0.5830124158642174,
+   "frac_rows_gt_100": 0.2055574439157036
+  },
+  "_mtime": 1791787969.0472956,
+  "_path": "/storage/s25017/AMEX/java_d-aggft/experiments/GRDM_BERKA_AGGREGATE_CONDITIONED_FINETUNE/runs/same_spec/seed_2/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/degft/seed2": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 1659.585693359375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.007263922518159807,
+   "frac_rows_gt_6": 0.0020487986589681506,
+   "frac_rows_gt_10": 0.001490035388340473,
+   "frac_rows_gt_100": 0.0007450176941702365
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 18365.1015625,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.2577777777777778,
+   "frac_rows_gt_6": 0.2477777777777778,
+   "frac_rows_gt_10": 0.23044444444444445,
+   "frac_rows_gt_100": 0.12511111111111112
+  },
+  "disp": {
+   "n_rows": 5369,
+   "max_abs": 80.00641632080078,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.1439746693983982,
+   "frac_rows_gt_6": 0.0825107096293537,
+   "frac_rows_gt_10": 0.057925125721735894,
+   "frac_rows_gt_100": 0.0
+  },
+  "card": {
+   "n_rows": 901,
+   "max_abs": 7964.75,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.01997780244173141,
+   "frac_rows_gt_6": 0.009988901220865706,
+   "frac_rows_gt_10": 0.008879023307436182,
+   "frac_rows_gt_100": 0.008879023307436182
+  },
+  "loan": {
+   "n_rows": 687,
+   "max_abs": 46344.58984375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.5414847161572053,
+   "frac_rows_gt_6": 0.529839883551674,
+   "frac_rows_gt_10": 0.5269286754002911,
+   "frac_rows_gt_100": 0.5152838427947598
+  },
+  "order": {
+   "n_rows": 6443,
+   "max_abs": 17122.646484375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.3208132857364582,
+   "frac_rows_gt_6": 0.30032593512338973,
+   "frac_rows_gt_10": 0.27037094521185784,
+   "frac_rows_gt_100": 0.23281080242123234
+  },
+  "trans": {
+   "n_rows": 1070888,
+   "max_abs": 11468.005859375,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.2022013506547837,
+   "frac_rows_gt_6": 0.18123650652542564,
+   "frac_rows_gt_10": 0.159624535899179,
+   "frac_rows_gt_100": 0.10977151672257043
+  },
+  "_mtime": 1791769970.7648263,
+  "_path": "/storage/s25017/AMEX/java_d_degft/experiments/GRDM_BERKA_DEGREE_CONDITIONED_FINETUNE/workspace/seed_2/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "california/original/seed2": {
+  "household": {
+   "n_rows": 554503,
+   "max_abs": 5.852571964263916,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0013940411503634786,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "individual": {
+   "n_rows": 1521972,
+   "max_abs": 6.5992751121521,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.00018068663549657943,
+   "frac_rows_gt_6": 3.942253865379915e-06,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "_mtime": 1791691601.713359,
+  "_path": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/california/paper_repro/seed_2/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "california/ft_agg/seed2": {
+  "household": {
+   "n_rows": 554503,
+   "max_abs": 5.818465232849121,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.001011716798646716,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "individual": {
+   "n_rows": 1521972,
+   "max_abs": 7.638702869415283,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0001728021277658196,
+   "frac_rows_gt_6": 1.051267697434644e-05,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "_mtime": 1791767200.4222276,
+  "_path": "/storage/s25017/AMEX/java_d-calagg-ft/experiments/GRDM_CALIFORNIA_AGGREGATE_CONDITIONED_FINETUNE/runs/agg/seed_2/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "california/ft_control/seed2": {
+  "household": {
+   "n_rows": 554503,
+   "max_abs": 6.130465030670166,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0011271354708630972,
+   "frac_rows_gt_6": 3.606833506761911e-06,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "individual": {
+   "n_rows": 1521972,
+   "max_abs": 6.758372783660889,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0001202387428940874,
+   "frac_rows_gt_6": 3.942253865379915e-06,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "_mtime": 1791764595.2010303,
+  "_path": "/storage/s25017/AMEX/java_d-calagg-ft/experiments/GRDM_CALIFORNIA_AGGREGATE_CONDITIONED_FINETUNE/runs/control/seed_2/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/original_E0a_column/seed0": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "disp": {
+   "n_rows": 5355,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "card": {
+   "n_rows": 895,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "loan": {
+   "n_rows": 679,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "order": {
+   "n_rows": 6442,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "trans": {
+   "n_rows": 1052012,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "_mtime": 1791933574.6068935,
+  "_path": "/storage/s25017/AMEX/java_d/results/stage2/e0a/original_column/workspace/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/aggft_E0a_column/seed0": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "disp": {
+   "n_rows": 5355,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "card": {
+   "n_rows": 895,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "loan": {
+   "n_rows": 679,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "order": {
+   "n_rows": 6442,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "trans": {
+   "n_rows": 1052012,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "_mtime": 1791936717.7083333,
+  "_path": "/storage/s25017/AMEX/java_d/results/stage2/e0a/aggft_column/workspace/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ },
+ "berka/degft_E0a_column/seed0": {
+  "client": {
+   "n_rows": 5369,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "account": {
+   "n_rows": 4500,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "disp": {
+   "n_rows": 5355,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "card": {
+   "n_rows": 895,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "loan": {
+   "n_rows": 679,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "order": {
+   "n_rows": 6442,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "trans": {
+   "n_rows": 1052012,
+   "max_abs": 5.199337482452393,
+   "nonfinite_rows": 0,
+   "frac_rows_gt_5.3": 0.0,
+   "frac_rows_gt_6": 0.0,
+   "frac_rows_gt_10": 0.0,
+   "frac_rows_gt_100": 0.0
+  },
+  "_mtime": 1791935605.4388118,
+  "_path": "/storage/s25017/AMEX/java_d/results/stage2/e0a/degft_column/workspace/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+ }
+}

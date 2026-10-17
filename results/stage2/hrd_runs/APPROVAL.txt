@@ -1,0 +1,8 @@
+approved by user 2026-10-15 14:28 IST: 'go pilot + PUMA in parallel'; launched 2026-10-15 14:28:55
+Step 1 (x0-clipped resample of hrd_d1, hrd_d2 seed 0) approved by user 2026-10-15 ~20:05 ('start step 1'); launched 2026-10-15 20:10:00. Secondary/sensitivity analysis; pre-registered 2% trigger not met (disclosed in phase_d_pilot_results.md §6).
+Step 2 (hrd_d2_nolabel, hrd_d2_meanonly; seed 0; x0-clipped sampling) approved by user 2026-10-15 ~21:40 ('Yes start'); launched 2026-10-15 21:56:09.
+Diagnostic teacher-forced-parent sampling of hrd_d2_nolabel seed 0 (user 'do', 2026-10-16 10:39); launched 2026-10-16 ~10:45 on GPU0, pid 1272313, tag _tfparent
+Step 3 (hrd_d2_nolabel_sdrop, state dropout 0.3, seed 0, GPU2) approved by user 2026-10-16 ~11:45 ('yes'); launched 2026-10-16 11:47:30
+Berka HRD pilot (berka_hrd_h0h GPU1, berka_hrd_d2 GPU5; seed 0) launched 2026-10-16 13:33:20 after user 'run' (2026-10-16 ~13:15)
+Seeds 1-2 of berka_hrd_h0h/berka_hrd_d2 launched 2026-10-16 13:35:00 on GPUs 7 3 2 4 (user: 'run parallely if needed')
+h0h seed1 moved GPU7->GPU6 2026-10-16 16:02:50 (user request)

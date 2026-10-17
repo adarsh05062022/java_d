@@ -1,0 +1,52 @@
+{
+ "dataset": "california",
+ "data_path": "data/california/train",
+ "parent": "household",
+ "child": "individual",
+ "baseline_workspace": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/california/paper_repro/seed_{seed}",
+ "model": {
+  "dim_t": 128,
+  "d_layers": [
+   512,
+   1024,
+   1024,
+   1024,
+   1024,
+   512
+  ],
+  "dropout": 0.0,
+  "gnn_aggr": "sum",
+  "n_layers": 1
+ },
+ "diffusion": {
+  "num_timesteps": 2000,
+  "scheduler": "cosine"
+ },
+ "trainer": {
+  "lr": 0.0006,
+  "weight_decay": 1e-05,
+  "steps": 100000,
+  "groups_per_batch": 1094,
+  "ema_rate": 0.999,
+  "log_every": 500,
+  "ckpt_every": 2000
+ },
+ "name": "hrd_d2_meanonly",
+ "description": "Step 2b: hrd_d2 with a mean-only entity state (15 member columns x mean = 15 dims). Tests whether a smaller summary reduces over-coupling. Sampled with x0 clipping (adopted after step 1).",
+ "hrd": {
+  "entity_state": true,
+  "size_conditioning": true,
+  "sibling_attention": true,
+  "attention_heads": 4,
+  "timestep_mode": "hierarchical",
+  "state_weight": 1.0,
+  "state_stats": [
+   "mean"
+  ]
+ },
+ "sampler": {
+  "clip_x0": 5.199337582290661
+ },
+ "_seed": 0,
+ "_steps_override": null
+}

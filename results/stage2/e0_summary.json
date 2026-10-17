@@ -1,0 +1,273 @@
+{
+ "e0a": {
+  "original_column": {
+   "fidelity_clipped": null,
+   "out_of_range_clipped": null,
+   "out_of_range_unclipped_seed0": {
+    "client": {
+     "n_rows": 5369,
+     "max_abs": 39668.10546875,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.003911342894393742,
+     "frac_rows_gt_6": 0.0022350530825107095,
+     "frac_rows_gt_10": 0.0022350530825107095,
+     "frac_rows_gt_100": 0.0022350530825107095
+    },
+    "account": {
+     "n_rows": 4500,
+     "max_abs": 21928.15625,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.029777777777777778,
+     "frac_rows_gt_6": 0.008888888888888889,
+     "frac_rows_gt_10": 0.0064444444444444445,
+     "frac_rows_gt_100": 0.0044444444444444444
+    },
+    "disp": {
+     "n_rows": 5355,
+     "max_abs": 36.632171630859375,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.004481792717086834,
+     "frac_rows_gt_6": 0.004295051353874884,
+     "frac_rows_gt_10": 0.0035480859010270775,
+     "frac_rows_gt_100": 0.0
+    },
+    "card": {
+     "n_rows": 895,
+     "max_abs": 5.626794815063477,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.008938547486033519,
+     "frac_rows_gt_6": 0.0,
+     "frac_rows_gt_10": 0.0,
+     "frac_rows_gt_100": 0.0
+    },
+    "loan": {
+     "n_rows": 679,
+     "max_abs": 5702.07763671875,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.03829160530191458,
+     "frac_rows_gt_6": 0.01914580265095729,
+     "frac_rows_gt_10": 0.01914580265095729,
+     "frac_rows_gt_100": 0.017673048600883652
+    },
+    "order": {
+     "n_rows": 6442,
+     "max_abs": 5803.935546875,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.008227258615336852,
+     "frac_rows_gt_6": 0.00776156473144986,
+     "frac_rows_gt_10": 0.007606333436820863,
+     "frac_rows_gt_100": 0.0058987891959018934
+    },
+    "trans": {
+     "n_rows": 1052012,
+     "max_abs": 3074.156494140625,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.0013830640715124921,
+     "frac_rows_gt_6": 0.0007015129104991197,
+     "frac_rows_gt_10": 0.0005817424135846359,
+     "frac_rows_gt_100": 0.0005674840210948164
+    },
+    "_mtime": 1791732887.2497306,
+    "_path": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/berka/paper_repro/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+   },
+   "x0clip_stats": null,
+   "unclipped_fidelity_source": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/berka/paper_repro/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/eval_result.pkl"
+  },
+  "aggft_column": {
+   "fidelity_clipped": null,
+   "out_of_range_clipped": null,
+   "out_of_range_unclipped_seed0": {
+    "client": {
+     "n_rows": 5369,
+     "max_abs": 23212.224609375,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.002607561929595828,
+     "frac_rows_gt_6": 0.0016762898118830322,
+     "frac_rows_gt_10": 0.0016762898118830322,
+     "frac_rows_gt_100": 0.001490035388340473
+    },
+    "account": {
+     "n_rows": 4500,
+     "max_abs": 12271.2060546875,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.49777777777777776,
+     "frac_rows_gt_6": 0.4171111111111111,
+     "frac_rows_gt_10": 0.33444444444444443,
+     "frac_rows_gt_100": 0.16622222222222222
+    },
+    "disp": {
+     "n_rows": 5355,
+     "max_abs": 179.0305633544922,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.1103641456582633,
+     "frac_rows_gt_6": 0.06890756302521009,
+     "frac_rows_gt_10": 0.04649859943977591,
+     "frac_rows_gt_100": 0.00018674136321195143
+    },
+    "card": {
+     "n_rows": 895,
+     "max_abs": 18988.1484375,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.04692737430167598,
+     "frac_rows_gt_6": 0.0022346368715083797,
+     "frac_rows_gt_10": 0.0011173184357541898,
+     "frac_rows_gt_100": 0.0011173184357541898
+    },
+    "loan": {
+     "n_rows": 679,
+     "max_abs": 37180.86328125,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.5625920471281296,
+     "frac_rows_gt_6": 0.4491899852724595,
+     "frac_rows_gt_10": 0.41384388807069217,
+     "frac_rows_gt_100": 0.374079528718704
+    },
+    "order": {
+     "n_rows": 6442,
+     "max_abs": 24351.90234375,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.2932319155541757,
+     "frac_rows_gt_6": 0.2514746972989755,
+     "frac_rows_gt_10": 0.21220117975783917,
+     "frac_rows_gt_100": 0.15166097485253027
+    },
+    "trans": {
+     "n_rows": 1052012,
+     "max_abs": 3149.82177734375,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.6975690391364358,
+     "frac_rows_gt_6": 0.6559792093626309,
+     "frac_rows_gt_10": 0.5029961635418607,
+     "frac_rows_gt_100": 0.17021859066246392
+    },
+    "_mtime": 1791787649.0495453,
+    "_path": "/storage/s25017/AMEX/java_d-aggft/experiments/GRDM_BERKA_AGGREGATE_CONDITIONED_FINETUNE/runs/same_spec/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+   },
+   "x0clip_stats": null,
+   "unclipped_fidelity_source": "/storage/s25017/AMEX/java_d-aggft/experiments/GRDM_BERKA_AGGREGATE_CONDITIONED_FINETUNE/metrics/evaluation_ft_same_spec_seed0_final.json"
+  },
+  "degft_column": {
+   "fidelity_clipped": null,
+   "out_of_range_clipped": null,
+   "out_of_range_unclipped_seed0": {
+    "client": {
+     "n_rows": 5369,
+     "max_abs": 31570.41796875,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.002980070776680946,
+     "frac_rows_gt_6": 0.0018625442354255914,
+     "frac_rows_gt_10": 0.0016762898118830322,
+     "frac_rows_gt_100": 0.0016762898118830322
+    },
+    "account": {
+     "n_rows": 4500,
+     "max_abs": 15215.603515625,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.24177777777777779,
+     "frac_rows_gt_6": 0.232,
+     "frac_rows_gt_10": 0.21688888888888888,
+     "frac_rows_gt_100": 0.10822222222222222
+    },
+    "disp": {
+     "n_rows": 5355,
+     "max_abs": 49.15619659423828,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.10830999066293184,
+     "frac_rows_gt_6": 0.03454715219421102,
+     "frac_rows_gt_10": 0.009523809523809525,
+     "frac_rows_gt_100": 0.0
+    },
+    "card": {
+     "n_rows": 895,
+     "max_abs": 5401.3818359375,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.00782122905027933,
+     "frac_rows_gt_6": 0.0022346368715083797,
+     "frac_rows_gt_10": 0.0022346368715083797,
+     "frac_rows_gt_100": 0.0022346368715083797
+    },
+    "loan": {
+     "n_rows": 679,
+     "max_abs": 56284.3203125,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.5213549337260678,
+     "frac_rows_gt_6": 0.49337260677466865,
+     "frac_rows_gt_10": 0.4889543446244477,
+     "frac_rows_gt_100": 0.4845360824742268
+    },
+    "order": {
+     "n_rows": 6442,
+     "max_abs": 21954.78125,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.3210183172927662,
+     "frac_rows_gt_6": 0.29571561626823967,
+     "frac_rows_gt_10": 0.2665321328779882,
+     "frac_rows_gt_100": 0.23564110524681775
+    },
+    "trans": {
+     "n_rows": 1052012,
+     "max_abs": 34936.02734375,
+     "nonfinite_rows": 0,
+     "frac_rows_gt_5.3": 0.2043474789260959,
+     "frac_rows_gt_6": 0.16723953719159096,
+     "frac_rows_gt_10": 0.12036934939905629,
+     "frac_rows_gt_100": 0.04697094709946274
+    },
+    "_mtime": 1791771982.814242,
+    "_path": "/storage/s25017/AMEX/java_d_degft/experiments/GRDM_BERKA_DEGREE_CONDITIONED_FINETUNE/workspace/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/node_type_to_X_syn.pkl"
+   },
+   "x0clip_stats": null,
+   "unclipped_fidelity_source": "/storage/s25017/AMEX/java_d_degft/experiments/GRDM_BERKA_DEGREE_CONDITIONED_FINETUNE/metrics/fidelity_seed0.json"
+  }
+ },
+ "e0b": {
+  "berka_original_realstruct__berka_card_ownership": {
+   "real": {
+    "mean": 0.8739133895876453,
+    "sd_over_xgb": 0.001273836760285374,
+    "n": 5
+   },
+   "synth": {
+    "mean": 0.6160993472377011,
+    "sd_over_xgb": 0.009618855171146542,
+    "n": 5
+   }
+  },
+  "berka_original_realstruct__berka_loan_default": {
+   "real": {
+    "mean": 0.938573407202216,
+    "sd_over_xgb": 0.004238543974542807,
+    "n": 5
+   },
+   "synth": {
+    "mean": 0.6484072022160664,
+    "sd_over_xgb": 0.04713752427097667,
+    "n": 5
+   }
+  },
+  "berka_original_sampledstruct__berka_card_ownership": {
+   "real": {
+    "mean": 0.8739133895876453,
+    "sd_over_xgb": 0.001273836760285374,
+    "n": 5
+   },
+   "synth": {
+    "mean": 0.5908645120203789,
+    "sd_over_xgb": 0.028996829543797044,
+    "n": 5
+   }
+  },
+  "berka_original_sampledstruct__berka_loan_default": {
+   "real": {
+    "mean": 0.938573407202216,
+    "sd_over_xgb": 0.004238543974542807,
+    "n": 5
+   },
+   "synth": {
+    "mean": 0.5828254847645429,
+    "sd_over_xgb": 0.06837372335466496,
+    "n": 5
+   }
+  }
+ }
+}

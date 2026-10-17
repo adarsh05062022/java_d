@@ -1,0 +1,600 @@
+{
+  "dataset": "california",
+  "leakage_caveat": false,
+  "records": [
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real",
+      "grdm_seed": null,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 1521638,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8761567773543821,
+        "f1_macro": 0.6849098934535146,
+        "f1_weighted": 0.8616910981857303,
+        "roc_auc_ovr": 0.9369602417101097
+      },
+      "seconds": 405.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real",
+      "grdm_seed": null,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 1521638,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8762514496698303,
+        "f1_macro": 0.6849108377215085,
+        "f1_weighted": 0.8617801028394647,
+        "roc_auc_ovr": 0.9370672903910214
+      },
+      "seconds": 410.8
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real",
+      "grdm_seed": null,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 1521638,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8759496816643393,
+        "f1_macro": 0.6851674298570694,
+        "f1_weighted": 0.8615088083647184,
+        "roc_auc_ovr": 0.9371173211992541
+      },
+      "seconds": 404.4
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "accuracy": 0.873381695107808,
+        "f1_macro": 0.6749998995999562,
+        "f1_weighted": 0.8578603264397382,
+        "roc_auc_ovr": 0.9310808309544135
+      },
+      "seconds": 550.3
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "accuracy": 0.873298856831791,
+        "f1_macro": 0.675448082175379,
+        "f1_weighted": 0.8578559895658657,
+        "roc_auc_ovr": 0.9309702039629728
+      },
+      "seconds": 591.4
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "accuracy": 0.8733935291472391,
+        "f1_macro": 0.674832049152449,
+        "f1_weighted": 0.857844194729993,
+        "roc_auc_ovr": 0.9309849652926362
+      },
+      "seconds": 567.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "mixed_25",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "accuracy": 0.8759082625263307,
+        "f1_macro": 0.683041993675112,
+        "f1_weighted": 0.8612559810069311,
+        "roc_auc_ovr": 0.937170472355078
+      },
+      "seconds": 569.0
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "mixed_25",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "accuracy": 0.8759378476249083,
+        "f1_macro": 0.6822411504071136,
+        "f1_weighted": 0.861149923927604,
+        "roc_auc_ovr": 0.9370775028856096
+      },
+      "seconds": 560.8
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "mixed_25",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1902048,
+      "n_train_real": 1521638,
+      "n_train_syn": 380410,
+      "metrics": {
+        "accuracy": 0.8759200965657618,
+        "f1_macro": 0.6832018843851921,
+        "f1_weighted": 0.8612158639281075,
+        "roc_auc_ovr": 0.9371980099978412
+      },
+      "seconds": 547.3
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "mixed_50",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "accuracy": 0.8762869517881233,
+        "f1_macro": 0.6823976154135122,
+        "f1_weighted": 0.8614429020348886,
+        "roc_auc_ovr": 0.9370792109788452
+      },
+      "seconds": 701.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "mixed_50",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "accuracy": 0.8762514496698303,
+        "f1_macro": 0.6824311278854345,
+        "f1_weighted": 0.8614102479500542,
+        "roc_auc_ovr": 0.9370626160887207
+      },
+      "seconds": 757.5
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "mixed_50",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 2282457,
+      "n_train_real": 1521638,
+      "n_train_syn": 760819,
+      "metrics": {
+        "accuracy": 0.8761390262952357,
+        "f1_macro": 0.6822847427881263,
+        "f1_weighted": 0.8612729525949,
+        "roc_auc_ovr": 0.9371305115187024
+      },
+      "seconds": 744.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "mixed",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "accuracy": 0.876109441196658,
+        "f1_macro": 0.6818169220052623,
+        "f1_weighted": 0.8611681233343554,
+        "roc_auc_ovr": 0.9368048089979805
+      },
+      "seconds": 1063.4
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "mixed",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "accuracy": 0.8759319306051928,
+        "f1_macro": 0.6813650893037944,
+        "f1_weighted": 0.8609612797774989,
+        "roc_auc_ovr": 0.9367385781469952
+      },
+      "seconds": 1042.5
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "mixed",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 3043276,
+      "n_train_real": 1521638,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "accuracy": 0.8761804454332441,
+        "f1_macro": 0.6817606413831507,
+        "f1_weighted": 0.8612074332453797,
+        "roc_auc_ovr": 0.9368063412047578
+      },
+      "seconds": 1061.8
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real_50",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 760819,
+      "n_train_real": 760819,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8751863861210386,
+        "f1_macro": 0.6836100246090713,
+        "f1_weighted": 0.8607290059066742,
+        "roc_auc_ovr": 0.9354602347957025
+      },
+      "seconds": 239.0
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real_50",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 760819,
+      "n_train_real": 760819,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8750384606281508,
+        "f1_macro": 0.6836327215122048,
+        "f1_weighted": 0.8606611086813355,
+        "roc_auc_ovr": 0.9354064983564334
+      },
+      "seconds": 244.5
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real_50",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 760819,
+      "n_train_real": 760819,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8752218882393316,
+        "f1_macro": 0.6834534616070079,
+        "f1_weighted": 0.8607556466269163,
+        "roc_auc_ovr": 0.9354769649471919
+      },
+      "seconds": 230.5
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "blend_50",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 760819,
+      "n_train_syn": 760819,
+      "metrics": {
+        "accuracy": 0.8750502946675819,
+        "f1_macro": 0.6812634531368937,
+        "f1_weighted": 0.8601839973874128,
+        "roc_auc_ovr": 0.9353945439668535
+      },
+      "seconds": 550.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "blend_50",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 760819,
+      "n_train_syn": 760819,
+      "metrics": {
+        "accuracy": 0.8753875647913659,
+        "f1_macro": 0.6802272686216331,
+        "f1_weighted": 0.8603701711916575,
+        "roc_auc_ovr": 0.9355377934955937
+      },
+      "seconds": 556.5
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "blend_50",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 760819,
+      "n_train_syn": 760819,
+      "metrics": {
+        "accuracy": 0.8748787010958321,
+        "f1_macro": 0.6788628033353269,
+        "f1_weighted": 0.8597500510233645,
+        "roc_auc_ovr": 0.935762320687041
+      },
+      "seconds": 572.8
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real_25",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 380410,
+      "n_train_real": 380410,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8735296206006958,
+        "f1_macro": 0.6834749817218448,
+        "f1_weighted": 0.8592937915972899,
+        "roc_auc_ovr": 0.9327237230686927
+      },
+      "seconds": 129.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real_25",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 380410,
+      "n_train_real": 380410,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8734763674232563,
+        "f1_macro": 0.6829313661516241,
+        "f1_weighted": 0.8593275351806695,
+        "roc_auc_ovr": 0.93225457497475
+      },
+      "seconds": 127.0
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real_25",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 380410,
+      "n_train_real": 380410,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8734467823246788,
+        "f1_macro": 0.6830575009371331,
+        "f1_weighted": 0.8593171065778371,
+        "roc_auc_ovr": 0.9329918552451213
+      },
+      "seconds": 124.6
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "blend_25",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 380410,
+      "n_train_syn": 1141228,
+      "metrics": {
+        "accuracy": 0.8749911244704267,
+        "f1_macro": 0.6796884148043139,
+        "f1_weighted": 0.8599278321966443,
+        "roc_auc_ovr": 0.9339050740807243
+      },
+      "seconds": 554.4
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "blend_25",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 380410,
+      "n_train_syn": 1141228,
+      "metrics": {
+        "accuracy": 0.8747958628198149,
+        "f1_macro": 0.679125683699355,
+        "f1_weighted": 0.8596471076696192,
+        "roc_auc_ovr": 0.9343059546924318
+      },
+      "seconds": 540.8
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "blend_25",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 380410,
+      "n_train_syn": 1141228,
+      "metrics": {
+        "accuracy": 0.8750502946675819,
+        "f1_macro": 0.6787575607432088,
+        "f1_weighted": 0.8598083127141094,
+        "roc_auc_ovr": 0.9342740918548706
+      },
+      "seconds": 560.8
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real_75",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1141228,
+      "n_train_real": 1141228,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8755118222053916,
+        "f1_macro": 0.685389994196616,
+        "f1_weighted": 0.8611747435332638,
+        "roc_auc_ovr": 0.9365082954487292
+      },
+      "seconds": 391.5
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real_75",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1141228,
+      "n_train_real": 1141228,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8755650753828311,
+        "f1_macro": 0.6845736570120009,
+        "f1_weighted": 0.8611720269827883,
+        "roc_auc_ovr": 0.9365817027535474
+      },
+      "seconds": 409.5
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "real_75",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1141228,
+      "n_train_real": 1141228,
+      "n_train_syn": 0,
+      "metrics": {
+        "accuracy": 0.8755769094222622,
+        "f1_macro": 0.6847282746845812,
+        "f1_weighted": 0.8611842553832312,
+        "roc_auc_ovr": 0.9364501617574795
+      },
+      "seconds": 361.3
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "blend_75",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 1141228,
+      "n_train_syn": 380410,
+      "metrics": {
+        "accuracy": 0.8756952498165724,
+        "f1_macro": 0.6829668037564236,
+        "f1_weighted": 0.8609995257539415,
+        "roc_auc_ovr": 0.9364566781360113
+      },
+      "seconds": 542.5
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "blend_75",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 1141228,
+      "n_train_syn": 380410,
+      "metrics": {
+        "accuracy": 0.875760337033443,
+        "f1_macro": 0.6832526745907017,
+        "f1_weighted": 0.8610854033940776,
+        "roc_auc_ovr": 0.936679263091154
+      },
+      "seconds": 507.3
+    },
+    {
+      "dataset": "california",
+      "task": "california_empstat",
+      "kind": "multiclass",
+      "regime": "blend_75",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 1141228,
+      "n_train_syn": 380410,
+      "metrics": {
+        "accuracy": 0.8758845944474687,
+        "f1_macro": 0.6821994258602834,
+        "f1_weighted": 0.8610716213715827,
+        "roc_auc_ovr": 0.9364571939524016
+      },
+      "seconds": 489.8
+    }
+  ]
+}

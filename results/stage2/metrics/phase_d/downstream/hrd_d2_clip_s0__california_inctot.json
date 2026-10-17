@@ -1,0 +1,59 @@
+{
+  "dataset": "hrd_d2_clip_s0",
+  "base": "california",
+  "leakage_caveat": false,
+  "syn_dir": "/storage/s25017/AMEX/java_d/results/stage2/hrd_runs/hrd_d2/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0_clip",
+  "records": [
+    {
+      "dataset": "hrd_d2_clip_s0",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5293012544629343,
+        "rmse": 11.308211368561695,
+        "mae": 5.764755320462315
+      },
+      "seconds": 84.1
+    },
+    {
+      "dataset": "hrd_d2_clip_s0",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5292698348941134,
+        "rmse": 11.308588778953977,
+        "mae": 5.7659250011200065
+      },
+      "seconds": 57.1
+    },
+    {
+      "dataset": "hrd_d2_clip_s0",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5300646596206686,
+        "rmse": 11.299037507283263,
+        "mae": 5.7613279486324736
+      },
+      "seconds": 51.4
+    }
+  ]
+}

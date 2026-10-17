@@ -1,0 +1,53 @@
+{
+ "dataset": "california",
+ "data_path": "data/california/train",
+ "parent": "household",
+ "child": "individual",
+ "baseline_workspace": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/california/paper_repro/seed_{seed}",
+ "model": {
+  "dim_t": 128,
+  "d_layers": [
+   512,
+   1024,
+   1024,
+   1024,
+   1024,
+   512
+  ],
+  "dropout": 0.0,
+  "gnn_aggr": "sum",
+  "n_layers": 1
+ },
+ "diffusion": {
+  "num_timesteps": 2000,
+  "scheduler": "cosine"
+ },
+ "trainer": {
+  "lr": 0.0006,
+  "weight_decay": 1e-05,
+  "steps": 100000,
+  "groups_per_batch": 1094,
+  "ema_rate": 0.999,
+  "log_every": 500,
+  "ckpt_every": 2000
+ },
+ "name": "hrd_d2_nolabel",
+ "description": "Step 2a: hrd_d2 with the entity state built WITHOUT the downstream target columns INCTOT and EMPSTAT (13 member columns x mean,std = 26 dims). Tests whether members copy the household's income/employment summary. Sampled with x0 clipping (adopted after step 1).",
+ "hrd": {
+  "entity_state": true,
+  "size_conditioning": true,
+  "sibling_attention": true,
+  "attention_heads": 4,
+  "timestep_mode": "hierarchical",
+  "state_weight": 1.0,
+  "state_exclude_columns": [
+   "INCTOT",
+   "EMPSTAT"
+  ]
+ },
+ "sampler": {
+  "clip_x0": 5.199337582290661
+ },
+ "_seed": 0,
+ "_steps_override": 30
+}

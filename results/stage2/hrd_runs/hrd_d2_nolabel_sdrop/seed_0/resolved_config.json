@@ -1,0 +1,54 @@
+{
+ "dataset": "california",
+ "data_path": "data/california/train",
+ "parent": "household",
+ "child": "individual",
+ "baseline_workspace": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/california/paper_repro/seed_{seed}",
+ "model": {
+  "dim_t": 128,
+  "d_layers": [
+   512,
+   1024,
+   1024,
+   1024,
+   1024,
+   512
+  ],
+  "dropout": 0.0,
+  "gnn_aggr": "sum",
+  "n_layers": 1
+ },
+ "diffusion": {
+  "num_timesteps": 2000,
+  "scheduler": "cosine"
+ },
+ "trainer": {
+  "lr": 0.0006,
+  "weight_decay": 1e-05,
+  "steps": 100000,
+  "groups_per_batch": 1094,
+  "ema_rate": 0.999,
+  "log_every": 500,
+  "ckpt_every": 2000
+ },
+ "name": "hrd_d2_nolabel_sdrop",
+ "description": "Step 3: hrd_d2_nolabel + entity-state dropout 0.3 in training (state input hidden for 30% of groups, learned 'missing' marker, no state loss for them). Targets the member-stage within-row loss (teacher-forced diagnostic gap 0.34 vs GRDM 0.22). Sampling unchanged (state always present), x0-clipped.",
+ "hrd": {
+  "entity_state": true,
+  "size_conditioning": true,
+  "sibling_attention": true,
+  "attention_heads": 4,
+  "timestep_mode": "hierarchical",
+  "state_weight": 1.0,
+  "state_exclude_columns": [
+   "INCTOT",
+   "EMPSTAT"
+  ],
+  "state_dropout": 0.3
+ },
+ "sampler": {
+  "clip_x0": 5.199337582290661
+ },
+ "_seed": 0,
+ "_steps_override": null
+}

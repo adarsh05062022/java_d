@@ -1,0 +1,404 @@
+{
+ "mode": "off",
+ "global_bound": null,
+ "bounds": {
+  "district": {
+   "lo": [
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393
+   ],
+   "hi": [
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393
+   ]
+  },
+  "client": {
+   "lo": [
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393
+   ],
+   "hi": [
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393
+   ]
+  },
+  "account": {
+   "lo": [
+    -5.199337482452393,
+    -5.199337482452393
+   ],
+   "hi": [
+    5.199337482452393,
+    5.199337482452393
+   ]
+  },
+  "disp": {
+   "lo": [
+    -5.199337482452393
+   ],
+   "hi": [
+    5.199337482452393
+   ]
+  },
+  "card": {
+   "lo": [
+    -5.199337482452393,
+    -5.199337482452393
+   ],
+   "hi": [
+    5.199337482452393,
+    5.199337482452393
+   ]
+  },
+  "loan": {
+   "lo": [
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393
+   ],
+   "hi": [
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393
+   ]
+  },
+  "order": {
+   "lo": [
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393
+   ],
+   "hi": [
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393
+   ]
+  },
+  "trans": {
+   "lo": [
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393,
+    -5.199337482452393
+   ],
+   "hi": [
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393,
+    5.199337482452393
+   ]
+  }
+ },
+ "x0_hat_rows_clipped": {
+  "client": {
+   "1999-1999": {
+    "rows_clipped": 0,
+    "rows_total": 5369,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 18729.9375
+   },
+   "1990-1998": {
+    "rows_clipped": 0,
+    "rows_total": 48321,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 3681.94775390625
+   },
+   "1900-1989": {
+    "rows_clipped": 0,
+    "rows_total": 483210,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 208.46279907226562
+   },
+   "1000-1899": {
+    "rows_clipped": 0,
+    "rows_total": 4832100,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 46.18597412109375
+   },
+   "100-999": {
+    "rows_clipped": 0,
+    "rows_total": 4832100,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 6.500814437866211
+   },
+   "0-99": {
+    "rows_clipped": 0,
+    "rows_total": 536900,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 6.249183654785156
+   }
+  },
+  "account": {
+   "1999-1999": {
+    "rows_clipped": 0,
+    "rows_total": 4500,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 20055.63671875
+   },
+   "1990-1998": {
+    "rows_clipped": 0,
+    "rows_total": 40500,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 13568.869140625
+   },
+   "1900-1989": {
+    "rows_clipped": 0,
+    "rows_total": 405000,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 9993.03515625
+   },
+   "1000-1899": {
+    "rows_clipped": 0,
+    "rows_total": 4050000,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 9505.6513671875
+   },
+   "100-999": {
+    "rows_clipped": 0,
+    "rows_total": 4050000,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 9415.5283203125
+   },
+   "0-99": {
+    "rows_clipped": 0,
+    "rows_total": 450000,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 9411.2451171875
+   }
+  },
+  "disp": {
+   "1999-1999": {
+    "rows_clipped": 0,
+    "rows_total": 5369,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 11264.46875
+   },
+   "1990-1998": {
+    "rows_clipped": 0,
+    "rows_total": 48321,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 1971.5615234375
+   },
+   "1900-1989": {
+    "rows_clipped": 0,
+    "rows_total": 483210,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 269.0015563964844
+   },
+   "1000-1899": {
+    "rows_clipped": 0,
+    "rows_total": 4832100,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 234.5441131591797
+   },
+   "100-999": {
+    "rows_clipped": 0,
+    "rows_total": 4832100,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 152.6383056640625
+   },
+   "0-99": {
+    "rows_clipped": 0,
+    "rows_total": 536900,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 146.4749298095703
+   }
+  },
+  "card": {
+   "1999-1999": {
+    "rows_clipped": 0,
+    "rows_total": 892,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 8681.4296875
+   },
+   "1990-1998": {
+    "rows_clipped": 0,
+    "rows_total": 8028,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 5416.2685546875
+   },
+   "1900-1989": {
+    "rows_clipped": 0,
+    "rows_total": 80280,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 4828.16015625
+   },
+   "1000-1899": {
+    "rows_clipped": 0,
+    "rows_total": 802800,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 4678.509765625
+   },
+   "100-999": {
+    "rows_clipped": 0,
+    "rows_total": 802800,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 4635.27783203125
+   },
+   "0-99": {
+    "rows_clipped": 0,
+    "rows_total": 89200,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 4632.3359375
+   }
+  },
+  "loan": {
+   "1999-1999": {
+    "rows_clipped": 0,
+    "rows_total": 682,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 24728.921875
+   },
+   "1990-1998": {
+    "rows_clipped": 0,
+    "rows_total": 6138,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 13501.1240234375
+   },
+   "1900-1989": {
+    "rows_clipped": 0,
+    "rows_total": 61380,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 10023.705078125
+   },
+   "1000-1899": {
+    "rows_clipped": 0,
+    "rows_total": 613800,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 9958.6103515625
+   },
+   "100-999": {
+    "rows_clipped": 0,
+    "rows_total": 613800,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 9917.140625
+   },
+   "0-99": {
+    "rows_clipped": 0,
+    "rows_total": 68200,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 9916.87890625
+   }
+  },
+  "order": {
+   "1999-1999": {
+    "rows_clipped": 0,
+    "rows_total": 6471,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 37693.390625
+   },
+   "1990-1998": {
+    "rows_clipped": 0,
+    "rows_total": 58239,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 26411.171875
+   },
+   "1900-1989": {
+    "rows_clipped": 0,
+    "rows_total": 582390,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 19052.70703125
+   },
+   "1000-1899": {
+    "rows_clipped": 0,
+    "rows_total": 5823900,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 17696.095703125
+   },
+   "100-999": {
+    "rows_clipped": 0,
+    "rows_total": 5823900,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 17533.521484375
+   },
+   "0-99": {
+    "rows_clipped": 0,
+    "rows_total": 647100,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 17524.703125
+   }
+  },
+  "trans": {
+   "1999-1999": {
+    "rows_clipped": 0,
+    "rows_total": 1056320,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 21317.9375
+   },
+   "1990-1998": {
+    "rows_clipped": 0,
+    "rows_total": 9506880,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 10753.599609375
+   },
+   "1900-1989": {
+    "rows_clipped": 0,
+    "rows_total": 95068800,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 1962.141357421875
+   },
+   "1000-1899": {
+    "rows_clipped": 0,
+    "rows_total": 950688000,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 1065.564453125
+   },
+   "100-999": {
+    "rows_clipped": 0,
+    "rows_total": 950688000,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 989.4385986328125
+   },
+   "0-99": {
+    "rows_clipped": 0,
+    "rows_total": 105632000,
+    "frac_rows_clipped": 0.0,
+    "max_abs_x0_hat": 982.9400024414062
+   }
+  }
+ }
+}

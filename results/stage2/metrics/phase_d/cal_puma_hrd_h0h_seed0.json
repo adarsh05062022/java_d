@@ -1,0 +1,23 @@
+{
+ "real_test_noise_floor": {
+  "puma_tv": 0.029094425009145868,
+  "inctot_given_puma_gap": 0.52359236443939,
+  "eta2_inctot_on_puma_ref": 0.062011892200230116,
+  "eta2_inctot_on_puma_cand": 0.06223751551158416
+ },
+ "hrd_h0h_s0": {
+  "path": "/storage/s25017/AMEX/java_d/results/stage2/hrd_runs/hrd_h0h/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/synthetic_database",
+  "puma": {
+   "puma_tv": 0.08454296675728526,
+   "inctot_given_puma_gap": 3.032121729012956,
+   "eta2_inctot_on_puma_ref": 0.062011892200230116,
+   "eta2_inctot_on_puma_cand": 0.0018175521809793939
+  },
+  "xgb_r2_inctot": {
+   "own": 0.47734577780580933,
+   "own+PUMA": 0.46564399722390615,
+   "own+hh_without_PUMA": 0.5185646289183246,
+   "own+hh": 0.5018557777054768
+  }
+ }
+}

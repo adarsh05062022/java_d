@@ -1,0 +1,66 @@
+{
+ "dataset": "berka_split",
+ "data_path": "data/berka/split_train",
+ "entity": "account",
+ "dimension_tables": [
+  "district"
+ ],
+ "baseline_workspace": "/bhallukah/s25017/ClavaDDPM/rdb-diffusion/rdbdiff_workspace/berka_split/paper_repro/seed_{seed}",
+ "model": {
+  "dim_t": 128,
+  "d_layers": [
+   512,
+   1024,
+   1024,
+   1024,
+   1024,
+   512
+  ],
+  "dropout": 0.0,
+  "gnn_aggr": "sum",
+  "n_layers": 1
+ },
+ "diffusion": {
+  "num_timesteps": 2000,
+  "scheduler": "cosine"
+ },
+ "trainer": {
+  "lr": 0.0006,
+  "weight_decay": 1e-05,
+  "steps": 200000,
+  "groups_per_batch": 16,
+  "ema_rate": 0.999,
+  "log_every": 1000,
+  "ckpt_every": 5000
+ },
+ "sampler": {
+  "clip_x0": 5.199337582290661
+ },
+ "name": "berka_hrd_d2skip",
+ "description": "Berka full HRD: label-free account state (mean/std of trans, order, loan (no status), disp columns) + child-count input + typed sibling attention over all of an account's disp/loan/order/trans rows. x0-clipped sampling. + entity skip (entity head also sees LayerNorm of its own pre-GNN embedding; fixes the sum-aggregation swamping that left the d2 state unlearned).",
+ "hrd": {
+  "timestep_mode": "hierarchical",
+  "entity_state": true,
+  "size_conditioning": true,
+  "sibling_attention": true,
+  "attention_heads": 4,
+  "attention_tables": [
+   "disp",
+   "loan",
+   "order",
+   "trans"
+  ],
+  "state_weight": 1.0,
+  "state_relations": {
+   "trans": [],
+   "order": [],
+   "loan": [
+    "status"
+   ],
+   "disp": []
+  },
+  "entity_skip": true
+ },
+ "_seed": 2,
+ "_steps_override": null
+}

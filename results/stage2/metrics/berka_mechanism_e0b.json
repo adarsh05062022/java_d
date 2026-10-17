@@ -1,0 +1,358 @@
+{
+ "real": {
+  "roles": {
+   "frac_accounts_exactly_one_type0": 0.19311111111111112,
+   "indep_pred_exactly_one_type0": 0.09655555555555556,
+   "frac_accounts_exactly_one_type1": 1.0,
+   "indep_pred_exactly_one_type1": 0.9034444444444445
+  },
+  "coherence": {
+   "eta2_trans.amount": 0.09899135640771238,
+   "eps2_trans.amount": 0.0951374290365636,
+   "chance_eta2_trans.amount": 0.004259130054462715,
+   "parent_r2_trans.amount": 0.1441462456408511,
+   "resid_eta2_trans.amount": 0.08472212403064523,
+   "eta2_trans.balance": 0.555378283514169,
+   "eps2_trans.balance": 0.5534764817776839,
+   "chance_eta2_trans.balance": 0.004259130054462715,
+   "parent_r2_trans.balance": 0.06676463090556795,
+   "resid_eta2_trans.balance": 0.5182986574023776,
+   "eta2_order.amount": 0.5817791200524178,
+   "eps2_order.amount": 0.002621049295666569,
+   "chance_eta2_order.amount": 0.5806800618238022,
+   "parent_r2_order.amount": 0.04003642541033581,
+   "resid_eta2_order.amount": 0.5584867637071484
+  },
+  "structure": {
+   "digest": "3b9359467cf30d25",
+   "spearman_n_trans_n_order": 0.2602352863211546,
+   "spearman_n_trans_n_disp": 0.0034706278193988626,
+   "spearman_n_trans_n_loan": 0.14310451669284666,
+   "spearman_n_order_n_loan": 0.28610188369446116,
+   "spearman_n_disp_n_card": -0.030014919924315004,
+   "spearman_n_trans_n_card": 0.05640872062822331,
+   "spearman_n_order_n_card": -0.02552654950299071,
+   "p_loan_account_has_order": 1.0,
+   "auroc_ntrans_to_card": 0.5387407336551242,
+   "auroc_norder_to_card": 0.47406500188807565
+  }
+ },
+ "original_realstruct": {
+  "path": "/storage/s25017/AMEX/java_d_degft/experiments/GRDM_BERKA_DEGREE_CONDITIONED_FINETUNE/workspace/seed_0/diagnostic_real_structure/baseline/synthetic_database",
+  "structure": {
+   "digest": "75c0a8d536ab3447",
+   "spearman_n_trans_n_order": 0.2602352863211546,
+   "spearman_n_trans_n_disp": 0.0034706278193988626,
+   "spearman_n_trans_n_loan": 0.14310451669284666,
+   "spearman_n_order_n_loan": 0.28610188369446116,
+   "spearman_n_disp_n_card": -0.030014919924315004,
+   "spearman_n_trans_n_card": 0.05640872062822331,
+   "spearman_n_order_n_card": -0.02552654950299071,
+   "p_loan_account_has_order": 1.0,
+   "auroc_ntrans_to_card": 0.5387407336551242,
+   "auroc_norder_to_card": 0.47406500188807565
+  },
+  "roles": {
+   "frac_accounts_exactly_one_type0": 0.18222222222222223,
+   "indep_pred_exactly_one_type0": 0.18357754762818054,
+   "frac_accounts_exactly_one_type1": 0.7402222222222222,
+   "indep_pred_exactly_one_type1": 0.7415775476281806
+  },
+  "coherence": {
+   "eta2_trans.amount": 0.01676050894168588,
+   "eps2_trans.amount": 0.012554851633143205,
+   "chance_eta2_trans.amount": 0.004259130054462715,
+   "parent_r2_trans.amount": 0.5445950631135288,
+   "resid_eta2_trans.amount": 0.007632818516773594,
+   "eta2_trans.balance": 0.027382024890411204,
+   "eps2_trans.balance": 0.02322179950011815,
+   "chance_eta2_trans.balance": 0.004259130054462715,
+   "parent_r2_trans.balance": 0.736378751350858,
+   "resid_eta2_trans.balance": 0.007218483592152089,
+   "eta2_order.amount": 0.5858431105557023,
+   "eps2_order.amount": 0.012312910171542093,
+   "chance_eta2_order.amount": 0.5806800618238022,
+   "parent_r2_order.amount": 0.03141479793852209,
+   "resid_eta2_order.amount": 0.5674389676139197
+  },
+  "label_deps": {
+   "loan_base_rate": 0.0718475073313783,
+   "loan_n": 682,
+   "loan_auc": {
+    "trans_n": 0.5180004222972973,
+    "trans_balance_mean": 0.5322705518018018,
+    "trans_balance_last": 0.46519566441441446,
+    "trans_amount_mean": 0.49299690315315314,
+    "trans_bank_0_frac": 0.529173704954955,
+    "trans_operation_3_frac": 0.5402238175675675,
+    "order_n": 0.5246155334171584,
+    "order_k_symbol_3_frac": 0.5517941773865944,
+    "order_k_symbol_4_frac": 0.4824451107457201,
+    "amount_per_month": 0.716284618112648,
+    "payments": 0.7246348776477416,
+    "amount": 0.7842795886126963
+   },
+   "loan_retained_by_family": {
+    "own_or_1hop_parent": {
+     "n_carriers": 6,
+     "mean_retained": 0.9564789423452494,
+     "n_reversed": 1
+    },
+    "child_aggregate": {
+     "n_carriers": 28,
+     "mean_retained": 0.06136167606184273,
+     "n_reversed": 14
+    },
+    "other_rollup": {
+     "n_carriers": 3,
+     "mean_retained": -0.10586274712532485,
+     "n_reversed": 1
+    }
+   },
+   "card_base_rate": 0.16613894579996275,
+   "card_n": 5369,
+   "card_auc": {
+    "trans_balance_mean": 0.5275249631649959,
+    "trans_balance_last": 0.5011161932788513,
+    "trans_amount_mean": 0.5112108875357959,
+    "trans_n": 0.5387407336551242,
+    "order_amount_sum": 0.5075798023568889,
+    "order_n": 0.516862877153183,
+    "disp_type": 0.5991735537190083,
+    "year": 0.4929714254520614,
+    "frequency": 0.5030464626877182
+   },
+   "card_retained_by_family": {
+    "child_aggregate": {
+     "n_carriers": 19,
+     "mean_retained": 0.03604915558136232,
+     "n_reversed": 4
+    },
+    "other_rollup": {
+     "n_carriers": 5,
+     "mean_retained": 0.6383492076558241,
+     "n_reversed": 1
+    },
+    "own_or_1hop_parent": {
+     "n_carriers": 2,
+     "mean_retained": 0.4788139569434056,
+     "n_reversed": 1
+    }
+   },
+   "p_card_by_balance_octile": [
+    0.2,
+    null,
+    null,
+    0.1588785046728972,
+    0.16471885336273429,
+    0.18781725888324874,
+    0.17880794701986755,
+    0.2222222222222222
+   ]
+  },
+  "saturation": {
+   "account": {
+    "max_excess_at_bound": 0.0008888888888888889,
+    "mean_excess_at_bound": 0.0008888888888888889,
+    "worst_column": "account_date"
+   },
+   "card": {
+    "max_excess_at_bound": -0.0022421524663677134,
+    "mean_excess_at_bound": -0.0022421524663677134,
+    "worst_column": "issued"
+   },
+   "loan": {
+    "max_excess_at_bound": 0.01466275659824047,
+    "mean_excess_at_bound": 0.0007331378299120315,
+    "worst_column": "payments"
+   },
+   "order": {
+    "max_excess_at_bound": 0.0007726781023025807,
+    "mean_excess_at_bound": 0.0007726781023025807,
+    "worst_column": "account_to"
+   },
+   "trans": {
+    "max_excess_at_bound": 0.0022559451681308795,
+    "mean_excess_at_bound": -0.0003003351257194765,
+    "worst_column": "account"
+   }
+  },
+  "model_space_rows_abs_gt6": {
+   "client": 0.00037250884708511827,
+   "account": 0.004666666666666667,
+   "disp": 0.0011175265412553548,
+   "card": 0.0,
+   "loan": 0.016129032258064516,
+   "order": 0.0016998918250656777,
+   "trans": 0.0004657679491063314,
+   "max_abs": {
+    "client": 1222.82958984375,
+    "account": 10141.208984375,
+    "disp": 26.301210403442383,
+    "card": 5.289094924926758,
+    "loan": 15378.6025390625,
+    "order": 2392.28125,
+    "trans": 1759.9920654296875
+   }
+  }
+ },
+ "original_sampledstruct": {
+  "path": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/berka/paper_repro/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/synthetic_database",
+  "structure": {
+   "digest": "31c7add69b28bac7",
+   "spearman_n_trans_n_order": 0.005854841285750558,
+   "spearman_n_trans_n_disp": -0.008551399114355087,
+   "spearman_n_trans_n_loan": -0.029486586122630092,
+   "spearman_n_order_n_loan": -0.00885556172621356,
+   "spearman_n_disp_n_card": 0.14889680577870185,
+   "spearman_n_trans_n_card": -0.009843602165699815,
+   "spearman_n_order_n_card": 0.012617295346628888,
+   "p_loan_account_has_order": 0.8409425625920471,
+   "auroc_ntrans_to_card": 0.49322268707568206,
+   "auroc_norder_to_card": 0.5089257709747727
+  },
+  "roles": {
+   "frac_accounts_exactly_one_type0": 0.19266666666666668,
+   "indep_pred_exactly_one_type0": 0.19232865497076024,
+   "frac_accounts_exactly_one_type1": 0.7217777777777777,
+   "indep_pred_exactly_one_type1": 0.7214397660818712
+  },
+  "coherence": {
+   "eta2_trans.amount": 0.015122231578586137,
+   "eps2_trans.amount": 0.010892241774051258,
+   "chance_eta2_trans.amount": 0.0042765712525819595,
+   "parent_r2_trans.amount": 0.510090466322557,
+   "resid_eta2_trans.amount": 0.007408525420827438,
+   "eta2_trans.balance": 0.024097884948574174,
+   "eps2_trans.balance": 0.01990644502653379,
+   "chance_eta2_trans.balance": 0.0042765712525819595,
+   "parent_r2_trans.balance": 0.7036421591735162,
+   "resid_eta2_trans.balance": 0.007141597151844464,
+   "eta2_order.amount": 0.5854543895584703,
+   "eps2_order.amount": -0.0019092971309166062,
+   "chance_eta2_order.amount": 0.5862443719919267,
+   "parent_r2_order.amount": 0.029118506974928127,
+   "resid_eta2_order.amount": 0.5684068318326096
+  },
+  "label_deps": {
+   "loan_base_rate": 0.050073637702503684,
+   "loan_n": 679,
+   "loan_auc": {
+    "trans_n": 0.3648390616475723,
+    "trans_balance_mean": 0.565139116202946,
+    "trans_balance_last": 0.5050190943807965,
+    "trans_amount_mean": 0.5588652482269504,
+    "trans_bank_0_frac": 0.5878068739770868,
+    "trans_operation_3_frac": 0.5941352973267868,
+    "order_n": 0.510624761420028,
+    "order_k_symbol_3_frac": 0.5530601857742716,
+    "order_k_symbol_4_frac": 0.49417864868303857,
+    "amount_per_month": 0.6025991792065664,
+    "payments": 0.6015731874145007,
+    "amount": 0.6355905152758778
+   },
+   "loan_retained_by_family": {
+    "own_or_1hop_parent": {
+     "n_carriers": 6,
+     "mean_retained": 0.6998197747502432,
+     "n_reversed": 0
+    },
+    "child_aggregate": {
+     "n_carriers": 28,
+     "mean_retained": 0.20836328333960222,
+     "n_reversed": 11
+    },
+    "other_rollup": {
+     "n_carriers": 3,
+     "mean_retained": 0.18790697674418574,
+     "n_reversed": 1
+    }
+   },
+   "card_base_rate": 0.16713352007469653,
+   "card_n": 5355,
+   "card_auc": {
+    "trans_balance_mean": 0.5018016133476965,
+    "trans_balance_last": 0.5001399153242979,
+    "trans_amount_mean": 0.5149402510208683,
+    "trans_n": 0.49322268707568206,
+    "order_amount_sum": 0.49958682138636523,
+    "order_n": 0.5104774959856845,
+    "disp_type": 0.6021300448430493,
+    "year": 0.5176050304381592,
+    "frequency": 0.4981568003607486
+   },
+   "card_retained_by_family": {
+    "child_aggregate": {
+     "n_carriers": 19,
+     "mean_retained": 0.04615931943180691,
+     "n_reversed": 6
+    },
+    "other_rollup": {
+     "n_carriers": 5,
+     "mean_retained": 0.4789008777330938,
+     "n_reversed": 1
+    },
+    "own_or_1hop_parent": {
+     "n_carriers": 2,
+     "mean_retained": 0.6066125343072466,
+     "n_reversed": 0
+    }
+   },
+   "p_card_by_balance_octile": [
+    0.375,
+    null,
+    0.2857142857142857,
+    0.12923076923076923,
+    0.1693227091633466,
+    0.16,
+    0.15827338129496402,
+    0.3333333333333333
+   ]
+  },
+  "saturation": {
+   "account": {
+    "max_excess_at_bound": -0.0006666666666666666,
+    "mean_excess_at_bound": -0.0006666666666666666,
+    "worst_column": "account_date"
+   },
+   "card": {
+    "max_excess_at_bound": -0.0033632286995515697,
+    "mean_excess_at_bound": -0.0033632286995515697,
+    "worst_column": "issued"
+   },
+   "loan": {
+    "max_excess_at_bound": 0.056279935561611705,
+    "mean_excess_at_bound": 0.025493545363848003,
+    "worst_column": "duration"
+   },
+   "order": {
+    "max_excess_at_bound": 0.006678424039889285,
+    "mean_excess_at_bound": 0.0066773805286365635,
+    "worst_column": "amount"
+   },
+   "trans": {
+    "max_excess_at_bound": 0.0025908553055531414,
+    "mean_excess_at_bound": -8.934000093843556e-05,
+    "worst_column": "account"
+   }
+  },
+  "model_space_rows_abs_gt6": {
+   "client": 0.0022350530825107095,
+   "account": 0.008888888888888889,
+   "disp": 0.004295051353874884,
+   "card": 0.0,
+   "loan": 0.01914580265095729,
+   "order": 0.00776156473144986,
+   "trans": 0.0007015129104991197,
+   "max_abs": {
+    "client": 39668.10546875,
+    "account": 21928.15625,
+    "disp": 36.632171630859375,
+    "card": 5.626794815063477,
+    "loan": 5702.07763671875,
+    "order": 5803.935546875,
+    "trans": 3074.156494140625
+   }
+  }
+ }
+}

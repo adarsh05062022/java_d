@@ -1,0 +1,59 @@
+{
+  "dataset": "cal_original_realstruct",
+  "base": "california",
+  "leakage_caveat": false,
+  "syn_dir": "/storage/s25017/AMEX/java_d/results/stage2/e0b/cal_original/workspace/seed_0/synthetic_data_real_structure",
+  "records": [
+    {
+      "dataset": "cal_original_realstruct",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5239273638855105,
+        "rmse": 11.372580167615439,
+        "mae": 5.77355159542497
+      },
+      "seconds": 28.6
+    },
+    {
+      "dataset": "cal_original_realstruct",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5244870159544447,
+        "rmse": 11.365893625315177,
+        "mae": 5.7659362688562155
+      },
+      "seconds": 35.3
+    },
+    {
+      "dataset": "cal_original_realstruct",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5241793101945142,
+        "rmse": 11.369570481099588,
+        "mae": 5.774960615163896
+      },
+      "seconds": 26.0
+    }
+  ]
+}

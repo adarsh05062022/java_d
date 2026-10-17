@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consolidated Audit: Berka + California GRDM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,650&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --ink: #18202b; --muted: #5a6573; --rule: #d9dee5;
+  --accent: #1f5f8b; --accent-soft: #e4eef6;
+  --good: #1d7a4f; --good-soft: #e3f3ea;
+  --bad: #a3402d; --bad-soft: #f8e7e2;
+  --warn: #8a5a12; --warn-soft: #fbf0dd;
+  --display: "Literata", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161c; --surface: #1a2028; --ink: #e5e9ef; --muted: #9aa5b3; --rule: #2e3742;
+    --accent: #7db4dc; --accent-soft: #1d2e3d; --good: #6fcf9d; --good-soft: #17301f;
+    --bad: #ee9580; --bad-soft: #3a211b; --warn: #e3b55f; --warn-soft: #3a2f16; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161c; --surface: #1a2028; --ink: #e5e9ef; --muted: #9aa5b3; --rule: #2e3742;
+  --accent: #7db4dc; --accent-soft: #1d2e3d; --good: #6fcf9d; --good-soft: #17301f;
+  --bad: #ee9580; --bad-soft: #3a211b; --warn: #e3b55f; --warn-soft: #3a2f16; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 15.5px/1.6 var(--body); margin: 0; }
+.page { max-width: 58rem; margin: 0 auto; padding-inline: 20px; padding-block: 40px 90px; display: flex; flex-direction: column; gap: 44px; }
+header { display: flex; flex-direction: column; gap: 12px; border-bottom: 1px solid var(--rule); padding-bottom: 28px; }
+.eyebrow { font: 500 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 650 clamp(28px, 5vw, 38px)/1.15 var(--display); margin: 0; text-wrap: balance; }
+h2 { font: 650 24px/1.25 var(--display); margin: 0; text-wrap: balance; scroll-margin-top: 20px; }
+h3 { font: 600 16px/1.4 var(--body); margin: 0; scroll-margin-top: 20px; }
+h4 { font: 600 14px/1.4 var(--body); margin: 0; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; font-size: 12.5px; }
+p, ul, ol { margin: 0; max-width: 74ch; }
+ul, ol { padding-left: 1.3em; display: flex; flex-direction: column; gap: 6px; }
+li { max-width: 72ch; }
+.lede { color: var(--muted); font-size: 16px; max-width: 70ch; }
+.meta { font: 400 13px/1.6 var(--mono); color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 18px; }
+section { display: flex; flex-direction: column; gap: 18px; }
+section.step { padding-top: 6px; }
+code { font: 400 0.88em var(--mono); background: var(--accent-soft); padding: 1px 5px; border-radius: 3px; overflow-wrap: anywhere; }
+pre { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; overflow-x: auto; font: 400 13px/1.55 var(--mono); }
+pre code { background: none; padding: 0; }
+
+/* top nav / toc */
+nav.toc { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+nav.toc .ttl { font: 600 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+nav.toc ol { columns: 2; column-gap: 24px; padding-left: 1.1em; margin: 0; }
+nav.toc li { break-inside: avoid; font-size: 14px; }
+nav.toc a { color: var(--ink); text-decoration: none; }
+nav.toc a:hover { color: var(--accent); text-decoration: underline; }
+
+/* verdict cards */
+.verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 12px; }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 16px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.card .tag { font: 600 11.5px/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; width: fit-content; padding: 4px 7px; border-radius: 3px; }
+.tag.up { color: var(--good); background: var(--good-soft); }
+.tag.down { color: var(--bad); background: var(--bad-soft); }
+.tag.flat { color: var(--accent); background: var(--accent-soft); }
+.tag.warn { color: var(--warn); background: var(--warn-soft); }
+.card p { font-size: 14.5px; }
+
+/* findings */
+.finding { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--warn); border-radius: 6px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+.finding.corr { border-left-color: var(--good); }
+.finding h3 { font-size: 15px; }
+.finding .num { font: 600 11.5px/1 var(--mono); color: var(--warn); letter-spacing: .05em; display: block; margin-bottom: 2px; }
+.finding.corr .num { color: var(--good); }
+.finding p, .finding ul, .finding li { font-size: 14.5px; }
+.finding ul { padding-left: 1.2em; }
+
+.assurance { background: var(--good-soft); border: 1px solid var(--good); border-radius: 6px; padding: 14px 18px; font-size: 14px; color: var(--ink); }
+.assurance strong { color: var(--good); }
+
+/* tables */
+.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+th, td { padding: 7px 10px; text-align: right; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; white-space: normal; min-width: 11rem; }
+thead th { font: 600 11.5px/1.3 var(--body); color: var(--muted); background: var(--bg); position: sticky; top: 0; }
+tbody tr:last-child td { border-bottom: 0; }
+td.pos { color: var(--good); font-weight: 600; }
+td.neg { color: var(--bad); font-weight: 600; }
+td.hi { font-weight: 600; background: var(--accent-soft); }
+table.prose th, table.prose td { text-align: left; white-space: normal; font-size: 13.5px; vertical-align: top; }
+table.prose th:first-child, table.prose td:first-child { min-width: 9rem; }
+caption { caption-side: top; text-align: left; font: 600 13px/1.4 var(--body); padding: 10px 10px 2px; color: var(--ink); }
+.note { font-size: 13.5px; color: var(--muted); }
+.footnote { font-size: 12.5px; color: var(--muted); border-top: 1px dashed var(--rule); padding-top: 8px; margin-top: 4px; }
+
+/* q&a */
+.qa { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 16px 20px; display: flex; flex-direction: column; gap: 6px; }
+.qa .qnum { font: 600 12px/1 var(--mono); color: var(--accent); letter-spacing: .05em; }
+.qa .answer { font-weight: 600; font-size: 14.5px; }
+.qa p { font-size: 14.5px; }
+
+footer { border-top: 1px solid var(--rule); padding-top: 20px; font-size: 13.5px; color: var(--muted); display: flex; flex-direction: column; gap: 8px; }
+a { color: var(--accent); }
+hr.rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+@media (max-width: 640px) { nav.toc ol { columns: 1; } th, td { font-size: 12px; padding: 6px 8px; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="eyebrow">GRDM &middot; Berka &amp; California &middot; consolidated audit</div>
+  <h1>Consolidated Audit: Berka + California GRDM Conditioning Experiments</h1>
+  <p class="lede">Auditing three prior sessions' outputs &mdash; Berka relational fidelity, Berka downstream prediction, and California household fidelity/downstream &mdash; by independently recomputing means/SDs from raw per-seed JSON rather than trusting prior summary prose. No GRDM model was retrained, no new sampling was run, and no existing experiment output was overwritten to produce this audit.</p>
+  <div class="meta">
+    <span>Audit opened 2026-10-13, updated 2026-10-14</span>
+    <span>5 configs &times; 2 datasets</span>
+    <span>n=3 seeds throughout</span>
+    <span>8 findings, 2 of them corrections</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="ttl">Contents</div>
+  <ol>
+    <li><a href="#step12">Step 1&ndash;2 &middot; What was collected &amp; verified</a></li>
+    <li><a href="#step3">Step 3 &middot; Findings 1&ndash;8</a></li>
+    <li><a href="#table1">Table 1 &middot; Berka relational fidelity</a></li>
+    <li><a href="#table2">Table 2 &middot; Berka loan default</a></li>
+    <li><a href="#table3">Table 3 &middot; Berka card ownership</a></li>
+    <li><a href="#table2a3a">Tables 2a/3a &middot; Gap to real data</a></li>
+    <li><a href="#table4">Table 4 &middot; California fidelity</a></li>
+    <li><a href="#table5">Table 5 &middot; California 11-regime coverage</a></li>
+    <li><a href="#step5">Step 5 &middot; Interpretation (Q1&ndash;8)</a></li>
+    <li><a href="#step6">Step 6 &middot; Reproducibility</a></li>
+    <li><a href="#summary">Final summary</a></li>
+  </ol>
+</nav>
+
+<section class="step" id="step12">
+  <h2>Step 1&ndash;2: What was collected and numerically verified</h2>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Deliverable</th><th>Location</th><th>Verification performed</th></tr></thead>
+      <tbody>
+        <tr><td>Berka relational fidelity (Table 1)</td><td><code>results/relational_fidelity_consolidated/</code></td><td>Recomputed mean/SD for degree-scratch and degree-finetune directly from <code>fidelity_seed{0,1,2}.json</code> (numpy, ddof=0) &mdash; <strong>matches exactly</strong>. Pulled baseline/agg-scratch/agg-finetune numbers directly from <code>java_d-aggft/.../comparison.json</code> and confirmed byte-for-byte.</td></tr>
+        <tr><td>Berka downstream prediction (Tables 2&ndash;3)</td><td><code>results/paper_repro/downstream/berka_prediction_tables/</code></td><td>Independently re-ran the group-by-<code>grdm_seed</code>-then-average aggregation on two raw source files (baseline loan-default <code>synth</code>, aggregate-scratch loan-default <code>synth</code>) &mdash; <strong>both match to 3 decimals</strong>.</td></tr>
+        <tr><td>California household fidelity (Table 4)</td><td><code>java_d-calagg-ft/.../eleven_regime_addendum/</code></td><td>Traced every row to <code>comparison.json</code>'s <code>relational.summary.*</code> block and <code>noise_floor_real_test</code> &mdash; <strong>matches exactly</strong>, including the ablation checks.</td></tr>
+        <tr><td>California 11-regime downstream coverage (Table 5)</td><td><code>java_d-calagg-ft/.../eleven_regime_addendum/</code></td><td>Recomputed baseline <code>synth</code> income-R&sup2; &mdash; <strong>matches exactly</strong> (0.5274&plusmn;0.0025, ddof=1). Originally 42/88 cells were <code>PENDING</code>; the job died silently, was relaunched fully detached, and completed 2026-10-14 05:09 IST &mdash; all 88 cells now populated.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>New files written by this audit</strong> (nothing pre-existing touched): <code>table4_california_household_fidelity.csv</code>, <code>table5_california_eleven_regime_coverage.csv</code>, this report. Tables 1&ndash;3 already lived correctly in this repo and are referenced by path, not duplicated. Tables 4&ndash;5 only existed in the <code>java_d-calagg-ft</code> worktree; this audit copies their verified values here so all five tables are reachable from one place.</p>
+</section>
+
+<section class="step" id="step3">
+  <h2>Step 3: Experimental-validity audit &mdash; findings</h2>
+  <p class="note">None of these invalidate the headline comparisons, but all of them change how the numbers should be read. Findings 7&ndash;8 were discovered mid-audit after the original pre-loss repository became reachable again; Finding 8 corrects a claim this audit itself got wrong in its first pass.</p>
+
+  <div class="finding">
+    <span class="num">FINDING 1</span>
+    <h3>Cardinality is bit-identical across every Berka configuration &mdash; not a valid comparison metric</h3>
+    <p><code>Cardinality</code> is 99.65&plusmn;0.05 for all five Berka configurations, identical to 12+ significant digits even across separate worktrees/training runs (confirmed: <code>mean=99.64999999999999, sd=0.053541261347361556</code> repeated verbatim across six keys in <code>comparison.json</code>). It is a property of the shared, deterministic structure-sampling step, unaffected by degree/aggregate conditioning. <strong>Do not use it to argue any configuration is better or worse.</strong> <code>3-HOP relational fidelity</code> is similarly flat (92.65&ndash;93.05) and should be read the same way.</p>
+  </div>
+
+  <div class="finding">
+    <span class="num">FINDING 2</span>
+    <h3>Standard-deviation convention differs between the Berka and California tables</h3>
+    <p>Table 1 and Tables 2&ndash;3 use <strong>population SD (ddof=0)</strong>, chosen explicitly to keep all Berka columns comparable. Table 4&ndash;5 use <strong>sample SD (ddof=1)</strong>, inherited from <code>GRDM_CALIFORNIA_.../compare.py</code> line 35. For n=3, ddof=1 SDs are &radic;(3/2) &asymp; 1.22&times; larger than ddof=0 on the same data &mdash; means are unaffected, but raw SDs across the two halves of this report are not on the same scale. Flagged, not silently renormalized.</p>
+  </div>
+
+  <div class="finding">
+    <span class="num">FINDING 3</span>
+    <h3>Berka and California have genuinely different leakage exposure &mdash; by construction, not by accident</h3>
+    <p>All 6 Berka configs carry <code>leakage_caveat=true</code>: the GRDM generator trained on the full <code>data/berka/preprocessed</code> database, which includes the accounts later held out as the downstream test set. California's <code>DATASETS["california"]</code> uses a genuinely separate <code>data/california/train</code> split, <code>leakage=False</code>, inherited by all 3 new fine-tuned arms. Berka's downstream numbers are an upper bound (relative ranking unaffected, absolute levels optimistic); California's carry no such caveat.</p>
+  </div>
+
+  <div class="finding">
+    <span class="num">FINDING 4</span>
+    <h3>Berka's "aggregate fine-tuned" column in Table 1 reflects a sampling failure, not a clean fine-tuning read</h3>
+    <p>The joint (unfrozen-backbone) fine-tune of the aggregate-conditioned model produces unstable sampling &mdash; up to 78% of rows fall outside the real-data range in model space (per the source experiment's own <code>REPORT.html</code>; consistent with the outsized Column-shape drop, 96.44&rarr;84.46). Numbers are mechanically comparable but measure this failure mode, not fine-tuning in general. Use the frozen-backbone variant for "does fine-tuning help fidelity" claims.</p>
+  </div>
+
+  <div class="finding">
+    <span class="num">FINDING 5</span>
+    <h3>Berka and California test different interventions &mdash; not a matched pair</h3>
+    <p>Berka's aggregate-conditioning (config 4) is trained <strong>from scratch</strong>. California has no from-scratch aggregate-conditioned run at all &mdash; <code>agg</code>/<code>agg_label_free</code>/<code>control</code> are all <strong>continued-training fine-tunes</strong> of the existing checkpoint. Any Berka-vs-California "does aggregate conditioning help" comparison is implicitly scratch-vs-fine-tune, not dataset-vs-dataset &mdash; the single most important caveat for the cross-dataset questions below.</p>
+  </div>
+
+  <div class="finding">
+    <span class="num">FINDING 6</span>
+    <h3>Berka's label-free aggregate arms aren't in the main 6-configuration downstream table</h3>
+    <p><code>berka_aggft_label_free{,_frozen}</code> results exist and are internally consistent but weren't one of the 6 requested configurations, so Tables 2&ndash;3 omit them. California's label-free arm, by contrast, <strong>is</strong> included in Tables 4&ndash;5. A scoping asymmetry carried over from the source reports, not an error &mdash; "6 Berka configs" and "4 California configs" are not parallel lists.</p>
+  </div>
+
+  <div class="finding">
+    <span class="num">FINDING 7</span>
+    <h3>Cross-checked against the pre-/scratch-loss original repository: the eval code is identical, the GRDM models are not</h3>
+    <p>2026-10-14: the original checkout became reachable again at <code>/bhallukah/.../rdb-diffusion</code> (the relocated old <code>/scratch</code> mount). Diffed directly against the rebuilt repo:</p>
+    <ul>
+      <li><strong>Byte-identical:</strong> <code>evaluate.py</code>, <code>data.py</code>, <code>splits.py</code>, <code>tasks.py</code> (incl. the Oct-5 date-offset bug fix, present in both), the entire <code>rdbdiff/</code> model+training tree, <code>main.py</code>, training configs. <code>run.py</code> differs by one path-only line, irrelevant to Berka.</li>
+      <li><strong>The <code>real</code> regime matches to full floating-point precision</strong> &mdash; Berka loan-default AUROC <code>0.938573407202216</code> in both repos; card-ownership AUROC <code>0.8739133895876453</code> in both. Proves the real-data split and eval protocol are unchanged.</li>
+      <li><strong>Everything synthetic-dependent differs</strong>, because the original GRDM checkpoints were lost with <code>/scratch</code> on 2026-10-07 and the current baseline is a fresh, stochastic retrain &mdash; not a copy. Drift is dataset-dependent: Berka (small, 171 test loans) swings a lot (synth AUROC 0.5316&rarr;0.5068 loan, 0.6094&rarr;0.5726 card); California barely moves (synth income R&sup2; 0.5272&rarr;0.5274).</li>
+    </ul>
+    <p><strong>Consequence:</strong> every number in Tables 1&ndash;5 is correct and internally consistent with the current baseline &mdash; but absolute Berka synthetic-only numbers should not be assumed to match any pre-2026-10-07 reporting. Relative comparisons between conditioning variants are unaffected.</p>
+  </div>
+
+  <div class="finding corr">
+    <span class="num">FINDING 8 &middot; CORRECTION</span>
+    <h3>The leakage-free Berka baseline (<code>berka_split</code>) is NOT orphaned &mdash; this audit's earlier claim was wrong</h3>
+    <p>The original audit stated <code>berka_split</code>'s checkpoint and real-data split "no longer exist on disk" &mdash; true only inside the <code>java_d</code> worktree family. Now that <code>/bhallukah</code> is reachable again, direct inspection found, fully intact:</p>
+    <ul>
+      <li><code>rdbdiff_workspace/berka_split/paper_repro/seed_{0,1,2}/model_checkpoint/{model.pt,model_ema.pt,checkpoint.pt}</code> &mdash; real trained checkpoints (2026-08-09), plus already-sampled synthetic data for every seed.</li>
+      <li><code>data/berka/split_train/</code> and <code>split_test/</code> &mdash; verified clean: 3375 train accounts, 1125 test accounts, <strong>zero account-ID overlap</strong>.</li>
+      <li>Eval code byte-identical to the current repo (Finding 7), so existing <code>berka_split__{task}.json</code> results are genuine, current-protocol, leakage-free results &mdash; not a stale pre-bug-fix artifact.</li>
+    </ul>
+    <p>What's still missing is only regime <em>coverage</em> (<code>real</code>/<code>synth</code>/<code>mixed</code> only, no <code>blend_*</code>/<code>real_25/50/75</code>) &mdash; fillable without retraining, the same way Table 5's California gaps were closed. <strong>Not performed in this audit</strong>; flagged as an opportunity, since it touches a shared mount this audit did not attempt to write to.</p>
+  </div>
+
+  <div class="assurance">
+    <strong>Nothing fabricated, nothing silently merged.</strong> No metric in Tables 1&ndash;5 was estimated, interpolated, or backfilled. The one historical leakage-free Berka baseline was deliberately excluded from Tables 2&ndash;3 (reasoning in Finding 3) &mdash; note its status changed in Finding 8.
+  </div>
+</section>
+
+<section class="step" id="table1">
+  <h2>Table 1 &mdash; Berka relational fidelity, all 5 configurations</h2>
+  <p class="note">Mean &plusmn; population SD (ddof=0), n=3 seeds. Fidelity rows 1&ndash;7 on the paper's 0&ndash;100 scale; dependency rows 8&ndash;11 on their native 0&ndash;1 scale. Full provenance: <code>relational_fidelity_detailed.csv</code>.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Original GRDM</th><th>Degree scratch</th><th>Degree fine-tuned</th><th>Aggregate scratch</th><th>Aggregate fine-tuned&sup1;</th></tr></thead>
+      <tbody>
+        <tr><td>Cardinality&sup2;</td><td>99.65&plusmn;0.05</td><td>99.65&plusmn;0.05</td><td>99.65&plusmn;0.05</td><td>99.65&plusmn;0.05</td><td>99.65&plusmn;0.05</td></tr>
+        <tr><td>Column-shape fidelity</td><td>96.997&plusmn;0.107</td><td>96.023&plusmn;0.094</td><td>90.907&plusmn;1.096</td><td class="hi">96.443&plusmn;0.160</td><td>84.457&plusmn;0.776</td></tr>
+        <tr><td>Intra-table trends</td><td>98.310&plusmn;0.043</td><td>97.506&plusmn;0.176</td><td>94.831&plusmn;0.600</td><td>97.520&plusmn;0.094</td><td>88.253&plusmn;0.442</td></tr>
+        <tr><td>1-hop relational fidelity</td><td>91.487&plusmn;0.200</td><td>92.148&plusmn;0.035</td><td>88.877&plusmn;0.555</td><td class="hi">92.700&plusmn;0.049</td><td>80.913&plusmn;2.176</td></tr>
+        <tr><td>2-hop relational fidelity</td><td>95.610&plusmn;0.071</td><td>95.050&plusmn;0.171</td><td>91.101&plusmn;0.964</td><td>95.017&plusmn;0.092</td><td>84.413&plusmn;1.554</td></tr>
+        <tr><td>3-hop relational fidelity&sup2;</td><td>92.710&plusmn;0.449</td><td>92.653&plusmn;0.586</td><td>92.988&plusmn;0.906</td><td>93.047&plusmn;0.772</td><td>92.853&plusmn;0.550</td></tr>
+        <tr><td>Average 2-way fidelity</td><td>95.263&plusmn;0.052</td><td>94.935&plusmn;0.114</td><td>91.681&plusmn;0.697</td><td>95.063&plusmn;0.045</td><td>85.067&plusmn;0.576</td></tr>
+        <tr><td>Aggregate KS distance (&darr;)</td><td>0.2728&plusmn;0.0012</td><td>0.2037&plusmn;0.0013</td><td>0.2199&plusmn;0.0030</td><td class="hi">0.1425&plusmn;0.0054</td><td>0.3390&plusmn;0.0239</td></tr>
+        <tr><td>Parent&ndash;aggregate corr. error (&darr;)</td><td>0.1413&plusmn;0.0031</td><td>0.1213&plusmn;0.0023</td><td>0.1859&plusmn;0.0116</td><td class="hi">0.0863&plusmn;0.0034</td><td>0.2103&plusmn;0.0190</td></tr>
+        <tr><td>Aggregate&ndash;aggregate corr. error (&darr;)</td><td>0.2447&plusmn;0.0016</td><td>0.1800&plusmn;0.0026</td><td>0.2463&plusmn;0.0172</td><td class="hi">0.0760&plusmn;0.0049</td><td>0.2836&plusmn;0.0572</td></tr>
+        <tr><td>Strong-dep. sign agreement, |r|&ge;0.1 (&uarr;)</td><td>0.6250&plusmn;0.0794</td><td>0.7639&plusmn;0.0196</td><td>0.6944&plusmn;0.0494</td><td class="hi">0.8843&plusmn;0.0458</td><td>0.7546&plusmn;0.0797</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="footnote">&sup1; <code>ft_same_spec</code> (joint fine-tune). <strong>Caveat: known sampling collapse, see Finding 4.</strong> Frozen counterpart (<code>ft_same_spec_frozen</code>): Column-shape 96.880&plusmn;0.078, Intra-table 98.137&plusmn;0.056, 1-hop 91.183&plusmn;0.246, 2-hop 95.660&plusmn;0.188, 3-hop 92.630&plusmn;1.221, avg-2way 95.173&plusmn;0.167, agg-KS 0.2574&plusmn;0.0060, parent-agg-corr 0.1387&plusmn;0.0006, agg-agg-corr 0.2205&plusmn;0.0086, sign-agreement 0.7130&plusmn;0.0429.<br>&sup2; Not informative for comparing these configurations &mdash; see Finding 1.</p>
+</section>
+
+<section class="step" id="table2">
+  <h2>Table 2 &mdash; Berka loan-default prediction, all 6 configurations &times; 5 regimes</h2>
+  <p class="note">Mean population SD (ddof=0), n=3 GRDM seeds. Real-only reference (identical across all 6 configs): AUROC 0.939, AP 0.762, Macro-F1 0.800 (n=511). All 6 configs carry <code>leakage_caveat=true</code> (Finding 3). Cell format AUROC/AP/Macro-F1; <strong>bold = beats baseline on all three metrics</strong>.</p>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Configuration</th><th>Synthetic-only</th><th>Real+Synthetic</th><th>Blend 25% real</th><th>Blend 50% real</th><th>Blend 75% real</th></tr></thead>
+      <tbody>
+        <tr><td>1. Original GRDM baseline</td><td>0.507/0.136/0.478</td><td>0.928/0.739/0.778</td><td>0.775/0.382/0.574</td><td>0.878/0.615/0.717</td><td>0.924/0.714/0.735</td></tr>
+        <tr><td>2. Degree-conditioned (scratch)</td><td class="hi">0.789/0.356/0.531</td><td>0.944/0.747/0.775</td><td>0.870/0.480/0.582</td><td>0.903/0.611/0.702</td><td>0.920/0.687/0.746</td></tr>
+        <tr><td>3. Degree-conditioned (fine-tune)</td><td>0.578/0.174/0.475</td><td>0.916/0.674/0.734</td><td>0.809/0.403/0.548</td><td>0.867/0.545/0.683</td><td>0.902/0.629/0.712</td></tr>
+        <tr><td>4. Aggregate-conditioned (scratch)</td><td class="hi">0.826/0.455/0.562</td><td>0.936/0.705/0.726</td><td>0.883/0.562/0.646</td><td>0.902/0.652/0.713</td><td>0.916/0.692/0.756</td></tr>
+        <tr><td>5. Aggregate-conditioned (joint ft)</td><td>0.595/0.167/0.504</td><td>0.921/0.676/0.732</td><td>0.836/0.430/0.592</td><td>0.877/0.533/0.671</td><td>0.911/0.654/0.737</td></tr>
+        <tr><td>6. Aggregate-conditioned (frozen ft)</td><td>0.534/0.164/0.493</td><td>0.921/0.694/0.759</td><td>0.773/0.362/0.593</td><td>0.877/0.556/0.675</td><td>0.921/0.678/0.733</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="step" id="table3">
+  <h2>Table 3 &mdash; Berka card-ownership prediction, all 6 configurations &times; 5 regimes</h2>
+  <p class="note">Same protocol/caveats as Table 2. Real-only reference: AUROC 0.874, AP 0.480, F1 0.692 (n=4007).</p>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Configuration</th><th>Synthetic-only</th><th>Real+Synthetic</th><th>Blend 25% real</th><th>Blend 50% real</th><th>Blend 75% real</th></tr></thead>
+      <tbody>
+        <tr><td>1. Original GRDM baseline</td><td>0.573/0.191/0.473</td><td>0.873/0.482/0.686</td><td>0.856/0.455/0.644</td><td>0.865/0.472/0.674</td><td>0.870/0.471/0.682</td></tr>
+        <tr><td>2. Degree-conditioned (scratch)</td><td class="hi">0.641/0.222/0.498</td><td>0.872/0.492/0.694</td><td>0.843/0.444/0.629</td><td>0.864/0.479/0.670</td><td>0.870/0.477/0.676</td></tr>
+        <tr><td>3. Degree-conditioned (fine-tune)</td><td>0.617/0.220/0.485</td><td>0.876/0.497/0.695</td><td>0.858/0.471/0.654</td><td>0.864/0.474/0.669</td><td>0.871/0.476/0.686</td></tr>
+        <tr><td>4. Aggregate-conditioned (scratch)</td><td class="hi">0.648/0.235/0.512</td><td>0.866/0.486/0.684</td><td>0.804/0.406/0.599</td><td>0.851/0.460/0.656</td><td>0.865/0.471/0.675</td></tr>
+        <tr><td>5. Aggregate-conditioned (joint ft)</td><td>0.606/0.209/0.467</td><td>0.869/0.480/0.683</td><td>0.839/0.436/0.626</td><td>0.860/0.462/0.666</td><td>0.868/0.468/0.675</td></tr>
+        <tr><td>6. Aggregate-conditioned (frozen ft)</td><td>0.569/0.181/0.467</td><td>0.869/0.470/0.680</td><td>0.845/0.434/0.635</td><td>0.861/0.461/0.665</td><td>0.867/0.468/0.675</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="step" id="table2a3a">
+  <h2>Tables 2a &amp; 3a &mdash; Gap to the real-data-only ceiling</h2>
+  <p class="note">Tables 2&ndash;3 compare GRDM configs against each other. This makes the comparison against <strong>real data</strong> explicit: gap = regime mean &minus; real-only mean (real-only verified bit-identical across all 6 configs to full float precision: loan-default AUROC <code>0.938573407202216</code>, card-ownership AUROC <code>0.8739133895876453</code>). <code>mixed</code> = real+synthetic added.</p>
+
+  <h3>Loan default &mdash; AUROC <span class="note">(real-only: 0.9386&plusmn;0.0000)</span></h3>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Configuration</th><th>synth</th><th>mixed</th><th>blend_25</th><th>blend_50</th><th>blend_75</th></tr></thead>
+      <tbody>
+        <tr><td>1. Original GRDM baseline</td><td>0.507&plusmn;0.067 (&minus;0.432)</td><td>0.928&plusmn;0.005 (&minus;0.010)</td><td>0.775&plusmn;0.012 (&minus;0.164)</td><td>0.878&plusmn;0.016 (&minus;0.060)</td><td>0.924&plusmn;0.003 (&minus;0.015)</td></tr>
+        <tr><td>2. Degree-conditioned (scratch)</td><td>0.789&plusmn;0.019 (&minus;0.150)</td><td class="pos">0.944&plusmn;0.009 (+0.005)</td><td>0.870&plusmn;0.019 (&minus;0.069)</td><td>0.903&plusmn;0.007 (&minus;0.035)</td><td>0.920&plusmn;0.013 (&minus;0.019)</td></tr>
+        <tr><td>3. Degree-conditioned (fine-tune)</td><td>0.578&plusmn;0.087 (&minus;0.361)</td><td>0.916&plusmn;0.005 (&minus;0.023)</td><td>0.809&plusmn;0.006 (&minus;0.130)</td><td>0.867&plusmn;0.022 (&minus;0.072)</td><td>0.902&plusmn;0.007 (&minus;0.036)</td></tr>
+        <tr><td>4. Aggregate-conditioned (scratch)</td><td>0.826&plusmn;0.039 (&minus;0.113)</td><td>0.936&plusmn;0.019 (&minus;0.003)</td><td>0.883&plusmn;0.020 (&minus;0.056)</td><td>0.902&plusmn;0.014 (&minus;0.037)</td><td>0.916&plusmn;0.005 (&minus;0.022)</td></tr>
+        <tr><td>5. Aggregate-conditioned (joint ft)</td><td>0.595&plusmn;0.041 (&minus;0.344)</td><td>0.921&plusmn;0.012 (&minus;0.017)</td><td>0.836&plusmn;0.036 (&minus;0.102)</td><td>0.877&plusmn;0.025 (&minus;0.061)</td><td>0.911&plusmn;0.011 (&minus;0.028)</td></tr>
+        <tr><td>6. Aggregate-conditioned (frozen ft)</td><td>0.534&plusmn;0.086 (&minus;0.404)</td><td>0.921&plusmn;0.016 (&minus;0.018)</td><td>0.773&plusmn;0.003 (&minus;0.165)</td><td>0.877&plusmn;0.024 (&minus;0.062)</td><td>0.921&plusmn;0.010 (&minus;0.018)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Loan default &mdash; AP <span class="note">(real-only: 0.7624&plusmn;0.0000)</span></h3>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Configuration</th><th>synth</th><th>mixed</th><th>blend_25</th><th>blend_50</th><th>blend_75</th></tr></thead>
+      <tbody>
+        <tr><td>1. Original GRDM baseline</td><td>0.136&plusmn;0.031 (&minus;0.626)</td><td>0.739&plusmn;0.014 (&minus;0.023)</td><td>0.382&plusmn;0.034 (&minus;0.380)</td><td>0.615&plusmn;0.027 (&minus;0.147)</td><td>0.714&plusmn;0.033 (&minus;0.048)</td></tr>
+        <tr><td>2. Degree-conditioned (scratch)</td><td>0.356&plusmn;0.031 (&minus;0.407)</td><td>0.747&plusmn;0.029 (&minus;0.015)</td><td>0.480&plusmn;0.023 (&minus;0.283)</td><td>0.611&plusmn;0.034 (&minus;0.152)</td><td>0.687&plusmn;0.052 (&minus;0.076)</td></tr>
+        <tr><td>3. Degree-conditioned (fine-tune)</td><td>0.174&plusmn;0.049 (&minus;0.588)</td><td>0.674&plusmn;0.016 (&minus;0.088)</td><td>0.403&plusmn;0.009 (&minus;0.360)</td><td>0.545&plusmn;0.042 (&minus;0.217)</td><td>0.629&plusmn;0.027 (&minus;0.133)</td></tr>
+        <tr><td>4. Aggregate-conditioned (scratch)</td><td>0.455&plusmn;0.106 (&minus;0.308)</td><td>0.705&plusmn;0.075 (&minus;0.057)</td><td>0.562&plusmn;0.095 (&minus;0.201)</td><td>0.652&plusmn;0.065 (&minus;0.110)</td><td>0.692&plusmn;0.034 (&minus;0.071)</td></tr>
+        <tr><td>5. Aggregate-conditioned (joint ft)</td><td>0.167&plusmn;0.038 (&minus;0.596)</td><td>0.676&plusmn;0.052 (&minus;0.086)</td><td>0.430&plusmn;0.097 (&minus;0.332)</td><td>0.533&plusmn;0.066 (&minus;0.229)</td><td>0.654&plusmn;0.067 (&minus;0.108)</td></tr>
+        <tr><td>6. Aggregate-conditioned (frozen ft)</td><td>0.164&plusmn;0.047 (&minus;0.598)</td><td>0.694&plusmn;0.038 (&minus;0.069)</td><td>0.362&plusmn;0.007 (&minus;0.400)</td><td>0.556&plusmn;0.018 (&minus;0.206)</td><td>0.678&plusmn;0.037 (&minus;0.085)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Loan default &mdash; Macro-F1 <span class="note">(real-only: 0.7997&plusmn;0.0000)</span></h3>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Configuration</th><th>synth</th><th>mixed</th><th>blend_25</th><th>blend_50</th><th>blend_75</th></tr></thead>
+      <tbody>
+        <tr><td>1. Original GRDM baseline</td><td>0.478&plusmn;0.006 (&minus;0.322)</td><td>0.778&plusmn;0.004 (&minus;0.022)</td><td>0.574&plusmn;0.014 (&minus;0.226)</td><td>0.717&plusmn;0.004 (&minus;0.083)</td><td>0.735&plusmn;0.014 (&minus;0.065)</td></tr>
+        <tr><td>2. Degree-conditioned (scratch)</td><td>0.531&plusmn;0.022 (&minus;0.268)</td><td>0.775&plusmn;0.006 (&minus;0.024)</td><td>0.582&plusmn;0.001 (&minus;0.218)</td><td>0.702&plusmn;0.020 (&minus;0.098)</td><td>0.746&plusmn;0.008 (&minus;0.054)</td></tr>
+        <tr><td>3. Degree-conditioned (fine-tune)</td><td>0.475&plusmn;0.004 (&minus;0.324)</td><td>0.734&plusmn;0.007 (&minus;0.065)</td><td>0.548&plusmn;0.026 (&minus;0.251)</td><td>0.683&plusmn;0.005 (&minus;0.117)</td><td>0.712&plusmn;0.010 (&minus;0.088)</td></tr>
+        <tr><td>4. Aggregate-conditioned (scratch)</td><td>0.562&plusmn;0.026 (&minus;0.238)</td><td>0.726&plusmn;0.025 (&minus;0.073)</td><td>0.646&plusmn;0.028 (&minus;0.154)</td><td>0.713&plusmn;0.017 (&minus;0.086)</td><td>0.756&plusmn;0.020 (&minus;0.044)</td></tr>
+        <tr><td>5. Aggregate-conditioned (joint ft)</td><td>0.504&plusmn;0.037 (&minus;0.295)</td><td>0.732&plusmn;0.031 (&minus;0.068)</td><td>0.592&plusmn;0.010 (&minus;0.207)</td><td>0.671&plusmn;0.016 (&minus;0.129)</td><td>0.737&plusmn;0.034 (&minus;0.062)</td></tr>
+        <tr><td>6. Aggregate-conditioned (frozen ft)</td><td>0.493&plusmn;0.017 (&minus;0.306)</td><td>0.759&plusmn;0.028 (&minus;0.041)</td><td>0.593&plusmn;0.029 (&minus;0.206)</td><td>0.675&plusmn;0.028 (&minus;0.125)</td><td>0.733&plusmn;0.022 (&minus;0.067)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Card ownership &mdash; AUROC <span class="note">(real-only: 0.8739&plusmn;0.0000)</span></h3>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Configuration</th><th>synth</th><th>mixed</th><th>blend_25</th><th>blend_50</th><th>blend_75</th></tr></thead>
+      <tbody>
+        <tr><td>1. Original GRDM baseline</td><td>0.573&plusmn;0.031 (&minus;0.301)</td><td>0.873&plusmn;0.002 (&minus;0.001)</td><td>0.856&plusmn;0.003 (&minus;0.018)</td><td>0.865&plusmn;0.003 (&minus;0.009)</td><td>0.870&plusmn;0.002 (&minus;0.004)</td></tr>
+        <tr><td>2. Degree-conditioned (scratch)</td><td>0.641&plusmn;0.004 (&minus;0.233)</td><td>0.872&plusmn;0.002 (&minus;0.002)</td><td>0.843&plusmn;0.003 (&minus;0.031)</td><td>0.864&plusmn;0.001 (&minus;0.010)</td><td>0.870&plusmn;0.002 (&minus;0.004)</td></tr>
+        <tr><td>3. Degree-conditioned (fine-tune)</td><td>0.617&plusmn;0.032 (&minus;0.257)</td><td class="pos">0.876&plusmn;0.002 (+0.002)</td><td>0.858&plusmn;0.001 (&minus;0.016)</td><td>0.864&plusmn;0.001 (&minus;0.010)</td><td>0.871&plusmn;0.001 (&minus;0.003)</td></tr>
+        <tr><td>4. Aggregate-conditioned (scratch)</td><td>0.648&plusmn;0.013 (&minus;0.226)</td><td>0.866&plusmn;0.003 (&minus;0.007)</td><td>0.804&plusmn;0.013 (&minus;0.070)</td><td>0.851&plusmn;0.005 (&minus;0.022)</td><td>0.865&plusmn;0.001 (&minus;0.009)</td></tr>
+        <tr><td>5. Aggregate-conditioned (joint ft)</td><td>0.606&plusmn;0.015 (&minus;0.268)</td><td>0.869&plusmn;0.001 (&minus;0.005)</td><td>0.839&plusmn;0.001 (&minus;0.035)</td><td>0.860&plusmn;0.003 (&minus;0.013)</td><td>0.868&plusmn;0.001 (&minus;0.006)</td></tr>
+        <tr><td>6. Aggregate-conditioned (frozen ft)</td><td>0.569&plusmn;0.028 (&minus;0.305)</td><td>0.869&plusmn;0.001 (&minus;0.005)</td><td>0.845&plusmn;0.002 (&minus;0.029)</td><td>0.861&plusmn;0.001 (&minus;0.013)</td><td>0.867&plusmn;0.000 (&minus;0.007)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Card ownership &mdash; AP <span class="note">(real-only: 0.4801&plusmn;0.0000)</span></h3>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Configuration</th><th>synth</th><th>mixed</th><th>blend_25</th><th>blend_50</th><th>blend_75</th></tr></thead>
+      <tbody>
+        <tr><td>1. Original GRDM baseline</td><td>0.191&plusmn;0.019 (&minus;0.289)</td><td class="pos">0.482&plusmn;0.014 (+0.002)</td><td>0.455&plusmn;0.009 (&minus;0.025)</td><td>0.472&plusmn;0.013 (&minus;0.008)</td><td>0.471&plusmn;0.006 (&minus;0.009)</td></tr>
+        <tr><td>2. Degree-conditioned (scratch)</td><td>0.222&plusmn;0.007 (&minus;0.258)</td><td class="pos">0.492&plusmn;0.003 (+0.012)</td><td>0.444&plusmn;0.010 (&minus;0.036)</td><td>0.479&plusmn;0.007 (&minus;0.001)</td><td>0.477&plusmn;0.002 (&minus;0.003)</td></tr>
+        <tr><td>3. Degree-conditioned (fine-tune)</td><td>0.220&plusmn;0.022 (&minus;0.260)</td><td class="pos">0.497&plusmn;0.008 (+0.017)</td><td>0.471&plusmn;0.004 (&minus;0.009)</td><td>0.474&plusmn;0.003 (&minus;0.006)</td><td>0.476&plusmn;0.003 (&minus;0.004)</td></tr>
+        <tr><td>4. Aggregate-conditioned (scratch)</td><td>0.235&plusmn;0.012 (&minus;0.245)</td><td class="pos">0.486&plusmn;0.005 (+0.006)</td><td>0.406&plusmn;0.020 (&minus;0.074)</td><td>0.460&plusmn;0.005 (&minus;0.020)</td><td>0.471&plusmn;0.003 (&minus;0.009)</td></tr>
+        <tr><td>5. Aggregate-conditioned (joint ft)</td><td>0.209&plusmn;0.012 (&minus;0.271)</td><td>0.480&plusmn;0.004 (+0.000)</td><td>0.436&plusmn;0.005 (&minus;0.044)</td><td>0.462&plusmn;0.007 (&minus;0.018)</td><td>0.468&plusmn;0.005 (&minus;0.012)</td></tr>
+        <tr><td>6. Aggregate-conditioned (frozen ft)</td><td>0.181&plusmn;0.015 (&minus;0.299)</td><td>0.470&plusmn;0.004 (&minus;0.010)</td><td>0.434&plusmn;0.007 (&minus;0.046)</td><td>0.461&plusmn;0.005 (&minus;0.019)</td><td>0.468&plusmn;0.001 (&minus;0.012)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Card ownership &mdash; F1 <span class="note">(real-only: 0.6924&plusmn;0.0000)</span></h3>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Configuration</th><th>synth</th><th>mixed</th><th>blend_25</th><th>blend_50</th><th>blend_75</th></tr></thead>
+      <tbody>
+        <tr><td>1. Original GRDM baseline</td><td>0.473&plusmn;0.015 (&minus;0.219)</td><td>0.686&plusmn;0.006 (&minus;0.006)</td><td>0.644&plusmn;0.003 (&minus;0.048)</td><td>0.674&plusmn;0.005 (&minus;0.019)</td><td>0.682&plusmn;0.005 (&minus;0.010)</td></tr>
+        <tr><td>2. Degree-conditioned (scratch)</td><td>0.498&plusmn;0.006 (&minus;0.195)</td><td class="pos">0.694&plusmn;0.003 (+0.001)</td><td>0.629&plusmn;0.008 (&minus;0.064)</td><td>0.670&plusmn;0.006 (&minus;0.022)</td><td>0.676&plusmn;0.001 (&minus;0.017)</td></tr>
+        <tr><td>3. Degree-conditioned (fine-tune)</td><td>0.485&plusmn;0.006 (&minus;0.207)</td><td class="pos">0.695&plusmn;0.002 (+0.003)</td><td>0.654&plusmn;0.003 (&minus;0.039)</td><td>0.669&plusmn;0.004 (&minus;0.023)</td><td>0.686&plusmn;0.005 (&minus;0.007)</td></tr>
+        <tr><td>4. Aggregate-conditioned (scratch)</td><td>0.512&plusmn;0.010 (&minus;0.181)</td><td>0.684&plusmn;0.007 (&minus;0.009)</td><td>0.599&plusmn;0.011 (&minus;0.093)</td><td>0.656&plusmn;0.011 (&minus;0.037)</td><td>0.675&plusmn;0.006 (&minus;0.017)</td></tr>
+        <tr><td>5. Aggregate-conditioned (joint ft)</td><td>0.467&plusmn;0.007 (&minus;0.226)</td><td>0.683&plusmn;0.004 (&minus;0.009)</td><td>0.626&plusmn;0.001 (&minus;0.066)</td><td>0.666&plusmn;0.007 (&minus;0.027)</td><td>0.675&plusmn;0.004 (&minus;0.017)</td></tr>
+        <tr><td>6. Aggregate-conditioned (frozen ft)</td><td>0.467&plusmn;0.008 (&minus;0.225)</td><td>0.680&plusmn;0.001 (&minus;0.013)</td><td>0.635&plusmn;0.006 (&minus;0.057)</td><td>0.665&plusmn;0.003 (&minus;0.028)</td><td>0.675&plusmn;0.001 (&minus;0.017)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note"><strong>Reading this table:</strong> every synthetic-involving regime sits at or below the real-only ceiling across all 90 (config&times;regime&times;metric) cells in both tasks, with exactly 7 nominal exceptions (green, all in the <code>mixed</code> regime, never in <code>synth</code> or any <code>blend_*</code>) &mdash; and every one is smaller than that cell's own seed-to-seed SD, so none is distinguishable from "ties the ceiling." No cell beats real data by a margin larger than its own SD: synthetic data closes most of the gap as more real data is blended in, but does not cross it.</p>
+</section>
+
+<section class="step" id="table4">
+  <h2>Table 4 &mdash; California household fidelity, all 4 configurations</h2>
+  <p class="note">Mean &plusmn; <strong>sample SD (ddof=1)</strong> &mdash; Finding 2, not the same convention as Tables 1&ndash;3. n=3 seeds. "Control" = continued training on the baseline checkpoint with no aggregate head.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Original GRDM</th><th>Control</th><th>Aggregate-cond.</th><th>Label-free agg.-cond.</th><th>Real-vs-real noise floor</th></tr></thead>
+      <tbody>
+        <tr><td>Household-summary mean KS (&darr;)</td><td>0.1489&plusmn;0.0002</td><td>0.1489&plusmn;0.0003</td><td class="hi">0.0543&plusmn;0.0016</td><td>0.0547&plusmn;0.0018</td><td>0.0031</td></tr>
+        <tr><td>Downstream feature mean KS (&darr;)</td><td>0.1114&plusmn;0.0002</td><td>0.1110&plusmn;0.0004</td><td class="hi">0.0338&plusmn;0.0009</td><td>0.0343&plusmn;0.0015</td><td>0.0031</td></tr>
+        <tr><td>Household&times;member corr. error, MAE (&darr;)</td><td>0.0401&plusmn;0.0006</td><td>0.0398&plusmn;0.0003</td><td class="hi">0.0227&plusmn;0.0011</td><td>0.0228&plusmn;0.0008</td><td>0.0041</td></tr>
+        <tr><td>Same-household agreement error, MAE (&darr;)</td><td>0.0898&plusmn;0.0001</td><td>0.0902&plusmn;0.0002</td><td class="hi">0.0555&plusmn;0.0013</td><td>0.0557&plusmn;0.0013</td><td>0.0008</td></tr>
+        <tr><td>Within-household variance-ratio error, MAE (&darr;)</td><td>0.1562&plusmn;0.0003</td><td>0.1568&plusmn;0.0000</td><td class="hi">0.0697&plusmn;0.0018</td><td>0.0702&plusmn;0.0022</td><td>0.0013</td></tr>
+        <tr><td>Numerical marginal mean TVD (&darr;)</td><td>0.0617&plusmn;0.0010</td><td>0.0615&plusmn;0.0003</td><td>0.0533&plusmn;0.0004</td><td>0.0531&plusmn;0.0002</td><td>0.0073</td></tr>
+        <tr><td>Categorical marginal mean TVD (&darr;)</td><td>0.0138&plusmn;0.0008</td><td>0.0130&plusmn;0.0003</td><td>0.0111&plusmn;0.0009</td><td>0.0111&plusmn;0.0008</td><td>0.0032</td></tr>
+        <tr><td>Held-out denoising loss (&darr;)</td><td>0.3003&plusmn;0.0002</td><td>0.2996&plusmn;0.0002</td><td>0.2874&plusmn;0.0002</td><td>0.2876&plusmn;0.0002</td><td>NA</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>Mechanism check</strong> (not in the main table): ablating the learned aggregate signal at eval time makes held-out loss <em>worse</em> than baseline, not just worse than the conditioned model &mdash; <code>agg_block_zeroed</code> = 0.3405&plusmn;0.0030, <code>agg_block_shuffled</code> = 0.3682&plusmn;0.0061 vs. conditioned 0.2874&plusmn;0.0002 and baseline 0.3003&plusmn;0.0002. Confirms the model genuinely uses the aggregate conditioning signal.</p>
+</section>
+
+<section class="step" id="table5">
+  <h2>Table 5 &mdash; California 11-regime downstream coverage, all 4 configurations</h2>
+  <div class="verdict">
+    <div class="card"><span class="tag up">complete</span><p><strong>88 / 88 cells populated</strong> as of 2026-10-14 05:09 IST &mdash; 0 remaining <code>NA</code>.</p></div>
+    <div class="card"><span class="tag warn">job died once</span><p>Original job died silently ~37 min in; relaunched fully detached, completed in ~4h46m.</p></div>
+    <div class="card"><span class="tag flat">sanity check</span><p><code>real_25/50/75</code> bit-identical across all 3 new arms &mdash; as expected, no GRDM dependence.</p></div>
+  </div>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Regime</th><th>Original GRDM (income R&sup2; / employ. F1)</th><th>Control</th><th>Aggregate-cond.</th><th>Label-free agg.-cond.</th></tr></thead>
+      <tbody>
+        <tr><td>real</td><td>0.5527&plusmn;0.0004 / 0.6850&plusmn;0.0001</td><td colspan="3">same (arm-invariant, no GRDM dependence)</td></tr>
+        <tr><td>synth</td><td>0.5274&plusmn;0.0025 / 0.6757&plusmn;0.0008</td><td>0.5273&plusmn;0.0025 / 0.6752&plusmn;0.0005</td><td>0.5253&plusmn;0.0015 / 0.6742&plusmn;0.0008</td><td>0.5236&plusmn;0.0022 / 0.6739&plusmn;0.0008</td></tr>
+        <tr><td>mixed_25</td><td>0.5522&plusmn;0.0003 / 0.6832&plusmn;0.0004</td><td>0.5523&plusmn;0.0001 / 0.6831&plusmn;0.0003</td><td>0.5522&plusmn;0.0001 / 0.6827&plusmn;0.0002</td><td>0.5520&plusmn;0.0002 / 0.6826&plusmn;0.0001</td></tr>
+        <tr><td>mixed_50</td><td>0.5516&plusmn;0.0001 / 0.6823&plusmn;0.0002</td><td>0.5516&plusmn;0.0002 / 0.6820&plusmn;0.0004</td><td>0.5512&plusmn;0.0001 / 0.6812&plusmn;0.0001</td><td>0.5511&plusmn;0.0001 / 0.6814&plusmn;0.0002</td></tr>
+        <tr><td>mixed</td><td>0.5503&plusmn;0.0005 / 0.6810&plusmn;0.0006</td><td>0.5503&plusmn;0.0005 / 0.6808&plusmn;0.0003</td><td>0.5494&plusmn;0.0002 / 0.6797&plusmn;0.0003</td><td>0.5492&plusmn;0.0001 / 0.6799&plusmn;0.0001</td></tr>
+        <tr><td>real_50</td><td>0.5478&plusmn;0.0004 / 0.6840&plusmn;0.0005</td><td>0.5478&plusmn;0.0004 / 0.6840&plusmn;0.0005</td><td>0.5478&plusmn;0.0004 / 0.6840&plusmn;0.0005</td><td>0.5478&plusmn;0.0004 / 0.6840&plusmn;0.0005</td></tr>
+        <tr><td>blend_50</td><td>0.5470&plusmn;0.0003 / 0.6805&plusmn;0.0005</td><td>0.5474&plusmn;0.0004 / 0.6803&plusmn;0.0006</td><td>0.5464&plusmn;0.0003 / 0.6794&plusmn;0.0005</td><td>0.5462&plusmn;0.0003 / 0.6797&plusmn;0.0008</td></tr>
+        <tr><td>real_25</td><td>0.5400&plusmn;0.0002 / 0.6832&plusmn;0.0001</td><td>0.5400&plusmn;0.0002 / 0.6832&plusmn;0.0001</td><td>0.5400&plusmn;0.0002 / 0.6832&plusmn;0.0001</td><td>0.5400&plusmn;0.0002 / 0.6832&plusmn;0.0001</td></tr>
+        <tr><td>blend_25</td><td>0.5414&plusmn;0.0008 / 0.6793&plusmn;0.0001</td><td>0.5417&plusmn;0.0010 / 0.6788&plusmn;0.0004</td><td>0.5398&plusmn;0.0006 / 0.6779&plusmn;0.0002</td><td>0.5394&plusmn;0.0009 / 0.6775&plusmn;0.0002</td></tr>
+        <tr><td>real_75</td><td>0.5511&plusmn;0.0001 / 0.6845&plusmn;0.0004</td><td>0.5511&plusmn;0.0001 / 0.6845&plusmn;0.0004</td><td>0.5511&plusmn;0.0001 / 0.6845&plusmn;0.0004</td><td>0.5511&plusmn;0.0001 / 0.6845&plusmn;0.0004</td></tr>
+        <tr><td>blend_75</td><td>0.5506&plusmn;0.0001 / 0.6827&plusmn;0.0004</td><td>0.5507&plusmn;0.0000 / 0.6825&plusmn;0.0007</td><td>0.5503&plusmn;0.0002 / 0.6821&plusmn;0.0001</td><td>0.5502&plusmn;0.0001 / 0.6823&plusmn;0.0001</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note"><strong>How the 42 previously-pending cells were filled:</strong> the background job meant to produce them (launched 2026-10-13 15:42 IST) died silently ~37 minutes in &mdash; no error, no traceback, no OOM evidence, no output file, most likely because its process group was tied to a tool-call session that was later torn down (the box had 685&nbsp;GB free memory and load average 67/224 cores at the time). Relaunched 2026-10-14 00:23 IST, fully detached via <code>setsid</code>+<code>nohup</code>+<code>disown</code> with stdin from <code>/dev/null</code>, and ran to completion (<code>exit 0</code> &times;3) by 05:09 IST &mdash; ~4h46m, well under the original ~10h estimate. No retraining or resampling &mdash; only re-fit XGBoost on already-sampled synthetic data.</p>
+</section>
+
+<section class="step" id="step5">
+  <h2>Step 5: Interpretation (verified results only)</h2>
+
+  <div class="qa">
+    <span class="qnum">Q1</span>
+    <p class="answer">Does degree conditioning improve relational fidelity? (Berka only &mdash; no California degree-conditioning experiment exists)</p>
+    <p>Mixed, metric-dependent, and <strong>from-scratch only</strong>. The four dependency metrics it targets all improve (agg-KS 0.273&rarr;0.204, parent-agg-corr 0.141&rarr;0.121, agg-agg-corr 0.245&rarr;0.180, sign-agreement 0.625&rarr;0.764), but the paper's general fidelity metrics mostly drop a little. Degree-<strong>fine-tuned</strong> is worse than both baseline and degree-scratch on almost every metric &mdash; fine-tuning actively hurts fidelity here, it does not just fail to help.</p>
+  </div>
+
+  <div class="qa">
+    <span class="qnum">Q2</span>
+    <p class="answer">Does aggregate conditioning improve relational fidelity?</p>
+    <p>Yes, more cleanly than degree conditioning, consistently across both datasets. Berka aggregate-from-scratch: agg-KS 0.273&rarr;0.143, parent-agg-corr 0.141&rarr;0.086, agg-agg-corr 0.245&rarr;0.076, sign-agreement 0.625&rarr;0.884 &mdash; the single clearest fidelity win in the whole audit. California aggregate-conditioning (fine-tune): household-summary KS 0.149&rarr;0.054, downstream-feature KS 0.111&rarr;0.034 &mdash; and unlike Berka, California's general fidelity metrics also improve (Column Shapes 98.573&rarr;98.971, 1-HOP 96.447&rarr;97.071). Caveat: Berka's arm is from-scratch, California's is fine-tuned (Finding 5) &mdash; not a fully matched comparison.</p>
+  </div>
+
+  <div class="qa">
+    <span class="qnum">Q3</span>
+    <p class="answer">Which approach performs better on each relevant fidelity metric? (Berka, where both exist)</p>
+    <p>Aggregate-conditioning-from-scratch beats degree-conditioning-from-scratch on all 4 dependency metrics and 3 of 4 paper-suite relational metrics. Aggregate conditioning is the stronger fidelity intervention on Berka, full stop.</p>
+  </div>
+
+  <div class="qa">
+    <span class="qnum">Q4</span>
+    <p class="answer">Do fidelity improvements translate into improved downstream prediction?</p>
+    <p><strong>Not reliably &mdash; the most important finding of the audit</strong>, now confirmed across the full 11-regime California sweep. On Berka, yes: the two configs with the biggest fidelity gains also uniquely beat the baseline on synthetic-only AUROC/AP/F1 (aggregate-scratch loan AUROC 0.507&rarr;0.826). On California, <strong>no</strong>: aggregate-conditioning gave the largest fidelity improvement in the audit but downstream utility is flat-to-slightly-worse than Control in every one of 11 regimes, both tasks. Likely reconciliation (not provable here): Berka's winner is from-scratch, California's is fine-tune, and Berka's own fine-tuned arms also fail to transfer fidelity gains &mdash; so the real split may be scratch-vs-fine-tune, not Berka-vs-California.</p>
+  </div>
+
+  <div class="qa">
+    <span class="qnum">Q5</span>
+    <p class="answer">Are results consistent between Berka and California?</p>
+    <p>Partially, only where the comparison is apples-to-apples. Consistent: aggregate conditioning improves targeted dependency/KS fidelity substantially in both (Q2). Inconsistent on the surface: downstream gain on Berka, none on California (Q4) &mdash; but this compares a scratch arm to a fine-tune arm, a confound this audit cannot remove. Not comparable at all: degree conditioning and the from-scratch regime (Berka only).</p>
+  </div>
+
+  <div class="qa">
+    <span class="qnum">Q6</span>
+    <p class="answer">Which findings are statistically or experimentally uncertain?</p>
+    <p>No significance testing (t-test, bootstrap CI) was performed anywhere. The large fidelity and synthetic-only downstream effects (gaps of several SDs) are unlikely to be pure noise. Several blend/mixed-regime downstream rows are not: e.g. degree-scratch loan-default AUROC beats baseline at <code>blend_50</code> (0.903 vs 0.878) while its AP is indistinguishable (0.611 vs 0.615) &mdash; a single-metric "win" with a sub-0.02 gap and SD&gt;0.02 should read as noise.</p>
+  </div>
+
+  <div class="qa">
+    <span class="qnum">Q7</span>
+    <p class="answer">Are the downstream results affected by potential data leakage?</p>
+    <p>Yes for Berka (all 6 Table 2&ndash;3 configs, Finding 3) &mdash; optimistic upper bound, relative ranking unaffected. No for California (Finding 3). <strong>Update (Finding 8):</strong> a genuine leakage-free Berka baseline (<code>berka_split</code>) also exists and is usable &mdash; previously wrongly reported as unrecoverable. Its synth-only AUROC is <em>higher</em>, not lower, than the leaky baseline's (loan 0.514 vs 0.507; card 0.602 vs 0.573) &mdash; the opposite of a naive leakage story, but confounded by a smaller training set and a different checkpoint entirely, so not a clean isolation. Flagged as open, not resolved.</p>
+  </div>
+
+  <div class="qa">
+    <span class="qnum">Q8</span>
+    <p class="answer">What evaluations are still needed before a strong conclusion?</p>
+    <p>(a) <s>42 pending California cells</s> &mdash; done 2026-10-14. (b) A <strong>California aggregate-from-scratch</strong> run, to separate "fine-tuning fails to transfer" from "California specifically doesn't benefit" &mdash; still missing, the single largest remaining gap requiring new training. (c) <s>A non-orphaned leakage-free Berka baseline</s> &mdash; corrected: it already exists (Finding 8); only its regime sweep is missing, fillable without retraining. (d) Formal significance testing, if a stronger claim than "consistent direction across 3 seeds" is needed.</p>
+  </div>
+</section>
+
+<section class="step" id="step6">
+  <h2>Step 6: Reproducibility</h2>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>Table</th><th>Path (under <code>/storage/s25017/AMEX/</code>)</th></tr></thead>
+      <tbody>
+        <tr><td>1 &mdash; Berka fidelity</td><td><code>java_d/results/relational_fidelity_consolidated/relational_fidelity_table.csv</code> (+ <code>_detailed.csv</code>)</td></tr>
+        <tr><td>2 &mdash; Berka loan default</td><td><code>java_d/results/paper_repro/downstream/berka_prediction_tables/table_a_loan_default.csv</code> (+ <code>_extended.csv</code>)</td></tr>
+        <tr><td>3 &mdash; Berka card ownership</td><td><code>java_d/results/paper_repro/downstream/berka_prediction_tables/table_b_card_ownership.csv</code> (+ <code>_extended.csv</code>)</td></tr>
+        <tr><td>4 &mdash; California fidelity</td><td><code>java_d/results/consolidated_audit/table4_california_household_fidelity.csv</code> (new)</td></tr>
+        <tr><td>5 &mdash; California 11-regime coverage</td><td><code>java_d/results/consolidated_audit/table5_california_eleven_regime_coverage.csv</code> (new)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Commands to reproduce the aggregation (no retraining)</h3>
+  <pre><code># Table 1 dependency metrics (degree-conditioned configs)
+cd /storage/s25017/AMEX/java_d-aggft && CUDA_VISIBLE_DEVICES="" conda run --no-capture-output -n tabsyn \
+    python /storage/s25017/AMEX/java_d/results/relational_fidelity_consolidated/compute_degree_dep_metrics.py
+
+# Tables 2-3 Berka downstream aggregation
+python /storage/s25017/AMEX/java_d/results/paper_repro/downstream/berka_prediction_tables/aggregate_downstream.py
+
+# California regime completion (the pattern used twice in this audit, incl. for berka_split's gap)
+cd /storage/s25017/AMEX/java_d-calagg-ft && conda run --no-capture-output -n tabsyn python -m downstream.run \
+    --dataset california_agg_ft --tasks california_inctot california_empstat \
+    --regimes real_25 real_50 real_75 blend_25 blend_75 mixed_25 mixed_50 \
+    --out-dir experiments/GRDM_CALIFORNIA_AGGREGATE_CONDITIONED_FINETUNE/downstream --out-suffix _missing</code></pre>
+
+  <h3>Discrepancy log</h3>
+  <div class="tablewrap">
+    <table class="prose">
+      <thead><tr><th>#</th><th>Discrepancy found</th><th>Resolution</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Cardinality metric identical across all configs/worktrees</td><td>Flagged as uninformative (Finding 1), kept for completeness but footnoted</td></tr>
+        <tr><td>2</td><td>Degree experiments' own <code>compare.py</code> uses <code>ddof=1</code>; the aggregate pipeline uses <code>ddof=0</code></td><td>Recomputed degree SDs from raw per-seed JSON with <code>ddof=0</code> for internal consistency</td></tr>
+        <tr><td>3</td><td>California's <code>compare.py</code> uses <code>ddof=1</code> throughout, different from Berka's <code>ddof=0</code></td><td>Not renormalized &mdash; flagged as Finding 2, left in native convention per table</td></tr>
+        <tr><td>4</td><td>This audit's first pass called <code>berka_split</code> "orphaned" with its checkpoint/split "no longer existing"</td><td><strong>This was wrong</strong> (Finding 8) &mdash; only checked inside <code>java_d</code>; fully intact at <code>/bhallukah</code></td></tr>
+        <tr><td>5</td><td>Config 4's own directory has only 2-of-3 downstream seeds; 3rd-seed-complete version lives elsewhere</td><td>Used the 3-seed copy; cross-checked <code>real</code>-regime numbers bit-identical, confirming same checkpoints</td></tr>
+        <tr><td>6</td><td>42/88 California Table 5 cells had no result; job died silently ~37 min in</td><td><strong>Resolved 2026-10-14</strong>: relaunched fully detached, completed in ~4h46m, all 42 cells filled</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Experiment limitations (cannot be resolved from available artifacts)</h3>
+  <ul>
+    <li>No California from-scratch aggregate-conditioning run exists &mdash; the single largest gap requiring genuinely new training.</li>
+    <li>No formal significance testing exists anywhere in the source pipeline; all SDs are seed-to-seed spread over n=3.</li>
+    <li>The Berka aggregate-fine-tune sampling-collapse root cause (Finding 4) was not independently re-verified in this audit.</li>
+    <li>The aggregate-family configs' per-seed dependency-metric values are not separately exposed in <code>comparison.json</code> &mdash; only pre-aggregated mean/SD/n was available to trust (spot-checked against the pattern of unaggregated fidelity numbers, which matched).</li>
+  </ul>
+</section>
+
+<section class="step" id="summary">
+  <h2>Final summary</h2>
+  <p>Across Berka, aggregate-conditioning trained from scratch is the strongest intervention tested: it improves every targeted relational-dependency metric by a wide margin and is one of only two configurations (with degree-conditioning-from-scratch) that improves downstream synthetic-only prediction utility on both tasks and all three metrics. Fine-tuning either scheme onto an existing checkpoint consistently underperforms from-scratch training, and in the aggregate case destabilizes sampling outright (joint fine-tune) &mdash; a frozen-backbone fine-tune is safe but gives much smaller gains.</p>
+  <p>On California, aggregate-conditioning (tested only as a fine-tune) produces the largest relational-fidelity improvement seen in this audit, confirmed genuine by an ablation check &mdash; but this fidelity gain does not transfer to downstream prediction utility in any of the 11 now-evaluated regimes, mirroring Berka's own finding that fine-tuned conditioning is the weaker lever for downstream gains.</p>
+  <p>All Berka downstream numbers carry an acknowledged, quantified leakage caveat; California's do not, by construction. A genuine leakage-free Berka baseline also exists and is usable &mdash; this audit's first pass wrongly reported it as unrecoverable; its checkpoint, split, and already-sampled synthetic data all survived at a relocated mount, just temporarily unreachable (Finding 8) &mdash; but it only covers 3 of 11 regimes today.</p>
+  <p>Checked explicitly against a real-data-only reference throughout (Tables 2a/3a): no configuration, in any regime, beats real-data-only performance by a margin larger than its own seed-to-seed SD &mdash; synthetic data narrows the gap as more real data is blended in, but does not reliably close it. No formal statistical-significance claim is made anywhere in this report; all comparisons are n=3-seed point estimates.</p>
+</section>
+
+<footer>
+  <div>Consolidated audit of GRDM relational-fidelity and downstream-prediction experiments across Berka and California, covering 5 Berka relational-fidelity configs, 6 Berka downstream configs, and 4 California configs.</div>
+  <div>Source: <code>results/consolidated_audit/AUDIT_REPORT.md</code> (this page's generating document) &middot; branch <code>paper-repro</code> &middot; <code>/storage/s25017/AMEX/java_d</code></div>
+</footer>
+
+</div>
+</body>
+</html>

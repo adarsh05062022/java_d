@@ -1,0 +1,123 @@
+{
+  "tables": {
+    "district": {
+      "rows_real": 77,
+      "rows_syn": 77,
+      "columns_match": true,
+      "column_order_as_real_csv": false,
+      "non_integer_cols_vs_real": [
+        "A11",
+        "A14",
+        "A15",
+        "A16",
+        "A4",
+        "A5",
+        "A6"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "pk_unique": true,
+      "pk_consecutive": true,
+      "n_nan": 0
+    },
+    "client": {
+      "rows_real": 5369,
+      "rows_syn": 5369,
+      "columns_match": true,
+      "column_order_as_real_csv": true,
+      "non_integer_cols_vs_real": [],
+      "missing_columns": [],
+      "extra_columns": [],
+      "pk_unique": true,
+      "pk_consecutive": true,
+      "n_nan": 0
+    },
+    "account": {
+      "rows_real": 4500,
+      "rows_syn": 4500,
+      "columns_match": true,
+      "column_order_as_real_csv": false,
+      "non_integer_cols_vs_real": [
+        "account_date"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "pk_unique": true,
+      "pk_consecutive": true,
+      "n_nan": 0
+    },
+    "disp": {
+      "rows_real": 5369,
+      "rows_syn": 5355,
+      "columns_match": true,
+      "column_order_as_real_csv": true,
+      "non_integer_cols_vs_real": [],
+      "missing_columns": [],
+      "extra_columns": [],
+      "pk_unique": true,
+      "pk_consecutive": true,
+      "n_nan": 0
+    },
+    "card": {
+      "rows_real": 892,
+      "rows_syn": 895,
+      "columns_match": true,
+      "column_order_as_real_csv": false,
+      "non_integer_cols_vs_real": [
+        "issued"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "pk_unique": true,
+      "pk_consecutive": true,
+      "n_nan": 0
+    },
+    "loan": {
+      "rows_real": 682,
+      "rows_syn": 679,
+      "columns_match": true,
+      "column_order_as_real_csv": true,
+      "non_integer_cols_vs_real": [
+        "amount",
+        "loan_date",
+        "payments"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "pk_unique": true,
+      "pk_consecutive": true,
+      "n_nan": 0
+    },
+    "order": {
+      "rows_real": 6471,
+      "rows_syn": 6442,
+      "columns_match": true,
+      "column_order_as_real_csv": false,
+      "non_integer_cols_vs_real": [
+        "account_to"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "pk_unique": true,
+      "pk_consecutive": true,
+      "n_nan": 0
+    },
+    "trans": {
+      "rows_real": 1056320,
+      "rows_syn": 1052012,
+      "columns_match": true,
+      "column_order_as_real_csv": false,
+      "non_integer_cols_vs_real": [
+        "account",
+        "trans_date"
+      ],
+      "missing_columns": [],
+      "extra_columns": [],
+      "pk_unique": true,
+      "pk_consecutive": true,
+      "n_nan": 0
+    }
+  },
+  "fk_integrity": "ok",
+  "passed": true
+}

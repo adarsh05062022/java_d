@@ -1,0 +1,9 @@
+{
+ "total": 8645529,
+ "gnn": 66304,
+ "mlps": 8542745,
+ "projs": 3456,
+ "time_embed": 33024,
+ "size_proj": 0,
+ "sibling_attention": 0
+}

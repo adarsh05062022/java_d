@@ -1,0 +1,31 @@
+Configuration,Training regime,AUROC,AP,F1,N seeds
+1. Original GRDM baseline,Synthetic-only,0.573 ± 0.031,0.191 ± 0.019,0.473 ± 0.015,3
+1. Original GRDM baseline,Real + Synthetic (full add),0.873 ± 0.002,0.482 ± 0.014,0.686 ± 0.006,3
+1. Original GRDM baseline,Mixed 25% real / 75% synth,0.856 ± 0.003,0.455 ± 0.009,0.644 ± 0.003,3
+1. Original GRDM baseline,Mixed 50% real / 50% synth,0.865 ± 0.003,0.472 ± 0.013,0.674 ± 0.005,3
+1. Original GRDM baseline,Mixed 75% real / 25% synth,0.870 ± 0.002,0.471 ± 0.006,0.682 ± 0.005,3
+2. Degree-conditioned GRDM (scratch),Synthetic-only,0.641 ± 0.004,0.222 ± 0.007,0.498 ± 0.006,3
+2. Degree-conditioned GRDM (scratch),Real + Synthetic (full add),0.872 ± 0.002,0.492 ± 0.003,0.694 ± 0.003,3
+2. Degree-conditioned GRDM (scratch),Mixed 25% real / 75% synth,0.843 ± 0.003,0.444 ± 0.010,0.629 ± 0.008,3
+2. Degree-conditioned GRDM (scratch),Mixed 50% real / 50% synth,0.864 ± 0.001,0.479 ± 0.007,0.670 ± 0.006,3
+2. Degree-conditioned GRDM (scratch),Mixed 75% real / 25% synth,0.870 ± 0.002,0.477 ± 0.002,0.676 ± 0.001,3
+3. Degree-conditioned GRDM (fine-tuned from baseline ckpt),Synthetic-only,0.617 ± 0.032,0.220 ± 0.022,0.485 ± 0.006,3
+3. Degree-conditioned GRDM (fine-tuned from baseline ckpt),Real + Synthetic (full add),0.876 ± 0.002,0.497 ± 0.008,0.695 ± 0.002,3
+3. Degree-conditioned GRDM (fine-tuned from baseline ckpt),Mixed 25% real / 75% synth,0.858 ± 0.001,0.471 ± 0.004,0.654 ± 0.003,3
+3. Degree-conditioned GRDM (fine-tuned from baseline ckpt),Mixed 50% real / 50% synth,0.864 ± 0.001,0.474 ± 0.003,0.669 ± 0.004,3
+3. Degree-conditioned GRDM (fine-tuned from baseline ckpt),Mixed 75% real / 25% synth,0.871 ± 0.001,0.476 ± 0.003,0.686 ± 0.005,3
+4. Aggregate-conditioned GRDM (scratch),Synthetic-only,0.648 ± 0.013,0.235 ± 0.012,0.512 ± 0.010,3
+4. Aggregate-conditioned GRDM (scratch),Real + Synthetic (full add),0.866 ± 0.003,0.486 ± 0.005,0.684 ± 0.007,3
+4. Aggregate-conditioned GRDM (scratch),Mixed 25% real / 75% synth,0.804 ± 0.013,0.406 ± 0.020,0.599 ± 0.011,3
+4. Aggregate-conditioned GRDM (scratch),Mixed 50% real / 50% synth,0.851 ± 0.005,0.460 ± 0.005,0.656 ± 0.011,3
+4. Aggregate-conditioned GRDM (scratch),Mixed 75% real / 25% synth,0.865 ± 0.001,0.471 ± 0.003,0.675 ± 0.006,3
+5. Aggregate-conditioned GRDM (joint fine-tune),Synthetic-only,0.606 ± 0.015,0.209 ± 0.012,0.467 ± 0.007,3
+5. Aggregate-conditioned GRDM (joint fine-tune),Real + Synthetic (full add),0.869 ± 0.001,0.480 ± 0.004,0.683 ± 0.004,3
+5. Aggregate-conditioned GRDM (joint fine-tune),Mixed 25% real / 75% synth,0.839 ± 0.001,0.436 ± 0.005,0.626 ± 0.001,3
+5. Aggregate-conditioned GRDM (joint fine-tune),Mixed 50% real / 50% synth,0.860 ± 0.003,0.462 ± 0.007,0.666 ± 0.007,3
+5. Aggregate-conditioned GRDM (joint fine-tune),Mixed 75% real / 25% synth,0.868 ± 0.001,0.468 ± 0.005,0.675 ± 0.004,3
+6. Aggregate-conditioned GRDM (frozen fine-tune),Synthetic-only,0.569 ± 0.028,0.181 ± 0.015,0.467 ± 0.008,3
+6. Aggregate-conditioned GRDM (frozen fine-tune),Real + Synthetic (full add),0.869 ± 0.001,0.470 ± 0.004,0.680 ± 0.001,3
+6. Aggregate-conditioned GRDM (frozen fine-tune),Mixed 25% real / 75% synth,0.845 ± 0.002,0.434 ± 0.007,0.635 ± 0.006,3
+6. Aggregate-conditioned GRDM (frozen fine-tune),Mixed 50% real / 50% synth,0.861 ± 0.001,0.461 ± 0.005,0.665 ± 0.003,3
+6. Aggregate-conditioned GRDM (frozen fine-tune),Mixed 75% real / 25% synth,0.867 ± 0.000,0.468 ± 0.001,0.675 ± 0.001,3

@@ -1,0 +1,1050 @@
+{
+  "degree_scratch": [
+    {
+      "seed": 0,
+      "run_dir": "/storage/s25017/AMEX/java_d_degcond/experiments/GRDM_DEGREE_CONDITIONED_SCRATCH/workspace/seed_0",
+      "schema_ok": true,
+      "fk_integrity": true,
+      "aggregates": {
+        "aggregate_ks_mean": 0.20543916846642452,
+        "aggregate_ks": {
+          "trans_n": 0.0102,
+          "trans_amount_mean": 0.3338,
+          "trans_amount_std": 0.3858,
+          "trans_amount_min": 0.558,
+          "trans_amount_max": 0.4831,
+          "trans_amount_sum": 0.1627,
+          "trans_balance_mean": 0.2647,
+          "trans_balance_min": 0.276,
+          "trans_balance_max": 0.5442,
+          "trans_balance_last": 0.0298,
+          "trans_date_min": 0.0538,
+          "trans_date_max": 0.6387,
+          "trans_date_span": 0.0456,
+          "order_n": 0.0051,
+          "order_amount_sum": 0.0387,
+          "order_amount_mean": 0.0332,
+          "order_amount_max": 0.0304,
+          "disp_n": 0.0031,
+          "card_n": 0.0067
+        },
+        "cross_table_corr_mad": 0.12000213737907124,
+        "cross_table_sign_agreement_|r|>=0.1": "56/72",
+        "cross_table_sign_agreement_frac": 0.7777777777777778,
+        "aggregate_aggregate_corr_mad": 0.18060484147439937,
+        "loan_default_corr": {
+          "loan_default~trans_n": [
+            0.064,
+            0.0525
+          ],
+          "loan_default~trans_amount_mean": [
+            0.0071,
+            0.2092
+          ],
+          "loan_default~trans_amount_std": [
+            0.0428,
+            0.1984
+          ],
+          "loan_default~trans_amount_min": [
+            -0.5796,
+            -0.2183
+          ],
+          "loan_default~trans_amount_max": [
+            0.1181,
+            0.172
+          ],
+          "loan_default~trans_amount_sum": [
+            0.0718,
+            0.2179
+          ],
+          "loan_default~trans_balance_mean": [
+            -0.2309,
+            0.0598
+          ],
+          "loan_default~trans_balance_min": [
+            -0.5469,
+            -0.3945
+          ],
+          "loan_default~trans_balance_max": [
+            0.0892,
+            0.2782
+          ],
+          "loan_default~trans_balance_last": [
+            -0.2104,
+            -0.0324
+          ],
+          "loan_default~trans_date_min": [
+            -0.104,
+            -0.2095
+          ],
+          "loan_default~trans_date_max": [
+            -0.1771,
+            0.0207
+          ],
+          "loan_default~trans_date_span": [
+            0.1028,
+            0.1764
+          ],
+          "loan_default~order_n": [
+            -0.1929,
+            -0.4448
+          ],
+          "loan_default~order_amount_sum": [
+            -0.1132,
+            -0.1753
+          ],
+          "loan_default~order_amount_mean": [
+            0.0697,
+            -0.103
+          ],
+          "loan_default~order_amount_max": [
+            -0.0061,
+            -0.1406
+          ]
+        },
+        "card_n_corr": {
+          "card_n~trans_n": [
+            0.0564,
+            -0.0098
+          ],
+          "card_n~trans_amount_mean": [
+            0.346,
+            -0.0156
+          ],
+          "card_n~trans_amount_std": [
+            0.3544,
+            -0.0105
+          ],
+          "card_n~trans_amount_min": [
+            0.0833,
+            0.0138
+          ],
+          "card_n~trans_amount_max": [
+            0.3377,
+            0.0007
+          ],
+          "card_n~trans_amount_sum": [
+            0.2975,
+            -0.0119
+          ],
+          "card_n~trans_balance_mean": [
+            0.4816,
+            -0.0306
+          ],
+          "card_n~trans_balance_min": [
+            0.0084,
+            0.0161
+          ],
+          "card_n~trans_balance_max": [
+            0.3946,
+            -0.0207
+          ],
+          "card_n~trans_balance_last": [
+            0.3879,
+            0.0085
+          ],
+          "card_n~trans_date_min": [
+            -0.0078,
+            -0.0025
+          ],
+          "card_n~trans_date_max": [
+            0.0242,
+            -0.0154
+          ],
+          "card_n~trans_date_span": [
+            0.0096,
+            -0.0025
+          ],
+          "card_n~order_n": [
+            -0.0255,
+            0.0126
+          ],
+          "card_n~order_amount_sum": [
+            0.1968,
+            -0.0092
+          ],
+          "card_n~order_amount_mean": [
+            0.167,
+            -0.0219
+          ],
+          "card_n~order_amount_max": [
+            0.1992,
+            -0.0152
+          ]
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "run_dir": "/storage/s25017/AMEX/java_d_degcond/experiments/GRDM_DEGREE_CONDITIONED_SCRATCH/workspace/seed_1",
+      "schema_ok": true,
+      "fk_integrity": true,
+      "aggregates": {
+        "aggregate_ks_mean": 0.20220442858721863,
+        "aggregate_ks": {
+          "trans_n": 0.0107,
+          "trans_amount_mean": 0.3147,
+          "trans_amount_std": 0.3542,
+          "trans_amount_min": 0.5611,
+          "trans_amount_max": 0.4627,
+          "trans_amount_sum": 0.1542,
+          "trans_balance_mean": 0.2518,
+          "trans_balance_min": 0.2869,
+          "trans_balance_max": 0.5244,
+          "trans_balance_last": 0.0464,
+          "trans_date_min": 0.0447,
+          "trans_date_max": 0.6358,
+          "trans_date_span": 0.0373,
+          "order_n": 0.0084,
+          "order_amount_sum": 0.0484,
+          "order_amount_mean": 0.0372,
+          "order_amount_max": 0.0492,
+          "disp_n": 0.0051,
+          "card_n": 0.0087
+        },
+        "cross_table_corr_mad": 0.12461597068928025,
+        "cross_table_sign_agreement_|r|>=0.1": "53/72",
+        "cross_table_sign_agreement_frac": 0.7361111111111112,
+        "aggregate_aggregate_corr_mad": 0.17651845676141995,
+        "loan_default_corr": {
+          "loan_default~trans_n": [
+            0.064,
+            -0.1265
+          ],
+          "loan_default~trans_amount_mean": [
+            0.0071,
+            0.3291
+          ],
+          "loan_default~trans_amount_std": [
+            0.0428,
+            0.1318
+          ],
+          "loan_default~trans_amount_min": [
+            -0.5796,
+            -0.0188
+          ],
+          "loan_default~trans_amount_max": [
+            0.1181,
+            0.2109
+          ],
+          "loan_default~trans_amount_sum": [
+            0.0718,
+            0.1281
+          ],
+          "loan_default~trans_balance_mean": [
+            -0.2309,
+            0.1363
+          ],
+          "loan_default~trans_balance_min": [
+            -0.5469,
+            -0.1568
+          ],
+          "loan_default~trans_balance_max": [
+            0.0892,
+            0.2328
+          ],
+          "loan_default~trans_balance_last": [
+            -0.2104,
+            0.0473
+          ],
+          "loan_default~trans_date_min": [
+            -0.104,
+            -0.142
+          ],
+          "loan_default~trans_date_max": [
+            -0.1771,
+            -0.0426
+          ],
+          "loan_default~trans_date_span": [
+            0.1028,
+            0.0816
+          ],
+          "loan_default~order_n": [
+            -0.1929,
+            -0.4393
+          ],
+          "loan_default~order_amount_sum": [
+            -0.1132,
+            -0.2009
+          ],
+          "loan_default~order_amount_mean": [
+            0.0697,
+            -0.1
+          ],
+          "loan_default~order_amount_max": [
+            -0.0061,
+            -0.1377
+          ]
+        },
+        "card_n_corr": {
+          "card_n~trans_n": [
+            0.0564,
+            0.0074
+          ],
+          "card_n~trans_amount_mean": [
+            0.346,
+            -0.0019
+          ],
+          "card_n~trans_amount_std": [
+            0.3544,
+            -0.0009
+          ],
+          "card_n~trans_amount_min": [
+            0.0833,
+            0.0366
+          ],
+          "card_n~trans_amount_max": [
+            0.3377,
+            -0.0041
+          ],
+          "card_n~trans_amount_sum": [
+            0.2975,
+            -0.0006
+          ],
+          "card_n~trans_balance_mean": [
+            0.4816,
+            -0.0069
+          ],
+          "card_n~trans_balance_min": [
+            0.0084,
+            0.0343
+          ],
+          "card_n~trans_balance_max": [
+            0.3946,
+            -0.0199
+          ],
+          "card_n~trans_balance_last": [
+            0.3879,
+            -0.0124
+          ],
+          "card_n~trans_date_min": [
+            -0.0078,
+            -0.0164
+          ],
+          "card_n~trans_date_max": [
+            0.0242,
+            0.0187
+          ],
+          "card_n~trans_date_span": [
+            0.0096,
+            0.0207
+          ],
+          "card_n~order_n": [
+            -0.0255,
+            -0.0377
+          ],
+          "card_n~order_amount_sum": [
+            0.1968,
+            -0.0156
+          ],
+          "card_n~order_amount_mean": [
+            0.167,
+            0.0055
+          ],
+          "card_n~order_amount_max": [
+            0.1992,
+            -0.0057
+          ]
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "run_dir": "/storage/s25017/AMEX/java_d_degcond/experiments/GRDM_DEGREE_CONDITIONED_SCRATCH/workspace/seed_2",
+      "schema_ok": true,
+      "fk_integrity": true,
+      "aggregates": {
+        "aggregate_ks_mean": 0.2035079907123219,
+        "aggregate_ks": {
+          "trans_n": 0.02,
+          "trans_amount_mean": 0.3289,
+          "trans_amount_std": 0.376,
+          "trans_amount_min": 0.5498,
+          "trans_amount_max": 0.4831,
+          "trans_amount_sum": 0.1593,
+          "trans_balance_mean": 0.2576,
+          "trans_balance_min": 0.2802,
+          "trans_balance_max": 0.5356,
+          "trans_balance_last": 0.0316,
+          "trans_date_min": 0.0576,
+          "trans_date_max": 0.6473,
+          "trans_date_span": 0.0498,
+          "order_n": 0.0033,
+          "order_amount_sum": 0.0343,
+          "order_amount_mean": 0.0215,
+          "order_amount_max": 0.0229,
+          "disp_n": 0.0024,
+          "card_n": 0.0056
+        },
+        "cross_table_corr_mad": 0.1193294513675173,
+        "cross_table_sign_agreement_|r|>=0.1": "56/72",
+        "cross_table_sign_agreement_frac": 0.7777777777777778,
+        "aggregate_aggregate_corr_mad": 0.18290772379548795,
+        "loan_default_corr": {
+          "loan_default~trans_n": [
+            0.064,
+            -0.059
+          ],
+          "loan_default~trans_amount_mean": [
+            0.0071,
+            0.2203
+          ],
+          "loan_default~trans_amount_std": [
+            0.0428,
+            0.0324
+          ],
+          "loan_default~trans_amount_min": [
+            -0.5796,
+            0.0685
+          ],
+          "loan_default~trans_amount_max": [
+            0.1181,
+            0.1965
+          ],
+          "loan_default~trans_amount_sum": [
+            0.0718,
+            0.1767
+          ],
+          "loan_default~trans_balance_mean": [
+            -0.2309,
+            0.2206
+          ],
+          "loan_default~trans_balance_min": [
+            -0.5469,
+            -0.2092
+          ],
+          "loan_default~trans_balance_max": [
+            0.0892,
+            0.3301
+          ],
+          "loan_default~trans_balance_last": [
+            -0.2104,
+            0.0243
+          ],
+          "loan_default~trans_date_min": [
+            -0.104,
+            -0.0472
+          ],
+          "loan_default~trans_date_max": [
+            -0.1771,
+            0.0607
+          ],
+          "loan_default~trans_date_span": [
+            0.1028,
+            0.0369
+          ],
+          "loan_default~order_n": [
+            -0.1929,
+            -0.3637
+          ],
+          "loan_default~order_amount_sum": [
+            -0.1132,
+            -0.0747
+          ],
+          "loan_default~order_amount_mean": [
+            0.0697,
+            -0.0429
+          ],
+          "loan_default~order_amount_max": [
+            -0.0061,
+            -0.0561
+          ]
+        },
+        "card_n_corr": {
+          "card_n~trans_n": [
+            0.0564,
+            -0.0233
+          ],
+          "card_n~trans_amount_mean": [
+            0.346,
+            -0.0343
+          ],
+          "card_n~trans_amount_std": [
+            0.3544,
+            -0.0407
+          ],
+          "card_n~trans_amount_min": [
+            0.0833,
+            0.0547
+          ],
+          "card_n~trans_amount_max": [
+            0.3377,
+            -0.0392
+          ],
+          "card_n~trans_amount_sum": [
+            0.2975,
+            -0.0413
+          ],
+          "card_n~trans_balance_mean": [
+            0.4816,
+            -0.0379
+          ],
+          "card_n~trans_balance_min": [
+            0.0084,
+            0.0569
+          ],
+          "card_n~trans_balance_max": [
+            0.3946,
+            -0.0529
+          ],
+          "card_n~trans_balance_last": [
+            0.3879,
+            -0.0003
+          ],
+          "card_n~trans_date_min": [
+            -0.0078,
+            0.0255
+          ],
+          "card_n~trans_date_max": [
+            0.0242,
+            0.0138
+          ],
+          "card_n~trans_date_span": [
+            0.0096,
+            -0.0209
+          ],
+          "card_n~order_n": [
+            -0.0255,
+            0.0141
+          ],
+          "card_n~order_amount_sum": [
+            0.1968,
+            -0.0133
+          ],
+          "card_n~order_amount_mean": [
+            0.167,
+            -0.025
+          ],
+          "card_n~order_amount_max": [
+            0.1992,
+            -0.0306
+          ]
+        }
+      }
+    }
+  ],
+  "degree_finetune": [
+    {
+      "seed": 0,
+      "run_dir": "/storage/s25017/AMEX/java_d_degft/experiments/GRDM_BERKA_DEGREE_CONDITIONED_FINETUNE/workspace/seed_0",
+      "schema_ok": true,
+      "fk_integrity": true,
+      "aggregates": {
+        "aggregate_ks_mean": 0.21617566196790947,
+        "aggregate_ks": {
+          "trans_n": 0.0102,
+          "trans_amount_mean": 0.276,
+          "trans_amount_std": 0.3362,
+          "trans_amount_min": 0.3991,
+          "trans_amount_max": 0.4467,
+          "trans_amount_sum": 0.0936,
+          "trans_balance_mean": 0.2396,
+          "trans_balance_min": 0.3682,
+          "trans_balance_max": 0.6158,
+          "trans_balance_last": 0.0582,
+          "trans_date_min": 0.1962,
+          "trans_date_max": 0.5891,
+          "trans_date_span": 0.1036,
+          "order_n": 0.0051,
+          "order_amount_sum": 0.138,
+          "order_amount_mean": 0.1088,
+          "order_amount_max": 0.1133,
+          "disp_n": 0.0031,
+          "card_n": 0.0067
+        },
+        "cross_table_corr_mad": 0.16949437903631936,
+        "cross_table_sign_agreement_|r|>=0.1": "53/72",
+        "cross_table_sign_agreement_frac": 0.7361111111111112,
+        "aggregate_aggregate_corr_mad": 0.22915690540982894,
+        "loan_default_corr": {
+          "loan_default~trans_n": [
+            0.064,
+            -0.4556
+          ],
+          "loan_default~trans_amount_mean": [
+            0.0071,
+            0.1431
+          ],
+          "loan_default~trans_amount_std": [
+            0.0428,
+            0.1867
+          ],
+          "loan_default~trans_amount_min": [
+            -0.5796,
+            -0.1149
+          ],
+          "loan_default~trans_amount_max": [
+            0.1181,
+            0.0379
+          ],
+          "loan_default~trans_amount_sum": [
+            0.0718,
+            -0.3567
+          ],
+          "loan_default~trans_balance_mean": [
+            -0.2309,
+            -0.2871
+          ],
+          "loan_default~trans_balance_min": [
+            -0.5469,
+            -0.4133
+          ],
+          "loan_default~trans_balance_max": [
+            0.0892,
+            0.1918
+          ],
+          "loan_default~trans_balance_last": [
+            -0.2104,
+            -0.1573
+          ],
+          "loan_default~trans_date_min": [
+            -0.104,
+            -0.418
+          ],
+          "loan_default~trans_date_max": [
+            -0.1771,
+            0.0216
+          ],
+          "loan_default~trans_date_span": [
+            0.1028,
+            0.3807
+          ],
+          "loan_default~order_n": [
+            -0.1929,
+            -0.1279
+          ],
+          "loan_default~order_amount_sum": [
+            -0.1132,
+            -0.0697
+          ],
+          "loan_default~order_amount_mean": [
+            0.0697,
+            -0.0717
+          ],
+          "loan_default~order_amount_max": [
+            -0.0061,
+            -0.0438
+          ]
+        },
+        "card_n_corr": {
+          "card_n~trans_n": [
+            0.0564,
+            -0.0098
+          ],
+          "card_n~trans_amount_mean": [
+            0.346,
+            -0.0083
+          ],
+          "card_n~trans_amount_std": [
+            0.3544,
+            -0.0029
+          ],
+          "card_n~trans_amount_min": [
+            0.0833,
+            -0.0052
+          ],
+          "card_n~trans_amount_max": [
+            0.3377,
+            0.0048
+          ],
+          "card_n~trans_amount_sum": [
+            0.2975,
+            -0.021
+          ],
+          "card_n~trans_balance_mean": [
+            0.4816,
+            -0.0223
+          ],
+          "card_n~trans_balance_min": [
+            0.0084,
+            -0.0021
+          ],
+          "card_n~trans_balance_max": [
+            0.3946,
+            0.0021
+          ],
+          "card_n~trans_balance_last": [
+            0.3879,
+            -0.0016
+          ],
+          "card_n~trans_date_min": [
+            -0.0078,
+            -0.0058
+          ],
+          "card_n~trans_date_max": [
+            0.0242,
+            -0.0165
+          ],
+          "card_n~trans_date_span": [
+            0.0096,
+            -0.0128
+          ],
+          "card_n~order_n": [
+            -0.0255,
+            0.0126
+          ],
+          "card_n~order_amount_sum": [
+            0.1968,
+            0.0027
+          ],
+          "card_n~order_amount_mean": [
+            0.167,
+            -0.0064
+          ],
+          "card_n~order_amount_max": [
+            0.1992,
+            0.0013
+          ]
+        }
+      }
+    },
+    {
+      "seed": 1,
+      "run_dir": "/storage/s25017/AMEX/java_d_degft/experiments/GRDM_BERKA_DEGREE_CONDITIONED_FINETUNE/workspace/seed_1",
+      "schema_ok": true,
+      "fk_integrity": true,
+      "aggregates": {
+        "aggregate_ks_mean": 0.21997112644865108,
+        "aggregate_ks": {
+          "trans_n": 0.0107,
+          "trans_amount_mean": 0.3287,
+          "trans_amount_std": 0.3849,
+          "trans_amount_min": 0.446,
+          "trans_amount_max": 0.5071,
+          "trans_amount_sum": 0.1407,
+          "trans_balance_mean": 0.2276,
+          "trans_balance_min": 0.3364,
+          "trans_balance_max": 0.5629,
+          "trans_balance_last": 0.0651,
+          "trans_date_min": 0.1211,
+          "trans_date_max": 0.6147,
+          "trans_date_span": 0.0987,
+          "order_n": 0.0084,
+          "order_amount_sum": 0.1154,
+          "order_amount_mean": 0.0959,
+          "order_amount_max": 0.1015,
+          "disp_n": 0.0051,
+          "card_n": 0.0087
+        },
+        "cross_table_corr_mad": 0.19397646192790993,
+        "cross_table_sign_agreement_|r|>=0.1": "52/72",
+        "cross_table_sign_agreement_frac": 0.7222222222222222,
+        "aggregate_aggregate_corr_mad": 0.23987648647947685,
+        "loan_default_corr": {
+          "loan_default~trans_n": [
+            0.064,
+            -0.5527
+          ],
+          "loan_default~trans_amount_mean": [
+            0.0071,
+            0.3637
+          ],
+          "loan_default~trans_amount_std": [
+            0.0428,
+            0.2578
+          ],
+          "loan_default~trans_amount_min": [
+            -0.5796,
+            0.1522
+          ],
+          "loan_default~trans_amount_max": [
+            0.1181,
+            0.174
+          ],
+          "loan_default~trans_amount_sum": [
+            0.0718,
+            -0.2333
+          ],
+          "loan_default~trans_balance_mean": [
+            -0.2309,
+            -0.4985
+          ],
+          "loan_default~trans_balance_min": [
+            -0.5469,
+            -0.4506
+          ],
+          "loan_default~trans_balance_max": [
+            0.0892,
+            -0.4993
+          ],
+          "loan_default~trans_balance_last": [
+            -0.2104,
+            -0.4454
+          ],
+          "loan_default~trans_date_min": [
+            -0.104,
+            -0.2885
+          ],
+          "loan_default~trans_date_max": [
+            -0.1771,
+            0.1717
+          ],
+          "loan_default~trans_date_span": [
+            0.1028,
+            0.2895
+          ],
+          "loan_default~order_n": [
+            -0.1929,
+            -0.0925
+          ],
+          "loan_default~order_amount_sum": [
+            -0.1132,
+            0.37
+          ],
+          "loan_default~order_amount_mean": [
+            0.0697,
+            0.4263
+          ],
+          "loan_default~order_amount_max": [
+            -0.0061,
+            0.4303
+          ]
+        },
+        "card_n_corr": {
+          "card_n~trans_n": [
+            0.0564,
+            0.0074
+          ],
+          "card_n~trans_amount_mean": [
+            0.346,
+            0.0207
+          ],
+          "card_n~trans_amount_std": [
+            0.3544,
+            0.0238
+          ],
+          "card_n~trans_amount_min": [
+            0.0833,
+            0.0254
+          ],
+          "card_n~trans_amount_max": [
+            0.3377,
+            0.007
+          ],
+          "card_n~trans_amount_sum": [
+            0.2975,
+            0.018
+          ],
+          "card_n~trans_balance_mean": [
+            0.4816,
+            0.0172
+          ],
+          "card_n~trans_balance_min": [
+            0.0084,
+            0.0196
+          ],
+          "card_n~trans_balance_max": [
+            0.3946,
+            0.001
+          ],
+          "card_n~trans_balance_last": [
+            0.3879,
+            0.0047
+          ],
+          "card_n~trans_date_min": [
+            -0.0078,
+            -0.0117
+          ],
+          "card_n~trans_date_max": [
+            0.0242,
+            -0.0139
+          ],
+          "card_n~trans_date_span": [
+            0.0096,
+            0.0127
+          ],
+          "card_n~order_n": [
+            -0.0255,
+            -0.0377
+          ],
+          "card_n~order_amount_sum": [
+            0.1968,
+            0.0047
+          ],
+          "card_n~order_amount_mean": [
+            0.167,
+            0.0187
+          ],
+          "card_n~order_amount_max": [
+            0.1992,
+            0.0115
+          ]
+        }
+      }
+    },
+    {
+      "seed": 2,
+      "run_dir": "/storage/s25017/AMEX/java_d_degft/experiments/GRDM_BERKA_DEGREE_CONDITIONED_FINETUNE/workspace/seed_2",
+      "schema_ok": true,
+      "fk_integrity": true,
+      "aggregates": {
+        "aggregate_ks_mean": 0.22349317029288882,
+        "aggregate_ks": {
+          "trans_n": 0.02,
+          "trans_amount_mean": 0.1973,
+          "trans_amount_std": 0.2902,
+          "trans_amount_min": 0.3884,
+          "trans_amount_max": 0.4209,
+          "trans_amount_sum": 0.0962,
+          "trans_balance_mean": 0.3358,
+          "trans_balance_min": 0.3524,
+          "trans_balance_max": 0.6293,
+          "trans_balance_last": 0.1482,
+          "trans_date_min": 0.1767,
+          "trans_date_max": 0.648,
+          "trans_date_span": 0.1702,
+          "order_n": 0.0033,
+          "order_amount_sum": 0.1383,
+          "order_amount_mean": 0.1051,
+          "order_amount_max": 0.1178,
+          "disp_n": 0.0024,
+          "card_n": 0.0056
+        },
+        "cross_table_corr_mad": 0.19424834854680595,
+        "cross_table_sign_agreement_|r|>=0.1": "45/72",
+        "cross_table_sign_agreement_frac": 0.625,
+        "aggregate_aggregate_corr_mad": 0.26979701404835543,
+        "loan_default_corr": {
+          "loan_default~trans_n": [
+            0.064,
+            -0.55
+          ],
+          "loan_default~trans_amount_mean": [
+            0.0071,
+            -0.453
+          ],
+          "loan_default~trans_amount_std": [
+            0.0428,
+            -0.4615
+          ],
+          "loan_default~trans_amount_min": [
+            -0.5796,
+            -0.1321
+          ],
+          "loan_default~trans_amount_max": [
+            0.1181,
+            -0.4808
+          ],
+          "loan_default~trans_amount_sum": [
+            0.0718,
+            -0.5343
+          ],
+          "loan_default~trans_balance_mean": [
+            -0.2309,
+            0.0817
+          ],
+          "loan_default~trans_balance_min": [
+            -0.5469,
+            0.1425
+          ],
+          "loan_default~trans_balance_max": [
+            0.0892,
+            0.0623
+          ],
+          "loan_default~trans_balance_last": [
+            -0.2104,
+            -0.0482
+          ],
+          "loan_default~trans_date_min": [
+            -0.104,
+            -0.2447
+          ],
+          "loan_default~trans_date_max": [
+            -0.1771,
+            -0.2236
+          ],
+          "loan_default~trans_date_span": [
+            0.1028,
+            0.2106
+          ],
+          "loan_default~order_n": [
+            -0.1929,
+            0.0028
+          ],
+          "loan_default~order_amount_sum": [
+            -0.1132,
+            0.2309
+          ],
+          "loan_default~order_amount_mean": [
+            0.0697,
+            0.2348
+          ],
+          "loan_default~order_amount_max": [
+            -0.0061,
+            0.2573
+          ]
+        },
+        "card_n_corr": {
+          "card_n~trans_n": [
+            0.0564,
+            -0.0233
+          ],
+          "card_n~trans_amount_mean": [
+            0.346,
+            -0.0212
+          ],
+          "card_n~trans_amount_std": [
+            0.3544,
+            -0.0114
+          ],
+          "card_n~trans_amount_min": [
+            0.0833,
+            0.0052
+          ],
+          "card_n~trans_amount_max": [
+            0.3377,
+            -0.0071
+          ],
+          "card_n~trans_amount_sum": [
+            0.2975,
+            -0.0281
+          ],
+          "card_n~trans_balance_mean": [
+            0.4816,
+            -0.0248
+          ],
+          "card_n~trans_balance_min": [
+            0.0084,
+            0.0246
+          ],
+          "card_n~trans_balance_max": [
+            0.3946,
+            -0.0173
+          ],
+          "card_n~trans_balance_last": [
+            0.3879,
+            -0.0105
+          ],
+          "card_n~trans_date_min": [
+            -0.0078,
+            0.0118
+          ],
+          "card_n~trans_date_max": [
+            0.0242,
+            -0.0262
+          ],
+          "card_n~trans_date_span": [
+            0.0096,
+            -0.0138
+          ],
+          "card_n~order_n": [
+            -0.0255,
+            0.0141
+          ],
+          "card_n~order_amount_sum": [
+            0.1968,
+            -0.0164
+          ],
+          "card_n~order_amount_mean": [
+            0.167,
+            -0.015
+          ],
+          "card_n~order_amount_max": [
+            0.1992,
+            -0.0206
+          ]
+        }
+      }
+    }
+  ]
+}

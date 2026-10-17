@@ -1,0 +1,9 @@
+metric,"Original GRDM (mean+-std, n)","Control (mean+-std, n)","Aggregate-conditioned (mean+-std, n)","Label-free aggregate-conditioned (mean+-std, n)",Real-vs-real noise floor (reference)
+Household-summary mean KS distance,0.1489 +/- 0.0002 (n=3),0.1489 +/- 0.0003 (n=3),0.0543 +/- 0.0016 (n=3),0.0547 +/- 0.0018 (n=3),0.0031
+Downstream household-feature mean KS distance,0.1114 +/- 0.0002 (n=3),0.1110 +/- 0.0004 (n=3),0.0338 +/- 0.0009 (n=3),0.0343 +/- 0.0015 (n=3),0.0031
+Household-attribute x member-summary correlation error (MAE),0.0401 +/- 0.0006 (n=3),0.0398 +/- 0.0003 (n=3),0.0227 +/- 0.0011 (n=3),0.0228 +/- 0.0008 (n=3),0.0041
+Same-household agreement error (MAE),0.0898 +/- 0.0001 (n=3),0.0902 +/- 0.0002 (n=3),0.0555 +/- 0.0013 (n=3),0.0557 +/- 0.0013 (n=3),0.0008
+Within-household variance-ratio error (MAE),0.1562 +/- 0.0003 (n=3),0.1568 +/- 0.0000 (n=3),0.0697 +/- 0.0018 (n=3),0.0702 +/- 0.0022 (n=3),0.0013
+Numerical marginal mean TVD,0.0617 +/- 0.0010 (n=3),0.0615 +/- 0.0003 (n=3),0.0533 +/- 0.0004 (n=3),0.0531 +/- 0.0002 (n=3),0.0073
+Categorical marginal mean TVD,0.0138 +/- 0.0008 (n=3),0.0130 +/- 0.0003 (n=3),0.0111 +/- 0.0009 (n=3),0.0111 +/- 0.0008 (n=3),0.0032
+Held-out denoising loss,0.3003 +/- 0.0002 (n=3),0.2996 +/- 0.0002 (n=3),0.2874 +/- 0.0002 (n=3),0.2876 +/- 0.0002 (n=3),NA (not applicable -- model loss has no real-vs-real analog)

@@ -28,9 +28,50 @@ SEEDS=("$@")
 # --seed_balance_alpha, --categorical_encoding). Word-split on purpose.
 read -r -a EXTRA_ARGS <<< "${RDBDIFF_EXTRA_ARGS:-}"
 
-# Thread cap per process. Training is not CPU-bound (~80% at 8 threads), so 4 keeps every
-# process comfortably under the 200% budget while several runs share the node.
-THREADS="${RDBDIFF_THREADS:-4}"
+# CPU cap: pin each run to a single core so it can never use more than 100% CPU. Only the main
+# thread is busy (~99% of a core); the OpenMP pool does ~2% of the work, so pinning costs a few
+# percent at most. The core is the least busy one on the GPU's NUMA node that does not already
+# hold one of our runs. RDBDIFF_PIN_CORE=0 turns pinning off.
+PIN_CORE="${RDBDIFF_PIN_CORE:-1}"
+
+# Thread cap per process. Training is not CPU-bound (~80% at 8 threads); 4 keeps an unpinned
+# process under the 200% budget, and a pinned one gains nothing from more than 1.
+if [ "$PIN_CORE" = 1 ]; then THREADS="${RDBDIFF_THREADS:-1}"; else THREADS="${RDBDIFF_THREADS:-4}"; fi
+
+# Least busy free core on GPU $1's NUMA node, sampled over one second; -1 if none is found.
+pick_core() {
+  local bus node cpus taken
+  bus=$(nvidia-smi --query-gpu=pci.bus_id --format=csv,noheader -i "$1" | cut -d: -f2- | tr 'A-F' 'a-f')
+  node=$(cat "/sys/bus/pci/devices/0000:${bus}/numa_node" 2>/dev/null || echo -1)
+  if [ "$node" -ge 0 ] 2>/dev/null; then
+    cpus=$(cat "/sys/devices/system/node/node${node}/cpulist")
+  else
+    cpus="0-$(( $(nproc --all) - 1 ))"
+  fi
+  # a pinned run reports a single core; unpinned processes report a range and are ignored
+  taken=$(for p in $(pgrep -u "$USER" -f "python -u main.py"); do
+    taskset -cp "$p" 2>/dev/null | awk '{print $NF}'
+  done | grep -E '^[0-9]+$' | sort -u | tr '\n' ' ')
+  { awk '/^cpu[0-9]+ /{t=0; for (i = 2; i <= NF; i++) t += $i; print substr($1, 4), $5 + $6, t}' /proc/stat
+    sleep 1
+    awk '/^cpu[0-9]+ /{t=0; for (i = 2; i <= NF; i++) t += $i; print substr($1, 4), $5 + $6, t}' /proc/stat
+  } | awk -v list="$cpus" -v taken=" $taken " '
+    BEGIN {
+      n = split(list, parts, ",")
+      for (i = 1; i <= n; i++) {
+        split(parts[i], ab, "-"); hi = (ab[2] == "" ? ab[1] : ab[2])
+        for (c = ab[1] + 0; c <= hi + 0; c++) if (index(taken, " " c " ") == 0) ok[c] = 1
+      }
+      best = -1; core = -1
+    }
+    ($1 in idle0) {
+      d = $3 - tot0[$1]
+      if (($1 in ok) && d > 0 && ($2 - idle0[$1]) / d > best) { best = ($2 - idle0[$1]) / d; core = $1 }
+      next
+    }
+    { idle0[$1] = $2; tot0[$1] = $3 }
+    END { print core }'
+}
 
 # Wall-clock budget per process, in hours. This node SIGTERMs processes at ~24h17m
 # (docs/REPRODUCTION.md 7), so a run must stop and checkpoint itself before that rather than be
@@ -80,13 +121,23 @@ for seed in "${SEEDS[@]}"; do
   gpu="${FREE_GPUS[$((i % ${#FREE_GPUS[@]}))]}"
   i=$((i + 1))
 
-  if [ -f "${workspace}/model_checkpoint/checkpoint.pt" ]; then
-    echo "  seed ${seed}: resuming from checkpoint on GPU ${gpu}"
-  else
-    echo "  seed ${seed}: starting fresh on GPU ${gpu}"
+  PIN=()
+  where="GPU ${gpu}"
+  if [ "$PIN_CORE" = 1 ]; then
+    core=$(pick_core "${gpu}")
+    if [ "${core}" -ge 0 ] 2>/dev/null; then
+      PIN=(taskset -c "${core}")
+      where="${where}, CPU core ${core}"
+    fi
   fi
 
-  setsid nohup env CUDA_VISIBLE_DEVICES="${gpu}" PYTHONUNBUFFERED=1 \
+  if [ -f "${workspace}/model_checkpoint/checkpoint.pt" ]; then
+    echo "  seed ${seed}: resuming from checkpoint on ${where}"
+  else
+    echo "  seed ${seed}: starting fresh on ${where}"
+  fi
+
+  setsid nohup "${PIN[@]}" env CUDA_VISIBLE_DEVICES="${gpu}" PYTHONUNBUFFERED=1 \
     OMP_NUM_THREADS="${THREADS}" MKL_NUM_THREADS="${THREADS}" \
     OPENBLAS_NUM_THREADS="${THREADS}" NUMEXPR_NUM_THREADS="${THREADS}" \
     conda run --no-capture-output -n tabsyn python -u main.py \

@@ -1,0 +1,12 @@
+2026-10-16 ~20:10 IST — user approved ("yes do the needful"):
+  * stop berka_hrd_d2 seeds 0 and 2 (entity state never learned; checkpoints kept at 135k / 140k)
+  * train berka_hrd_d2skip (d2 + entity skip) and berka_hrd_attn (same, no entity state) — 3 seeds each,
+    200k steps, CPU (12 threads each), sampling on the freest GPU; launcher stage2/launch/berka_hrd_cpu.sh
+Success criteria for d2skip, fixed BEFORE any result (from the proposal message):
+  1. state loss < 0.3 by 50k steps                      (at 2k: 0.35 in all seeds — already near)
+  2. no dead account head (account loss tracks h0h/attn)
+  3. account column fidelity within 1 point of GRDM (GRDM 3-seed mean computed with the same per-table script)
+  4. order.amount eps^2 (within-account coupling) back near real (~0; as-run d2 s1 = 0.695)
+  5. task-battery rel-view median retention >= 0.51 (as-run d2 s1)
+Main comparison: d2skip vs attn (paired by seed) = contribution of a WORKING entity state beyond attention.
+Observed speed with 6 concurrent CPU runs: ~0.26 s/step -> ~14.5 h training; ETA ~11:30 on 2026-10-17 incl. sampling+scoring.

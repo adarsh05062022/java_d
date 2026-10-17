@@ -1,0 +1,38 @@
+{
+ "real_test_noise_floor": {
+  "puma_tv": 0.029094425009145868,
+  "inctot_given_puma_gap": 0.52359236443939,
+  "eta2_inctot_on_puma_ref": 0.062011892200230116,
+  "eta2_inctot_on_puma_cand": 0.06223751551158416
+ },
+ "smoke": {
+  "path": "/storage/s25017/AMEX/java_d-stage2/rdbdiff_workspace/california_puma_bits_smoke/smoke/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0_decoded/synthetic_database",
+  "puma": {
+   "puma_tv": 0.13488693594156453,
+   "inctot_given_puma_gap": 38.039632546522995,
+   "eta2_inctot_on_puma_ref": 0.062011892200230116,
+   "eta2_inctot_on_puma_cand": 0.0001476209424842476
+  },
+  "xgb_r2_inctot": {
+   "own": -66.36949262796679,
+   "own+PUMA": -28.80687386784497,
+   "own+hh_without_PUMA": -81.41135260265939,
+   "own+hh": -30.323647513886424
+  }
+ },
+ "baseline_s0": {
+  "path": "/storage/s25017/AMEX/java_d/rdbdiff_workspace/california/paper_repro/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/synthetic_database",
+  "puma": {
+   "puma_tv": 0.09247734274086403,
+   "inctot_given_puma_gap": 2.964397565091447,
+   "eta2_inctot_on_puma_ref": 0.062011892200230116,
+   "eta2_inctot_on_puma_cand": 0.004142902334915462
+  },
+  "xgb_r2_inctot": {
+   "own": 0.4791077518240838,
+   "own+PUMA": 0.4671247024638906,
+   "own+hh_without_PUMA": 0.5228670832111896,
+   "own+hh": 0.5069302642985932
+  }
+ }
+}

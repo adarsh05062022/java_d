@@ -1,0 +1,87 @@
+{
+ "exactly-one-head (real 0.933)": {
+  "GRDM": 0.375727453232895,
+  "D2 no-label z": 0.9417550491160552,
+  "+ state dropout 0.3": 0.9384511896238613
+ },
+ "indep. prediction": {
+  "GRDM": 0.3755075623487683,
+  "D2 no-label z": 0.5521599947438766,
+  "+ state dropout 0.3": 0.5479132250185008
+ },
+ "AGE \u03b5\u00b2 (real 0.291)": {
+  "GRDM": 0.0482804052182729,
+  "D2 no-label z": 0.29714368985535156,
+  "+ state dropout 0.3": 0.30479327501901043
+ },
+ "EDUC \u03b5\u00b2 (real 0.238)": {
+  "GRDM": 0.037401903408894134,
+  "D2 no-label z": 0.263249019210227,
+  "+ state dropout 0.3": 0.27904606670626797
+ },
+ "INCTOT \u03b5\u00b2 (real 0.076)": {
+  "GRDM": 0.024294215232619067,
+  "D2 no-label z": 0.08646374932412261,
+  "+ state dropout 0.3": 0.105285769534743
+ },
+ "head\u2013spouse AGE r (real 0.928)": {
+  "GRDM": 0.1801165043378212,
+  "D2 no-label z": 0.9225855364496371,
+  "+ state dropout 0.3": 0.9237494617242179
+ },
+ "INCTOT|age\u00d7EDUC gap (\u22640.25)": {
+  "GRDM": 0.21710167860534352,
+  "D2 no-label z": 0.5986634483175877,
+  "+ state dropout 0.3": 0.8487917172128553
+ },
+ "EMPSTAT TV (\u22640.008)": {
+  "GRDM": 0.006596202872384709,
+  "D2 no-label z": 0.026600160937804002,
+  "+ state dropout 0.3": 0.03932561868964384
+ },
+ "INCTOT mean shift": {
+  "GRDM": 0.07089112235883555,
+  "D2 no-label z": 0.4371603279663905,
+  "+ state dropout 0.3": 0.8456951755903539
+ },
+ "group size \u2192 INCTOT gap": {
+  "GRDM": 1.8599114847735316,
+  "D2 no-label z": 0.7664608491277995,
+  "+ state dropout 0.3": 1.1151389253139747
+ },
+ "\u03b7\u00b2(INCTOT; PUMA) (real 0.062)": {
+  "GRDM": 0.004142902334915462,
+  "D2 no-label z": 0.0035262971502377626,
+  "+ state dropout 0.3": 0.003482694051582038
+ },
+ "Column Shapes (\u226598.4)": {
+  "GRDM": 98.61,
+  "D2 no-label z": 98.45562656623649,
+  "+ state dropout 0.3": 98.10463507362458
+ },
+ "AVG 2-WAY": {
+  "GRDM": 96.96,
+  "D2 no-label z": 96.53155433665502,
+  "+ state dropout 0.3": 96.01508012898611
+ },
+ "households with z at bound": {
+  "GRDM": null,
+  "D2 no-label z": 0.005359754431992769,
+  "+ state dropout 0.3": 0.11024647206068039
+ },
+ "TSTR income R\u00b2": {
+  "GRDM": 0.5249,
+  "D2 no-label z": 0.5243106493480977,
+  "+ state dropout 0.3": 0.5231646807741325
+ },
+ "TSTR employment F1": {
+  "GRDM": 0.6751,
+  "D2 no-label z": 0.6741722391393243,
+  "+ state dropout 0.3": 0.6743815094136221
+ },
+ "criteria passed (of 7 mechanism)": {
+  "GRDM": 3,
+  "D2 no-label z": 5,
+  "+ state dropout 0.3": 4
+ }
+}

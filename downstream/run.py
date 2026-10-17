@@ -34,7 +34,10 @@ from downstream.data import (
 from downstream.evaluate import bootstrap_ci, compute_metrics, fit_predict
 from downstream.tasks import TASKS
 
-CLAVA_ROOT = "/scratch/s25017/ClavaDDPM/ClavaDDPM"
+# Where ClavaDDPM's complex_data/ lives; only the California test split is read from it. The
+# original checkout (/scratch/s25017/ClavaDDPM/ClavaDDPM) was lost on 7 Oct 2026, and the split was
+# re-downloaded next to this repo. Override with CLAVA_ROOT.
+CLAVA_ROOT = os.environ.get("CLAVA_ROOT", os.path.dirname(REPO_ROOT))
 
 DATASETS = {
     "california": dict(

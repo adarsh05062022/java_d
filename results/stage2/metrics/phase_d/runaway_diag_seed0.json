@@ -1,0 +1,179 @@
+{
+ "hrd_d1": {
+  "frac_ind_rows_gt6": 0.015145832087986005,
+  "frac_households_dropped": 0.005944061619143626,
+  "per_model_column_frac_gt6_individual": [
+   0.0151,
+   0.01507,
+   0.01506,
+   0.01506,
+   0.01506,
+   0.0151,
+   0.01507,
+   0.01507,
+   0.01504,
+   0.01507,
+   0.01506,
+   0.01504,
+   0.01505,
+   0.01505,
+   0.01505
+  ],
+  "all": {
+   "discrepancy": {
+    "within_row.INCTOT|age_band,EDUC": 1.0166785088534542,
+    "within_row.EMPSTAT|age_band,SEX": 0.030437997022229858,
+    "parent_child.INCTOT|VALUEH_decile": 1.6412969547450527,
+    "parent_child.INCTOT|OWNERSHP,ROOMS": 0.5293407516507207,
+    "parent_child.EMPSTAT|OWNERSHP": 0.01727110954605619,
+    "group_size.INCTOT|age_band,hh_size": 1.3615326186412569,
+    "marginal.INCTOT_mean_abs_diff": 0.7771463642230589
+   }
+  },
+  "without_runaway_households": {
+   "discrepancy": {
+    "within_row.INCTOT|age_band,EDUC": 0.5706809168309998,
+    "within_row.EMPSTAT|age_band,SEX": 0.023467360942454895,
+    "parent_child.INCTOT|VALUEH_decile": 1.049585186047486,
+    "parent_child.INCTOT|OWNERSHP,ROOMS": 0.2969407382279336,
+    "parent_child.EMPSTAT|OWNERSHP": 0.015903794119387804,
+    "group_size.INCTOT|age_band,hh_size": 0.7412712733165465,
+    "marginal.INCTOT_mean_abs_diff": 0.13060413904499413
+   },
+   "sibling": {
+    "eps2_AGE": 0.4630953998413895,
+    "loo_corr_AGE": 0.611824833469009,
+    "eps2_INCTOT": 0.33592063164990477,
+    "loo_corr_INCTOT": 0.45151005188192445,
+    "eps2_EDUC": 0.41804836065654033,
+    "loo_corr_EDUC": 0.5548464842226195,
+    "frac_households_exactly_one_head": 0.5351655548641436,
+    "frac_households_no_head": 0.27975152710324797,
+    "indep_pred_exactly_one_head": 0.5381278328621851,
+    "indep_pred_no_head": 0.27791180487317046,
+    "n_head_spouse_pairs": 75630,
+    "head_spouse_corr_AGE": 0.9152388538918331,
+    "head_spouse_corr_EDUC": 0.6933576223315734,
+    "head_spouse_corr_INCTOT": 0.46333249214778593
+   }
+  }
+ },
+ "hrd_d2": {
+  "frac_ind_rows_gt6": 0.013651415294813946,
+  "frac_households_dropped": 0.00629392446929955,
+  "per_model_column_frac_gt6_individual": [
+   0.01345,
+   0.0135,
+   0.01343,
+   0.01339,
+   0.01338,
+   0.01343,
+   0.01341,
+   0.01347,
+   0.01337,
+   0.01348,
+   0.01338,
+   0.01339,
+   0.01338,
+   0.01338,
+   0.01342
+  ],
+  "all": {
+   "discrepancy": {
+    "within_row.INCTOT|age_band,EDUC": 1.1339042222450568,
+    "within_row.EMPSTAT|age_band,SEX": 0.032959021934355126,
+    "parent_child.INCTOT|VALUEH_decile": 1.455440417440565,
+    "parent_child.INCTOT|OWNERSHP,ROOMS": 0.5344776321160088,
+    "parent_child.EMPSTAT|OWNERSHP": 0.014399864301321102,
+    "group_size.INCTOT|age_band,hh_size": 1.4216317516543768,
+    "marginal.INCTOT_mean_abs_diff": 0.3706735707763915
+   }
+  },
+  "without_runaway_households": {
+   "discrepancy": {
+    "within_row.INCTOT|age_band,EDUC": 0.5813938348804905,
+    "within_row.EMPSTAT|age_band,SEX": 0.02845856160033866,
+    "parent_child.INCTOT|VALUEH_decile": 1.0434710315043592,
+    "parent_child.INCTOT|OWNERSHP,ROOMS": 0.31348185958755154,
+    "parent_child.EMPSTAT|OWNERSHP": 0.01710868570721343,
+    "group_size.INCTOT|age_band,hh_size": 0.7569143679561577,
+    "marginal.INCTOT_mean_abs_diff": 0.40016893751553617
+   },
+   "sibling": {
+    "eps2_AGE": 0.2866026784283295,
+    "loo_corr_AGE": 0.43430116018975384,
+    "eps2_INCTOT": 0.11577113258115179,
+    "loo_corr_INCTOT": 0.17960881200453502,
+    "eps2_EDUC": 0.26241324688626505,
+    "loo_corr_EDUC": 0.38617954761215395,
+    "frac_households_exactly_one_head": 0.9312647795968516,
+    "frac_households_no_head": 0.06850473582292976,
+    "indep_pred_exactly_one_head": 0.5407018793974488,
+    "indep_pred_no_head": 0.27546900719388484,
+    "n_head_spouse_pairs": 246129,
+    "head_spouse_corr_AGE": 0.9240286752629946,
+    "head_spouse_corr_EDUC": 0.6242539676618457,
+    "head_spouse_corr_INCTOT": 0.3565195615763135
+   }
+  }
+ },
+ "hrd_h0h": {
+  "frac_ind_rows_gt6": 8.539524532411765e-06,
+  "frac_households_dropped": 2.344441779400519e-05,
+  "per_model_column_frac_gt6_individual": [
+   0.0,
+   1e-05,
+   1e-05,
+   0.0,
+   1e-05,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "all": {
+   "discrepancy": {
+    "within_row.INCTOT|age_band,EDUC": 0.24987429270811087,
+    "within_row.EMPSTAT|age_band,SEX": 0.006713129780547919,
+    "parent_child.INCTOT|VALUEH_decile": 1.5521725255137806,
+    "parent_child.INCTOT|OWNERSHP,ROOMS": 0.5711581619259197,
+    "parent_child.EMPSTAT|OWNERSHP": 0.005554359349775962,
+    "group_size.INCTOT|age_band,hh_size": 1.7593595621103901,
+    "marginal.INCTOT_mean_abs_diff": 0.10724521926496067
+   }
+  },
+  "without_runaway_households": {
+   "discrepancy": {
+    "within_row.INCTOT|age_band,EDUC": 0.249734333333184,
+    "within_row.EMPSTAT|age_band,SEX": 0.006714409012263976,
+    "parent_child.INCTOT|VALUEH_decile": 1.552241331911547,
+    "parent_child.INCTOT|OWNERSHP,ROOMS": 0.5712696709596532,
+    "parent_child.EMPSTAT|OWNERSHP": 0.005553494298200589,
+    "group_size.INCTOT|age_band,hh_size": 1.7595168946886266,
+    "marginal.INCTOT_mean_abs_diff": 0.1073533917004088
+   },
+   "sibling": {
+    "eps2_AGE": 0.10223541546614695,
+    "loo_corr_AGE": 0.14232766249377218,
+    "eps2_INCTOT": 0.029618220179523896,
+    "loo_corr_INCTOT": 0.046554886511578464,
+    "eps2_EDUC": 0.04326432990640644,
+    "loo_corr_EDUC": 0.06445295137204354,
+    "frac_households_exactly_one_head": 0.37109956897329077,
+    "frac_households_no_head": 0.3949773665891179,
+    "indep_pred_exactly_one_head": 0.37677236794007946,
+    "indep_pred_no_head": 0.38980487809581144,
+    "n_head_spouse_pairs": 55994,
+    "head_spouse_corr_AGE": 0.2755593233545347,
+    "head_spouse_corr_EDUC": 0.10345689860549168,
+    "head_spouse_corr_INCTOT": 0.1339118542401235
+   }
+  }
+ }
+}

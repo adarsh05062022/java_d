@@ -1,0 +1,56 @@
+{
+ "real test": {
+  "gap": 0.15838815578480403,
+  "gap_mean_shift_removed": 0.1610812284923882,
+  "gap_marginal_matched": 0.15948120204618765,
+  "inctot_mean": 10.442161132280892,
+  "real_inctot_mean": 10.45332529813267,
+  "empstat_cond_tv": 0.004928100998262265,
+  "empstat_marginal_tv": 0.0014325537149752002
+ },
+ "GRDM": {
+  "gap": 0.21710167860534352,
+  "gap_mean_shift_removed": 0.2510865739294661,
+  "gap_marginal_matched": 0.23306363566418226,
+  "inctot_mean": 10.524216420491506,
+  "real_inctot_mean": 10.45332529813267,
+  "empstat_cond_tv": 0.006596202872384709,
+  "empstat_marginal_tv": 0.00533762316572893
+ },
+ "H0h": {
+  "gap": 0.24987429270811087,
+  "gap_mean_shift_removed": 0.27769117408457106,
+  "gap_marginal_matched": 0.2526205070662594,
+  "inctot_mean": 10.34608007886771,
+  "real_inctot_mean": 10.45332529813267,
+  "empstat_cond_tv": 0.006713129780547919,
+  "empstat_marginal_tv": 0.002281005766928971
+ },
+ "D2 clip": {
+  "gap": 0.5912260224741669,
+  "gap_mean_shift_removed": 0.6467919286834203,
+  "gap_marginal_matched": 0.43884412281071855,
+  "inctot_mean": 9.96034991083233,
+  "real_inctot_mean": 10.45332529813267,
+  "empstat_cond_tv": 0.0289322731754083,
+  "empstat_marginal_tv": 0.01584002368693977
+ },
+ "D2 nolabel": {
+  "gap": 0.5986634483175877,
+  "gap_mean_shift_removed": 0.6363045693173605,
+  "gap_marginal_matched": 0.39214534812616125,
+  "inctot_mean": 10.01616497016628,
+  "real_inctot_mean": 10.45332529813267,
+  "empstat_cond_tv": 0.026600160937804002,
+  "empstat_marginal_tv": 0.017045285916315774
+ },
+ "D2 meanonly": {
+  "gap": 0.7279237444573955,
+  "gap_mean_shift_removed": 0.8113424609163613,
+  "gap_marginal_matched": 0.43450681412168884,
+  "inctot_mean": 9.797758864077666,
+  "real_inctot_mean": 10.45332529813267,
+  "empstat_cond_tv": 0.026155796808902225,
+  "empstat_marginal_tv": 0.018174598316800666
+ }
+}

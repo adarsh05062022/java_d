@@ -1,0 +1,59 @@
+{
+  "dataset": "d5_s0",
+  "base": "california",
+  "leakage_caveat": false,
+  "syn_dir": "/storage/s25017/AMEX/java_d-stage2/rdbdiff_workspace/california_puma_bits/stage2_d5/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0_decoded",
+  "records": [
+    {
+      "dataset": "d5_s0",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 0,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5226539711715212,
+        "rmse": 11.387779623172753,
+        "mae": 5.787247824216464
+      },
+      "seconds": 41.3
+    },
+    {
+      "dataset": "d5_s0",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 1,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5223440276814431,
+        "rmse": 11.39147609825716,
+        "mae": 5.788338508343148
+      },
+      "seconds": 40.1
+    },
+    {
+      "dataset": "d5_s0",
+      "task": "california_inctot",
+      "kind": "regression",
+      "regime": "synth",
+      "grdm_seed": 0,
+      "xgb_seed": 2,
+      "n_train": 1521638,
+      "n_train_real": 0,
+      "n_train_syn": 1521638,
+      "metrics": {
+        "r2": 0.5232886046183032,
+        "rmse": 11.380207056210663,
+        "mae": 5.78092366041691
+      },
+      "seconds": 36.6
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+ "hrd_h0h_s0": {
+  "path": "/storage/s25017/AMEX/java_d/results/stage2/hrd_runs/hrd_h0h/seed_0/synthetic_data_sampled_structure_size_multiplier_1.0/synthetic_database",
+  "sibling": {
+   "eps2_AGE": 0.10222139080875457,
+   "loo_corr_AGE": 0.14230394016630718,
+   "eps2_INCTOT": 0.02960523140679806,
+   "loo_corr_INCTOT": 0.046529990106603594,
+   "eps2_EDUC": 0.04325618954158142,
+   "loo_corr_EDUC": 0.06443689023163723,
+   "frac_households_exactly_one_head": 0.37109627901021275,
+   "frac_households_no_head": 0.3949681065747165,
+   "indep_pred_exactly_one_head": 0.37677494311582294,
+   "indep_pred_no_head": 0.38979360848063105,
+   "n_head_spouse_pairs": 55995,
+   "head_spouse_corr_AGE": 0.27552451449449583,
+   "head_spouse_corr_EDUC": 0.10344912170068672,
+   "head_spouse_corr_INCTOT": 0.13387682812377216
+  },
+  "discrepancy": {
+   "within_row.INCTOT|age_band,EDUC": 0.24987429270811087,
+   "within_row.EMPSTAT|age_band,SEX": 0.006713129780547919,
+   "parent_child.INCTOT|VALUEH_decile": 1.5521725255137806,
+   "parent_child.INCTOT|OWNERSHP,ROOMS": 0.5711581619259197,
+   "parent_child.EMPSTAT|OWNERSHP": 0.005554359349775962,
+   "group_size.INCTOT|age_band,hh_size": 1.7593595621103901,
+   "marginal.INCTOT_mean_abs_diff": 0.10724521926496067
+  },
+  "criteria": {
+   "exactly_one_head>=0.85": false,
+   "exactly_one_head-indep>=0.25": false,
+   "eps2_AGE within 0.291+-0.03": false,
+   "eps2_INCTOT<=0.096": true,
+   "head_spouse_corr_AGE>=0.80": false,
+   "INCTOT|age,EDUC gap<=0.25": true,
+   "EMPSTAT|age,SEX TV<=0.008": true
+  }
+ }
+}

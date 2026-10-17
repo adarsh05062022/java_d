@@ -1,101 +1,175 @@
 {
   "berka": {
-    "finished_seeds": [],
+    "finished_seeds": [
+      0,
+      1,
+      2
+    ],
     "metrics": {
       "Cardinality": {
-        "seeds": {},
-        "mean": null,
-        "std": null,
+        "seeds": {
+          "0": 99.72,
+          "1": 99.59,
+          "2": 99.64
+        },
+        "mean": 99.65,
+        "std": 0.0655743852430178,
         "paper_mean": 99.65,
         "paper_std": 0.05,
-        "delta": null,
+        "delta": 0.0,
         "previous_mean": 99.65
       },
       "Column Shapes": {
-        "seeds": {},
-        "mean": null,
-        "std": null,
+        "seeds": {
+          "0": 96.85,
+          "1": 97.04,
+          "2": 97.1
+        },
+        "mean": 96.99666666666667,
+        "std": 0.1305118130030146,
         "paper_mean": 96.84,
         "paper_std": 0.14,
-        "delta": null,
+        "delta": 0.1566666666666663,
         "previous_mean": 96.89
       },
       "Intra-Table Trends": {
-        "seeds": {},
-        "mean": null,
-        "std": null,
+        "seeds": {
+          "0": 98.25,
+          "1": 98.35,
+          "2": 98.33
+        },
+        "mean": 98.31,
+        "std": 0.05291502622128934,
         "paper_mean": 98.23,
         "paper_std": 0.03,
-        "delta": null,
+        "delta": 0.0799999999999983,
         "previous_mean": 98.26
       },
       "1-HOP": {
-        "seeds": {},
-        "mean": null,
-        "std": null,
+        "seeds": {
+          "0": 91.22,
+          "1": 91.7,
+          "2": 91.54
+        },
+        "mean": 91.48666666666666,
+        "std": 0.24440403706431402,
         "paper_mean": 91.41,
         "paper_std": 0.11,
-        "delta": null,
+        "delta": 0.07666666666666799,
         "previous_mean": 91.43
       },
       "2-HOP": {
-        "seeds": {},
-        "mean": null,
-        "std": null,
+        "seeds": {
+          "0": 95.67,
+          "1": 95.51,
+          "2": 95.65
+        },
+        "mean": 95.61,
+        "std": 0.08717797887081243,
         "paper_mean": 95.57,
         "paper_std": 0.04,
-        "delta": null,
+        "delta": 0.04000000000000625,
         "previous_mean": 95.71
       },
       "3-HOP": {
-        "seeds": {},
-        "mean": null,
-        "std": null,
+        "seeds": {
+          "0": 92.16,
+          "1": 93.26,
+          "2": 92.71
+        },
+        "mean": 92.71,
+        "std": 0.5500000000000043,
         "paper_mean": 92.43,
         "paper_std": 0.69,
-        "delta": null,
+        "delta": 0.2799999999999869,
         "previous_mean": 92.06
+      },
+      "AVG 2-WAY": {
+        "seeds": {
+          "0": 95.19,
+          "1": 95.3,
+          "2": 95.3
+        },
+        "mean": 95.26333333333334,
+        "std": 0.06350852961085851,
+        "paper_mean": null,
+        "paper_std": null,
+        "delta": null,
+        "previous_mean": 95.25
       }
     }
   },
   "california": {
-    "finished_seeds": [],
+    "finished_seeds": [
+      0,
+      1,
+      2
+    ],
     "metrics": {
       "Cardinality": {
-        "seeds": {},
-        "mean": null,
-        "std": null,
+        "seeds": {
+          "0": 99.96,
+          "1": 99.97,
+          "2": 99.96
+        },
+        "mean": 99.96333333333332,
+        "std": 0.005773502691899211,
         "paper_mean": 99.96,
         "paper_std": 0.01,
-        "delta": null,
+        "delta": 0.0033333333333303017,
         "previous_mean": 99.96
       },
       "Column Shapes": {
-        "seeds": {},
-        "mean": null,
-        "std": null,
+        "seeds": {
+          "0": 98.61,
+          "1": 98.61,
+          "2": 98.5
+        },
+        "mean": 98.57333333333334,
+        "std": 0.06350852961085851,
         "paper_mean": 98.75,
         "paper_std": 0.0,
-        "delta": null,
+        "delta": -0.1766666666666623,
         "previous_mean": 98.6
       },
       "Intra-Table Trends": {
-        "seeds": {},
-        "mean": null,
-        "std": null,
+        "seeds": {
+          "0": 97.54,
+          "1": 97.56,
+          "2": 97.38
+        },
+        "mean": 97.49333333333334,
+        "std": 0.09865765724632981,
         "paper_mean": 97.35,
         "paper_std": 0.02,
-        "delta": null,
+        "delta": 0.14333333333334508,
         "previous_mean": 97.53
       },
       "1-HOP": {
-        "seeds": {},
-        "mean": null,
-        "std": null,
+        "seeds": {
+          "0": 96.39,
+          "1": 96.56,
+          "2": 96.39
+        },
+        "mean": 96.44666666666667,
+        "std": 0.09814954576223736,
         "paper_mean": 96.16,
         "paper_std": 0.05,
-        "delta": null,
+        "delta": 0.28666666666667595,
         "previous_mean": 96.48
+      },
+      "AVG 2-WAY": {
+        "seeds": {
+          "0": 96.96,
+          "1": 97.06,
+          "2": 96.88
+        },
+        "mean": 96.96666666666667,
+        "std": 0.09018499505646148,
+        "paper_mean": null,
+        "paper_std": null,
+        "delta": null,
+        "previous_mean": 97.0
       }
     }
   }

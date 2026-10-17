@@ -14,6 +14,29 @@ lightning_logs
 *.pickle
 .ipynb_checkpoints/
 
+# model weights / checkpoints (results/**/model_checkpoint/ holds ~6GB of these;
+# the small loss.csv curves next to them stay tracked)
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# run pickles: normalizers, eval_result, node_type_to_X_syn (~1.7GB). The label
+# encoders under data/ are deliberately NOT matched — the datasets need them.
+results/**/*.pkl
+
+# full database dumps written by every run (~5.5GB, single CSVs up to 113MB —
+# over GitHub's 100MB limit); rerun main.py to regenerate
+results/**/synthetic_database/
+results/**/real_database/
+results/**/sampled_structure/
+
+# run-scaffolding symlinks to absolute local paths (dangling in any other clone)
+results/stage2/*/*/configs
+results/stage2/*/*/data
+results/stage2/*/*/rdbdiff_workspace/
+results/stage2/d5/workspace
+
 *.log
 
 # project-specific

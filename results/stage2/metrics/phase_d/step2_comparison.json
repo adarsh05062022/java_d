@@ -1,0 +1,121 @@
+{
+ "exactly-one-head (real 0.933)": {
+  "GRDM": 0.375727453232895,
+  "D2 (pilot, unclipped)": 0.9271870485822439,
+  "D2 clipped": 0.9317911715536255,
+  "D2 no-label z": 0.9417550491160552,
+  "D2 mean-only z": 0.9391761631587205
+ },
+ "indep. prediction": {
+  "GRDM": 0.3755075623487683,
+  "D2 (pilot, unclipped)": 0.5397750487630352,
+  "D2 clipped": 0.5406051171723948,
+  "D2 no-label z": 0.5521599947438766,
+  "D2 mean-only z": 0.5503421554684139
+ },
+ "AGE \u03b5\u00b2 (real 0.291)": {
+  "GRDM": 0.0482804052182729,
+  "D2 (pilot, unclipped)": 0.28969223198395205,
+  "D2 clipped": 0.28354531077486944,
+  "D2 no-label z": 0.29714368985535156,
+  "D2 mean-only z": 0.3013588698438871
+ },
+ "EDUC \u03b5\u00b2 (real 0.238)": {
+  "GRDM": 0.037401903408894134,
+  "D2 (pilot, unclipped)": 0.27294752552926344,
+  "D2 clipped": 0.2648032023257491,
+  "D2 no-label z": 0.263249019210227,
+  "D2 mean-only z": 0.2577964053615995
+ },
+ "INCTOT \u03b5\u00b2 (real 0.076)": {
+  "GRDM": 0.024294215232619067,
+  "D2 (pilot, unclipped)": 0.12824874626347946,
+  "D2 clipped": 0.11799776789097005,
+  "D2 no-label z": 0.08646374932412261,
+  "D2 mean-only z": 0.10342616672814973
+ },
+ "head\u2013spouse AGE r (real 0.928)": {
+  "GRDM": 0.1801165043378212,
+  "D2 (pilot, unclipped)": 0.9240240821176322,
+  "D2 clipped": 0.9237192396257997,
+  "D2 no-label z": 0.9225855364496371,
+  "D2 mean-only z": 0.9158887146591205
+ },
+ "INCTOT|age\u00d7EDUC gap (\u22640.25)": {
+  "GRDM": 0.21710167860534352,
+  "D2 (pilot, unclipped)": 1.1339042222450568,
+  "D2 clipped": 0.5912260224741669,
+  "D2 no-label z": 0.5986634483175877,
+  "D2 mean-only z": 0.7279237444573955
+ },
+ "EMPSTAT TV (\u22640.008)": {
+  "GRDM": 0.006596202872384709,
+  "D2 (pilot, unclipped)": 0.032959021934355126,
+  "D2 clipped": 0.0289322731754083,
+  "D2 no-label z": 0.026600160937804002,
+  "D2 mean-only z": 0.026155796808902225
+ },
+ "INCTOT mean shift": {
+  "GRDM": 0.07089112235883555,
+  "D2 (pilot, unclipped)": 0.3706735707763915,
+  "D2 clipped": 0.49297538730034063,
+  "D2 no-label z": 0.4371603279663905,
+  "D2 mean-only z": 0.6555664340550038
+ },
+ "group size \u2192 INCTOT gap": {
+  "GRDM": 1.8599114847735316,
+  "D2 (pilot, unclipped)": 1.4216317516543768,
+  "D2 clipped": 0.7678800008212024,
+  "D2 no-label z": 0.7664608491277995,
+  "D2 mean-only z": 1.0294127277162204
+ },
+ "\u03b7\u00b2(INCTOT; PUMA) (real 0.062)": {
+  "GRDM": 0.004142902334915462,
+  "D2 (pilot, unclipped)": 0.06010180902431693,
+  "D2 clipped": 0.003802242073214387,
+  "D2 no-label z": 0.0035262971502377626,
+  "D2 mean-only z": 0.005577674600534644
+ },
+ "Column Shapes (\u226598.4)": {
+  "GRDM": 98.61,
+  "D2 (pilot, unclipped)": 98.31614853002226,
+  "D2 clipped": 98.44179341445265,
+  "D2 no-label z": 98.45562656623649,
+  "D2 mean-only z": 98.32961976172437
+ },
+ "AVG 2-WAY": {
+  "GRDM": 96.96,
+  "D2 (pilot, unclipped)": 96.07140462782957,
+  "D2 clipped": 96.4877231305917,
+  "D2 no-label z": 96.53155433665502,
+  "D2 mean-only z": 96.55990961587784
+ },
+ "households with z at bound": {
+  "GRDM": null,
+  "D2 (pilot, unclipped)": 0.017659056931734085,
+  "D2 clipped": 0.006724941078573465,
+  "D2 no-label z": 0.005359754431992769,
+  "D2 mean-only z": 0.004008995369076729
+ },
+ "TSTR income R\u00b2": {
+  "GRDM": 0.5249,
+  "D2 (pilot, unclipped)": 0.5283032552765758,
+  "D2 clipped": 0.5295452496592388,
+  "D2 no-label z": 0.5243106493480977,
+  "D2 mean-only z": 0.5277929192759668
+ },
+ "TSTR employment F1": {
+  "GRDM": 0.6751,
+  "D2 (pilot, unclipped)": 0.6694922720426801,
+  "D2 clipped": 0.6693412836637406,
+  "D2 no-label z": 0.6741722391393243,
+  "D2 mean-only z": 0.6728893346975762
+ },
+ "criteria passed (of 7 mechanism)": {
+  "GRDM": 3,
+  "D2 (pilot, unclipped)": 4,
+  "D2 clipped": 4,
+  "D2 no-label z": 5,
+  "D2 mean-only z": 4
+ }
+}
