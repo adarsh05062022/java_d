@@ -55,6 +55,7 @@ results/stage2/d5/workspace
 
 # third-party reference papers/reports
 /docs/references/
+/Amex reports/
 
 # tooling
 .code-review-graph/

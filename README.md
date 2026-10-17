@@ -3,6 +3,44 @@ This repository provides the official implementation of the paper [Joint Relatio
 
 If you encounter any problem with the code or if you have any questions or suggestions, feel free to open an issue on GitHub or contact me at a.ketata@tum.de.
 
+## About this fork: AMEX project (work in progress)
+
+This repository is a working copy of GRDM, used in an AMEX research project on synthetic relational
+databases. The question is whether GRDM's synthetic databases are *useful*, not only statistically
+similar: can a model trained on synthetic data predict well on real data, and are the dependencies
+between related rows (e.g. people in one household, transactions of one account) preserved? Where
+they are not, we are developing a method that fixes it. Everything below this section is the upstream
+GRDM README.
+
+**What has been done so far**
+
+1. **Reproduced the paper's baseline.** GRDM's Table 1 on Berka and California, 3 seeds each, matches
+   the paper within its error bars (e.g. Berka 1-HOP 91.49 vs 91.41, California 1-HOP 96.45 vs 96.16).
+   See `results/paper_repro/summary.md`.
+2. **Downstream-utility audit.** Train on synthetic, test on real (TSTR) for Berka loan default and card
+   ownership and California income and employment, across 11 mixes of real and synthetic training
+   data (`downstream/`). Despite high fidelity scores, GRDM's synthetic Berka data gives a loan-default
+   AUROC of about 0.51, which is chance level (real data: 0.94).
+3. **Conditioning variants of GRDM.** Conditioning on child counts (degree) or child aggregates, trained
+   from scratch or fine-tuned from the baseline. From scratch, both raise synthetic-only loan AUROC on
+   Berka. Fine-tuning either collapses at sampling or stays within noise of the baseline. On California,
+   aggregate conditioning improves relational fidelity but not downstream utility. (These Berka numbers
+   come from generators trained on the full database, test accounts included.)
+4. **Stage 1: why GRDM falls short** (`reports/stage1_grdm_limitations.md`). The main finding: GRDM
+   generates sibling rows independently of each other given their parent. For example, only 38% of
+   synthetic California households have exactly one head, against 93% in the real data, which is what
+   independence predicts. The structure sampler also draws each relation's row counts independently, and
+   the first reverse diffusion step amplifies the denoising error about 30x.
+5. **Stage 2: hierarchical relational diffusion (HRD), in progress** (`results/stage2/`; the HRD code is
+   not in this branch yet). HRD adds a generated per-entity state and attention across sibling
+   rows. On California, sibling attention restores household roles (exactly-one-head 0.93, real 0.93). On
+   Berka, with a leakage-free train/test split, loan-default TSTR AUROC rises from 0.51 to 0.75, and
+   median retention on a schema-driven battery of prediction tasks goes from −0.32 to +0.83. Open issues:
+   values within a row become over-coupled, and the design's novelty relative to ClavaDDPM is limited.
+
+`PROJECT_GUIDE.md` maps the folders added on top of upstream. `reports/grdm-final-report.html` is the
+write-up of the earlier downstream study.
+
 **Abstract**
 
 >*Building generative models for relational databases (RDBs) is important for many applications, such as privacy-preserving data release and augmenting real datasets. However, most prior works either focus on single-table generation or adapt single-table models to the multi-table setting by relying on autoregressive factorizations and sequential generation. These approaches limit parallelism, restrict flexibility in downstream applications, and compound errors due to commonly made conditional independence assumptions. In this paper, we propose a fundamentally different approach: jointly modeling all tables in an RDB without imposing any table order. By using a natural graph representation of RDBs, we propose the Graph-Conditional Relational Diffusion Model (GRDM), which leverages a graph neural network to jointly denoise row attributes and capture complex inter-table dependencies. Extensive experiments on six real-world RDBs demonstrate that our approach substantially outperforms autoregressive baselines in modeling multi-hop inter-table correlations and achieves state-of-the-art performance on single-table fidelity metrics.*
